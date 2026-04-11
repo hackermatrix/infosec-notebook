@@ -12,6 +12,9 @@
 Thumbs.db
 desktop.ini
 
+# ── Scripts (local use only) ──────────────────────────────────────────────────
+sync_notes.sh
+
 # ── Large binary folders (too heavy for git) ──────────────────────────────────
 vids/
 
