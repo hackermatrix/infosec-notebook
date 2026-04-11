@@ -24,3 +24,4 @@ vids/
 #   !<folder_name>/.gitkeep
 17_Bug_Bounty/*
 !17_Bug_Bounty/.gitkeep
+*.sh
