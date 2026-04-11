@@ -1,0 +1,2 @@
+breachdirectory.org
+ddosecrets.org

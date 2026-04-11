@@ -1,0 +1,23 @@
+# ── Syncthing ─────────────────────────────────────────────────────────────────
+.stfolder/
+.stignore
+
+# ── Obsidian ──────────────────────────────────────────────────────────────────
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+
+# ── OS noise ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Large binary folders (too heavy for git) ──────────────────────────────────
+vids/
+
+# ── Private folders: folder is tracked, contents are NOT ──────────────────────
+# To add more private folders, follow this pattern:
+#   <folder_name>/*
+#   !<folder_name>/.gitkeep
+17_Bug_Bounty/*
+!17_Bug_Bounty/.gitkeep

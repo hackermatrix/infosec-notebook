@@ -1,0 +1,3 @@
+- Does one Cluster represent a single Applications ?
+- How are different apps seperated ?
+- How are the environments for a single applicaation seperated ?
