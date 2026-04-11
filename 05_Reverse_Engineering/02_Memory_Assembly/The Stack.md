@@ -54,4 +54,4 @@ ret             ; Jump to return address
 ---
 **Related Topics:**
 - [[05_Reverse_Engineering/02_Memory_Assembly/Instructions|Instructions (PUSH/POP)]]
-- [[03_Exploitation_Security/Stack Canaries|Security (Stack Canaries)]]
+- [[05_Reverse_Engineering/03_Exploitation_Security/Security Mechanisms|SecurityMechanisms]]

@@ -1,0 +1,301 @@
+{
+  "main": {
+    "id": "b5566c608ef80fcc",
+    "type": "split",
+    "children": [
+      {
+        "id": "d09883f74440aac9",
+        "type": "tabs",
+        "dimension": 76.77475898334794,
+        "children": [
+          {
+            "id": "e64a0bbe2e773b90",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/Stack Canaries.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Stack Canaries"
+            }
+          },
+          {
+            "id": "cd83d9f4bbc66f68",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "5010 Software Security/02_Buffer_Overflow.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02_Buffer_Overflow"
+            }
+          },
+          {
+            "id": "93fcc12b7658bc16",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "05_Reverse_Engineering/02_Memory_Assembly/The Stack.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "The Stack"
+            }
+          }
+        ]
+      },
+      {
+        "id": "f5e2f3fd76e46764",
+        "type": "tabs",
+        "dimension": 23.22524101665206,
+        "children": [
+          {
+            "id": "3279e036011af0a6",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/Stack Canaries.md",
+                "followCursor": false,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Stack Canaries"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "501cc709a06e6696",
+    "type": "split",
+    "children": [
+      {
+        "id": "4b8b8f109cbbacf4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f5840bfbaf596e7a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "61db085d00085ad4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "f1f948b5b4b54a60",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          },
+          {
+            "id": "32b7f0c76edbe05c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/Stack Canaries.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Stack Canaries"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 351.5
+  },
+  "right": {
+    "id": "4ea3f69a560f69fe",
+    "type": "split",
+    "children": [
+      {
+        "id": "7fb98404b778b70c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7ed81a677469c041",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "AD/AD Vulns Index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for AD Vulns Index"
+            }
+          },
+          {
+            "id": "372b9cb75ab3e27b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "AD/AD Vulns Index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from AD Vulns Index"
+            }
+          },
+          {
+            "id": "a2e905ccb1b2756c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "32db82979f5257a3",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "1f837cbee21f646b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "AD/AD Vulns Index.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of AD Vulns Index"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "e64a0bbe2e773b90",
+  "lastOpenFiles": [
+    "images/Pasted image 20260411165849.png",
+    "05_Reverse_Engineering/03_Exploitation_Security/Security Mechanisms.md",
+    "05_Reverse_Engineering/02_Memory_Assembly/The Stack.md",
+    "5010 Software Security/02_Buffer_Overflow.md",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/SQL Injection.md",
+    "09_Web_Exploitation/01_Web_Tech_Fundamentals.md",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/09_Hacking JWT token.md",
+    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/Stack Canaries.md",
+    "Interview Prep/All about API.md",
+    "Interview Prep/Understanding Payment Basics.md",
+    "01_Recon_Scanning/Recon MOC.md",
+    "01_Recon_Scanning/ServiceEnumerations/Finger.md",
+    "05_Reverse_Engineering/03_Exploitation_Security/Heap_Based_README.md",
+    "03_Exploitation_Security/Stack Canaries.md",
+    "images/Pasted image 20260115173248.png",
+    "05_Reverse_Engineering/02_Memory_Assembly/Instructions.md",
+    "temp_re/Reverse Engineering/Address Spaces.md",
+    "5010 Software Security/01_Secure_Coding.md",
+    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/Practise Examples.md",
+    "temp_re/Reverse Engineering/The Stack.md",
+    "05_Reverse_Engineering/02_Memory_Assembly/Execution Flow.md",
+    "05_Reverse_Engineering/02_Memory_Assembly/MemorySections.md",
+    "05_Reverse_Engineering/01_Foundations/Address Spaces.md",
+    "5010 Network Security/03 - Firewalls and Network Architecture.md",
+    "5010 Network Security/04 - Wireless Security.md",
+    "5010 Network Security/05 - Encryption and Secure Protocols.md",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/Authentication and access control issues.md",
+    "5010 Software Security",
+    "5010",
+    "sync_notes.sync-conflict-20260411-135723-ZLSIWW6.sh",
+    "~syncthing~sync_notes.sync-conflict-20260411-135723-ZLSIWW6.sh.tmp",
+    "sync_notes.sh.tmp.5656.1775930179686",
+    "sync_notes.sh.tmp.5656.1775930014694",
+    "5010 Software Security",
+    "17_Bug_Bounty/~syncthing~Daily_Tasks.md.tmp",
+    "images/Pasted image 20260318182259.png",
+    "images/Pasted image 20260318181535.png",
+    "images/Pasted image 20260318171157.png",
+    "images/Pasted image 20260318165218.png",
+    "images/Pasted image 20260318153246.png",
+    "images/Pasted image 20260318152854.png",
+    "images/Pasted image 20260318152824.png",
+    "images/Pasted image 20260317120228.png",
+    "images/Pasted image 20260317120040.png",
+    "5010 Network Security/~syncthing~04 - Wireless Security.md.tmp",
+    "5010 Network Security/~syncthing~03 - Firewalls and Network Architecture.md.tmp",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
+  ]
+}

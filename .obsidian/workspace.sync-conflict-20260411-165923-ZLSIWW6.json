@@ -84,12 +84,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "5010 Network Security/04 - Wireless Security.md",
+                "file": "5010 Network Security/03 - Firewalls and Network Architecture.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04 - Wireless Security"
+              "title": "03 - Firewalls and Network Architecture"
             }
           },
           {
@@ -161,7 +161,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       },
       {
         "id": "f5e2f3fd76e46764",
@@ -174,13 +174,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "09_Web_Exploitation/03_Web_Vulnerabilities/Authentication and access control issues.md",
+                "file": "5010 Network Security/03 - Firewalls and Network Architecture.md",
                 "followCursor": false,
                 "showSearch": true,
-                "searchQuery": ""
+                "searchQuery": "circui"
               },
               "icon": "lucide-list",
-              "title": "Outline of Authentication and access control issues"
+              "title": "Outline of 03 - Firewalls and Network Architecture"
             }
           }
         ]
@@ -345,19 +345,33 @@
       "bases:Create new base": false
     }
   },
-  "active": "be16adabd12f5e7b",
+  "active": "163860489c38dffe",
   "lastOpenFiles": [
-    "Untitled.md",
+    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/~syncthing~Stack Canaries.md.tmp",
+    "images/Pasted image 20260411165849.png",
+    "images/~syncthing~Pasted image 20260411165849.png.tmp",
+    "05_Reverse_Engineering/03_Exploitation_Security/~syncthing~Security Mechanisms.md.tmp",
+    "05_Reverse_Engineering/02_Memory_Assembly/~syncthing~The Stack.md.tmp",
+    "5010 Network Security/01 - DoS and DDoS Attacks.md",
+    "5010 Network Security.md",
     "5010 Network Security/04 - Wireless Security.md",
+    "5010 Software Security/01_Secure_Coding.md",
+    "5010 Software Security/~syncthing~01_Secure_Coding.md.tmp",
+    "~syncthing~README.md.tmp",
     "5010 Software Security",
+    "~syncthing~.gitignore.tmp",
+    "~syncthing~sync_notes.sh.tmp",
+    "sync_notes.sync-conflict-20260411-135723-ZLSIWW6.sh",
+    "~syncthing~sync_notes.sync-conflict-20260411-135723-ZLSIWW6.sh.tmp",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/Authentication and access control issues.md",
+    "README.md",
+    "Untitled.md",
     "09_Web_Exploitation/03_Web_Vulnerabilities/02_GraphQL_Vulns.md",
     "5010_Lab_4/Lab 4.md",
     "5010_Lab_4/LAB 4- IPTABLES.md",
     "5010 Network Security/05 - Encryption and Secure Protocols.md",
     "5010 Network Security/03 - Firewalls and Network Architecture.md",
     "5010 Network Security/02 - Session Attacks and DNS Security.md",
-    "5010 Network Security/01 - DoS and DDoS Attacks.md",
-    "17_Bug_Bounty/~syncthing~Daily_Tasks.md.tmp",
     "images/Pasted image 20260318182259.png",
     "images/Pasted image 20260318181535.png",
     "images/Pasted image 20260318171157.png",
@@ -367,16 +381,6 @@
     "images/Pasted image 20260318152824.png",
     "images/Pasted image 20260317120228.png",
     "images/Pasted image 20260317120040.png",
-    "images/Pasted image 20260317115822.png",
-    "5010 Network Security/~syncthing~04 - Wireless Security.md.tmp",
-    "5010 Network Security/~syncthing~03 - Firewalls and Network Architecture.md.tmp",
-    "5010_Lab_4",
-    "5010 Network Security/~syncthing~02 - Session Attacks and DNS Security.md.tmp",
-    "17_Bug_Bounty/~syncthing~.gitkeep.tmp",
-    "sync_notes.sh",
-    "~syncthing~sync_notes.sh.tmp",
-    "~syncthing~.gitignore.tmp",
-    "5010 Network Security.md",
     "2026-03-12 CY5130.md",
     "CY5130 TEAM 4_Project_6.md",
     "02_Linux_Systems/iptables.md",
@@ -389,10 +393,6 @@
     "Interview Prep/PCI DSS.md",
     "temp_re/Reverse Engineering/Types and Size.md",
     "File Path.md",
-    "Global Master MOC.md",
-    "09_Web_Exploitation/00_Web_Recon/01_Passive_Recon.md",
-    "09_Web_Exploitation/03_Web_Vulnerabilities/Parameter Pollution Lab.md",
-    "09_Web_Exploitation/03_Web_Vulnerabilities/Server Side Request Forgergy - Portswinger practise.md",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }
