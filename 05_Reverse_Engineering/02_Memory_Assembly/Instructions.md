@@ -92,6 +92,7 @@ ret:
   RSP += 8
 ```
 
+#### Since `ret` just pops whatever is on the stack into RIP — if you can overflow the stack and overwrite that saved return address, you control where RIP goes next. That's the entire basis of buffer overflow exploitation and ROP chains, which you've been working through in your labs.
 ---
 
 **Why this matters for exploitation**
