@@ -9,3 +9,4 @@ In login.c, check_authentication() declares local buffers in this order: passwor
 ✗ On x86-64 the stack grows downward. Locals declared first (password_buffer) sit at lower addresses; later ones (username_buffer, then auth_flag) sit at progressively higher addresses. Overflowing password_buffer upward crosses username_buffer and reaches auth_flag. This is why declaration order in C directly affects exploitability.
 
 ![[Pasted image 20260413193540.png]]
+![[Pasted image 20260413194031.png]]]
