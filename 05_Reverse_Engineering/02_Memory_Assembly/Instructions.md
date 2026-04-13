@@ -44,6 +44,19 @@ Instructions are the low-level machine commands that tell the CPU what to do.
 | `JG` / `JL` | Jump if Greater / Less (Signed) | (Complex Flag Check) |
 | `CALL` | Call Procedure | Push RIP, Jump to address |
 | `RET` | Return from Procedure | Pop RIP back into EIP |
+```asm
+jmp 0x401234
+```
+
+That's it — it just sets `RIP = 0x401234`. The CPU then fetches and executes whatever instruction lives at that address. No value is saved, nothing is pushed to the stack.
+
+```
+Before jmp:
+  RIP = 0x400100   (currently executing jmp instruction)
+
+After jmp:
+  RIP = 0x401234   (CPU jumps here next)
+```
 
 
 ---
