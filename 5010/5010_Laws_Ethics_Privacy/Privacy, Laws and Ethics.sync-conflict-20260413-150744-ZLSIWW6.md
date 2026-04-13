@@ -217,4 +217,3 @@ The textbook gives four conditions. The more of these that are true, the stronge
 ## 🏷️ Tags
 
 `#privacy` `#law` `#ethics` `#cybersecurity` `#GDPR` `#FTC` `#copyright` `#patents` `#trade-secrets`
-

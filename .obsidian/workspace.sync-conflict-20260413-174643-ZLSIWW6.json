@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01_Recon_Scanning/ServiceEnumerations/Finger.md",
+                "file": "09_Web_Exploitation/03_Web_Vulnerabilities/SQL Injection.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Finger"
+              "title": "SQL Injection"
             }
           },
           {
@@ -84,12 +84,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "5010 Network Security/03 - Firewalls and Network Architecture.md",
+                "file": "5010 Network Security.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "03 - Firewalls and Network Architecture"
+              "title": "5010 Network Security"
             }
           },
           {
@@ -152,16 +152,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/Stack Canaries.md",
+                "file": "01_Recon_Scanning/ServiceEnumerations/Finger.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Stack Canaries"
+              "title": "Finger"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       },
       {
         "id": "f5e2f3fd76e46764",
@@ -174,13 +173,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "5010 Network Security/03 - Firewalls and Network Architecture.md",
+                "file": "09_Web_Exploitation/03_Web_Vulnerabilities/SQL Injection.md",
                 "followCursor": false,
                 "showSearch": true,
-                "searchQuery": "circui"
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 03 - Firewalls and Network Architecture"
+              "title": "Outline of SQL Injection"
             }
           }
         ]
@@ -345,54 +344,54 @@
       "bases:Create new base": false
     }
   },
-  "active": "163860489c38dffe",
+  "active": "f5840bfbaf596e7a",
   "lastOpenFiles": [
-    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/~syncthing~Stack Canaries.md.tmp",
-    "images/Pasted image 20260411165849.png",
-    "images/~syncthing~Pasted image 20260411165849.png.tmp",
-    "05_Reverse_Engineering/03_Exploitation_Security/~syncthing~Security Mechanisms.md.tmp",
-    "05_Reverse_Engineering/02_Memory_Assembly/~syncthing~The Stack.md.tmp",
-    "5010 Network Security/01 - DoS and DDoS Attacks.md",
+    "5010/5010_Operational_Security/~syncthing~10.1 - Security Planning.md.tmp",
+    "5010/5010_Operational_Security/~syncthing~10.3 - Handling Incidents.md.tmp",
+    "5010/5010_Operational_Security/10.6 - Conclusion.md",
+    "5010/5010_Operational_Security/00 - Chapter 10 MOC.md",
+    "5010/5010_Operational_Security/10.2 - Business Continuity Planning.md",
+    "5010/5010_Operational_Security/10.5 - Dealing with Disaster.md",
+    "5010/5010_Operational_Security/10.3 - Handling Incidents.md",
+    "5010/5010_Operational_Security/10.4 - Risk Analysis.md",
+    "5010/5010_Operational_Security/10.1 - Security Planning.md",
+    "5010/5010_Operational_Security/~syncthing~10.2 - Business Continuity Planning.md.tmp",
+    "5010/5010_Operational_Security/~syncthing~10.4 - Risk Analysis.md.tmp",
+    "5010/5010_Operational_Security/Untitled.md",
+    "5010/5010_Operational_Security",
+    "5010/5010_Laws_Ethics_Privacy/Untitled.md",
+    "5010/Untitled.md",
+    "5010/5010_Laws_Ethics_Privacy/~syncthing~Untitled.md.tmp",
+    "5010/~syncthing~Untitled.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/~syncthing~Privacy, Laws and Ethics.md.tmp",
+    "5010/5010 Network Security/01 - DoS and DDoS Attacks.md",
+    "5010/5010 Network Security/02 - Session Attacks and DNS Security.md",
+    "5010/5010 Network Security/03 - Firewalls and Network Architecture.md",
+    "5010/5010 Network Security/05 - Encryption and Secure Protocols.md",
+    "5010/5010_Lab_4_IPTABLES/Lab 4.md",
+    "5010/5010_Lab_4_IPTABLES/LAB 4- IPTABLES.md",
     "5010 Network Security.md",
-    "5010 Network Security/04 - Wireless Security.md",
-    "5010 Software Security/01_Secure_Coding.md",
-    "5010 Software Security/~syncthing~01_Secure_Coding.md.tmp",
-    "~syncthing~README.md.tmp",
-    "5010 Software Security",
-    "~syncthing~.gitignore.tmp",
-    "~syncthing~sync_notes.sh.tmp",
-    "sync_notes.sync-conflict-20260411-135723-ZLSIWW6.sh",
-    "~syncthing~sync_notes.sync-conflict-20260411-135723-ZLSIWW6.sh.tmp",
-    "09_Web_Exploitation/03_Web_Vulnerabilities/Authentication and access control issues.md",
+    "Global Master MOC.md",
     "README.md",
-    "Untitled.md",
-    "09_Web_Exploitation/03_Web_Vulnerabilities/02_GraphQL_Vulns.md",
-    "5010_Lab_4/Lab 4.md",
-    "5010_Lab_4/LAB 4- IPTABLES.md",
-    "5010 Network Security/05 - Encryption and Secure Protocols.md",
-    "5010 Network Security/03 - Firewalls and Network Architecture.md",
-    "5010 Network Security/02 - Session Attacks and DNS Security.md",
-    "images/Pasted image 20260318182259.png",
-    "images/Pasted image 20260318181535.png",
-    "images/Pasted image 20260318171157.png",
-    "images/Pasted image 20260318165218.png",
-    "images/Pasted image 20260318153246.png",
-    "images/Pasted image 20260318152854.png",
-    "images/Pasted image 20260318152824.png",
-    "images/Pasted image 20260317120228.png",
-    "images/Pasted image 20260317120040.png",
-    "2026-03-12 CY5130.md",
-    "CY5130 TEAM 4_Project_6.md",
-    "02_Linux_Systems/iptables.md",
-    "01_Recon_Scanning/Nmap practise use cases.md",
-    "5010_Notes/01_Network_Security/01_Network_Threats_and_Reconnaissance.md",
-    "temp_re/Reverse Engineering/Resources.md",
-    "temp_re/Reverse Engineering/Address Spaces.md",
-    "temp_re/Reverse Engineering/Class Notes 5130 (15-01-2026).md",
-    "temp_re/Reverse Engineering/Class Notes 5130 (22-01-2026).md",
-    "Interview Prep/PCI DSS.md",
-    "temp_re/Reverse Engineering/Types and Size.md",
+    "test",
     "File Path.md",
+    "temp_re/Reverse Engineering/Execution Flow.md",
+    "temp_re/Reverse Engineering/Class Notes 5130 (15-01-2026).md",
+    "Interview Prep/Untitled.md",
+    "Interview Prep/Basics Revision.md",
+    "5130/04_Unix_Syslog.md",
+    "images/Pasted image 20260115173248.png",
+    "images/Pasted image 20260413133656.png",
+    "images/Pasted image 20260413125257.png",
+    "images/Pasted image 20260413124425.png",
+    "images/Pasted image 20260413124343.png",
+    "images/Pasted image 20260413123925.png",
+    "images/Pasted image 20260413120654.png",
+    "images/Pasted image 20260413120620.png",
+    "images/Pasted image 20260413120540.png",
+    "images/Pasted image 20260413115919.png",
+    "5130",
+    "5010",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }
