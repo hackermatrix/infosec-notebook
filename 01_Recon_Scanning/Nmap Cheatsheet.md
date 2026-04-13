@@ -30,7 +30,7 @@ nmap -sC -sV -T4 -oA nmap/initial <target_ip>
 | -vv   | Output            | Increased Verbiosity                                     |
 | -oA   | Output            | Save the nmap results in three major formats             |
 | -oG   | Output            | Save results in grepable format                          |
-| -sn   |                   | Ping scan: find live hosts on the subnet                 |
+| -sn   | Ping Sweep        | Ping scan: find live hosts on the subnet                 |
 
 ---
 
