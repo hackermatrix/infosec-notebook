@@ -110,6 +110,7 @@
 **
 NOP** stands for **No Operation**
 
+##### A NOP sled is a sequence of 0x90 (no-operation) instructions placed before shellcode. Because the injected address may not point exactly at the first shellcode byte (due to slight stack shifts), the sled gives a large 'landing zone' — any address within the sled slides execution into the shellcode. It becomes unnecessary when the exact shellcode start address is known with certainty (e.g., ASLR disabled + deterministic stack + exact offset confirmed in GDB).
 ---
 
 ## **8. Shift and Rotate Instructions**
