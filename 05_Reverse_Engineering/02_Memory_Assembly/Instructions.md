@@ -36,14 +36,14 @@ Instructions are the low-level machine commands that tell the CPU what to do.
 ---
 
 ## 4. Control Flow (Branching)
-| Instruction | Description | Condition |
-| :--- | :--- | :--- |
-| `JMP` | Unconditional Jump | Always |
-| `JE` / `JZ` | Jump if Equal / Zero | `ZF = 1` |
-| `JNE` / `JNZ`| Jump if Not Equal / Not Zero | `ZF = 0` |
-| `JG` / `JL` | Jump if Greater / Less (Signed) | (Complex Flag Check) |
-| `CALL` | Call Procedure | Push RIP, Jump to address |
-| `RET` | Return from Procedure | Pop RIP back into EIP |
+| Instruction   | Description                     | Condition                 |
+| :------------ | :------------------------------ | :------------------------ |
+| `JMP`         | Unconditional Jump              | Always                    |
+| `JE` / `JZ`   | Jump if Equal / Zero            | `ZF = 1`                  |
+| `JNE` / `JNZ` | Jump if Not Equal / Not Zero    | `ZF = 0`                  |
+| `JG` / `JL`   | Jump if Greater / Less (Signed) | (Complex Flag Check)      |
+| `CALL`        | Call Procedure                  | Push RIP, Jump to address |
+| `RET`         | Return from Procedure           | Pop RIP back into EIP     |
 ```asm
 jmp 0x401234
 ```
