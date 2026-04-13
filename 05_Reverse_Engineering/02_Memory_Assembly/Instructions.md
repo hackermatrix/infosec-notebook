@@ -57,7 +57,46 @@ Before jmp:
 After jmp:
   RIP = 0x401234   (CPU jumps here next)
 ```
+**`call` vs `jmp` — the key difference**
 
+`call` is like a jump, but it **saves the return address** first:
+
+asm
+
+```asm
+call 0x401234
+```
+
+What actually happens:
+
+1. RSP decrements by 8
+2. The **current RIP** (address of the next instruction after call) is pushed onto the stack
+3. RIP = 0x401234
+
+```
+Before call:
+  RIP = 0x400100
+  RSP = 0x7fffffffe010
+
+After call:
+  [0x7fffffffe008] = 0x400108  ← return address saved on stack
+  RSP = 0x7fffffffe008
+  RIP = 0x401234
+```
+
+And `ret` reverses it — it **pops** the saved address off the stack back into RIP:
+
+```
+ret:
+  RIP = pop from stack
+  RSP += 8
+```
+
+---
+
+**Why this matters for exploitation**
+
+Since `ret` just pops whatever is on the stack into RI
 
 ---
 
