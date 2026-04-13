@@ -107,7 +107,8 @@
     - `WAIT` – Wait for an event
         
 - **Use Case:** Pausing CPU, debugging, system initialization.
-    
+**
+NOP** stands for **No Operation**
 
 ---
 
