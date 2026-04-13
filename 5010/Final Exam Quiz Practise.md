@@ -13,3 +13,4 @@ In login.c, check_authentication() declares local buffers in this order: passwor
 
 ![[Pasted image 20260413194103.png]]
 
+![[Pasted image 20260413194344.png]]
