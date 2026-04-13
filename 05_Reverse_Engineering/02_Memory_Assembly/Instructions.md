@@ -45,6 +45,7 @@ Instructions are the low-level machine commands that tell the CPU what to do.
 | `CALL` | Call Procedure | Push RIP, Jump to address |
 | `RET` | Return from Procedure | Pop RIP back into EIP |
 
+
 ---
 
 ## 5. Comparison & Testing
