@@ -8,11 +8,13 @@ Resource : https://medium.com/@Loginsoft/open-vulnerability-assessment-language-
 	- The Extensible Configuration Checklist Description Format
 	- “uniform foundation for expression of security checklists, benchmarks, and other
 		configuration guidance, and thereby foster more widespread application of good security practices.”
+	- Instead of a human manually going through a list like "make sure passwords are long enough" or "make sure the firewall is on," XCCDF puts those rules into a structured XML file so a tool like OpenSCAP can automatically check your system against them
 	- Also provides format specification for recording the results of applying such
 		benchmarks.
 		![[Pasted image 20260402171103.png]]
 2. **OVAL:**
 	- Open Vulnerability and Assessment Language
+	- OVAL stands for Open Vulnerability and Assessment Language. It's the companion to XCCDF — if XCCDF is the "what to check" list, OVAL is the "how to check it" instructions.
 	- OVAL is an information security community effort to standardize how to assess and
 		report upon the machine state of computer systems. OVAL includes a language to
 		encode system details, and an assortment of content repositories held throughout the
@@ -22,3 +24,5 @@ Resource : https://medium.com/@Loginsoft/open-vulnerability-assessment-language-
 		- analyzing the system for the presence of the specified machine state (vulnerability, configuration, patch state, etc.);
 		- and reporting the results of this assessment
 		- OVAL definitions will detect the presence of the vulnerability
+3. ARF: 
+	- Asset Reporting Framework, a standard to describe the sharable information of assets.
