@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "05_Reverse_Engineering/05_Academic_Notes/Demo Lab - Buffer Overflow.md",
+                "file": "5010/5010 Software Security/03_What is Secure SDLC.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "Demo Lab - Buffer Overflow"
+              "title": "03_What is Secure SDLC"
             }
           },
           {
@@ -173,13 +173,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "05_Reverse_Engineering/05_Academic_Notes/Demo Lab - Buffer Overflow.md",
+                "file": "5010/5010 Software Security/03_What is Secure SDLC.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Demo Lab - Buffer Overflow"
+              "title": "Outline of 03_What is Secure SDLC"
             }
           }
         ]
@@ -344,54 +344,54 @@
       "bases:Create new base": false
     }
   },
-  "active": "b4ff8cf49efb17d8",
+  "active": "f5840bfbaf596e7a",
   "lastOpenFiles": [
-    "5010/5010_Laws_Ethics_Privacy/chap9text/Chapter-9-Quiz.html",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/00 - Chapter 9 MOC.md",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/9.3 - Authentication and Privacy.md",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/9.6 - Email Security.md",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/9.8-9.9 - Future and Conclusion.md",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/9.4 - Data Mining.md",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/9.5 - Privacy on the Web.md",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/9.7 - Privacy Impacts of Emerging Technologies.md",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/9.2 - Privacy Principles and Policies.md",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/9.1 - Privacy Concepts.md",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/~syncthing~Chapter-9-Quiz.html.tmp",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/~syncthing~00 - Chapter 9 MOC.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/~syncthing~9.3 - Authentication and Privacy.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/~syncthing~9.6 - Email Security.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/~syncthing~9.4 - Data Mining.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/~syncthing~9.8-9.9 - Future and Conclusion.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/~syncthing~9.7 - Privacy Impacts of Emerging Technologies.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/~syncthing~9.1 - Privacy Concepts.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/~syncthing~9.2 - Privacy Principles and Policies.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/chap9text/~syncthing~9.5 - Privacy on the Web.md.tmp",
-    "05_Reverse_Engineering/02_Memory_Assembly/Instructions.md",
+    "5010/5010 Network Security/02 - Session Attacks and DNS Security.md",
+    "05_Reverse_Engineering/05_Academic_Notes/Demo Lab - Buffer Overflow.md",
+    "5010/5010 Software Security/03_What is Secure SDLC.md",
+    "5010/5010 Software Security/01_Secure_Coding.md",
     "05_Reverse_Engineering/02_Memory_Assembly/The Stack.md",
-    "05_Reverse_Engineering/02_Memory_Assembly/MemorySections.md",
-    "05_Reverse_Engineering/02_Memory_Assembly/Execution Flow.md",
-    "05_Reverse_Engineering/01_Foundations/Types and Size.md",
-    "05_Reverse_Engineering/01_Foundations/SysCalls and Privilege Levels.md",
-    "05_Reverse_Engineering/01_Foundations/Concepts.md",
-    "05_Reverse_Engineering/01_Foundations/Registers.md",
-    "05_Reverse_Engineering/01_Foundations/Address Spaces.md",
-    "03_Exploitation_Security/Stack Canaries.md",
+    "5010/5010 Software Security/02_Buffer_Overflow.md",
+    "5010/5010_Lab_4_IPTABLES/LAB 4- IPTABLES.md",
+    "5010/5010_Lab_4_IPTABLES/Lab 4.md",
+    "02_Linux_Systems/iptables.md",
+    "01_Recon_Scanning/Recon MOC.md",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/SQL Injection.md",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.5 - Computer Crime.md.tmp",
+    "09_Web_Exploitation/04_Exploitation_Techniques.md",
+    "5010/5010 Network Security/04 - Wireless Security.md",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/02_GraphQL_Vulns.md",
+    "10_Android_Hacking/02_CheckList.md",
     "5010/Final Exam Quiz Practise.md",
-    "5010/5010 Network Security/05 - Encryption and Secure Protocols.md",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.6 - Ethical Issues in Computer Security.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Privacy, Laws and Ethics_Slides.md",
+    "images/Pasted image 20260413215346.png",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/11.4 - Redress for Software Failures.md",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/00 - Chapter 11 MOC.md",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/11.2 - Information and the Law.md",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/Chapter-11-Quiz.html",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/11.3 - Rights of Employees and Employers.md",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/11.6 - Ethical Issues in Computer Security.md",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/11.1 - Protecting Programs and Data.md",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.4 - Redress for Software Failures.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/11.7 - Incident Analysis with Ethics.md",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.2 - Information and the Law.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~00 - Chapter 11 MOC.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/11.5 - Computer Crime.md",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~Chapter-11-Quiz.html.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.3 - Rights of Employees and Employers.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.1 - Protecting Programs and Data.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.7 - Incident Analysis with Ethics.md.tmp",
+    "images/Pasted image 20260413205303.png",
+    "5010/5010_Laws_Ethics_Privacy/Privacy_Textbook/00 - Chapter 9 MOC.md",
     "images/Pasted image 20260413195232.png",
-    "temp_re/Reverse Engineering/Instructions.md",
-    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/Practise Examples.md",
-    "5010/5010_Operational_Security/00 - Chapter 10 MOC.md",
     "images/Pasted image 20260413194344.png",
     "images/Pasted image 20260413194103.png",
     "images/Pasted image 20260413194031.png",
     "images/Pasted image 20260413193540.png",
-    "5010/5010 Software Security/02_Buffer_Overflow.md",
     "images/Pasted image 20260115173248.png",
     "images/Pasted image 20260413133656.png",
     "images/Pasted image 20260413125257.png",
-    "images/Pasted image 20260413124425.png",
-    "images/Pasted image 20260413124343.png",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }
