@@ -6,9 +6,6 @@ xx = (team_member NUID % 512)
 2590422 % 512 = 214
 
 
-![[Pasted image 20260401093728.png]]
-
-![[Pasted image 20260401093533.png]]
 
 ## Part 1 — login.c (Simple Overflow)
 
