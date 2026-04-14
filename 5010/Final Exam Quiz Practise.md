@@ -17,3 +17,19 @@ In login.c, check_authentication() declares local buffers in this order: passwor
 ![[Pasted image 20260413195232.png]]
 ![[Pasted image 20260413205303.png]]
 ![[Pasted image 20260413215346.png]]
+
+**To find the NOP sled address (C)**, you have to actually _run the program in GDB with a payload that already contains a NOP sled_. You can't inspect a NOP sled that doesn't exist in memory yet.
+
+**To construct that test payload**, you need to know the shellcode bytes first (E), so you know how long it is and how much NOP padding to put before it.
+
+So the dependency chain is:
+
+```
+E (get shellcode bytes)
+  → you now know shellcode length
+  → you can construct a test payload with NOP sled + shellcode
+  → run it in GDB
+C (x/200x $rsp → spot the 0x90909090 pattern → grab an address)
+  → now you have a real address to put in the return address slot
+D (final payload: NOP sled + shellcode + padding + that address)
+```
