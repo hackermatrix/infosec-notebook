@@ -6,17 +6,16 @@
 
 ## 🗂️ Topics
 
-| # | Topic | Link |
-|---|-------|------|
-| 9.1 | Privacy Concepts | [[9.1 - Privacy Concepts]] |
-| 9.2 | Privacy Principles and Policies | [[9.2 - Privacy Principles and Policies]] |
-| 9.3 | Authentication and Privacy | [[9.3 - Authentication and Privacy]] |
-| 9.4 | Data Mining | [[9.4 - Data Mining]] |
-| 9.5 | Privacy on the Web | [[9.5 - Privacy on the Web]] |
-| 9.6 | Email Security | [[9.6 - Email Security]] |
+| #   | Topic                                    | Link                                               |
+| --- | ---------------------------------------- | -------------------------------------------------- |
+| 9.1 | Privacy Concepts                         | [[9.1 - Privacy Concepts]]                         |
+| 9.2 | Privacy Principles and Policies          | [[9.2 - Privacy Principles and Policies]]          |
+| 9.3 | Authentication and Privacy               | [[9.3 - Authentication and Privacy]]               |
+| 9.4 | Data Mining                              | [[9.4 - Data Mining]]                              |
+| 9.5 | Privacy on the Web                       | [[9.5 - Privacy on the Web]]                       |
+| 9.6 | Email Security                           | [[9.6 - Email Security]]                           |
 | 9.7 | Privacy Impacts of Emerging Technologies | [[9.7 - Privacy Impacts of Emerging Technologies]] |
-| 9.8 | Where the Field Is Headed | [[9.8 - Where the Field Is Headed]] |
-| 9.9 | Conclusion | [[9.9 - Conclusion]] |
+
 
 ---
 

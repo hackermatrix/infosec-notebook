@@ -82,6 +82,25 @@ RBP - username_start = 0x7fffffffec30 - 0x7fffffffe9e0 = 0x250 = 592 bytes
 - The shellcode must land **before** RBP — past it you're corrupting saved RBP and the return address (which you need to control cleanly)
 - NOP sled fills the space so you can jump anywhere in it reliably
 
+```
+username starts at:  0x7fffffffe9e0
+saved RBP is at:     0x7fffffffec30
+
+Gap = 592 bytes  ← this is how far you write before you HIT saved RBP
+```
+
+So the layout is:
+
+```
+[NOP sled ~560 bytes][shellcode ~30 bytes] = 590 bytes of username buffer
+                                              ↑
+                                    you're still INSIDE username here
+
+[fake RBP  8 bytes]   ← this IS the saved RBP slot (you're overwriting it now)
+[return address    ]  ← this is what you actually care about (points into NOP sled)
+```
+
+
 **The exploit:**
 
 bash
