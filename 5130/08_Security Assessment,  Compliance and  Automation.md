@@ -36,6 +36,44 @@
 #### Why do we need them ?
 - Without them, one vendor might call a flaw "buffer overflow in web server," another might call it "memory corruption in HTTP daemon"
 
-#### **CVE ( Common Vulnerabilities and Exposures) **
+**CVE — Common Vulnerabilities and Exposures**
 
+Imagine someone discovers a bug in Google Chrome that lets hackers steal your data. That bug gets reported and assigned a name like CVE-2024-5678. Now every security person, every company, and every tool in the world can refer to that exact bug by that exact name. No confusion. It's like giving every known bug its own ID card. There are thousands of CVEs published every year.
+
+---
+
+**CCE — Common Configuration Enumeration**
+
+This is about settings, not bugs. Your computer has hundreds of settings — password length, firewall on/off, which users can log in remotely, etc. CCE gives each important security setting a unique ID. So instead of saying "that setting where you turn off root SSH access," you just say CCE-12345. It makes it easy for tools to check if your settings are correct.
+
+---
+
+**CPE — Common Platform Enumeration**
+
+This is just a standard way to name what software or hardware you're running. For example, "Windows 11 version 22H2" or "Red Hat Enterprise Linux 9.2" each get a specific CPE name. This matters because security checks need to know what system they're looking at. A rule for Linux doesn't apply to Windows, so CPE helps tools figure out which checks to run on which machines.
+
+---
+
+**CWE — Common Weakness Enumeration**
+
+This categorizes the types of mistakes programmers make. For example, "buffer overflow" is one type of mistake. "SQL injection" is another. While CVE points to one specific bug in one specific product, CWE describes the general category of the problem. Think of it this way: if CVE is "John got the flu on March 5th," CWE is "the flu" as a general illness. It helps developers understand patterns so they can avoid making the same kinds of mistakes.
+
+---
+
+**CVSS — Common Vulnerability Scoring System**
+
+When a bug (CVE) is found, people need to know how dangerous it is. CVSS gives it a score from 0 to 10. A score of 2 might mean it's hard to exploit and doesn't do much damage. A score of 9.8 means it's easy to exploit and could be devastating. This helps organizations decide what to fix first. If you have 500 bugs to patch, you start with the ones scored 9 and above.
+
+---
+
+**How they all fit together**
+
+Imagine you're running a security scan on your server:
+
+1. **CPE** identifies your server as "Red Hat Linux 9.2"
+2. The scanner checks for known **CVEs** (bugs) that affect that system
+3. It also checks your **CCEs** (settings) to make sure things are configured securely
+4. Each bug found is categorized by **CWE** (what type of mistake caused it)
+5. Each bug is scored by **CVSS** (how dangerous it is)
+6. You get a report telling you what to fix and in what order
 
