@@ -37,7 +37,7 @@
 - For example, consider the passenger screening model in an airport. All passengers pass through the airport security checkpoint (PDP/PEP) to access the boarding gates. 
 - The passengers, airport employees, aircraft crew, etc., mill about in the terminal area, and all the individuals are considered trusted. In this model, the implicit trust zone is the boarding area.
 
----
+
 ## Tenets  of ZT
 
 **1. Everything is a resource.** Every device, service, and data source on the network is treated as a resource that needs protection whether it's a server, a laptop, a SaaS application, or even a personal device that connects to company systems.
@@ -54,7 +54,7 @@
 
 **7. Collect as much data as possible to improve security.** The organization gathers information about network traffic, access requests, device states, and user behavior then uses all of that data to get smarter about making policies and detecting threats over time.
 
----
+
 ## Logical Components of ZTA : The Core Pieces
 
 The system is built around three core components:
@@ -62,7 +62,6 @@ The system is built around three core components:
 - **Policy Engine (PE)** : The **decision maker**. It takes in all available information (user identity, device health, threat intelligence) and decides: allow or deny. Think of it as the brain.
 
 - **Policy Administrator (PA)** : The **executor**. Once the PE makes a decision, the PA carries it out it sets up or tears down the connection. It also generates session tokens and credentials. Think of it as the hands.
-	- It doesn't decide anything — it just acts on the PE's verdict and tells the enforcement points to open or close the door.
 
 - **Policy Enforcement Point (PEP)** : The **gatekeeper**. It sits between the user and the resource, and physically allows or blocks the connection based on what the PA tells it. Think of it as the door.
 
@@ -80,18 +79,3 @@ The Policy Engine doesn't make decisions in a vacuum. It pulls information from 
 - **SIEM** : Collects and analyzes security events to refine policies and detect attacks
 
 ![[Pasted image 20260412160613.png]]
-
-## Why PE and PEP Don't Communicate Directly ?
-- The short answer: **they operate in different planes, and mixing them would conflate two things that must stay separate decision-making and enforcement.**
-
-- NIST deliberately splits ZTA into a **Control Plane** (where policy decisions happen) and a **Data Plane** (where those decisions are carried out). 
-- The Policy Administrator exists precisely because the PE's output a decision like _"grant access"_ or _"deny"_  is **abstract and high-level**. The PEP, on the other hand, needs **specific, technical instructions**: open this port, issue this session token, route this traffic, block this connection.
-
-
-### The Separation of Concerns Principle
-
-Think of it like a court system:
-
-- The **Judge (PE)** interprets the law and delivers a verdict. They don't physically unlock prison doors or issue travel bans themselves.
-- The **Bailiff/Clerk (PA)** takes that verdict and translates it into the right paperwork and commands for the right people.
-- The **Security Guard (PEP)** physically acts on those instructions at the door.
