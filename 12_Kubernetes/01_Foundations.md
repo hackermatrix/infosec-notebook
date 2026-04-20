@@ -3,14 +3,20 @@ https://medium.com/@h.stoychev87/kubernetes-the-basics-ccadefb48037
 
 ![[Pasted image 20260218154310.png]]
 
+All of this is managed my Kubernetes.
+
 ![[Pasted image 20260420141735.png]]
 
-All of this is managed my Kubernetes.
+### Master node/control plane 
+Control plane/master node is a virtual machine that hosts administrative components which help run the cluster(will see below) smoothly. 
+
 
 
 ### # Pods:
+![[Pasted image 20260420171937.png]]
 
-- **Definition:** The **smallest deployable unit** in Kubernetes. Think of it as a wrapper around one or more containers that share the same network namespace and storage
+
+- **Definition:** The **smallest deployable unit** in Kubernetes. **is a group of one or more [containers](https://kubernetes.io/docs/concepts/containers/)**, with shared storage and network resources, and a specification for how to run the containers. **Think of it as a wrapper around one or more containers that share the same network namespace and storage**. Pod helps you run the containers. 
 - **Key Features:**
     - Each Pod gets its **own IP address**.
     - 
@@ -59,3 +65,10 @@ Think of it like **a babysitter for your pods**: it keeps the number of pods exa
 ```
 Deployment --> Pods --> Service routes traffic to Pods
 ```
+
+### Node 
+
+A node may be a virtual or physical machine, depending on the cluster. Each node is managed by the [control plane](https://kubernetes.io/docs/reference/glossary/?all=true#term-control-plane) and contains the services necessary to run [Pods](https://kubernetes.io/docs/concepts/workloads/pods/).
+
+The hosted application is in the worker node. 
+
