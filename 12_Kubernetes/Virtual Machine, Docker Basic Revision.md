@@ -17,8 +17,8 @@ There is one dockerfile per application
 
 Docker build command is issued to docker daemon such as dockerd. 
 
-The image is then stored locally. 
-
+The image is then stored locally.  Eg. here you can see in the local there are images, this is your local registry and then there are images in the Hub which is your image registry 
+![[Pasted image 20260420162909.png]]
 ### Docker Push 
 
 docker push command will move the image from local registry to image registry. 
