@@ -3,17 +3,9 @@ https://medium.com/@h.stoychev87/kubernetes-the-basics-ccadefb48037
 
 ![[Pasted image 20260218154310.png]]
 
+![[Pasted image 20260420141735.png]]
+
 All of this is managed my Kubernetes.
-
-#### **# Replicaset**:
-A **ReplicaSet** is like a **helper that makes sure your app is always running**.
-
-- You tell it, “I want **3 copies** of this app running.”
-- If one copy (pod) dies or is deleted, ReplicaSet **automatically creates a new one**.
-- If you want more copies, it can **add them**. If you want fewer, it can **remove some**.
-
-Think of it like **a babysitter for your pods**: it keeps the number of pods exactly how you want.
-
 
 
 ### # Pods:
@@ -21,7 +13,10 @@ Think of it like **a babysitter for your pods**: it keeps the number of pods exa
 - **Definition:** The **smallest deployable unit** in Kubernetes. Think of it as a wrapper around one or more containers that share the same network namespace and storage
 - **Key Features:**
     - Each Pod gets its **own IP address**.
-    - Containers inside a Pod can communicate over `localhost`.
+    - 
+
+
+Containers inside a Pod can communicate over `localhost`.
     - Pods are **ephemeral**: they can die and be recreated, so you usually don’t interact with them directly in production.
         
 - **Analogy:** A Pod is like a **single apartment** inside a building (the apartment can have multiple rooms → containers).
@@ -46,7 +41,14 @@ Think of it like **a babysitter for your pods**: it keeps the number of pods exa
     - **Headless:** Direct Pod access without a stable IP.
 - **Analogy:** A Service is like the **reception desk** of a building. Even if tenants (Pods) move in and out, the reception always knows where to direct visitors.
 
+#### **# Replicaset**:
+A **ReplicaSet** is like a **helper that makes sure your app is always running**.
 
+- You tell it, “I want **3 copies** of this app running.”
+- If one copy (pod) dies or is deleted, ReplicaSet **automatically creates a new one**.
+- If you want more copies, it can **add them**. If you want fewer, it can **remove some**.
+
+Think of it like **a babysitter for your pods**: it keeps the number of pods exactly how you want.
 ### **How They Work Together**
 
 1. You create a **Deployment** → it creates and manages multiple **Pods**.
