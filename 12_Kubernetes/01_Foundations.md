@@ -7,7 +7,7 @@ All of this is managed my Kubernetes.
 
 ![[Pasted image 20260420141735.png]]
 
-### Master node/control plane & its components 
+## Master node/control plane & its components 
 Control plane/master node is a virtual machine that hosts administrative components which help run the cluster(will see below) smoothly. 
 
 In a high availability there is more than one nodes/virtual machine for the control plane. 
@@ -19,8 +19,7 @@ In a high availability there is more than one nodes/virtual machine for the cont
 API server is the center of the control plane. Any incoming request from the client will first reach to the API server. Then API server will interact with other components. 
 Any request from outside will first go to the API server. It's a main entry point inside the kubernetes cluster. 
 
-#### Schedular 
-
+### Schedular 
 Receive the request from the API server:
 Eg. Request to schedule a pod. 
 Request is received first by the API server, API server forward that request to the scheduler to find a suitable node for that pod. 
@@ -35,9 +34,35 @@ Control manager is the combination of many different components.
 4. **Cloud controller**: communication between a kubernetes cluster & a cloud provider. 
 Monitor the workload, monitor the kubernetes object & make sure it is up & healthy. 
 
+### ETCD
+
+Etcd is a **key value data store**
+eg. name (key): Tanishka (value).  
+**Etcd is a schema less database.** 
+Etcd is a **NoSQL databases where you store your values as per documents. The document here is a JSON file** 
+Every s**ingle information about the cluster is stored here, whenever you make changes in the cluster that information is included.** 
+**Only API server interacts** with the etcd database.
+**Only API server has the authority** to apply changes to the etcd.
+If we want to retrieve information from the etcd. Eg. we want to know how many pods are running in the cluster. So that information will also be retrieved by the API server from the etcd database.
 
 
+## Worker node components
 
+### Kube-proxy
+
+Every worker node will have kubelet and kube-proxy running. 
+
+![[Pasted image 20260420203914.png]]
+
+Kube-proxy receives instructions from the control plane node. 
+
+API server will send instructions to the kubelet to make some changes in the worker node. 
+
+Eg. if it receives instruction to delete a pod. 
+![[Pasted image 20260420204702.png]]
+
+API server will reflect the changes in etcd. 
+It is a node based agent and receive the request from the API server and enables communication 
 ### # Pods:
 ![[Pasted image 20260420171937.png]]
 
