@@ -48,7 +48,7 @@ If we want to retrieve information from the etcd. Eg. we want to know how many p
 
 ## Worker node components
 
-### Kube-proxy
+### Kubelet
 
 Every worker node will have kubelet and kube-proxy running. 
 
