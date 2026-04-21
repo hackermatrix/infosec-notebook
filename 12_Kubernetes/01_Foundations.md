@@ -7,8 +7,34 @@ All of this is managed my Kubernetes.
 
 ![[Pasted image 20260420141735.png]]
 
-### Master node/control plane 
+### Master node/control plane & its components 
 Control plane/master node is a virtual machine that hosts administrative components which help run the cluster(will see below) smoothly. 
+
+In a high availability there is more than one nodes/virtual machine for the control plane. 
+
+![[Pasted image 20260420195208.png]]
+
+#### API Server:
+
+API server is the center of the control plane. Any incoming request from the client will first reach to the API server. Then API server will interact with other components. 
+Any request from outside will first go to the API server. It's a main entry point inside the kubernetes cluster. 
+
+#### Schedular 
+
+Receive the request from the API server:
+Eg. Request to schedule a pod. 
+Request is received first by the API server, API server forward that request to the scheduler to find a suitable node for that pod. 
+It catches newly created pods that are yet to be assigned to a node means writing nodes name in the pod metadata
+
+### Controller manager 
+
+Control manager is the combination of many different components. 
+1. **Node Controller :** responsible for managing the nodes. 
+2. **Namespace** 
+3. **Deployment Controller** 
+4. **Cloud controller**: communication between a kubernetes cluster & a cloud provider. 
+Monitor the workload, monitor the kubernetes object & make sure it is up & healthy. 
+
 
 
 
