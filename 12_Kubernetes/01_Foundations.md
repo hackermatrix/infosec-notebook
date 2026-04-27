@@ -114,8 +114,24 @@ Scheduler sends instructions to the **apiserver.**
 Note: Every component sends instructions/metadata to the api server 
 
 ![[Pasted image 20260427155317.png]]
-
 ![[Pasted image 20260427155542.png]]
+
+### Part 4
+
+API server interacts with the kubelet of the particular node that I have a job for schedule this pod on your node. 
+Receiving that request kubelet will schedule the pod. It will send the details back to the api server that pod has been created. 
+
+![[Pasted image 20260427160054.png]]
+
+### Part 5
+
+![[Pasted image 20260427160541.png]]
+
+API server will add the entry to the ETCD database. That the pod has been created. 
+Then the api server will send the details to the user that your request has been created. 
+
+![[Pasted image 20260427160717.png]]
+
 ### # Pods:
 ![[Pasted image 20260420171937.png]]
 
