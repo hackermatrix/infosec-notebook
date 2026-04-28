@@ -29,6 +29,11 @@ Note in other fields you have to mentioned the exact specification but in the la
 ![[Pasted image 20260428002339.png]]
 ![[Pasted image 20260428002420.png]]
 
+Note the containerPort:80 is not port mapping. it just declares that the container listens on port 80 inside the pod. It doesn't expose anything to the outside.
+
+**Host-to-container mapping**
+hostPort: 8080
+
 *Rembember the labels should not be the same level as metadata
 
 Suppose you mispronoune a name
