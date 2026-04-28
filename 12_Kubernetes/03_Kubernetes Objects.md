@@ -33,3 +33,13 @@ Every manifest needs four things:
 - **`kind`** — the type of object (e.g., `Deployment`, `Pod`, `Service`)
 - **`metadata`** — identifying info like the object's name, UID, and optionally a namespace
 - **`spec`** — the desired state, which varies depending on the object type
+
+
+## How to directly update the object in the cluster. 
+
+eg. I have to edit pod yaml file 
+
+kubectl edit pod nginx-pod
+
+It will open an editor kind of interface.
+![[Pasted image 20260428012059.png]]

@@ -29,4 +29,15 @@ Note in other fields you have to mentioned the exact specification but in the la
 ![[Pasted image 20260428002339.png]]
 ![[Pasted image 20260428002420.png]]
 
-*Rembember the labels should not be the same level as metadata*
+*Rembember the labels should not be the same level as metadata
+
+Suppose you mispronoune a name
+![[Pasted image 20260428010921.png]]
+
+Though it gives a warning it does get configured.
+![[Pasted image 20260428011022.png]]
+
+Here you see it does not show ready 
+![[Pasted image 20260428011058.png]]
+
+**CrashLoopBackOff** means Kubernetes **successfully pulled the image and started the container, but it keeps crashing**. The container starts, dies, Kubernetes restarts it, it dies again — and after several tries it backs off.
