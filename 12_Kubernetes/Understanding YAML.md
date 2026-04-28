@@ -3,6 +3,21 @@ YAML file extensions can be .yaml or yml
 
 YAML supports different data types list, integer & a lot more. 
 
+Important YAML does not support tab only spaces. 
+
+apiVersion: v1          ← 0 spaces (top level)
+kind: Pod               ← 0 spaces
+metadata:               ← 0 spaces
+  name: demo-pod        ← 2 spaces (under metadata)
+  labels:               ← 2 spaces (under metadata)
+    env: demo           ← 4 spaces (under labels)
+    type: frontend      ← 4 spaces (under labels)
+spec:                   ← 0 spaces (top level)
+  containers:           ← 2 spaces (under spec)
+  - name: nginx-container  ← 2 spaces (list item under containers)
+    image: nginx           ← 4 spaces (under the container)
+    ports:                 ← 4 spaces (under the container)
+    - containerPort: 80    ← 4 spaces (list item under ports)
 ## Syntax 
 
 Identation in yaml should be taken care of:
