@@ -232,8 +232,41 @@ Under spec template should be mentioned.
 
 ##### SPEC
 
-Whenever there is a pod that crashes or whenever a pod gets deleted it should spin up a new pod, but how will the replication controller know which image to use which version of the image to use. what is the port name and on which port that pod should be exposed this information is in the template.
+Whenever there is a pod that crashes or whenever a pod gets deleted it should spin up a new pod, but how will the replication controller know 
+- which image to use
+- which version of the image to use. 
+- what is the port name 
+- which port that pod should be exposed this information is in the template.
+
+apiVersion: v1
+kind: ReplicationController
+metadata:                        # WHO is the RC?
+  name: nginx-rc
+  labels:
+    env: demo
+spec:                            # WHAT should the RC do?
+  replicas: 3                    # How many pods to maintain
+  template:                      # TEMPLATE for pods it creates ↓
+
+    # ======== INNER LAYER: The Pod blueprint ========
+    metadata:                    # WHO is each pod?
+      labels:
+        env: demo
+        name: nginx
+    spec:                        # WHAT runs inside each pod?
+      containers:
+      - image: nginx
+        name: nginx-container
 
 
+![[Pasted image 20260428162320.png]]
 
+Important thing: 
 
+Slide difference between a label name & pod name: 
+
+![[Pasted image 20260428162429.png]]
+
+**`metadata.name`** — This is the pod's actual identity in Kubernetes. It's what shows up when you run `kubectl get pods`. But in a ReplicationController template, you usually **don't set this** because the RC creates multiple pods and auto-generates unique names like `nginx-rc-x7k2f`, `nginx-rc-m9p1d`, etc. If you hardcoded a name, the second replica would fail because names must be unique.
+
+**`metadata.labels.name: nginx`** — This is just a tag/sticker. It's like putting a sticky note on the pod saying "name=nginx." It has no effect on the pod's identity. Its purpose is for **selection and grouping** — the RC uses labels to find which pods belong to it.
