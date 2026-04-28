@@ -139,7 +139,8 @@ Then the api server will send the details to the user that your request has been
 - **Definition:** The **smallest deployable unit** in Kubernetes. **is a group of one or more [containers](https://kubernetes.io/docs/concepts/containers/)**, with shared storage and network resources, and a specification for how to run the containers. **Think of it as a wrapper around one or more containers that share the same network namespace and storage**. Pod helps you run the containers. 
 - **Key Features:**
     - Each Pod gets its **own IP address**.
-    - 
+
+Pods are sharing resources from the node. CPU, memory etc. 
 
 Containers inside a Pod can communicate over `localhost`.
     - Pods are **ephemeral**: they can die and be recreated, so you usually don’t interact with them directly in production.
@@ -189,6 +190,50 @@ Think of it like **a babysitter for your pods**: it keeps the number of pods exa
 ```
 Deployment --> Pods --> Service routes traffic to Pods
 ```
+
+
+### Replication Controller 
+
+![[Pasted image 20260428150511.png]]
+
+Controllers are managed by controller manager. 
+Replication controller make sure that all replicas are running all the time and the application does not crash even if there is a pod failure. 
+eg. The pods in the image are part of the replication controller. 
+
+Note: There is a difference between replication controller and replication set. 
+
+Replication spins up multiple identical instances of a pod. 
+Replication controller has the load balancing logic. 
+Replication controlller is responsible for redirecting the traffic to one of the active pods. 
+It has mechanism which will check which pod is active or which pod is healthy and it will redirect the traffic or there are some load balancing algorithms through which it finds the most healthy pods. 
+
+Suppose if you have mentioned replicas=3 it will always ensure that there are three instances of pod running all the time. 
+So if one fails it will spin up one, if two fails it will spin up two. 
+Replica is the desired number of instances running on the pod. 
+
+It reaches to a point where the node reaches capacity. 
+Replication controlller can spun a new node. 
+![[Pasted image 20260428152305.png]]
+
+E.g, in the image above you can see a new node with a pod. 
+
+
+### How to deploy replication controller 
+
+#### Step 1: Create YAML file 
+
+The below four objects should be mentioned : 
+apiversion 
+kind 
+metadata 
+spec 
+
+Under spec template should be mentioned. 
+
+##### SPEC
+
+Whenever there is a pod that crashes or whenever a pod gets deleted it should spin up a new pod, but how will the replication controller know which image to use which version of the image to use. what is the port name and on which port that pod should be exposed this information is in the template.
+
 
 
 

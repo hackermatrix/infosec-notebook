@@ -13,7 +13,10 @@ https://kind.sigs.k8s.io/docs/user/quick-start#creating-a-cluster
 
 ```
 kind create cluster --config kind-example-config.yaml
+
 ```
+## How to switch contexts
+
 When you run kubectl get nodes it will give information about the recent cluster what about the previous cluster i.e, when you will use kubectl get context
 
 kubectl config get-contexts
@@ -24,8 +27,7 @@ the * in the column CURRENT shows that any command you will run will give inform
 
 Eg. when I do kubectl get-nodes 
 ![[Pasted image 20260427224233.png]]
-
-How to switch contexts 
+ 
 kubectl config use-context my-cluster-name
 
 Kubectl run pod-name --image image-name. 
@@ -36,6 +38,7 @@ Eg. if there are two containers running it would be 2/2 or something
 
 ![[Pasted image 20260427232236.png]]  
 
+## Explain command 
 kubectl explain pod 
 
 It's a **documentation tool**. It shows you the structure/schema of a Kubernetes resource type.
@@ -48,6 +51,10 @@ At the top you can see the kind and version these versions are the one that are 
 
 It can be further delved into this 
 ![[Pasted image 20260428105903.png]]
+
+rc is replicationccontroller when you are making a yaml file for replicationcontroller 
+
+![[Pasted image 20260428154010.png]]
 
 ## Editing a pod 
 
