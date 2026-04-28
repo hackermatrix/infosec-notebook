@@ -35,3 +35,17 @@ When you do kubectl get-pods and see 1/1 that means it has one container & one i
 Eg. if there are two containers running it would be 2/2 or something 
 
 ![[Pasted image 20260427232236.png]]  
+
+kubectl explain pod 
+
+It's a **documentation tool**. It shows you the structure/schema of a Kubernetes resource type.
+Note: it is not the pod name jus the pod
+
+At the top you can see the kind and version these versions are suppose to be used. 
+
+![[Pasted image 20260428105450.png]]
+![[Pasted image 20260428105505.png]]
+
+It can be further delved into this 
+![[Pasted image 20260428105903.png]]
+
