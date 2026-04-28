@@ -22,6 +22,8 @@ Run kubectl explain pod, will tell you what all versions are available.
 
 In metadata there are different fields such as name, labels 
 
+labels are helpful to group your resources together. 
+
 Note in other fields you have to mentioned the exact specification but in the label you can have any key value.
 
 ![[Pasted image 20260428002154.png]]

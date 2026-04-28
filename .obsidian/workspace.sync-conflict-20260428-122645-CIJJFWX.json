@@ -1,0 +1,260 @@
+{
+  "main": {
+    "id": "b5566c608ef80fcc",
+    "type": "split",
+    "children": [
+      {
+        "id": "d09883f74440aac9",
+        "type": "tabs",
+        "dimension": 78.63247863247864,
+        "children": [
+          {
+            "id": "b4ff8cf49efb17d8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "12_Kubernetes/Kubernetes Kind & Understanding Commands.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Kubernetes Kind & Understanding Commands"
+            }
+          }
+        ]
+      },
+      {
+        "id": "f5e2f3fd76e46764",
+        "type": "tabs",
+        "dimension": 21.367521367521366,
+        "children": [
+          {
+            "id": "3279e036011af0a6",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "12_Kubernetes/Kubernetes Kind & Understanding Commands.md",
+                "followCursor": false,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Kubernetes Kind & Understanding Commands"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "501cc709a06e6696",
+    "type": "split",
+    "children": [
+      {
+        "id": "4b8b8f109cbbacf4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f5840bfbaf596e7a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "61db085d00085ad4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#How",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "f1f948b5b4b54a60",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 351.5
+  },
+  "right": {
+    "id": "4ea3f69a560f69fe",
+    "type": "split",
+    "children": [
+      {
+        "id": "7fb98404b778b70c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7ed81a677469c041",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "AD/AD Vulns Index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for AD Vulns Index"
+            }
+          },
+          {
+            "id": "372b9cb75ab3e27b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "AD/AD Vulns Index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from AD Vulns Index"
+            }
+          },
+          {
+            "id": "a2e905ccb1b2756c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "32db82979f5257a3",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "1f837cbee21f646b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "AD/AD Vulns Index.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of AD Vulns Index"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "b4ff8cf49efb17d8",
+  "lastOpenFiles": [
+    "images/Pasted image 20260428122628.png",
+    "images/Pasted image 20260428122220.png",
+    "images/Pasted image 20260428121936.png",
+    "images/Pasted image 20260428121905.png",
+    "images/Pasted image 20260428121600.png",
+    "images/Pasted image 20260428121552.png",
+    "images/Pasted image 20260428114846.png",
+    "12_Kubernetes/kubectl Cheatsheet.md",
+    "12_Kubernetes/01_Foundations.md",
+    "12_Kubernetes/Understanding YAML.md",
+    "12_Kubernetes/Kubernetes Kind & Understanding Commands.md",
+    "images/Pasted image 20260428113050.png",
+    "images/Pasted image 20260428112242.png",
+    "images/Pasted image 20260428111523.png",
+    "12_Kubernetes/kubernetes_basic_terminologies.md",
+    "images/Pasted image 20260428105903.png",
+    "12_Kubernetes/03_Kubernetes Objects.md",
+    "12_Kubernetes/04_Managing Objects.md",
+    "12_Kubernetes/Virtual Machine, Docker Basic Revision.md",
+    "12_Kubernetes/08_Labels and Selectors.md",
+    "12_Kubernetes/07_Kubernetes RBAC.md",
+    "12_Kubernetes/06_Kubernetes Namespace.md",
+    "12_Kubernetes/05_Kubernetes Service.md",
+    "12_Kubernetes/04_Kubernetes Networking.md",
+    "12_Kubernetes/Doubts.md",
+    "12_Kubernetes/02_Kubernetes Components.md",
+    "12_Kubernetes/Managing_objects_detailed/Imperative Commands.md",
+    "07_Docker_Cloud/Docker/Docker Commands.md",
+    "01_Recon_Scanning/Nmap practise use cases.md",
+    "01_Recon_Scanning/Nmap Cheatsheet.md",
+    "Docker.md",
+    "5130/05_SIEMS.md",
+    "5010/5010_Laws_Ethics_Privacy/Privacy_Textbook/9.1 - Privacy Concepts.md",
+    "14_GRC/Common Criteria Framework.md",
+    "15_SOC/Incident Response Policy, Plan, Playbook.md",
+    "15_SOC/SCAP (Security Content Automation Protocol).md",
+    "5130/Audit_and_Logging_TextBook/Log-Management-Quiz-Ch2-3.html",
+    "5130/Audit_and_Logging_TextBook",
+    "5130/New folder",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.5 - Computer Crime.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.6 - Ethical Issues in Computer Security.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/Chapter-11-Quiz.html",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.4 - Redress for Software Failures.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.2 - Information and the Law.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~00 - Chapter 11 MOC.md.tmp",
+    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~Chapter-11-Quiz.html.tmp",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
+  ]
+}

@@ -96,9 +96,49 @@ kubectl exec -it podname -- sh
 
 ![[Pasted image 20260428114846.png]]
 
-kubectl run <pod-name> --image=<image-name> --dry-run=client -o yaml
-- `kubectl run <pod-name>` — create a pod with this name
-- `--image=<image-name>` — using this container image
+kubectl run pod-name --image=image-name> --dry-run=client -o yaml
+- `kubectl run pod-name` — create a pod with this name
+- `--image=image-name` — using this container image
 - `--dry-run=client` — don't actually create anything, just simulate it
-- `-o yaml` — output the generated YAML
+- `-o yaml` — output the generated YAML>
 
+
+
+![[Pasted image 20260428121600.png]]
+
+So instead of creating a manual yaml file it creates one and then you can make changes to the yaml file accordingly. 
+
+You can also redirect it to a new yaml file 
+
+kubectl run pod-name --image=image-name> --dry-run=client -o yaml > newfilename.yaml 
+![[Pasted image 20260428121905.png]]
+![[Pasted image 20260428121936.png]]
+
+Similarly you can do a .json file 
+![[Pasted image 20260428122220.png]]
+
+
+## How to get information about a particular pod 
+
+kubectl describe pod pod-name 
+
+![[Pasted image 20260428122628.png]]
+![[Pasted image 20260428122644.png]]
+
+## How to get information about labels 
+
+kubectl get pods pod-name --show-labels
+
+![[Pasted image 20260428123103.png]]
+
+-o wide will show that all the information like extended information about the get pods command 
+
+kubectl get pods -o wide 
+
+![[Pasted image 20260428123303.png]]
+
+**Readiness Gates**
+These are custom conditions that must be true before Kubernetes considers the pod "Ready." By default, Kubernetes marks a pod ready when its containers are running and passing health checks. But sometimes external systems (like a load balancer or service mesh) need to confirm the pod is actually ready to receive traffic. Readiness gates let you add those extra checks. `<none>` means no custom readiness conditions are configured — Kubernetes is using its default readiness logic.
+
+
+![[Pasted image 20260428123623.png]]
