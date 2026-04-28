@@ -132,7 +132,7 @@ Then the api server will send the details to the user that your request has been
 
 ![[Pasted image 20260427160717.png]]
 
-### # Pods:
+##  Pods:
 ![[Pasted image 20260420171937.png]]
 
 
@@ -141,12 +141,16 @@ Then the api server will send the details to the user that your request has been
     - Each Pod gets its **own IP address**.
     - 
 
-
 Containers inside a Pod can communicate over `localhost`.
     - Pods are **ephemeral**: they can die and be recreated, so you usually don’t interact with them directly in production.
         
 - **Analogy:** A Pod is like a **single apartment** inside a building (the apartment can have multiple rooms → containers).
 
+### Ways to use pod
+
+There are two ways of using a pod:
+1. Imperative: In imperative you run simple commands such as kubectl, you are instructing the api server. 
+2. Declarative: Create a configuration file that could be JSON file or YAML. In the configuration file you mention the desired state of the object. 
 ### # Deployment:
 
 - **Definition:** A **higher-level abstraction** that manages Pods.

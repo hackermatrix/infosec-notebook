@@ -27,3 +27,11 @@ Eg. when I do kubectl get-nodes
 
 How to switch contexts 
 kubectl config use-context my-cluster-name
+
+Kubectl run pod-name --image image-name. 
+
+When you do kubectl get-pods and see 1/1 that means it has one container & one is already running
+
+Eg. if there are two containers running it would be 2/2 or something 
+
+![[Pasted image 20260427232236.png]]  
