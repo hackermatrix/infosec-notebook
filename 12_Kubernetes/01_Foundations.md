@@ -371,3 +371,6 @@ Check the name of the image in container
 
 Here is the syntax 
 kubectl set image deploy/deploy-name container-name>=new-image
+
+This change is in the live object file and not in the yaml file 
+

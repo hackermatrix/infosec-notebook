@@ -160,5 +160,10 @@ kubectl describe po
 ![[Pasted image 20260429150944.png]]
 
 
+## How to check the rollout history 
+
+kubectl rollout history deploy/nginx-deploy
+![[Pasted image 20260429170214.png]]
 
 
+## How to dry run deploy 
