@@ -149,3 +149,16 @@ These are custom conditions that must be true before Kubernetes considers the po
 
 
 ![[Pasted image 20260428123623.png]]
+
+## How to get information about individual pods 
+
+kubectl get po 
+
+kubectl describe po 
+![[Pasted image 20260429150603.png]]
+
+![[Pasted image 20260429150944.png]]
+
+
+
+

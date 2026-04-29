@@ -229,6 +229,7 @@ metadata
 spec 
 
 Under spec template should be mentioned. 
+![[Pasted image 20260429153453.png]]
 
 ##### SPEC
 
@@ -259,8 +260,6 @@ spec:                            # WHAT should the RC do?
         name: nginx-container
 
 
-![[Pasted image 20260428162320.png]]
-
 Important thing: 
 
 Slide difference between a label name & pod name: 
@@ -270,3 +269,52 @@ Slide difference between a label name & pod name:
 **`metadata.name`** — This is the pod's actual identity in Kubernetes. It's what shows up when you run `kubectl get pods`. But in a ReplicationController template, you usually **don't set this** because the RC creates multiple pods and auto-generates unique names like `nginx-rc-x7k2f`, `nginx-rc-m9p1d`, etc. If you hardcoded a name, the second replica would fail because names must be unique.
 
 **`metadata.labels.name: nginx`** — This is just a tag/sticker. It's like putting a sticky note on the pod saying "name=nginx." It has no effect on the pod's identity. Its purpose is for **selection and grouping** — the RC uses labels to find which pods belong to it.
+
+![[Pasted image 20260429002813.png]]
+
+
+#### Step 2: Apply the YAML file 
+
+![[Pasted image 20260429151301.png]]
+
+Check if the pods mentioned in the rc file are present 
+
+![[Pasted image 20260429151333.png]]
+
+![[Pasted image 20260429151414.png]]
+
+### Difference between replicaset & replication controller 
+
+Replication controller is the legacy version, replicaset is the newer version 
+Replicaset is the preferred way. 
+
+Replication controller will be used to manage the resources, the pods created as part of that replication controller. 
+
+Replicaset we can manage the existing pods as well it does not have to be part of the replica set. 
+
+And that is done by another field called selector and inside that we do matchLabels. Under matchLabels mention the pod that you want to be part of the replicaset. 
+Eg. in the image we mentioned env:demo 
+Every pod with this particular label will be managed by the replicaset. 
+
+![[Pasted image 20260429154408.png]]
+
+Now when I apply this I get an error 
+![[Pasted image 20260429154616.png]]
+
+There seems to be some error in the version that I mentioned in the yaml file to troubleshoot this: 
+![[Pasted image 20260429154806.png]]
+
+There is something named as Groups here, check explain pods 
+![[Pasted image 20260429154920.png]]
+this one does not have groups here so we will mention the yaml file as 
+
+Note: Remember the selector is always placed under template. 
+
+![[Pasted image 20260429155513.png]]
+
+![[Pasted image 20260429155536.png]]
+
+spec:
+  replicas:      ← HOW MANY pods
+  selector:      ← HOW TO FIND pods
+  template:      ← WHAT the pods look like
