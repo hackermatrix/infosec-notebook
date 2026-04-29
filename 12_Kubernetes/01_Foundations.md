@@ -152,14 +152,6 @@ Containers inside a Pod can communicate over `localhost`.
 There are two ways of using a pod:
 1. Imperative: In imperative you run simple commands such as kubectl, you are instructing the api server. 
 2. Declarative: Create a configuration file that could be JSON file or YAML. In the configuration file you mention the desired state of the object. 
-### # Deployment:
-
-- **Definition:** A **higher-level abstraction** that manages Pods.
-- **Purpose:** Ensures that a specified number of Pods are running at all times, handles **rolling updates**, and can **rollback** if something goes wrong.
-- **Key Features:**
-    - Declarative: You define **desired state**, and Kubernetes works to maintain it.
-    - Handles **replicas**, **scaling**, and **upgrades** automatically.
-- **Analogy:** Deployment is like a **property manager** who ensures the building always has the right number of apartments occupied.
 
 ### # Service:
 
@@ -318,3 +310,64 @@ spec:
   replicas:      ← HOW MANY pods
   selector:      ← HOW TO FIND pods
   template:      ← WHAT the pods look like
+
+### Methods to deploy replicaset 
+
+#### Declarative way 
+
+##### Edit it live
+
+kubectl edit replicaset replicasetname
+kubectl edit rs/replicasetname
+
+![[Pasted image 20260429160949.png]]
+
+##### Edit the nano file 
+
+#### Imperative way 
+kubectl scale --replicas=10 rs/nginx-rs
+![[Pasted image 20260429162149.png]]
+
+## # Deployment:
+
+-Deployment provides additional functionality to the replicaset. 
+
+![[Pasted image 20260429162634.png]]
+
+Deployment will create the replicaset: 
+Deployment will manage the replicaset, replicaset will manage the pod. 
+![[Pasted image 20260429162807.png]]
+
+Let us say the pods are running version 1.1 of the nginx 
+
+![[Pasted image 20260429162918.png]]
+
+Now suppose we have to change the version from 1.1 to 1.2. Replicaset will apply the changes and recreate the pods all at once. The users will face the downtime. the application will face the donwtime for brief period.
+
+Deployment will do the changes in the rolling update fashion. 
+
+![[Pasted image 20260429163320.png]]
+
+ E.g. it will update the first pod, while the first pod is being updated traffic is being served by the next two pods. It can also spin up a new pod to take care of the traffic. 
+Once the first pod is updated it add it back to the load balancer
+
+Simlarly for the next pod.
+![[Pasted image 20260429163534.png]]
+
+### How to deploy deployment
+
+#### Declarative way: Editing the yaml file 
+![[Pasted image 20260429164132.png]]
+![[Pasted image 20260429164748.png]]
+
+
+### How to edit the image
+
+Check the name of the image in container 
+
+![[Pasted image 20260429165720.png]]
+
+![[Pasted image 20260429165846.png]]
+
+Here is the syntax 
+kubectl set image deploy/deploy-name container-name>=new-image
