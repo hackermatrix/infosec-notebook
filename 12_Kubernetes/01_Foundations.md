@@ -360,7 +360,13 @@ Simlarly for the next pod.
 ![[Pasted image 20260429164132.png]]
 ![[Pasted image 20260429164748.png]]
 
-
+You create: Deployment (nginx-deploy)
+                ↓ automatically creates
+            ReplicaSet (nginx-deploy-7cbf7c7c5c)
+                ↓ automatically creates
+            Pods (nginx-deploy-7cbf7c7c5c-f94wq)
+                 (nginx-deploy-7cbf7c7c5c-ljmmd)
+                 (nginx-deploy-7cbf7c7c5c-q7pcv)
 ### How to edit the image
 
 Check the name of the image in container 

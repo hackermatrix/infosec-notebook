@@ -167,3 +167,8 @@ kubectl rollout history deploy/nginx-deploy
 
 
 ## How to dry run deploy 
+
+kubectl create deploy nginx-new --image=nginx --dry-run=client -o yaml > deploy.yaml
+
+''kubectl create deploy <name> --image=<image> --dry-run=client -o yaml > filename.yaml '''
+   
