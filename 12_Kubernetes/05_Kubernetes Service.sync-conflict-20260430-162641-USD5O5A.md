@@ -159,15 +159,6 @@ spec:
 - **When to use:** When one service inside your cluster needs to talk to another, like your backend talking to a database. No one outside the cluster needs access.
 
 
-![[Pasted image 20260430162043.png]]
+![[Pasted image 20260430161719.png]]
 
-You can access the pods from backend to front using ip or service. 
-
-ClusterIP works on port 8443 , http, https ports 
-
-### How to create ClusterIP
-
-![[Pasted image 20260430164418.png]]
-
-![[Pasted image 20260430164359.png]]
-
+Cluster IP: 10.244.2.3 
