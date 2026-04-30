@@ -71,10 +71,23 @@ So now I am labelling it as env
 
 ![[Pasted image 20260430003250.png]]
 
+### Checking if the nodeport is exposed on kubernetes 
+
+![[Pasted image 20260430153345.png]]
+
+Then you describe any pod using 
+
+![[Pasted image 20260430153451.png]]
+
+Check on the port it is running using curl
+
+![[Pasted image 20260430153735.png]]
+
+
 
 ### How to do deploy nodeport using kind simulation
 
-Remember node is a physical or virtual machine but in kind the node is a container when you deploy a container you need to do port mapping. 
+Remember node is a physical or virtual machine but in kind the node is a container when you deploy a container you need to do port mapping. Kind does not expose the cluster directly.
 
 #### Step 1: Create cluster with port mapping 
 
@@ -90,6 +103,7 @@ apply deploys resources (pods, services, deployments) onto an **already running*
 ![[Pasted image 20260430143142.png]]
 
 By default it switches you to context3 but still i switched 
+
 ![[Pasted image 20260430143638.png]]
 
 #### Step 2: Apply the replicaset 
@@ -101,9 +115,28 @@ By default it switches you to context3 but still i switched
 
 #### Step 3: Apply the nodeport yaml file : check the nodeport yaml file 
 
+![[Pasted image 20260430151343.png]]
+![[Pasted image 20260430151424.png]]
+```
+kubectl apply -f nodeport.yaml
+```
+![[Pasted image 20260430151612.png]]
 
+#### Step 4: Check if nodeport is working 
 
-1. **ClusterIP**:
+```
+
+kubectl describe svc nodeport
+
+```
+![[Pasted image 20260430152116.png]]
+
+![[Pasted image 20260430152231.png]]
+
+Note nginx works on http
+![[Pasted image 20260430152538.png]]
+
+## **ClusterIP**:
 - Think of it as an **internal phone line** inside your office. Only people inside the building (cluster) can call it.
 
 ```yaml
