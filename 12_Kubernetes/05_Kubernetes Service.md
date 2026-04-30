@@ -75,6 +75,8 @@ So now I am labelling it as env
 ### Nodeport port mapping in kind
 
 Remember node is a physical or virtual machine but in kind the node is a container when you deploy a container you need to do port mapping. 
+![[Pasted image 20260430012034.png]]
+
 
 
 
