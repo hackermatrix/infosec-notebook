@@ -72,11 +72,34 @@ So now I am labelling it as env
 ![[Pasted image 20260430003250.png]]
 
 
-### Nodeport port mapping in kind
+### How to do deploy nodeport using kind simulation
 
 Remember node is a physical or virtual machine but in kind the node is a container when you deploy a container you need to do port mapping. 
+
+#### Step 1: Create cluster with port mapping 
+
 ![[Pasted image 20260430012034.png]]
 
+Will have to recreate the cluster not just apply 
+
+create builds the actual Kubernetes cluster itself. Think of it as constructing the building — setting up the nodes, the control plane, etcd, networking. Without this, there's no Kubernetes at all.
+
+apply deploys resources (pods, services, deployments) onto an **already running** cluster. This is like furnishing the rooms inside the building.
+
+
+![[Pasted image 20260430143142.png]]
+
+By default it switches you to context3 but still i switched 
+![[Pasted image 20260430143638.png]]
+
+#### Step 2: Apply the replicaset 
+![[Pasted image 20260430144816.png]]
+
+![[Pasted image 20260430144840.png]]
+
+![[Pasted image 20260430144906.png]]
+
+#### Step 3: Apply the nodeport yaml file : check the nodeport yaml file 
 
 
 
