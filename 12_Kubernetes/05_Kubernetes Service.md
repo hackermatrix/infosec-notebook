@@ -163,11 +163,45 @@ spec:
 
 You can access the pods from backend to front using ip or service. 
 
-ClusterIP works on port 8443 , http, https ports 
+ClusterIP works on port 443 , http, https ports 
 
 ### How to create ClusterIP
 
 ![[Pasted image 20260430164418.png]]
 
 ![[Pasted image 20260430164359.png]]
+
+![[Pasted image 20260430170001.png]]
+
+Endpoint is the ip of the pod on which the service is listening to. 
+![[Pasted image 20260430170127.png]]
+
+**ClusterIP (10.96.230.205)** — stays constant for the lifetime of the service. As long as this service exists, this IP never changes. Other pods can always reach it at `10.96.230.205:80`. This is why services exist — they give you a stable address.
+## Loadbalancer 
+
+![[Pasted image 20260430170733.png]]
+
+### How to deploy Loadbalancer 
+
+![[Pasted image 20260430171728.png]]
+
+![[Pasted image 20260430171718.png]]
+The reason external-ip has pending because we have not configured an external loadbalancer. 
+
+https://kind.sigs.k8s.io/docs/user/loadbalancer/
+
+
+## External Loadbalancer 
+![[Pasted image 20260430172143.png]]
+
+
+You create: Service with type: LoadBalancer
+                ↓ Kubernetes tells the cloud provider
+Cloud creates: An actual external load balancer (like AWS ELB)
+                ↓ gets a public IP
+Users reach:  public-ip:80 → Load Balancer → NodePort → Service → Pods
+
+## Imperative way to deploy service 
+
+![[Pasted image 20260430172437.png]]
 
