@@ -3,7 +3,13 @@
 
 ## Types of Service
 
-1. **ClusterIP**:
+1. ClusterIP
+2. Nodeport 
+3. ExternalName 
+4. Loadbalancer 
+5. 
+
+5. **ClusterIP**:
 - Think of it as an **internal phone line** inside your office. Only people inside the building (cluster) can call it.
 
 ```yaml
