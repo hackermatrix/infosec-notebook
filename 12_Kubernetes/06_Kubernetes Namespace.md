@@ -23,3 +23,5 @@
 
 3. **Isolation:** 
 	- Namespaces offer a degree of isolation. If a process in one namespace fails, it doesn’t impact processes in other namespaces, thereby enhancing the system’s overall stability and reliability.
+
+It creates a namespace called kubesystem.
