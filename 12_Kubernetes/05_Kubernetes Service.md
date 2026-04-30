@@ -14,6 +14,12 @@ Service will make the application loosely coupled & accessible to only what is s
 
 ![[Pasted image 20260429212704.png]]
 
+## How to get information about services
+
+kubectl get svc 
+
+![[Pasted image 20260430003456.png]]
+
 ## Types of Service
 
 1. ClusterIP
@@ -61,8 +67,14 @@ selector is used to mention which pod or deployment served as a service. Now rem
 ![[Pasted image 20260429215636.png]]
 
 So now I am labelling it as env
+![[Pasted image 20260430003334.png]]
+
+![[Pasted image 20260430003250.png]]
 
 
+### Nodeport port mapping in kind
+
+Remember node is a physical or virtual machine but in kind the node is a container when you deploy a container you need to do port mapping. 
 
 
 
