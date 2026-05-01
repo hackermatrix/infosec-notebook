@@ -248,3 +248,10 @@ Generate YAML:      kubectl ... --dry-run=client -o yaml
 Label it:           kubectl label <type> <name> key=value
 Filter by label:    kubectl get <type> -l key=value
 ```
+
+## Logs
+
+```
+kubectl logs nginx --all-containers=true
+```
+https://kubernetes.io/docs/reference/kubectl/generated/kubectl_logs/
