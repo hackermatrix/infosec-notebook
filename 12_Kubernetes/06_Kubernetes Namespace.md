@@ -31,8 +31,24 @@
 
 Nginx and redis hostname in namespace prod if want to interact to with namespace test. 
 
+![[Pasted image 20260430153207.png]]
+
 They have to use something called as an fully qualified doman name, 
 
+- **FQDN** : Fully Qualified Domain Name (example : www.google.com.)
+	- This is an FQDN because it includes:
+		- **Host** → `www`
+		- **Domain** → `google`
+		- **Top-Level Domain (TLD)** → `com`
+		- **Root (optional dot)** → `.` (often omitted in practice)
+		
+- **default** and **demo** are the two namespaces.
+-  **svc-test** and **svc-demo** are the services that are deployed.
+
+#### Types of communication:
+1. **pod to pod** : pod can communicate using IP addresses **"Across namespaces"** . 
+2. **pod and service ( different namespace )** : If a pod in a different namespace wants to communicate with a service in a different namespace, they need to use a FQDN.
+3. **pod and service ( same namespace )** : If a pod in a same namespace wants to communicate with a service in a same namespace, they can use the service name (eg. **svc-test or svc-demo**).
 
 ### Default Namespace 
 
