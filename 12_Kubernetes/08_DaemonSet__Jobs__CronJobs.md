@@ -1,11 +1,15 @@
+https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
+https://kubernetes.io/docs/tasks/manage-daemon/create-daemon-set/
 
 ## 1. DaemonSet:
 ![[Pasted image 20260430191706.png]]
 - Similar to ReplicaSet but it creates a replica in each node.
 - If a new node is added to the cluster, the daemonset detects that and adds a pod replica to it and also deletes the replica pod if the node is removed from the cluster.
-- It is majorly used for creating things like monitoring agents, logging agent, kube-proxy uses it, etc
+- Make sure that number of replicas is equal to number of nodes. Each node has one running replica all the time 
+- It is majorly used for creating things like monitoring agents, logging agent, kube-proxy uses (Weave-net is a CNI plugin for networking., etc
 - So basically it is used when we need something that we need on every node.
 - Example:
+
 ```
 yaml
 apiVersion: apps/v1
@@ -27,8 +31,7 @@ spec:
         
 ```
 
-
-Great question. The `matchLabels` isn't about deciding **where** to run — it's about **ownership**.
+The `matchLabels` isn't about deciding **where** to run, it's about **ownership**.
 
 Imagine you have multiple DaemonSets running on the same cluster:
 
@@ -58,6 +61,12 @@ It's also needed for:
 - **Health monitoring** — if a pod crashes, the DaemonSet needs to know it was one of its own to restart it
 
 So `matchLabels` answers "which pods belong to me," not "where should I run." Every controller in Kubernetes (Deployment, ReplicaSet, DaemonSet, StatefulSet) uses this same pattern for ownership tracking.
+
+### Difference between Deployment, Replicaset & DaemonSet
+
+In the deployment we actually specify the number of replicas that we can schedule pods based on the availability of the nodes & few other resources. but daemonset requires one replica in each node, replica part is not needed in the yaml file. 
+
+
 ## 2. CronJobs
 
 - CronJob is meant for performing regular scheduled actions such as backups, report generation, and so on. 

@@ -72,8 +72,63 @@ It's running an infinite loop waiting for a **Service called `myservice`**
 https://kubernetes.io/docs/concepts/services-networking/service/
 https://kubernetes.io/docs/tasks/manage-kubernetes-objects/imperative-command/
 
+Imperative way 
+
 ```
 kubectl create service clusterip myservice --tcp=80:80
 ```
 
+Declarative way 
+
+```yaml
+
+apiVersion: v1
+
+kind: Service
+
+metadata:
+
+  name: myservice
+
+spec:
+
+  ports:
+
+  - protocol: TCP
+
+    port: 80
+
+    targetPort: 9376
+
+---
+
+apiVersion: v1
+
+kind: Service
+
+metadata:
+
+  name: mydb
+
+spec:
+
+  ports:
+
+  - protocol: TCP
+
+    port: 80
+
+    targetPort: 9377
+    
+```
+
+┌─[✗]─[tara@parrot]─[~/kubernetes]
+└──╼ $kubectl apply -f service.yaml
+Warning: resource services/myservice is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+service/myservice configured
+service/mydb created
+┌─[tara@parrot]─[~/kubernetes]
+└──╼ $kubectl logs myapp-pod
+Defaulted container "myapp-container" out of: myapp-container, init-myservice (init)
+The app is running!
 2. Sidecar/helper container
