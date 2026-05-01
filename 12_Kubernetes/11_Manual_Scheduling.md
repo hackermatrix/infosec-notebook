@@ -1,3 +1,5 @@
+## What is manual_scheduling 
+
 There are two pods in the pending state. In one pod we have mentioned a field called nodeName. 
 
 We have instructed that schedule the pod on worker node 1
@@ -12,3 +14,8 @@ It is looking for the pod which does not have selector field have no node name s
 .
 ![[Pasted image 20260501162549.png]]
 
+## How to deploy manual scheduling
+
+Changing a yaml file 
+
+![[Pasted image 20260501175506.png]]

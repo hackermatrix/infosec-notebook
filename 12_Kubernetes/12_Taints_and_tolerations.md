@@ -3,8 +3,51 @@ _**Taints** and **tolerations** work together to ensure that pods are not schedu
 - These are applied to **Nodes**.
 - They allow a node to repel a set of pods.
 - We can schedule control plane components on control plane node any custom work load that you deploy from your side which is not control plane components. Hence, it will not be scheduled you cannot see it in kubectl get nodes. 
+-  Example :
+```bash
+kubectl taint nodes node1 key1=value1:NoSchedule
+```
 
 ## Tolerations
 - These are applied to **pods** .
-- Tolerations allow the scheduler to schedule pods with matching taints
+- Tolerations allow the scheduler to schedule pods with matching taints.
+- You specify a toleration for a pod in the PodSpec.
+```yaml
+tolerations:
+- key: "key1"
+  operator: "Equal"
+  value: "value1"
+  effect: "NoSchedule"
+```
 
+
+> [! important]
+> The default Kubernetes scheduler takes taints and tolerations into account when selecting a node to run a particular Pod. However, if you manually specify the `.spec.nodeName` for a Pod, that action bypasses the scheduler; the Pod is then bound onto the node where you assigned it, even if there are `NoSchedule` taints on that node that you selected. If this happens and the node also has a `NoExecute` taint set, the kubelet will eject the Pod unless there is an appropriate tolerance set.
+## What are operator and effects ?
+
+1. **Operator** :
+	- Two values are possible "Exists" and "Equal".
+	- **Equal** : The toleration should exactly match the key and well as the value of the taint.
+	- **Exists** : The toleration in this case only needs to match the key of the taint.
+	- The default value of operator is Equal.
+2. **Effect** :
+	- It can have three possible values : **NoExecute**, **NoSchedule**, **PreferNoSchedule**.
+	1. **NoExecute:** 
+		- Affects already running pods .
+		- Pods that do not tolerate the taint are removed immediately.
+		- For the eviction to work, "**tolerationSeconds**" needs to be specified in the pod spec or else the pod is not removed.
+		
+	2. **NoSchedule:**
+		- No new Pods will be scheduled on the tainted node unless they have a matching toleration.
+		- Running pods are not removed.
+		
+	3. **PreferNoSchedule :**
+		- A soft version of NoSchedule.
+		- The control plane will _try_ to avoid placing a Pod that does not tolerate the taint on the node, but it is not guaranteed.
+
+## Multiple Taints and Torelations 
+- You can put multiple taints on the same node and multiple tolerations on the same pod.
+- Kubernetes does the following:
+	1. Look at all taints on the node
+	2. Remove the ones the pod can tolerate
+	3. Whatever is left (“un-ignored taints”) decides what happens
