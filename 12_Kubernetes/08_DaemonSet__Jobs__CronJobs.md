@@ -6,7 +6,8 @@
 - It is majorly used for creating things like monitoring agents, logging agent, kube-proxy uses it, etc
 - So basically it is used when we need something that we need on every node.
 - Example:
-```yaml
+```
+yaml
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -23,9 +24,40 @@ spec:
       containers:
       - name: vd-nix
         image: nginx
+        
 ```
 
 
+Great question. The `matchLabels` isn't about deciding **where** to run — it's about **ownership**.
+
+Imagine you have multiple DaemonSets running on the same cluster:
+
+```
+DaemonSet A (log collector)  → creates pods with label: app=fluentd
+DaemonSet B (monitoring)     → creates pods with label: app=prometheus
+DaemonSet C (network plugin) → creates pods with label: app=calico
+```
+
+All three run one pod on every node. So on a node with 3 DaemonSets, you have 3 pods. The `matchLabels` is how each DaemonSet knows **which pod is mine**.
+
+Without it:
+
+- DaemonSet A sees 3 pods on a node and thinks "I have too many, let me delete some"
+- DaemonSet B sees the same 3 pods and does the same
+- Chaos
+
+With it:
+
+- DaemonSet A checks labels → "only 1 pod has `app=fluentd`, that's mine, all good"
+- DaemonSet B checks labels → "only 1 pod has `app=prometheus`, that's mine, all good"
+
+It's also needed for:
+
+- **Updating** — when you change the image, the DaemonSet needs to know which pods to replace
+- **Deleting** — when you delete the DaemonSet, it needs to clean up only its own pods
+- **Health monitoring** — if a pod crashes, the DaemonSet needs to know it was one of its own to restart it
+
+So `matchLabels` answers "which pods belong to me," not "where should I run." Every controller in Kubernetes (Deployment, ReplicaSet, DaemonSet, StatefulSet) uses this same pattern for ownership tracking.
 ## 2. CronJobs
 
 - CronJob is meant for performing regular scheduled actions such as backups, report generation, and so on. 
