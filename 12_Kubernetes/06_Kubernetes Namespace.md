@@ -24,4 +24,50 @@
 3. **Isolation:** 
 	- Namespaces offer a degree of isolation. If a process in one namespace fails, it doesn’t impact processes in other namespaces, thereby enhancing the system’s overall stability and reliability.
 
-It creates a namespace called kubesystem.
+
+
+![[Pasted image 20260430190331.png]]
+
+
+Nginx and redis hostname in namespace prod if want to interact to with namespace test. 
+
+They have to use something called as an fully qualified doman name, 
+
+
+### Default Namespace 
+
+![[Pasted image 20260430190912.png]]
+
+When you dont specify the namespace name it goes in the default namespace. 
+
+
+### kube-system 
+
+All the control plane components are included in the kube-system. 
+
+```
+kubectl get all --namespace=kube-system
+```
+![[Pasted image 20260430192004.png]]
+
+```
+kubectl get all --n=namespace-name
+```
+![[Pasted image 20260430192440.png]]
+
+
+## How to deploy namespace 
+
+### Declarative way 
+https://kubernetes.io/docs/tasks/administer-cluster/namespaces/#creating-a-new-namespace
+
+![[Pasted image 20260430194044.png]]
+![[Pasted image 20260430194103.png]]
+
+
+### Deploy namespace with deployment
+
+kubectl create deployment cattle --image=registry.k8s.io/serve_hostname -n=production
+
+![[Pasted image 20260430195323.png]]
+`nginx-demo` is the **deployment name**
