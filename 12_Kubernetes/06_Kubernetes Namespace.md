@@ -67,7 +67,43 @@ https://kubernetes.io/docs/tasks/administer-cluster/namespaces/#creating-a-new-n
 
 ### Deploy namespace with deployment
 
+
 kubectl create deployment cattle --image=registry.k8s.io/serve_hostname -n=production
+
+### Communication between two pods in different namespace. 
+
+#### 1st Namespace 
 
 ![[Pasted image 20260430195323.png]]
 `nginx-demo` is the **deployment name**
+
+```
+ kubectl get pods -n namespace name
+
+```
+
+![[Pasted image 20260430200724.png]]
+![[Pasted image 20260430202536.png]]
+
+Will try to curl IP 10.244.2.2
+
+![[Pasted image 20260430202859.png]]
+
+![[Pasted image 20260430203840.png]]
+
+Now since we are creating  we will expose the replicaset
+
+https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/
+
+
+#### 2nd Namespace 
+
+![[Pasted image 20260430201825.png]]
+
+![[Pasted image 20260430201916.png]]
+![[Pasted image 20260430202253.png]]The vice versa the curl works 
+
+![[Pasted image 20260430203044.png]]
+
+Now we will scale 
+![[Pasted image 20260430203824.png]]
