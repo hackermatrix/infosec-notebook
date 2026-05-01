@@ -51,3 +51,25 @@ tolerations:
 	1. Look at all taints on the node
 	2. Remove the ones the pod can tolerate
 	3. Whatever is left (“un-ignored taints”) decides what happens
+
+
+## Assigning Pods to Nodes
+
+#### Node labels
+
+
+
+- We can also add labels to Nodes similar to any object in kubernetes.
+- Assigning label to a node:
+```bash
+kubectl label nodes <node-name> <key>=<value>
+```
+- verifying a label:
+```
+kubectl get nodes --show-labels
+```
+
+#### nodeSelector
+- We You can add the `nodeSelector` field to your Pod specification and specify the node labels you want the target node to have. 
+- ![[Pasted image 20260501181401.png]]
+- nodeSelectors does not support any logical operators like : "AND","OR",etc. For that we use the concept of [Affinity and anti-affinity](13_Affinity_and_anti-affinity)

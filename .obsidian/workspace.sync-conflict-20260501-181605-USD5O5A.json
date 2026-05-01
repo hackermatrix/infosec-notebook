@@ -4,21 +4,87 @@
     "type": "split",
     "children": [
       {
-        "id": "d1a5a74f2d0a9245",
+        "id": "d09883f74440aac9",
         "type": "tabs",
+        "dimension": 78.63247863247864,
         "children": [
           {
-            "id": "aefbeec47e69d5ab",
+            "id": "b4ff8cf49efb17d8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "12_Kubernetes/01_Foundations.md",
+                "file": "12_Kubernetes/04_Managing Objects.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01_Foundations"
+              "title": "04_Managing Objects"
+            }
+          },
+          {
+            "id": "e11c78d8ea1773d7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "12_Kubernetes/05_Kubernetes Service.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "05_Kubernetes Service"
+            }
+          },
+          {
+            "id": "c3a6c838ccb18aaa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "12_Kubernetes/06_Kubernetes Namespace.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "06_Kubernetes Namespace"
+            }
+          },
+          {
+            "id": "923e4cdbb337947c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "12_Kubernetes/12_Taints_and_tolerations.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "12_Taints_and_tolerations"
+            }
+          }
+        ],
+        "currentTab": 3
+      },
+      {
+        "id": "f5e2f3fd76e46764",
+        "type": "tabs",
+        "dimension": 21.367521367521366,
+        "children": [
+          {
+            "id": "3279e036011af0a6",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "12_Kubernetes/12_Taints_and_tolerations.md",
+                "followCursor": false,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 12_Taints_and_tolerations"
             }
           }
         ]
@@ -183,54 +249,54 @@
       "bases:Create new base": false
     }
   },
-  "active": "f5840bfbaf596e7a",
+  "active": "923e4cdbb337947c",
   "lastOpenFiles": [
-    "images/Pasted image 20260428122628.png",
-    "images/Pasted image 20260428122220.png",
-    "images/Pasted image 20260428121936.png",
-    "images/Pasted image 20260428121905.png",
-    "images/Pasted image 20260428121600.png",
-    "images/Pasted image 20260428121552.png",
-    "images/Pasted image 20260428114846.png",
-    "12_Kubernetes/Doubts.md",
-    "12_Kubernetes/kubectl Cheatsheet.md",
-    "12_Kubernetes/Kubernetes Kind & Understanding Commands.md",
-    "12_Kubernetes/06_Kubernetes Namespace.md",
-    "12_Kubernetes/Understanding YAML.md",
-    "12_Kubernetes/kubernetes_basic_terminologies.md",
-    "images/Pasted image 20260428113050.png",
-    "images/Pasted image 20260428112242.png",
-    "images/Pasted image 20260428111523.png",
-    "images/Pasted image 20260428105903.png",
+    "images/Pasted image 20260501181401.png",
+    "images/Pasted image 20260501180418.png",
+    "images/Pasted image 20260501175506.png",
+    "12_Kubernetes/09_Static Pods.md",
+    "images/Pasted image 20260501162549.png",
+    "12_Kubernetes/11_Manual_Scheduling.md",
+    "images/Pasted image 20260501162520.png",
+    "images/Pasted image 20260501161735.png",
+    "images/Pasted image 20260501162335.png",
+    "12_Kubernetes/12_Taints_and_tolerations.md",
+    "12_Kubernetes/10_Taints_and_tolerations.md",
     "12_Kubernetes/03_Kubernetes Objects.md",
-    "12_Kubernetes/04_Managing Objects.md",
-    "12_Kubernetes/01_Foundations.md",
-    "12_Kubernetes/Virtual Machine, Docker Basic Revision.md",
-    "12_Kubernetes/08_Labels and Selectors.md",
-    "12_Kubernetes/07_Kubernetes RBAC.md",
-    "12_Kubernetes/05_Kubernetes Service.md",
-    "12_Kubernetes/04_Kubernetes Networking.md",
+    "images/Pasted image 20260501160613.png",
+    "images/Pasted image 20260501155951.png",
+    "images/Pasted image 20260501155622.png",
+    "images/Pasted image 20260501153205.png",
+    "12_Kubernetes/08_DaemonSet__Jobs__CronJobs.md",
     "12_Kubernetes/02_Kubernetes Components.md",
+    "12_Kubernetes/Kubernetes Kind & Understanding Commands.md",
+    "12_Kubernetes/kubernetes_basic_terminologies.md",
+    "12_Kubernetes/07_MultiContainer Pods.md",
+    "12_Kubernetes/06_Kubernetes Namespace.md",
+    "12_Kubernetes/05_Kubernetes Service.md",
+    "12_Kubernetes/01_Foundations.md",
+    "12_Kubernetes/kubectl Cheatsheet.md",
+    "12_Kubernetes/Doubts.md",
+    "12_Kubernetes/04_Kubernetes Networking.md",
+    "12_Kubernetes/04_Managing Objects.md",
+    "12_Kubernetes/~syncthing~06_Kubernetes Namespace.md.tmp",
+    "12_Kubernetes/~syncthing~08_DaemonSet__Jobs__CronJobs.md.tmp",
+    "12_Kubernetes/~syncthing~09_Static Pods.md.tmp",
+    "12_Kubernetes/~syncthing~07_MultiContainer Pods.md.tmp",
+    "images/~syncthing~Pasted image 20260430153207.png.tmp",
+    "images/~syncthing~Pasted image 20260430191706.png.tmp",
     "12_Kubernetes/Managing_objects_detailed/Imperative Commands.md",
-    "07_Docker_Cloud/Docker/Docker Commands.md",
-    "01_Recon_Scanning/Nmap practise use cases.md",
-    "01_Recon_Scanning/Nmap Cheatsheet.md",
-    "Docker.md",
-    "5130/05_SIEMS.md",
-    "5010/5010_Laws_Ethics_Privacy/Privacy_Textbook/9.1 - Privacy Concepts.md",
-    "14_GRC/Common Criteria Framework.md",
-    "15_SOC/Incident Response Policy, Plan, Playbook.md",
-    "15_SOC/SCAP (Security Content Automation Protocol).md",
+    "12_Kubernetes/Alias Commands.md",
+    "12_Kubernetes/Managing_objects_detailed/Untitled.md",
+    "12_Kubernetes/Virtual Machine, Docker Basic Revision.md",
+    "12_Kubernetes/07_Kubernetes RBAC.md",
+    "12_Kubernetes/08_Labels and Selectors.md",
+    "12_Kubernetes/Understanding YAML.md",
+    "Untitled.md",
     "5130/Audit_and_Logging_TextBook/Log-Management-Quiz-Ch2-3.html",
     "5130/Audit_and_Logging_TextBook",
     "5130/New folder",
     "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.5 - Computer Crime.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.6 - Ethical Issues in Computer Security.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/Chapter-11-Quiz.html",
-    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.4 - Redress for Software Failures.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~11.2 - Information and the Law.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~00 - Chapter 11 MOC.md.tmp",
-    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/~syncthing~Chapter-11-Quiz.html.tmp",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }
