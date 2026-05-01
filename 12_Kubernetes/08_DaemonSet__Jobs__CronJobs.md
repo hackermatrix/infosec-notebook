@@ -66,6 +66,11 @@ So `matchLabels` answers "which pods belong to me," not "where should I run." Ev
 
 In the deployment we actually specify the number of replicas that we can schedule pods based on the availability of the nodes & few other resources. but daemonset requires one replica in each node, replica part is not needed in the yaml file. 
 
+### How to get Daemonset in all namespaces
+
+![[Pasted image 20260501115719.png]]
+kindnet is for networking. 
+
 
 ## 2. CronJobs
 
