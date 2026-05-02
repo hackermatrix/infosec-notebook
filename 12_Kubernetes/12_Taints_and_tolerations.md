@@ -36,8 +36,14 @@ When i do describe pod
 
 ![[Pasted image 20260502153114.png]]
 
-
 Note: Under tolerations: what you see is not related to our taint. 
+
+Now I am deploying another cluster. 
+![[Pasted image 20260502160022.png]]
+![[Pasted image 20260502161448.png]]
+
+It should have been running and it says configured not applied.
+
 ## Tolerations
 - These are applied to **pods** .
 - Tolerations allow the scheduler to schedule pods with matching taints.
