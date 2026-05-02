@@ -31,13 +31,18 @@ tolerations:
 	- **Exists** : The toleration in this case only needs to match the key of the taint.
 	- The default value of operator is Equal.
 2. **Effect** :
+	- Effect is the scheduling type. 
+	- Effect is mentioned in the toleration and taint. But precednece is more on the taint than toleration.
 	- It can have three possible values : **NoExecute**, **NoSchedule**, **PreferNoSchedule**.
 	1. **NoExecute:** 
+		- NoExecute works on the already existing pods. 
 		- Affects already running pods .
+		- If we check this effect on toleration it will check if there is any existing pod as well as running. 
 		- Pods that do not tolerate the taint are removed immediately.
 		- For the eviction to work, "**tolerationSeconds**" needs to be specified in the pod spec or else the pod is not removed.
 		
 	2. **NoSchedule:**
+		- NoSchedule works on the newer pods. 
 		- No new Pods will be scheduled on the tainted node unless they have a matching toleration.
 		- Running pods are not removed.
 		
