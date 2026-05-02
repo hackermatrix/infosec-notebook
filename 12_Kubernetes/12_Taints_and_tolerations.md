@@ -8,6 +8,7 @@ _**Taints** and **tolerations** work together to ensure that pods are not schedu
 kubectl taint nodes node1 key1=value1:NoSchedule
 ```
 
+
 ## Tolerations
 - These are applied to **pods** .
 - Tolerations allow the scheduler to schedule pods with matching taints.
@@ -47,6 +48,7 @@ tolerations:
 		- Running pods are not removed.
 		
 	3. **PreferNoSchedule :**
+		- PereferNoSchedule tries to apply that but does not gurantee pod scheduling for that particular taints and tolerations.
 		- A soft version of NoSchedule.
 		- The control plane will _try_ to avoid placing a Pod that does not tolerate the taint on the node, but it is not guaranteed.
 
