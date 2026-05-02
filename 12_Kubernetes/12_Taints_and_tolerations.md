@@ -25,6 +25,19 @@ Reconfirmed it:
 
 **`NoSchedule` only affects _future_ pods.** Any pods already running on `cka-cluster3-worker` will stay there undisturbed. The taint `gpu=true:NoSchedule` is saying: "From now on, don't put any new pods on this node _unless_ they have a matching toleration."
 
+Now I tried deploying a pod & it shows in pending state. Because this pod does not have a toleration to tolerate the node's taint. That is why it is stuck on pending. 
+
+![[Pasted image 20260502152741.png]]
+
+
+When i do describe pod 
+
+![[Pasted image 20260502153057.png]]
+
+![[Pasted image 20260502153114.png]]
+
+
+Note: Under tolerations: what you see is not related to our taint. 
 ## Tolerations
 - These are applied to **pods** .
 - Tolerations allow the scheduler to schedule pods with matching taints.
