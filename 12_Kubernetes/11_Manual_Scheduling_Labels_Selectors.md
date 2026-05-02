@@ -44,3 +44,7 @@ Here selector is matching the label of pod with the deployment it is saying that
 Annotations is not labels it is similar but it will store additional details additional  additional information related to object itself lets say it will add one more additional information which will be easier for the controller to know how to roll back & how to make changes. 
 
 ![[Pasted image 20260501193226.png]]
+
+
+
+eg. customer rating filter in Amazon is the labels. 

@@ -73,3 +73,39 @@ kubectl get nodes --show-labels
 - We You can add the `nodeSelector` field to your Pod specification and specify the node labels you want the target node to have. 
 - ![[Pasted image 20260501181401.png]]
 - nodeSelectors does not support any logical operators like : "AND","OR",etc. For that we use the concept of [Affinity and anti-affinity](13_Affinity_and_anti-affinity)
+
+
+## Taints flow
+
+![[Pasted image 20260501201141.png]]
+
+Let us assume Node 1 is specialized to run AI workloads, we will tain this node with gpu value = true. 
+
+Now let us assume the pod is scheduled to run on particular node it will first go and check the scheduler who is responsible.
+
+![[Pasted image 20260501201308.png]]
+
+The scheduler will try to schedule rhe pod on the node1, but the node has a taint which says that gpu=true. So this won't be schedule here. 
+
+![[Pasted image 20260501201505.png]]![[Pasted image 20260501202633.png]]
+
+![[Pasted image 20260501202928.png]]
+
+We have to make sure that toleration that we are scheduling is scheduled successfully on node 1. 
+
+In this pod we will add something such as toleration. Toleration is something that will enable the pod to be scheduled on the node in which there is toleration.  
+
+Let us say we have the toleration as gpu = true , then the node 
+
+![[Pasted image 20260501205019.png]]
+
+Here we are instructing the node to accept only certain pods. So this particular node will only accept the pod that has toleration of GPU = true. 
+
+Let us this node is a bigger node. It has GPU's running. It has extensive memory & other resources & we want this node to be specialized for AI workload. Any other pods that are running non AI-ML workloads can go to other nodes available. 
+
+Toleration has a key value pair which suggests what type of toleration or what type of taints to tolerate. 
+
+![[Pasted image 20260501205934.png]]
+
+Remember taint is on node and toleration is on pod. 
+
