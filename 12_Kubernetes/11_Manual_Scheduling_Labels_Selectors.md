@@ -40,3 +40,7 @@ Label with the selector term:
 ![[Pasted image 20260501185137.png]]
 
 Here selector is matching the label of pod with the deployment it is saying that match the labels for where the environment equal to demo it will check and find the environment equal to demo is for this particular pod. 
+
+Annotations is not labels it is similar but it will store additional details additional  additional information related to object itself lets say it will add one more additional information which will be easier for the controller to know how to roll back & how to make changes. 
+
+![[Pasted image 20260501193226.png]]
