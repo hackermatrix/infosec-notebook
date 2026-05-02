@@ -3,11 +3,27 @@ _**Taints** and **tolerations** work together to ensure that pods are not schedu
 - These are applied to **Nodes**.
 - They allow a node to repel a set of pods.
 - We can schedule control plane components on control plane node any custom work load that you deploy from your side which is not control plane components. Hence, it will not be scheduled you cannot see it in kubectl get nodes. 
--  Example :
+-  Command:
 ```bash
 kubectl taint nodes node1 key1=value1:NoSchedule
 ```
 
+ ### Example 
+
+
+![[Pasted image 20260502142546.png]]
+
+![[Pasted image 20260502142558.png]]
+
+tainted both the nodes. 
+
+
+Reconfirmed it: 
+![[Pasted image 20260502143017.png]]
+
+-i means in sensitive. 
+
+**`NoSchedule` only affects _future_ pods.** Any pods already running on `cka-cluster3-worker` will stay there undisturbed. The taint `gpu=true:NoSchedule` is saying: "From now on, don't put any new pods on this node _unless_ they have a matching toleration."
 
 ## Tolerations
 - These are applied to **pods** .
