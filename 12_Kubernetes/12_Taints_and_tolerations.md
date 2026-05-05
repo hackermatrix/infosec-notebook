@@ -5,6 +5,7 @@ _**Taints** and **tolerations** work together to ensure that pods are not schedu
 - We can schedule control plane components on control plane node any custom work load that you deploy from your side which is not control plane components. Hence, it will not be scheduled you cannot see it in kubectl get nodes. 
 -  Command:
 ```bash
+
 kubectl taint nodes node1 key1=value1:NoSchedule
 ```
 
@@ -16,7 +17,6 @@ kubectl taint nodes node1 key1=value1:NoSchedule
 ![[Pasted image 20260502142558.png]]
 
 tainted both the nodes. 
-
 
 Reconfirmed it: 
 ![[Pasted image 20260502143017.png]]
@@ -41,8 +41,10 @@ Note: Under tolerations: what you see is not related to our taint.
 Now I am deploying another cluster. 
 ![[Pasted image 20260502160022.png]]
 ![[Pasted image 20260502161448.png]]
-
 It should have been running and it says configured not applied.
+
+it eventually runs;
+![[Pasted image 20260505185937.png]]
 
 ## Tolerations
 - These are applied to **pods** .
@@ -127,7 +129,7 @@ Now let us assume the pod is scheduled to run on particular node it will first g
 
 ![[Pasted image 20260501201308.png]]
 
-The scheduler will try to schedule rhe pod on the node1, but the node has a taint which says that gpu=true. So this won't be schedule here. 
+The scheduler will try to schedule the pod on the node1, but the node has a taint which says that gpu=true. So this won't be schedule here. 
 
 ![[Pasted image 20260501201505.png]]![[Pasted image 20260501202633.png]]
 
@@ -151,3 +153,4 @@ Toleration has a key value pair which suggests what type of toleration or what t
 
 Remember taint is on node and toleration is on pod. 
 
+##
