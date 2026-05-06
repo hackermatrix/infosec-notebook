@@ -114,11 +114,25 @@ kubectl get nodes --show-labels
 ```
 
 #### nodeSelector
+
 - We You can add the `nodeSelector` field to your Pod specification and specify the node labels you want the target node to have. 
 - ![[Pasted image 20260501181401.png]]
 - nodeSelectors does not support any logical operators like : "AND","OR",etc. For that we use the concept of [Affinity and anti-affinity](13_Affinity_and_anti-affinity)
 
 
+##### NodeSelector Flow
+
+The flow continues from the taints example. T
+What if the scheduler tried to schedule the pod on the node2. We did not have a taint on the node2. Taints and tolerations just prevent or restrict unwanted pods to be scheduled on a particular node but it does not gurantee that those particular pods will be scheduled on it. 
+
+![[Pasted image 20260505190711.png]]
+
+So the pod can go on node2 and node3
+![[Pasted image 20260505191123.png]]
+
+So to add more functionality. so instead of node making that decision on what type of pod to accept we will give the decision to which pod has to be deployed on we do that with the help of labels. 
+
+Use gpu=false as the label on the particular pod. Now we have to match the pod with the node. it will check if any node is available with the matching label. 
 ## Taints flow
 
 ![[Pasted image 20260501201141.png]]
@@ -153,4 +167,10 @@ Toleration has a key value pair which suggests what type of toleration or what t
 
 Remember taint is on node and toleration is on pod. 
 
-##
+## How to untaint it 
+
+```
+└──╼ kubectl taint nodes cka-cluster-worker2 gpu=true:NoSchedule-
+node/cka-cluster-worker2 untainted
+
+```
