@@ -8,6 +8,7 @@ Socket is dependent on how you use it.
 
 ![[Pasted image 20260508145531.png]]
 
+![[Pasted image 20260508161901.png]]
 ## Client Socket Workflow
 
 In C there is a socket function. 
@@ -22,3 +23,5 @@ Recieve function()
 You can start sending and receivng data. If you are writing a HTTP client you might first make a request data back as a response. But this receive function allows us to get data from whatever the other side of the connection we can receive that data store it print it out write to the file. 
 
 We can read that data back basically to string and then see whatever it looks like. 
+
+Raw sockets which are sockets independent
