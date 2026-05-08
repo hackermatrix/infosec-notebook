@@ -6,7 +6,7 @@ Resources : https://medium.com/@prasad.midde3/understanding-node-affinity-pod-af
 ![[Pasted image 20260505190457.png]]
 
 
-### Types of Node Affinity
+### Types of Node Affinity/Properties
 
 1. **RequiredDuringSchedulingIgnoredDuringExecution**:
     - Ensures pods are only scheduled on nodes that satisfy the specified rules.
@@ -15,3 +15,14 @@ Resources : https://medium.com/@prasad.midde3/understanding-node-affinity-pod-af
 2. **PreferredDuringSchedulingIgnoredDuringExecution**:
     - Specifies preferences that the scheduler attempts to fulfill but doesn’t enforce strictly.
     - **Less Strict.**
+
+
+### Node Affinity Example 
+
+As taints and tolerations do not provide gurantee to be scheduled on a particular pod. 
+
+![[Pasted image 20260508173230.png]]
+
+The pod with affinity disk!=ssd will be  
+
+![[Pasted image 20260508174129.png]]
