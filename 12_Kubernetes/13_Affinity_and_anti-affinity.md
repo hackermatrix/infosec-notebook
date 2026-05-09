@@ -8,6 +8,8 @@ Resources : https://medium.com/@prasad.midde3/understanding-node-affinity-pod-af
 
 ### Types of Node Affinity/Properties
 
+It is Applied to a pod, telling the scheduler, "Only place me on nodes with these labels"
+
 1. **RequiredDuringSchedulingIgnoredDuringExecution**:
     - Ensures pods are only scheduled on nodes that satisfy the specified rules.
     - If no nodes meet the criteria, the pods remain unscheduled.
@@ -42,3 +44,53 @@ As taints and tolerations do not provide gurantee to be scheduled on a particula
 The pod with affinity disk!=ssd will be  
 
 ![[Pasted image 20260508174129.png]]
+
+## Example:  RequiredDuringSchedulingIgnoredDuringExecution:
+
+https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes-using-node-affinity/
+
+### Step 1 Create the yaml file with the pod specification : 
+![[Pasted image 20260509100929.png]]
+![[Pasted image 20260509100949.png]]
+Since it does not match the pod since it is not getting scheduled. 
+
+![[Pasted image 20260509101128.png]]
+![[Pasted image 20260509101311.png]]
+
+
+![[Pasted image 20260509102222.png]]
+
+### Step 2: Apply label to the nodes 
+
+![[Pasted image 20260509102417.png]]
+
+![[Pasted image 20260509102626.png]]
+
+Once we have added the label the node is running. 
+
+The pod is running now:
+![[Pasted image 20260509102756.png]]
+![[Pasted image 20260509102901.png]]
+
+###  Let us check with operator Exists
+
+it will just check that this label exists or not and it will use that node to schedule the pod. 
+
+![[Pasted image 20260509105820.png]]
+
+Relabel the node 
+## Example:  PreferedDuringSchedulingIgnoredDuringExecution:
+
+
+### Step 1: Change the YAML file 
+
+![[Pasted image 20260509105040.png]]
+
+![[Pasted image 20260509105013.png]]
+
+#### Differene in the yaml file between the two properties.
+- `requiredDuringSchedulingIgnoredDuringExecution` takes a **`nodeSelector`** object containing `nodeSelectorTerms` (a list).
+- `preferredDuringSchedulingIgnoredDuringExecution` takes a **list** of weighted preference items, each with a `weight` (1–100) and a `preference` (which contains the `matchExpressions`). No `nodeSelectorTerms` key at all.
+
+
+Now even though we do not have a node with any matching label the pod gets scheduled. 
