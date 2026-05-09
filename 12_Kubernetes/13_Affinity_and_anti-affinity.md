@@ -5,6 +5,13 @@ Resources : https://medium.com/@prasad.midde3/understanding-node-affinity-pod-af
 
 ![[Pasted image 20260505190457.png]]
 
+### Example 
+
+![[Pasted image 20260509111713.png]]
+
+Here the pod with toleration color=green will be scheduled on node green and node3
+now how do we prevent it from scheduling no node3 we do it with combination of taints and affinity.
+![[Pasted image 20260509112139.png]]
 
 ### Types of Node Affinity/Properties
 
@@ -76,9 +83,17 @@ The pod is running now:
 
 it will just check that this label exists or not and it will use that node to schedule the pod. 
 
-![[Pasted image 20260509105820.png]]
+![[Pasted image 20260509110941.png]]
 
 Relabel the node 
+![[Pasted image 20260509111253.png]]
+
+Apply the yaml file 
+
+![[Pasted image 20260509110956.png]]
+
+![[Pasted image 20260509111315.png]]
+
 ## Example:  PreferedDuringSchedulingIgnoredDuringExecution:
 
 
