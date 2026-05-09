@@ -33,5 +33,10 @@ We will use a combination of these probes in a production environment and mostly
 
 # Types of Health Checks 
 
-HTTP
-TCP 
+1. HTTP: It will send a HTTP request to an endpoint after every 10 or 15 second & it is getting the response back as success then only the health checks are successful. 
+2. TCP: In case of TCP probe it will try to open a port on certain endpoint, based on the response it will fail or pass. 
+3. Command: It will execute a command against the endpoint and if the command results in a success response then only the health checks will be successful. 
+
+![[Pasted image 20260509150926.png]]
+
+Inside the pod we have the container & it uses an image. A busy box image It has a few binaries a few executables, it runs those commands that are mentioned as part of the command and arguments. it is not an ongoing pod it does not have an operating system. It is an image that you use when we have to run some arbitary or line comamands 
