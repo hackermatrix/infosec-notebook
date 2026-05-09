@@ -54,7 +54,7 @@ They have to use something called as an fully qualified doman name,
 
 ![[Pasted image 20260430190912.png]]
 
-When you dont specify the namespace name it goes in the default namespace. 
+When you don't specify the namespace name it goes in the default namespace. 
 
 
 ### kube-system 

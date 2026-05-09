@@ -32,6 +32,82 @@ That is why we define the resource and limits in the pod in the container so whe
 
 # Deploying Rate and Limits
 
-## What is metrics 
+##  Deploying a metrics  server 
 
+### What is metrics server 
 It exposes metrics of the server
+
+![[Pasted image 20260509120058.png]]
+![[Pasted image 20260509120123.png]]
+
+Since it is an add on it will be in the kube-system. Why is metric-server in the kube-system.
+
+**Cluster-wide infrastructure add-ons — things that aren't application workloads but are part of the platform** — get grouped there so cluster operators have a predictable place to look. Examples that all live in `kube-system` by convention:
+
+- CoreDNS (DNS resolution for the cluster)
+- kube-proxy (networking on each node)
+- CNI plugins (Calico, Flannel, Cilium often)
+- metrics-server (resource metrics for `kubectl top`)
+- cluster autoscaler
+
+
+When i do kubectl top node i see the metrics.
+
+![[Pasted image 20260509120434.png]]
+
+
+## Creating namespace
+
+![[Pasted image 20260509121003.png]]
+
+
+
+## Understanding resource and limits in yaml file. 
+
+![[Pasted image 20260509121104.png]]
+This image is there to do stress testing on the cluster. It will put some pressure on the nodes based on the arguments that we have passed. 
+
+https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+
+Remember memory, cpu  are the resources of the container , so resources and limit in the yaml  will always be a child of the container.
+
+```yaml
+containers:
+  - name: app
+    image: images.my-company.example/app:v4
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+```
+
+There are two properties: 
+1. Requests 
+2. Limits
+
+Mi here is not megabytes it is a different unit. but similar to MB 
+
+![[Pasted image 20260509122105.png]]
+
+100Mi of memory here means it will be allocated 100Mi to the pod at the very beginning. It can go upto 200 MB and after that the pod will be killed. 
+
+
+![[Pasted image 20260509122325.png]]
+
+if you dont specify the limits the pod will take whatever memory the node has. It can end up killing the node. Here 100 Mb is the lower bound and 200 MB is the upper bound. 
+
+
+Now here with the help of command and argument we are over writing 
+![[Pasted image 20260509122537.png]]
+
+![[Pasted image 20260509122523.png]]
+
+when you apply this yaml file though it says pod created it gives  OOMKilled error 
+
+![[Pasted image 20260509123047.png]]
+
+![[Pasted image 20260509124213.png]]
