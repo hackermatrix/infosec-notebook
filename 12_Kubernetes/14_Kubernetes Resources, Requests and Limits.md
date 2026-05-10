@@ -89,7 +89,7 @@ There are two properties:
 1. Requests 
 2. Limits
 
-Mi here is not megabytes it is a different unit. but similar to MB 
+Mi here is not megabytes it is a different unit. but similar to MB **(1 MiB = 1.048576  MB )**
 
 ![[Pasted image 20260509122105.png]]
 
