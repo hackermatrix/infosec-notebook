@@ -109,3 +109,8 @@ Apply the yaml file
 
 
 Now even though we do not have a node with any matching label the pod gets scheduled. 
+
+
+> [! Note]
+> In Both the cases, if the pod is already scheduled , it does not affect it. Since, in either of cases it is **IgnoredDuringExecution.** 
+> 
