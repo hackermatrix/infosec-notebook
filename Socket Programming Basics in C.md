@@ -26,4 +26,9 @@ We can read that data back basically to string and then see whatever it looks li
 
 Raw sockets which are sockets independent
 
+![[Pasted image 20260510183053.png]]
 
+AF_INET is the address family
+0 is the default TCP
+
+Creates one of the endpoints to create a communication. 
