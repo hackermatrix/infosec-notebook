@@ -25,3 +25,5 @@ You can start sending and receivng data. If you are writing a HTTP client you mi
 We can read that data back basically to string and then see whatever it looks like. 
 
 Raw sockets which are sockets independent
+
+
