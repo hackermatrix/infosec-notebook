@@ -20,12 +20,12 @@ pacman -Qi libsodium
 
 ![[Pasted image 20260510173323.png]]
 
-Sodium's standard encryption function performs authenticated encryption, which is a combination of encryption and MAC.
 
-`rypto_secretbox_MACBYTES` extra bytes are required to prepend the tag.
 
 [Authenticated encryption | Libsodium documentation](https://libsodium.gitbook.io/doc/secret-key_cryptography/secretbox)
 
 
+## Creating my own key 
 
 
+[The pwhash* API | Libsodium documentation](https://doc.libsodium.org/doc/password_hashing/default_phf)
