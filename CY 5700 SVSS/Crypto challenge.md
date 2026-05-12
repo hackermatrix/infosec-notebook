@@ -29,3 +29,5 @@ pacman -Qi libsodium
 
 
 [The pwhash* API | Libsodium documentation](https://doc.libsodium.org/doc/password_hashing/default_phf)
+
+
