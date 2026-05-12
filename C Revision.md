@@ -14,4 +14,4 @@ https://www.w3schools.com/c/ref_string_strcpy.php
 https://www.geeksforgeeks.org/c/c-define-preprocessor/
 https://www.geeksforgeeks.org/c/macros-and-its-types-in-c-cpp/
 https://www.geeksforgeeks.org/c/strcpy-in-c/
-
+https://www.geeksforgeeks.org/c/fread-function-in-c/
