@@ -32,3 +32,10 @@ AF_INET is the address family
 0 is the default TCP
 
 Creates one of the endpoints to create a communication. 
+
+
+https://www.geeksforgeeks.org/c/socket-programming-cc/
+https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers
+## Server Socket Workflow
+
+![[Pasted image 20260512144136.png]]
