@@ -31,3 +31,8 @@ pacman -Qi libsodium
 [The pwhash* API | Libsodium documentation](https://doc.libsodium.org/doc/password_hashing/default_phf)
 
 
+
+
+## Successful connection 
+
+![[Pasted image 20260513135315.png]]
