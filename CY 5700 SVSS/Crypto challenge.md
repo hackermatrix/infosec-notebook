@@ -31,8 +31,25 @@ pacman -Qi libsodium
 [The pwhash* API | Libsodium documentation](https://doc.libsodium.org/doc/password_hashing/default_phf)
 
 
-
-
-## Successful connection 
+## Successful connection & Encryption 
 
 ![[Pasted image 20260513135315.png]]
+
+https://libsodium.gitbook.io/doc/secret-key_cryptography/secretbox
+
+## Decryption 
+
+unsigned char decrypted[MESSAGE_LEN]; if (crypto_secretbox_open_easy(decrypted, ciphertext, CIPHERTEXT_LEN, nonce, key) != 0) { /* message forged! */ }
+
+`c` is a pointer to an authentication tag + encrypted message combination, as produced by `crypto_secretbox_easy()`. 
+`clen` is the length of this authentication tag + encrypted message combination. 
+
+Put differently, `clen` is the number of bytes written by `crypto_secretbox_easy()`, which is `crypto_secretbox_MACBYTES` + the length of the message.
+
+The nonce `n` and the key `k` have to match those used to encrypt and authenticate the message.
+
+The function returns `-1` if the verification fails, and `0` on success. On success, the decrypted message is stored into `m`.
+
+`m` and `c` can overlap, making in-place decryption possible.
+
+https://libsodium.gitbook.io/doc/quickstart
