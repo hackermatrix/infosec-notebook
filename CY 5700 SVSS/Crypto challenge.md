@@ -53,3 +53,14 @@ The function returns `-1` if the verification fails, and `0` on success. On succ
 `m` and `c` can overlap, making in-place decryption possible.
 
 https://libsodium.gitbook.io/doc/quickstart
+
+## Hashing 
+
+https://libsodium.gitbook.io/doc/hashing/generic_hashing
+
+
+#define 
+MESSAGE ((const unsigned char *) "Arbitrary data to hash")
+#define 
+MESSAGE_LEN 22 unsigned char hash
+[crypto_generichash_BYTES]; crypto_generichash(hash, sizeof hash, MESSAGE, MESSAGE_LEN, NULL, 0);
