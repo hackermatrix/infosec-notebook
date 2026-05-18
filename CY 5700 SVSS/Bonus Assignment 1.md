@@ -35,3 +35,6 @@ Very large messages should be split in multiple chunks instead of being encrypte
 - This keeps memory usage in control,
     
 - A corrupted chunk can be immediately detected before the whole ciphertext is received,
+
+I tired printing size of the payload
+![[Pasted image 20260518161157.png]]
