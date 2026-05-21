@@ -8,13 +8,9 @@
 - Network Policies
 - Ingress and Ingress Controllers
 - Service Mesh
-
-
 ### **Pod networking**
 - Kubernetes works by using a Container Network Interface (CNI) plugin to configure the network interfaces of containers in a pod. When a pod is created, the CNI plugin creates a network namespace for the pod, along with a virtual Ethernet interface and an IP address for the container.
 - ![[Pasted image 20260313181058.png]]
-
-
 
 ### Service Networking 
 - In Kubernetes, a service is an abstraction layer that provides a stable IP address and DNS name for a set of pods.

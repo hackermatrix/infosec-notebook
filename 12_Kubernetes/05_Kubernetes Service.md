@@ -2,14 +2,13 @@
 
 ## Why are services needed
 
-To make our  application accessible to users, how do we ensure that our frontend pods are able to communicate with the backend pods, our backend pods should be able to communicate with external database. This is done with the help of our services. 
+To make our application accessible to users, how do we ensure that our frontend pods are able to communicate with the backend pods, our backend pods should be able to communicate with external database. This is done with the help of our services. 
 
 ![[Pasted image 20260429202320.png]]
 
 Users will access the service, the service will access the frontend pod on which the service is exposed & give response back to the user. 
+Service will make the application loosely coupled & accessible to only what is specified.
 
-
-Service will make the application loosely coupled & accessible to only what is specified. 
 ![[Pasted image 20260429202541.png]]
 
 ![[Pasted image 20260429212704.png]]
@@ -27,16 +26,17 @@ kubectl get svc
 3. ExternalName 
 4. Loadbalancer 
 
-
 ## NodePort 
+
+Makes a Service accessible from outside the cluster using `NodeIP:NodePort`.
 
 ![[Pasted image 20260429202702.png]]
 
-Service on which the application will be exposed on a particular port and that port is called nodeport. 
+Service on which the application will be exposed **on a particular port and that port is called nodeport.** 
 
 Let us assume we expose the application on port 30001. The range for node port exposed is 30001 to 32767.
 
-We have to specify a static port between that range. Our application will be listening on port 30001. Our service will be exposed internally within the cluster. All the service that our internal to the cluster. will be accessing this on  port 80. 
+We have to specify a static port between that range. Our application will be listening on port 30001. Our service will be exposed internally within the cluster. All the service that our internal to the cluster. will be accessing this on port 80. 
 
 ![[Pasted image 20260429203135.png]]
 
@@ -63,7 +63,8 @@ The port 80 pointed towards service will be used for other services or other app
 
 https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
 
-selector is used to mention which pod or deployment served as a service. Now remebmer selector has label field. To check the label field 
+selector is used to mention which pod or deployment served as a service. Now remember selector has label field. To check the label field.
+
 ![[Pasted image 20260429215636.png]]
 
 So now I am labelling it as env
@@ -84,7 +85,6 @@ Check on the port it is running using curl
 ![[Pasted image 20260430153735.png]]
 
 
-
 ### How to do deploy nodeport using kind simulation
 
 Remember node is a physical or virtual machine but in kind the node is a container when you deploy a container you need to do port mapping. Kind does not expose the cluster directly.
@@ -95,7 +95,7 @@ Remember node is a physical or virtual machine but in kind the node is a contain
 
 Will have to recreate the cluster not just apply 
 
-create builds the actual Kubernetes cluster itself. Think of it as constructing the building — setting up the nodes, the control plane, etcd, networking. Without this, there's no Kubernetes at all.
+create builds the actual Kubernetes cluster itself. Think of it as constructing the building setting up the nodes, the control plane, etcd, networking. Without this, there's no Kubernetes at all.
 
 apply deploys resources (pods, services, deployments) onto an **already running** cluster. This is like furnishing the rooms inside the building.
 
@@ -106,7 +106,7 @@ By default it switches you to context3 but still i switched
 
 ![[Pasted image 20260430143638.png]]
 
-#### Step 2: Apply the replicaset 
+#### Step 2: Apply the replicaset:
 ![[Pasted image 20260430144816.png]]
 
 ![[Pasted image 20260430144840.png]]
@@ -138,7 +138,7 @@ Note nginx works on http
 
 ## **ClusterIP**:
 
-Every pod has its own IP and it is not static . 
+**Every pod has its own IP** and it is not static . 
 
 ![[Pasted image 20260430160758.png]]
 
@@ -156,7 +156,7 @@ spec:
     targetPort: 80
 ```
 
-- **When to use:** When one service inside your cluster needs to talk to another, like your backend talking to a database. No one outside the cluster needs access.
+- **When to use:** When one service inside your cluster needs to talk to another, **like your backend talking to a database. No one outside the cluster needs access.**
 
 
 ![[Pasted image 20260430162043.png]]
@@ -176,7 +176,7 @@ ClusterIP works on port 443 , http, https ports
 Endpoint is the ip of the pod on which the service is listening to. 
 ![[Pasted image 20260430170127.png]]
 
-**ClusterIP (10.96.230.205)** — stays constant for the lifetime of the service. As long as this service exists, this IP never changes. Other pods can always reach it at `10.96.230.205:80`. This is why services exist — they give you a stable address.
+**ClusterIP (10.96.230.205)**  stays constant for the lifetime of the service. As long as this service exists, this IP never changes. Other pods can always reach it at `10.96.230.205:80`. This is why services exist  they give you a stable address.
 ## Loadbalancer 
 
 ![[Pasted image 20260430170733.png]]

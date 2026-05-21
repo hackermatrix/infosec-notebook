@@ -6,19 +6,18 @@
 
 ### Understanding the Relationship Between Namespaces and Clusters
 
-- In Kubernetes, a cluster is the complete set of resources and components that are necessary to run your applications. Within this cluster, namespaces come into play as a way to divide or segment these resources.
-
+- In Kubernetes, a cluster is the complete set of resources and components that are necessary to run your applications. Within this cluster, namespaces come into **play as a way to divide or segment these resources.**
 
 ### Applications of Kubernetes Namespaces
 
 1. **Resource Segregation:** 
 	- Kubernetes namespaces play a pivotal role in resource management by providing a mechanism for resource categorization. 
-	- For example, you can allocate varying amounts of CPU and memory resources to different namespaces, tailoring resource allocation to the specific needs of the applications within them. This granular control over resource distribution allows for efficient utilization of cluster resources, ensuring that each application has access to the resources it needs to perform optimally.
+	- For example, you can **allocate varying amounts of CPU and memory resources to different namespaces, tailoring resource allocation to the specific needs of the applications within them.** This granular control over **resource distribution allows for efficient utilization of cluster resources, ensuring that each application has access to the resources it needs to perform optimally.**
 
 2. **Access Management:** 
-	- Namespaces also serve as a powerful tool for access management within a Kubernetes cluster. 
-	- They enable fine-grained access control by allowing specific users or groups access to particular namespaces. 
-	- This capability is especially beneficial in multi-tenant environments where multiple teams or projects share the same Kubernetes cluster. 
+	- Namespaces also serve as a powerful tool for **access management within a Kubernetes cluster.** 
+	- They enable **fine-grained access control** by **allowing specific users or groups access to particular namespaces.** 
+	- This capability is especially beneficial in **multi-tenant environments where multiple teams or projects share the same Kubernetes cluster.** 
 	- By assigning each team to a specific namespace, you can ensure that team members have access to the resources they need while preventing unauthorized access to other teams’ resources.
 
 3. **Isolation:** 
@@ -33,7 +32,9 @@ Nginx and redis hostname in namespace prod if want to interact to with namespace
 
 ![[Pasted image 20260430153207.png]]
 
-They have to use something called as an fully qualified doman name, 
+They have to use something called as an fully qualified domain name.
+
+Each Kubernetes service has a DNS entry like `<service-name>.<namespace>.svc.cluster.local`. Using the FQDN lets a pod in one namespace directly address a service in another.
 
 - **FQDN** : Fully Qualified Domain Name (example : www.google.com.)
 	- This is an FQDN because it includes:
@@ -44,7 +45,18 @@ They have to use something called as an fully qualified doman name,
 		
 - **default** and **demo** are the two namespaces.
 -  **svc-test** and **svc-demo** are the services that are deployed.
+https://labex.io/questions/how-to-access-a-kubernetes-service-across-namespaces-9199
 
+Here you can see it cannot curl directly: 
+
+![[Pasted image 20260521133213.png]]
+
+![[Pasted image 20260521132644.png|617]]
+![[Pasted image 20260521132827.png]]
+![[Pasted image 20260521133042.png]]
+
+Here  the Fully Qualified Namespace are present in the etc/resolv.
+Hostname are per namespace and not cluster-wide. 
 #### Types of communication:
 1. **pod to pod** : pod can communicate using IP addresses **"Across namespaces"** . 
 2. **pod and service ( different namespace )** : If a pod in a different namespace wants to communicate with a service in a different namespace, they need to use a FQDN.
@@ -55,7 +67,6 @@ They have to use something called as an fully qualified doman name,
 ![[Pasted image 20260430190912.png]]
 
 When you don't specify the namespace name it goes in the default namespace. 
-
 
 ### kube-system 
 

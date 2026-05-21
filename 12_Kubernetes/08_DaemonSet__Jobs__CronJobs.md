@@ -71,7 +71,6 @@ In the deployment we actually specify the number of replicas that we can schedul
 ![[Pasted image 20260501115719.png]]
 kindnet is for networking. 
 
-
 ## 2. CronJobs
 
 - CronJob is meant for performing regular scheduled actions such as backups, report generation, and so on. 

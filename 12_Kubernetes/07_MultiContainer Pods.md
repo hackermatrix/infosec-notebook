@@ -1,14 +1,14 @@
-- When architecting multi-container Pods, the two most powerful patterns are **Init Containers** and **Sidecar Containers**. The distinction between them comes down entirely to their **lifecycle** and **purpose**.
+## Difference between Init and Sidecar Containers.
+When architecting multi-container Pods, the two most powerful patterns are **Init Containers** and **Sidecar Containers**. The distinction between them comes down entirely to their **lifecycle** and **purpose**.
 
 ![[Pasted image 20260501045220.png]]
 
-
-1. **Init Containers** :
-	- Starts before the main app container starts. So when kubelet sends a request to the pod for the initialization like let's start the pod it will first start the init container. 
-	- Setups things before the starting the man container.
-	- Sometimes it is something that runs, does its thing and exits ( e.g busybox )
-	- It shares the resources of the pod. lets say we have allocated some memory, some cpu, some storage to the pod. All those resources will be shared among all the container inside that pod. 
-	- **Example**: Checking weather a service on which our main application depends has started or not using nslookup.  
+## 1. **Init Containers** :
+Starts before the main app container starts. So when kubelet sends a request to the pod for the initialization like let's start the pod it will first start the init container.
+Setups things before the starting the man container.
+Sometimes it is something that runs, does its thing and exits ( e.g busybox )
+It shares the resources of the pod. lets say we have allocated **some memory, some cpu, some storage to the pod**. All those resources will be shared among all the container inside that pod. 
+**Example**: Checking weather a service on which our main application depends has started or not using nslookup.  
 
 - **Example**: 
 ```yaml
@@ -68,7 +68,6 @@ Error from server (BadRequest): container "myapp-container" in pod "myapp-pod" i
 
 It's running an infinite loop waiting for a **Service called `myservice`**
 
- 
 https://kubernetes.io/docs/concepts/services-networking/service/
 https://kubernetes.io/docs/tasks/manage-kubernetes-objects/imperative-command/
 
@@ -131,4 +130,13 @@ service/mydb created
 └──╼ $kubectl logs myapp-pod
 Defaulted container "myapp-container" out of: myapp-container, init-myservice (init)
 The app is running!
-2. Sidecar/helper container
+
+**We cannot add/remove init containers once it is created.** 
+
+## Sidecar/helper container
+
+Sidecar container runs with the app all the time & it provides certain input or it takes certain output from the app container. It is also referred as a helper container. 
+
+These containers are used to enhance or to extend the functionality of the primary _app container_ by providing additional services, or functionality such as logging, monitoring, security, or data synchronization, without directly altering the primary application code.
+
+https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/

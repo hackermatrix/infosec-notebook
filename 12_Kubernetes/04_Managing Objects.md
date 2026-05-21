@@ -36,7 +36,6 @@ Here, you write your desired object in a YAML file, then explicitly tell `kubect
 **Analogy:** Like following a recipe and telling the kitchen "make this" or "throw this out." You have a written record, but you're still giving explicit orders.
 
 ---
-
 ## Style 3: Declarative Object Configuration (The "Make It So" Way)
 
 This is the most advanced approach. You just maintain a folder of YAML files describing what you _want_ to exist. Then you run `kubectl apply -f configs/`, and Kubernetes **figures out** what needs to be created, updated, or deleted on its own.
@@ -58,10 +57,10 @@ This is the most advanced approach. You just maintain a folder of YAML files des
 
 ## Quick Summary
 
-|Style|You say...|Best for|Difficulty|
-|---|---|---|---|
-|**Imperative commands**|"Do this now"|Learning / dev|Easiest|
-|**Imperative config**|"Do this with this file"|Production (single files)|Medium|
-|**Declarative config**|"Here's what I want — figure it out"|Production (teams/directories)|Hardest|
+| Style                   | You say...                           | Best for                       | Difficulty |
+| ----------------------- | ------------------------------------ | ------------------------------ | ---------- |
+| **Imperative commands** | "Do this now"                        | Learning / dev                 | Easiest    |
+| **Imperative config**   | "Do this with this file"             | Production (single files)      | Medium     |
+| **Declarative config**  | "Here's what I want — figure it out" | Production (teams/directories) | Hardest    |
 
 The key takeaway: as your projects grow from experiments to production, you'll naturally move from imperative commands toward declarative configuration for better tracking, collaboration, and reliability.

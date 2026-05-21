@@ -43,13 +43,12 @@ Control manager is the combination of many different components.
 
 Etcd is a **key value data store**
 eg. name (key): Tanishka (value).  
-**Etcd is a schema less database.** 
+**Etcd is a schema less database.** schema less database means that does not require a predefined, rigid structure before you can store data
 Etcd is a **NoSQL databases where you store your values as per documents. The document here is a JSON file**. 
 Every s**ingle information about the cluster is stored here, whenever you make changes in the cluster that information is included.** 
 **Only API server interacts** with the etcd database.
 **Only API server has the authority** to apply changes to the etcd.
 If we want to retrieve information from the etcd. Eg. we want to know how many pods are running in the cluster. So that information will also be retrieved by the API server from the etcd database.
-
 
 ## Worker node components
 
@@ -58,7 +57,6 @@ Every worker node will have **kubelet** and **kube-proxy** running.
 
 ![[Pasted image 20260420203914.png]]
 
-
 API server will send instructions to the **kubelet to make some changes in the worker node.** 
 
 Eg. if it receives instruction to delete a pod. 
@@ -66,7 +64,7 @@ Eg. if it receives instruction to delete a pod.
 
 API server will reflect the changes in etcd. 
 It is a node based agent and receive the request from the API server and enables communication 
-It nenables communication between **worker node & control plane node**. 
+It enables communication between **worker node & control plane node**. 
 
 **Detail about Kubelet:** 
 https://addozhang.medium.com/source-code-analysis-a-comprehensive-understanding-of-kubelet-7a9083514ff0
@@ -75,7 +73,7 @@ https://addozhang.medium.com/source-code-analysis-a-comprehensive-understanding-
 ![[Pasted image 20260427153254.png]]
 
 **Kube-proxy** enables networking within the node. 
-It creates **IP tables rule**s  & enables **pod-to-pod networking**.
+It creates **IP tables rule**s & enables **pod-to-pod networking**.
 **Pods and services can communicate with each other** with the help of kube-proxy.
 
 receives instructions from the control plane node. 
@@ -90,23 +88,24 @@ E.g. A user(eg. administrator/devops team)
 That user uses a client utility called kubectl (helps you interact with the cluster)
 Suppose the request was to create the pod. eg. kubetcl create pod. 
 
-This  request goes to the api server when the api server receives the request.
-Kube-api server will authenticate the request, whether it is a valid request, whether the user has permissions. 
+This request goes to the api server when the api server receives the request.
+Kube-api server will **authenticate the request**, whether it is a valid request, **whether the user has permissions.** 
 ![[Pasted image 20260427154333.png]]
 
 ### Part 2: 
 
 **API Server** will send the request to **ETCD database**.
+
 ![[Pasted image 20260427154623.png]]
 
-Since ETCD is a database it will not create the pod, but it will create an entry in the database. 
+Since ETCD is a database it will not create the pod, but it will **create an entry in the database.** 
 ![[Pasted image 20260427154935.png]]
 
-ETCD will send a response back to the API server that pod has been created. 
+ETCD will **send a response back to the API server that pod has been created.** 
 
 ### Part 3: 
 
-Scheduler runs all the time, is monitoring the control plane. 
+Scheduler runs all the time, is **monitoring the control plane**. 
 Scheduler finds that **there is a pod that needs to be scheduled on a node.** 
 Scheduler will **find a node available for the pod.** 
 Scheduler sends instructions to the **apiserver.**
@@ -118,8 +117,8 @@ Note: Every component sends instructions/metadata to the api server
 
 ### Part 4
 
-API server interacts with the kubelet of the particular node that I have a job for schedule this pod on your node. 
-Receiving that request kubelet will schedule the pod. It will send the details back to the api server that pod has been created. 
+API server interacts with the **kubelet** of the particular node that I have a job for schedule this pod on your node. 
+Receiving that request **kubelet will schedule the pod. It will send the details back to the api server that pod has been created.** 
 
 ![[Pasted image 20260427160054.png]]
 
@@ -127,12 +126,13 @@ Receiving that request kubelet will schedule the pod. It will send the details b
 
 ![[Pasted image 20260427160541.png]]
 
-API server will add the entry to the ETCD database. That the pod has been created. 
-Then the api server will send the details to the user that your request has been created. 
+API server will **add the entry to the ETCD database. That the pod has been created.** 
+**Then the api server will send the details to the user that your request has been created**. 
 
 ![[Pasted image 20260427160717.png]]
 
 ##  Pods:
+
 ![[Pasted image 20260420171937.png]]
 
 
@@ -140,18 +140,17 @@ Then the api server will send the details to the user that your request has been
 - **Key Features:**
     - Each Pod gets its **own IP address**.
 
-Pods are sharing resources from the node. CPU, memory etc. 
+Pods are sharing resources from the node. **CPU, memory etc.** 
 
-Containers inside a Pod can communicate over `localhost`.
+Containers inside a Pod **can communicate over `localhost`**.
     - Pods are **ephemeral**: they can die and be recreated, so you usually don’t interact with them directly in production.
-        
 - **Analogy:** A Pod is like a **single apartment** inside a building (the apartment can have multiple rooms → containers).
 
 ### Ways to use pod
 
 There are two ways of using a pod:
-1. Imperative: In imperative you run simple commands such as kubectl, you are instructing the api server. 
-2. Declarative: Create a configuration file that could be JSON file or YAML. In the configuration file you mention the desired state of the object. 
+1. **Imperative**: In imperative you run simple commands such as kubectl, you are instructing the api server. 
+2. **Declarative:** Create a configuration file that could be JSON file or YAML. In the configuration file you mention the desired state of the object. 
 
 ### # Service:
 
@@ -192,7 +191,7 @@ Controllers are managed by controller manager.
 Replication controller make sure that all replicas are running all the time and the application does not crash even if there is a pod failure. 
 eg. The pods in the image are part of the replication controller. 
 
-Note: There is a difference between replication controller and replication set. 
+Note: There is a difference between **replication controller and replication set.** 
 
 Replication spins up multiple identical instances of a pod. 
 Replication controller has the load balancing logic. 
@@ -224,7 +223,6 @@ Under spec template should be mentioned.
 ![[Pasted image 20260429153453.png]]
 
 ##### SPEC
-
 Whenever there is a pod that crashes or whenever a pod gets deleted it should spin up a new pod, but how will the replication controller know 
 - which image to use
 - which version of the image to use. 
@@ -251,14 +249,13 @@ spec:                            # WHAT should the RC do?
       - image: nginx
         name: nginx-container
 
-
 Important thing: 
 
 Slide difference between a label name & pod name: 
 
 ![[Pasted image 20260428162429.png]]
 
-**`metadata.name`** — This is the pod's actual identity in Kubernetes. It's what shows up when you run `kubectl get pods`. But in a ReplicationController template, you usually **don't set this** because the RC creates multiple pods and auto-generates unique names like `nginx-rc-x7k2f`, `nginx-rc-m9p1d`, etc. If you hardcoded a name, the second replica would fail because names must be unique.
+**`metadata.name`**  This is the pod's actual identity in Kubernetes. It's what shows up when you run `kubectl get pods`. But in a ReplicationController template, you usually **don't set this** because the RC creates multiple pods and auto-generates unique names like `nginx-rc-x7k2f`, `nginx-rc-m9p1d`, etc. If you hardcoded a name, the second replica would fail because names must be unique.
 
 **`metadata.labels.name: nginx`** — This is just a tag/sticker. It's like putting a sticky note on the pod saying "name=nginx." It has no effect on the pod's identity. Its purpose is for **selection and grouping** — the RC uses labels to find which pods belong to it.
 
@@ -285,7 +282,7 @@ Replication controller will be used to manage the resources, the pods created as
 Replicaset we can manage the existing pods as well it does not have to be part of the replica set. 
 
 And that is done by another field called selector and inside that we do matchLabels. Under matchLabels mention the pod that you want to be part of the replicaset. 
-Eg. in the image we mentioned env:demo 
+Eg. in the image we mentioned env: demo 
 Every pod with this particular label will be managed by the replicaset. 
 
 ![[Pasted image 20260429154408.png]]
@@ -296,7 +293,8 @@ Now when I apply this I get an error
 There seems to be some error in the version that I mentioned in the yaml file to troubleshoot this: 
 ![[Pasted image 20260429154806.png]]
 
-There is something named as Groups here, check explain pods 
+There is something named as Groups here, check explain pods.
+
 ![[Pasted image 20260429154920.png]]
 this one does not have groups here so we will mention the yaml file as 
 
@@ -351,7 +349,7 @@ Deployment will do the changes in the rolling update fashion.
  E.g. it will update the first pod, while the first pod is being updated traffic is being served by the next two pods. It can also spin up a new pod to take care of the traffic. 
 Once the first pod is updated it add it back to the load balancer
 
-Simlarly for the next pod.
+Similarly for the next pod.
 ![[Pasted image 20260429163534.png]]
 
 ### How to deploy deployment
