@@ -36,6 +36,10 @@ Very large messages should be split in multiple chunks instead of being encrypte
 I tired printing size of the payload
 
 ## Hints from professor
-Noise can be random, 
+Noise can be random
+
+it is based on the number of tries you send. 
+
+with the bad message try to recover the good message. 
 
 Needs to pass the MAC check 
