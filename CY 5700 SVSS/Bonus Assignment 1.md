@@ -38,3 +38,6 @@ Very large messages should be split in multiple chunks instead of being encrypte
 
 I tired printing size of the payload
 ![[Pasted image 20260518161157.png]]
+
+
+Needs to pass the MAC check 

@@ -52,8 +52,16 @@ Primitives :
 >- The Confused Deputy Problem occurs when a privileged program is tricked into performing an action on behalf of a less-privileged user, misusing its authority.
 >- Here the program in question is the **Deputy**.
 
+## 2. Capabilities :
 
-## 2. MANDATORY ACCESS CONTROL (MAC)
+- Processes do not posses any capabilities by default .
+- We can specifiy them as start capabilities .
+### # Capability Sets:
+- There are 5 capability sets 
+- **permitted, effective, bounding, inheritable, ambient**
+- 
+
+## 3. MANDATORY ACCESS CONTROL (MAC)
 - **Mandatory Access Control (MAC)** is a **security model** used in operating systems where access to resources is **strictly controlled by the system**, not by the individual users.
 - **Examples** : [[SELinux]] , Apparmour
 
