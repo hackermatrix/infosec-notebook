@@ -57,3 +57,8 @@ It does ask for the interference
 
 If you give the wrong interface it gives error 
 ![[Pasted image 20260523195550.png]]
+
+![[Pasted image 20260523200247.png]]
+![[Pasted image 20260523200313.png]]
+
+system()
