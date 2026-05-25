@@ -93,3 +93,13 @@ https://forum.hackthebox.com/t/bypassing-other-blacklisted-characters/255983
 ![[Pasted image 20260525153121.png]]
 
 ![[Pasted image 20260525153847.png]]
+
+
+Let us debug this '('. 
+https://oneuptime.com/blog/post/2026-01-24-bash-syntax-error-unexpected-token/view
+
+![[Pasted image 20260525162736.png]]
+/usr/bin/ip addr show dev lo $(bash)
+
+https://eitca.org/cybersecurity/eitc-is-lsa-linux-system-administration/bash-scripting/bash-variables-and-quoting/examination-review-bash-variables-and-quoting/what-is-command-substitution-in-bash-and-how-is-it-done/
+![[Pasted image 20260525165556.png]]
