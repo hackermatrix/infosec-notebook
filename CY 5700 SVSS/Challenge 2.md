@@ -62,3 +62,22 @@ If you give the wrong interface it gives error
 ![[Pasted image 20260523200313.png]]
 
 system()
+
+## ltrace 
+
+![[Pasted image 20260525141057.png]]
+
+https://man7.org/linux/man-pages/man1/ltrace.1.html
+**ltrace** is a program that simply runs the specified _command_ until it exits.  It intercepts and records the dynamic library calls which are called by the executed process and the signals which are received by that process.  It can also intercept and print the
+system calls executed by the program.
+
+![[Pasted image 20260525141806.png]]
+
+![[Pasted image 20260525144445.png]]
+
+`/usr/bin/tail` command in Unix/Linux systems ==outputs the final part of a file or piped data to the terminal==
+
+Trying to see system() 
+![[Pasted image 20260525145224.png]]
+![[Pasted image 20260525145308.png]]
+![[Pasted image 20260525145414.png]]
