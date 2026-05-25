@@ -81,3 +81,15 @@ Trying to see system()
 ![[Pasted image 20260525145224.png]]
 ![[Pasted image 20260525145308.png]]
 ![[Pasted image 20260525145414.png]]
+
+
+![[Pasted image 20260525150342.png]]
+
+
+## Blacklisting bypass 
+
+https://forum.hackthebox.com/t/bypassing-other-blacklisted-characters/255983
+
+![[Pasted image 20260525153121.png]]
+
+![[Pasted image 20260525153847.png]]
