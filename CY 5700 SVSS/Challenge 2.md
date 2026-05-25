@@ -102,4 +102,22 @@ https://oneuptime.com/blog/post/2026-01-24-bash-syntax-error-unexpected-token/vi
 /usr/bin/ip addr show dev lo $(bash)
 
 https://eitca.org/cybersecurity/eitc-is-lsa-linux-system-administration/bash-scripting/bash-variables-and-quoting/examination-review-bash-variables-and-quoting/what-is-command-substitution-in-bash-and-how-is-it-done/
+
+I did this then 
+![[Pasted image 20260525170414.png]]
+
+it is not giving and error which means that I cannot see it i just need to send the file somewhere. 
+
+So i send the file somewhere else. 
+![[Pasted image 20260525170543.png]]
+
 ![[Pasted image 20260525165556.png]]
+
+It is a second program 
+
+I tried submitting it. 
+![[Pasted image 20260525170640.png]]
+
+![[Pasted image 20260525170701.png]]
+
+22-7nsRP_spFss37IfMSatCxQ-22
