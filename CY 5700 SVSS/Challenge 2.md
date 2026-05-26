@@ -132,6 +132,42 @@ I tried submitting it.
 ![[Pasted image 20260526125826.png]]
 ## Strings 
 ![[Pasted image 20260526125942.png]]
+![[Pasted image 20260526125958.png]]
+![[Pasted image 20260526130021.png]]
+
+## ltrace 
+
+![[Pasted image 20260526130218.png]]
+
+Ltrace shows that dlopen does open in my directory 
+
+Couple of things here one is getpwuid, dlopen, dlsym, dlerror & dlcose. 
+
+![[Pasted image 20260526132915.png]]
+
+So i know it is this libpub.so which is calling it. but i know that 
+### getpwuid 
+
+https://pubs.opengroup.org/onlinepubs/009695399/functions/getpwuid.html
+
+### dlopen 
+
+https://man7.org/linux/man-pages/man3/dlopen.3.html
+
+The function **dlopen**() loads the dynamic shared object (shared
+       library) file named by the null-terminated string _path_ and returns
+       an opaque "handle" for the loaded object.
 
 
+There is this l
 
+### dlsystem 
+
+https://man7.org/linux/man-pages/man3/dlsym.3.html
+
+### Dynamic and static linked libraries
+
+https://www.geeksforgeeks.org/operating-systems/static-and-dynamic-linking-in-operating-systems/
+
+
+![[Pasted image 20260526135906.png]]
