@@ -145,29 +145,59 @@ Couple of things here one is getpwuid, dlopen, dlsym, dlerror & dlcose.
 
 ![[Pasted image 20260526132915.png]]
 
-So i know it is this libpub.so which is calling it. but i know that 
-### getpwuid 
+## Bypassing 
+
+So i know it is this libpub.so which is calling it. but i know that it does call it here 
+dlopen("/home/hackers/hacker22/libpub.so"..., 2)
+
+So i created a file name as libpub.c  and compiled it but i got this error 
+![[Pasted image 20260526140720.png]]
+
+So I knew it needed a function named as generate
+
+![[Pasted image 20260526140555.png]]
+
+![[Pasted image 20260526140956.png]]
+
+Compiled it like this.
+![[Pasted image 20260526141127.png]]
+
 
 https://pubs.opengroup.org/onlinepubs/009695399/functions/getpwuid.html
 
-### dlopen 
-
 https://man7.org/linux/man-pages/man3/dlopen.3.html
-
-The function **dlopen**() loads the dynamic shared object (shared
-       library) file named by the null-terminated string _path_ and returns
-       an opaque "handle" for the loaded object.
-
-
-There is this l
-
-### dlsystem 
 
 https://man7.org/linux/man-pages/man3/dlsym.3.html
 
-### Dynamic and static linked libraries
-
 https://www.geeksforgeeks.org/operating-systems/static-and-dynamic-linking-in-operating-systems/
 
+## Output 
+
+Then ran 
 
 ![[Pasted image 20260526135906.png]]
+
+![[Pasted image 20260526140135.png]]
+
+22-8xKHl1CoR1NtRlwAgBSp0A-22
+
+# prog5do
+
+like sudo, but for prog5; run a target command with prog5’s privileges
+
+![[Pasted image 20260526141457.png]]
+![[Pasted image 20260526141807.png]]
+
+you can;t even cat it 
+![[Pasted image 20260526141859.png]]
+
+## ltrace 
+
+I think it does strncmp with my privileges to that of the hacker which is 6. 
+![[Pasted image 20260526143946.png]]
+
+![[Pasted image 20260526145201.png]]
+
+Only the root has access to the acls 
+
+![[Pasted image 20260526145220.png]]
