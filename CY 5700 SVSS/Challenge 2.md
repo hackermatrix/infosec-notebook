@@ -201,3 +201,28 @@ I think it does strncmp with my privileges to that of the hacker which is 6.
 Only the root has access to the acls 
 
 ![[Pasted image 20260526145220.png]]
+
+read(3, "# allowlist\nbob kaan root grader"..., 1024)
+
+Linux system call (`read`) attempting to read up to \(1024\) bytes from a file descriptor (`3`) into a buffer containing an allowlist of usernames (`bob`, `kaan`, `root`, `grader`)
+
+![[Pasted image 20260526150700.png]]
+![[Pasted image 20260526150714.png]]
+
+### strtok
+
+The **`strtok`** function in C **splits a string into smaller pieces called tokens** based on specified delimiter characters. It belongs to the `<string.h>`
+
+### `memset
+a standard C/C++ function used to fill a specified block of memory with a particular byte value==
+
+I could not see the paths so I did this 
+
+ltrace -s 1000 prog5do echo
+![[Pasted image 20260526151755.png]]
+
+This is the allowlist of graders 
+![[Pasted image 20260526151818.png]]
+
+### Figuring out the environment variables 
+![[Pasted image 20260526154732.png]]
