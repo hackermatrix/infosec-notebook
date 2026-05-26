@@ -226,3 +226,9 @@ This is the allowlist of graders
 
 ### Figuring out the environment variables 
 ![[Pasted image 20260526154732.png]]
+
+Tried chanding the environment variable 
+
+![[Pasted image 20260526160647.png]]
+
+![[Pasted image 20260526160735.png]]
