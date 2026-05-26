@@ -198,6 +198,8 @@ I think it does strncmp with my privileges to that of the hacker which is 6.
 
 ![[Pasted image 20260526145201.png]]
 
+![[Pasted image 20260526180723.png]]
+
 Only the root has access to the acls 
 
 ![[Pasted image 20260526145220.png]]
