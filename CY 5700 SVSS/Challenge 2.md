@@ -113,7 +113,7 @@ So i send the file somewhere else.
 
 ![[Pasted image 20260525165556.png]]
 
-It is a second program 
+It is a second shell
 
 I tried submitting it. 
 ![[Pasted image 20260525170640.png]]
@@ -121,3 +121,17 @@ I tried submitting it.
 ![[Pasted image 20260525170701.png]]
 
 22-7nsRP_spFss37IfMSatCxQ-22
+
+# Fantasy_pub_generator:
+
+## Analyzing the code. 
+
+![[Pasted image 20260526125741.png]]
+
+## Looking at the hints 
+![[Pasted image 20260526125826.png]]
+## Strings 
+![[Pasted image 20260526125942.png]]
+
+
+
