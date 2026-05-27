@@ -353,3 +353,12 @@ Now when prog5do reads acl.txt:
 the db-path is gibberish 
 ![[Pasted image 20260527144611.png]]
 
+## Tring the manipulating the file 
+
+![[Pasted image 20260527151032.png]]
+
+![[Pasted image 20260527151047.png]]
+
+![[Pasted image 20260527151142.png]]
+
+It does strncmp here so maybe i need to do keep the same database. 
