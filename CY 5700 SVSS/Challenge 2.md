@@ -362,3 +362,27 @@ the db-path is gibberish
 ![[Pasted image 20260527151142.png]]
 
 It does strncmp here so maybe i need to do keep the same database. 
+
+When i change the db-type from binary to string i get this 
+![[Pasted image 20260527160049.png]]
+
+When i change to timestamp 
+
+![[Pasted image 20260527160126.png]]
+
+
+I tried adding data-type of one more thing and it gave me this error. When I did ltrace i  saw this 
+
+![[Pasted image 20260527161617.png]]
+
+![[Pasted image 20260527161748.png]]
+
+![[Pasted image 20260527163514.png]]
+
+### System gets called when there is error in db-type 
+
+### There is string compare with db-type 
+
+![[Pasted image 20260527163935.png]]
+
+IN THE .ini file doesn;t matter namiing and path with the sym link , the %s in the ltrace can be exploited.
