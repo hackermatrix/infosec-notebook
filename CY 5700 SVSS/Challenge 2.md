@@ -200,6 +200,8 @@ I think it does strncmp with my privileges to that of the hacker which is 6.
 
 ![[Pasted image 20260526180723.png]]
 
+![[Pasted image 20260527134244.png]]
+
 Only the root has access to the acls 
 
 ![[Pasted image 20260526145220.png]]
@@ -210,6 +212,31 @@ Linux system call (`read`) attempting to read up to \(1024\) bytes from a file d
 
 ![[Pasted image 20260526150700.png]]
 ![[Pasted image 20260526150714.png]]
+
+### Open 
+
+#### ACL.txt 
+
+Open function are in the two parts one is for opening the acl 
+
+![[Pasted image 20260527134443.png]]
+
+In the context of the C and POSIX `open()` system call, passing `0` as the `flags` parameter signifies **read-only access** (equivalent to `O_RDONLY`) with no additional options. (just read the file, don't create it)
+[[1](https://stackoverflow.com/questions/42119595/open-system-call-with-parameter-0-as-a-flag), [2](https://www.reddit.com/r/C_Programming/comments/1cnmj6g/posix_and_o_readonly/)]
+![[Pasted image 20260527132925.png]]
+
+![[Pasted image 20260527134613.png]]
+
+I understand the permission for the acl.txt 
+
+#### error.txt
+
+
+![[Pasted image 20260527135131.png]]
+
+![[Pasted image 20260527135452.png]]
+
+![[Pasted image 20260527135555.png]]
 
 ### strtok
 
