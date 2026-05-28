@@ -1,4 +1,4 @@
-## 🛡**Encryption & Decryption**:
+	## 🛡**Encryption & Decryption**:
 
 ### 1. Symmetric (password-based) encryption
 
