@@ -421,8 +421,20 @@ The full line you provided looks like arguments for a string formatting function
 - The 1st `%s` gets replaced by **`db-type`**
 - The 2nd `%s` gets replaced by **`/home/hackers/hacker22/moon.ini
 
-what if i slink the /home/hackers/hacker22/moon.ini with a bash shell 
-
-
 system("/usr/bin/grep db-type "/home/hackers/hacker22/bash" | /usr/bin/grep -v "^#""db-type = "binary"
 db-type = "string"
+
+### what if i slink the /home/hackers/hacker22/moon.ini with a bash shell 
+
+It gives this error 
+
+![[Pasted image 20260529182328.png]]
+### File path gets parsed. 
+
+![[Pasted image 20260529182541.png]]
+
+This can be leveraged passing the file path.
+
+![[Pasted image 20260529183005.png]]
+
+![[Pasted image 20260529184335.png]]
