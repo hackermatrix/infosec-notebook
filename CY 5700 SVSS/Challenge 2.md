@@ -347,9 +347,14 @@ Now when prog5do reads acl.txt:
 ## understanding moon file 
 
 ![[Pasted image 20260527144427.png]]
+I can cat the moon.ini file 
 
 ![[Pasted image 20260527144551.png]]
 
+
+![[Pasted image 20260529160228.png]]
+
+![[Pasted image 20260529160357.png]
 the db-path is gibberish 
 ![[Pasted image 20260527144611.png]]
 
@@ -386,3 +391,35 @@ I tried adding data-type of one more thing and it gave me this error. When I did
 ![[Pasted image 20260527163935.png]]
 
 IN THE .ini file doesn;t matter namiing and path with the sym link , the %s in the ltrace can be exploited.
+
+Even when i type the three names , i get only two %s, %s
+
+![[Pasted image 20260529161741.png]]
+
+![[Pasted image 20260529161231.png]]
+
+### Analyzing the sprintf and system 
+
+
+snprintf("/usr/bin/grep db-type "/home/hackers/hacker22/moon.ini" | /usr/bin/grep -v "^#"", 512, "/usr/bin/grep %s "%s" | /usr/bin/grep -v "^#"", "db-type", "/home/hackers/hacker22/moon.ini") = 79
+
+The full line you provided looks like arguments for a string formatting function (like `snprintf` in C).
+
+- **`/usr/bin/grep db-type`**: Searches for the text "db-type" inside a file.
+- **`"/home/hackers/hacker22/moon.ini"`**: The specific configuration file being searched.
+- **`|` (Pipe)**: Sends the output of the first search into the next search tool.
+- **`/usr/bin/grep -v "^#"`**: Filters out lines that start with a hashtag.
+    - `-v` means "invert match" (exclude these lines).
+    - `^#` means "starts with #".
+    - **Purpose**: This removes commented-out lines so you only see active configuration settings.
+
+- **`"/usr/bin/grep %s "%s"`**: The base template string. The `%s` markers are placeholders for text variables.
+- **`512`**: The maximum buffer size allocated in memory to prevent security bugs like buffer overflows.
+- **The variables**: The code injects `db-type` and the file path into those `%s` placeholders to safely build the final command line.
+
+### Important thing to note in sprint 
+- The 1st `%s` gets replaced by **`db-type`**
+- The 2nd `%s` gets replaced by **`/home/hackers/hacker22/moon.ini
+
+what if i slink the /home/hackers/hacker22/moon.ini with a bash shell 
+
