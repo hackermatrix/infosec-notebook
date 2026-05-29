@@ -423,3 +423,6 @@ The full line you provided looks like arguments for a string formatting function
 
 what if i slink the /home/hackers/hacker22/moon.ini with a bash shell 
 
+
+system("/usr/bin/grep db-type "/home/hackers/hacker22/bash" | /usr/bin/grep -v "^#""db-type = "binary"
+db-type = "string"
