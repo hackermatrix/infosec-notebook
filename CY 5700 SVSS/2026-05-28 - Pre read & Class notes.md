@@ -104,18 +104,55 @@ How HTTP "fakes" state:
 #### HTTP Request 
 ![[Pasted image 20260530135819.png]]
 
+
+resource field is basically the **path + anything attached to it**:
+
+**Just a path:**
+
+```
+GET /login
+GET /users/profile
+GET /images/logo.png
+```
+`/` means the **root** of the website — basically "give me the homepage."
+
+#### HTTP Response 
+
+![[Pasted image 20260530140336.png]]
+
+**Anti-framing (x-frame-options: SAMEORIGIN)** Prevents your page from being embedded in an `<iframe>` on another site. This blocks **clickjacking** attacks where an attacker puts your bank page in an invisible iframe and tricks you into clicking buttons on it. SAMEORIGIN means only the same site can frame it.
+
+**Disable content sniffing (x-content-type-options: nosniff)** Browsers sometimes try to guess what a file is even if the server says otherwise. `nosniff` says "trust my Content-Type, don't guess." Without this, an attacker could upload a file that looks like an image but the browser sniffs it as JavaScript and runs it.
+
+**Enable anti-XSS filter (x-xss-protection: 1; mode=block)** An older browser-built-in XSS filter. If the browser detects a reflected XSS attempt, it blocks the page from rendering. Mostly deprecated now in modern browsers since CSP does this better, but still seen in older responses.
+
 #### HTTP Methods 
 
+![[Pasted image 20260530140005.png]]
+####  Access Control 
+![[Pasted image 20260530141954.png]]
 
+##### HTTP Authentication 
+
+Browser → "give me /secret"
+Server  → "401, prove who you are"
+Browser → "here's base64(tan:mypassword)"
+Server  → "ok, here's /secret"
+
+It **must be done over TLS:** Without TLS (HTTPS), anyone on the network can intercept the request and just base64-decode your credentials.
+
+#### Cookies 
+ ![[Pasted image 20260530142416.png]]
+ 
 If you set **httponly = true that means cookie cannot be sent through document.cookie() or javascript** 
-**some times javascript might need the cookie.** 
-but if not do set this value. 
+**some times javascript might need the cookie.** but if not do set this value. 
 
 You login to amazon.com it returns back success page. 
 
 Read set-cookie and cookie. 
 
-Access control is built on top of HTTP. 
+![[Pasted image 20260530143720.png]]
+
 
 For this course we assume TLS is always there. 
 TLS does nothing is you go to a malicious site. 
@@ -123,26 +160,30 @@ If the website has vulnerability TLS does nothing.
 
 Basis of web attack is seperation of data and control. 
 
+![[Pasted image 20260530144338.png]]
+
+There are **two** `goto fail` statements. The second one has no `if` condition — it **always executes**, jumping straight to `fail:` no matter what.
+
+**Why this is catastrophic:** The `sslRawVerify()` call below — which actually checks if the signature is valid — **never runs**. The code jumps past it every time.
+
+So the function returns whatever `err` was from the last successful operation (which is `0` = success), meaning it tells the program **"signature verified!"** even when it never checked it.
 #### Javascript
 
-eval()
-
-OWASP fact check 
+eval() 
 
 #### Root of most evil 
 
 Untrusted input. 
 everything in a HTTP, request is considered input. 
-- path 
-- Query string 
-- Header names, header values
-- POST parameters 
-- Hidden form fields 
-- Cookies 
-- Uploaded files 
+- **path** 
+- **Query string** 
+- **Header names, header values**
+- **POST parameters** 
+- **Hidden form fields** 
+- **Cookies** 
+- **Uploaded files** 
 
 Everything that comes to the application from external- not just request paylod. but every part of the request. 
-
 
 ### Rule 1: Validate Input 
 
