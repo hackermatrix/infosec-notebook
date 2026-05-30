@@ -426,7 +426,7 @@ db-type = "string"
 
 ### what if i slink the /home/hackers/hacker22/moon.ini with a bash shell 
 
-It gives this error 
+It gives this error   it neeeds it in the **moon configuration** 
 
 ![[Pasted image 20260529182328.png]]
 ### File path gets parsed. 
