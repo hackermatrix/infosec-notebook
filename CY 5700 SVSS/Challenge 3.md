@@ -32,6 +32,10 @@ Remembering from classnotes: If you set httponly = true that means cookie cannot
 
 ![[Pasted image 20260601124105.png]]
 
+![[Pasted image 20260601133906.png]]
+
+session=eyJfZmxhc2hlcyI6W3siIHQiOlsiZXJyb3IiLCJObyBjYXJkIG9uIGZpbGUuIEFkZCBvbmUgaW4geW91ciBwcm9maWxlLiJdfV19.ah3DUg.ZUjVirDmf_kHh8nAz2z-RiiOLs8
+
 ![[Pasted image 20260601124900.png]]
 
 ![[Pasted image 20260601124925.png]]
@@ -46,9 +50,85 @@ Remembering from classnotes: If you set httponly = true that means cookie cannot
 
 All the src images seem fine
 
-### Hints
+Comments get posted 
+![[Pasted image 20260601130238.png]]
 
-![[Pasted image 20260601125827.png]]
+### Inspecting I the second  page 
+
+![[Pasted image 20260601130407.png]]
+
+###  Comment section input 
+
+![[Pasted image 20260601133721.png]]
+
+
+![[Pasted image 20260601133706.png]]
+
+###  Cart 
+
+![[Pasted image 20260601133751.png]]
+
+If i click on 1-Click Buy! 
+
+![[Pasted image 20260601134055.png]]
+
+The error can be inspected like a GET request 
+![[Pasted image 20260601134327.png]]
+
+There is a Role 
+
+![[Pasted image 20260601134403.png]]
+
+
+###  Hints
+
+#### The csrf_token is in two places: 
+
+one is near click buy 
+
+![[Pasted image 20260601133311.png]]
+
+Other one is here near comments
+
+![[Pasted image 20260601133440.png]]
+
+
+#### Card details are through hidden input 
+
+https://www.w3schools.com/tags/att_input_type_hidden.asp
+
+![[Pasted image 20260601135252.png]]
+
+### Profile page 
+
+![[Pasted image 20260601134845.png]]
+
+![[Pasted image 20260601134914.png]]
+
+BuyerAccount has an id associated 6a507996c0c037f005b730ebf26542a1162cb3a223cd602f40cfc4228528a93b
+
+![[Pasted image 20260601135031.png]]
+![[Pasted image 20260601135047.png]]
+![[Pasted image 20260601135108.png]]
+
+### Playing with card details 
+
+![[Pasted image 20260601135454.png]]
+
+![[Pasted image 20260601135506.png]]
+
+When i change the password it is a GET request. 
+
+![[Pasted image 20260601135549.png]]
+
+![[Pasted image 20260601135627.png]]
+![[Pasted image 20260601135648.png]]
+
+### Let us try buying through fake user card 
+
+#### Quick observation csrf token gets passed whenever you try to buy 
+
+![[Pasted image 20260601135840.png]]
 
 
 ## SQL injection to login to bob. 
