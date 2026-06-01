@@ -63,7 +63,13 @@ Comments get posted
 
 
 ![[Pasted image 20260601133706.png]]
+ 
+  ### Playing with XSS
 
+![[Pasted image 20260601162952.png]]
+
+
+![[Pasted image 20260601162818.png]]
 ###  Cart 
 
 ![[Pasted image 20260601133751.png]]
@@ -80,7 +86,7 @@ There is a Role
 ![[Pasted image 20260601134403.png]]
 
 
-###  Hints
+###  CSRF Token 
 
 #### The csrf_token is in two places: 
 
@@ -111,6 +117,7 @@ BuyerAccount has an id associated 6a507996c0c037f005b730ebf26542a1162cb3a223cd60
 ![[Pasted image 20260601135047.png]]
 ![[Pasted image 20260601135108.png]]
 
+
 ### Playing with card details 
 
 ![[Pasted image 20260601135454.png]]
@@ -123,6 +130,10 @@ When i change the password it is a GET request.
 
 ![[Pasted image 20260601135627.png]]
 ![[Pasted image 20260601135648.png]]
+
+#### Checking for XSS
+
+![[Pasted image 20260601163321.png]]
 
 ### Let us try buying through fake user card 
 
@@ -150,6 +161,7 @@ When i change the password it is a GET request.
 ![[Pasted image 20260601142040.png]]
 ![[Pasted image 20260601142101.png]]
 
+![[Pasted image 20260601163110.png]]
 
 ### Messages 
 ![[Pasted image 20260601142520.png]]
@@ -164,6 +176,14 @@ When i change the password it is a GET request.
 ![[Pasted image 20260601142747.png]]
 
 ![[Pasted image 20260601142814.png]]
+
+### Trying XSS 
+
+![[Pasted image 20260601163844.png]]
+
+![[Pasted image 20260601163901.png]]
+
+### CSRF Token manipulation 
 
 I tried removing the CSRF token thing it gives this. 
 

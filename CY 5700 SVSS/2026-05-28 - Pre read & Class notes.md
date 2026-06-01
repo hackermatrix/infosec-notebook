@@ -216,6 +216,8 @@ Web server receives input and sends to database
 
 UNION SELECT 
 
+The **SQL `UNION` operator** combines the results of two or more `SELECT` queries into a **single, distinct result set by automatically removing duplicate rows**
+
 SQL queries often include ***user input***
 
 -- comment it out. 
