@@ -183,6 +183,10 @@ When i change the password it is a GET request.
 
 ![[Pasted image 20260601163901.png]]
 
+#### Doesn;t work gives me this error of unknown user 
+
+![[Pasted image 20260601173623.png]]
+
 ### CSRF Token manipulation 
 
 I tried removing the CSRF token thing it gives this. 
