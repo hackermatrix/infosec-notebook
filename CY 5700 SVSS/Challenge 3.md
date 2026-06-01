@@ -130,6 +130,44 @@ When i change the password it is a GET request.
 
 ![[Pasted image 20260601135840.png]]
 
+#### Role id gets returned 
+
+![[Pasted image 20260601140303.png]]
+
+
+![[Pasted image 20260601140231.png]]
+
+![[Pasted image 20260601141127.png]]
+
+![[Pasted image 20260601141311.png]]
+
+![[Pasted image 20260601141528.png]]
+
+![[Pasted image 20260601141903.png]]
+
+![[Pasted image 20260601141934.png]]
+
+![[Pasted image 20260601142040.png]]
+![[Pasted image 20260601142101.png]]
+
+
+### Messages 
+![[Pasted image 20260601142520.png]]
+![[Pasted image 20260601142626.png]]
+
+![[Pasted image 20260601142605.png]]
+
+![[Pasted image 20260601142715.png]]
+
+![[Pasted image 20260601142731.png]]
+
+![[Pasted image 20260601142747.png]]
+
+![[Pasted image 20260601142814.png]]
+
+I tried removing the CSRF token thing it gives this. 
+
+![[Pasted image 20260601145835.png]]
 
 ## SQL injection to login to bob. 
 
