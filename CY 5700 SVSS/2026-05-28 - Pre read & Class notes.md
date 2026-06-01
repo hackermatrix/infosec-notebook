@@ -236,8 +236,18 @@ look for some input injection need not be vulnerability always.
 
 
 
+## Demo 1 
+
+You want to take contents of the database 
 
 
+
+![[Pasted image 20260601155520.png]]
+
+
+### Edited the URL 
+
+![[Pasted image 20260601155722.png]]
 
 
 

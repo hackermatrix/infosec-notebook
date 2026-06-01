@@ -169,6 +169,12 @@ I tried removing the CSRF token thing it gives this.
 
 ![[Pasted image 20260601145835.png]]
 
+The CSRF token that i see here in the response is different 
+
+1efe2104df01ab7f43b1ebc24c58089e81046eecf147e45799505bfe254da520
+
+![[Pasted image 20260601150405.png]]
+
 ## SQL injection to login to bob. 
 
 SELECT * FROM users WHERE username = 'bob’ - -’ AND password = 'anything';
@@ -181,5 +187,4 @@ https://www.sentinelone.com/cybersecurity-101/cybersecurity/types-of-sql-injecti
 
 https://infosecwriteups.com/from-sql-injection-to-weak-passwords-a-deep-dive-into-a-tamil-nadu-government-security-flaw-1b648d62d457
 ![[Pasted image 20260531155053.png]]
-
 
