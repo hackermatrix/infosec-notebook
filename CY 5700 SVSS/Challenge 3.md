@@ -70,6 +70,7 @@ Comments get posted
 
 
 ![[Pasted image 20260601162818.png]]
+
 ###  Cart 
 
 ![[Pasted image 20260601133751.png]]
@@ -104,6 +105,12 @@ Other one is here near comments
 https://www.w3schools.com/tags/att_input_type_hidden.asp
 
 ![[Pasted image 20260601135252.png]]
+
+####  More SQL injection in the update profile 
+
+cb1745f79417a77bfd308b6f15aeb3ef82a3f26a5a224404ebbb60790fe5302e
+
+![[Pasted image 20260602135423.png]]
 
 ### Profile page 
 
@@ -221,3 +228,9 @@ https://infosecwriteups.com/from-sql-injection-to-weak-passwords-a-deep-dive-int
 ## SQL injection in login 
 
 ![[Pasted image 20260602113103.png]]
+
+
+## Exploiting # <input type="hidden">
+
+
+https://www.w3schools.com/tags/att_input_type_hidden.asp

@@ -297,3 +297,28 @@ Web developers tool
 ![[Pasted image 20260602115013.png]]
 
 You can change the headers, the cookie you can play with this too. 
+
+
+### You put in a sql command like this ' and see if it throws an error. 
+![[Pasted image 20260602134249.png]]
+
+**Type `AND 1=1` (always true):**
+
+- 200 with results → SQL injection is working ✓ (true condition shows everything)
+
+**Type `AND 1=2` (always false):**
+
+- 200 with **empty** results → SQL injection is working ✓ (false condition hides everything)
+
+**The key is the DIFFERENCE between the two:**
+
+```
+AND 1=1 → results show    ✓
+AND 1=2 → results disappear ✓
+```
+
+If they behave differently like this → **injection is working**.
+
+If both show the same results regardless → injection is not working, output is being sanitized. 
+
+**500** means your SQL syntax broke something server-side — useful because it confirms the input is reaching SQL, but you **need to fix your syntax.**
