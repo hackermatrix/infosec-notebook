@@ -198,6 +198,28 @@ When i change the password it is a GET request.
 
 ![[Pasted image 20260601173623.png]]
 
+### Trying SQL injection on Messages. 
+
+![[Pasted image 20260602150207.png]]
+![[Pasted image 20260602150242.png]]
+
+which makes me realize that it takes the user id. 
+
+I had created a user tani myself  
+
+![[Pasted image 20260602150339.png]]
+
+![[Pasted image 20260602150421.png]]
+
+Things I am observing the GET request and the POST request have this in common. 
+
+28251da03e59a20613c7195c43bd5fa2fed23c93d101824931db0088f668f4fb
+
+
+session=eyJfZmxhc2hlcyI6W3siIHQiOlsic3VjY2VzcyIsIk1lc3NhZ2Ugc2VudC4iXX1dfQ.ah8o6A.cI43_7EmVDTepNWSM3a_FTB-FJQ
+
+
+csrf_token=cb1745f79417a77bfd308b6f15aeb3ef82a3f26a5a224404ebbb60790fe5302e
 ### CSRF Token manipulation 
 
 I tried removing the CSRF token thing it gives this. 

