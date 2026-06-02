@@ -227,10 +227,28 @@ https://infosecwriteups.com/from-sql-injection-to-weak-passwords-a-deep-dive-int
 
 ## SQL injection in login 
 
+
 ![[Pasted image 20260602113103.png]]
 
 
-## Exploiting # <input type="hidden">
+## Delete one of the items originally listed for sale
 
+Exploiting the input type="hidden" 
 
 https://www.w3schools.com/tags/att_input_type_hidden.asp
+
+In the post update profile you can see this make_mode is being passed 
+
+![[Pasted image 20260602145708.png]]
+
+I tried sending it as bob and admin it gave me this 
+
+![[Pasted image 20260602140757.png]]
+
+![[Pasted image 20260602141840.png]]
+![[Pasted image 20260602142014.png]]
+![[Pasted image 20260602142110.png]]
+
+![[Pasted image 20260602145831.png]]
+
+and i can delete through this. 
