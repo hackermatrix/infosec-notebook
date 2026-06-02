@@ -360,3 +360,10 @@ Then replace those numbers with actual data you want:
 asd' UNION SELECT username, password, 3 FROM users --
 ```
 
+![[Pasted image 20260602164458.png]]
+
+How do you see the table, column names
+
+![[Pasted image 20260602165418.png]]
+
+###  SQL metadata
