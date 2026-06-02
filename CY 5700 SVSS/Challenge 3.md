@@ -113,6 +113,10 @@ https://www.w3schools.com/tags/att_input_type_hidden.asp
 
 BuyerAccount has an id associated 6a507996c0c037f005b730ebf26542a1162cb3a223cd602f40cfc4228528a93b
 
+If i play with the account id and remove it gives me access denied 
+
+![[Pasted image 20260602120408.png]]
+
 ![[Pasted image 20260601135031.png]]
 ![[Pasted image 20260601135047.png]]
 ![[Pasted image 20260601135108.png]]
