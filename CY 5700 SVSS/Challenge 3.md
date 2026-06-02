@@ -212,3 +212,8 @@ https://www.sentinelone.com/cybersecurity-101/cybersecurity/types-of-sql-injecti
 https://infosecwriteups.com/from-sql-injection-to-weak-passwords-a-deep-dive-into-a-tamil-nadu-government-security-flaw-1b648d62d457
 ![[Pasted image 20260531155053.png]]
 
+
+
+## SQL injection in login 
+
+![[Pasted image 20260602113103.png]]

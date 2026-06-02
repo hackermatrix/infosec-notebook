@@ -240,26 +240,60 @@ look for some input injection need not be vulnerability always.
 
 ## Demo 1 
 
-You want to take contents of the database 
+
+![[Pasted image 20260602112140.png]]
+![[Pasted image 20260602112215.png]]
 
 
+Why `asdf` as username
+`asdf` is intentionally a username that **doesn't exist**. The point is to prove the SQL injection works regardless of whether the username is valid. If he used `admin` it might look like he just knew the password. Using `asdf` proves he's bypassing auth entirely, not guessing credentials.
 
-![[Pasted image 20260601155520.png]]
+Any random string works — `banana`, `xyz`, anything fake.
+
+**Why `asdf' OR 1=1--` as the password?**
+
+The backend SQL query probably looks like:
+
+sql
+
+```sql
+SELECT * FROM users 
+WHERE username='asdf' AND password='asdf' OR 1=1--'
+```
+- You typed: `asdf' OR 1=1--`
+- The app wraps it in quotes making it: `'asdf' OR 1=1--'`
+
+So the password part becomes:
+
+- `asdf` — matched against password column (fails)
+- `'` — **closes** the password string early
+- `OR 1=1` — now interpreted as **SQL code**, not a string
+- `--` — comments out the trailing `'` the app added
+
+We will login in take note of all the **inputs the application takes** 
+![[Pasted image 20260602113644.png]]
+
+Professor is exploring the search functionality.
+
+![[Pasted image 20260602113808.png]]
+
+![[Pasted image 20260602114005.png]]
+
+Then the professor notes that the course number it is clickable and clicks on it. 
+
+Exploring other options and tabs 
+
+![[Pasted image 20260602114324.png]]
+
+The goal is to make Toby drop out. 
+
+Threat modelling is what could possibly go wrong. One way to do is to take toby;s password and login to his account and make him lose it.  
+
+### Make the list of inputs available to you and provoke those inputs and see which one could potentionally be vulnerable to SQL injection. 
 
 
-### Edited the URL 
+Web developers tool 
 
-![[Pasted image 20260601155722.png]]
+![[Pasted image 20260602115013.png]]
 
-
-
-
-
-
-
-
-
-- 
-
-
-
+You can change the headers, the cookie you can play with this too. 
