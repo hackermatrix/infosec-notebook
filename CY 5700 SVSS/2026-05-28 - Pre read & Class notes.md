@@ -366,4 +366,33 @@ How do you see the table, column names
 
 ![[Pasted image 20260602165418.png]]
 
-###  SQL metadata
+###  What is `sqlite_master`
+
+Every SQLite database has a built-in table called `sqlite_master` that stores the **schema** — basically a map of the entire database:
+
+- All table names
+- All column names
+- How everything is structured
+
+It's like a directory of the database itself.
+
+**What `sqlite_master` contains:**
+
+sql
+
+```sql
+type    -- 'table', 'index', 'view'
+name    -- name of the table/index
+tbl_name -- table it belongs to
+rootpage
+sql     -- the CREATE TABLE statement!
+```
+**So your injection:**
+
+```
+asd' UNION SELECT 1,2,3,4,5,6 FROM sqlite_master --
+```
+
+Is trying to dump the schema.
+
+![[Pasted image 20260602170807.png]]
