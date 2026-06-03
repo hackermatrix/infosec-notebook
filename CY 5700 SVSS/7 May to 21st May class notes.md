@@ -1124,9 +1124,156 @@ LD_PRELOAD set? → is binary SUID? → YES → ignore LD_PRELOAD
 
 ![[Pasted image 20260603141710.png]]
 
-### Demo 3 
+## Demo 3 
 
 The setup is like this. This sets an internal tool. Every user transaction or purchase records in the database. Employees should grab non-sensitive data from the database. 
 
 
 ![[Pasted image 20260603145551.png]]
+
+![[Pasted image 20260603150624.png]]
+![[Pasted image 20260603150648.png]]
+
+![[Pasted image 20260603150719.png]]
+
+The invoice file should exist. 
+
+![[Pasted image 20260603151203.png]]
+
+The database is a binary database format. 
+
+Goal is to use the invoice program to corrupt the database.  What the professor is trying to do her is to get the output as transactions.db 
+
+![[Pasted image 20260603151433.png]]
+
+![[Pasted image 20260603151521.png]]
+
+**transactions.db:**
+
+```
+-rw-rw----  root  superpriv
+ ↑↑↑↑↑↑↑↑
+ rw-  = owner (root) can read/write
+ rw-  = group (superpriv) can read/write
+ ---  = others = NO ACCESS
+```
+
+**invoice binary:**
+
+```
+-rwxr-sr-x  kaan  superpriv
+      ↑
+      s = SGID bit (Set Group ID)
+          runs with GROUP = superpriv
+```
+### The Key — SGID not SUID!
+
+```
+SUID = runs with owner's privileges  (root)
+SGID = runs with GROUP's privileges  (superpriv)
+```
+
+So `invoice` runs as **group `superpriv`** which means it CAN read `transactions.db`.
+
+
+### Looking at the source code 
+![[Pasted image 20260603152916.png]]
+if (access(argv[2], W_OK)) {
+`access()` is **defined by POSIX** to explicitly use the **real UID/GID**, not the effective UID/GID. This is its entire purpose for existing as a separate function.
+
+access(path, W_OK)    → "does REAL user have write permission?"
+                                              ↑
+                                    permission check, not ownership
+
+open(path, O_WRONLY)  → "does EFFECTIVE gid have write permission?"
+                                              ↑
+                                    same check, different identity
+
+This is a race condition here. 
+
+The sequence of conditions 
+
+1. Create a normal file. 
+2. Wait until the thing executes 
+3. Go and delete the empty invoice file 
+4. Replace it with a symbolic link. 
+5. With open syscall 
+
+As the CPU switches contexts between threads you want to get lucky. 
+
+![[Pasted image 20260603155007.png]]
+
+![[Pasted image 20260603155153.png]]
+![[Pasted image 20260603155220.png]]
+
+access(argv[2], W_OK)   // CHECK  ← real uid kaan
+    ↓
+    ↓  ← TIME GAP HERE (attacker's window!)
+    ↓
+open(argv[2], O_WRONLY) // USE    ← effective gid superpriv
+
+This gap between CHECK and USE is the **TOCTOU vulnerability** (Time Of Check Time Of Use).
+
+#### Why Delete? — The Symlink Swap Logic
+
+The attacker needs `out.txt` to mean **different things** at check time vs use time:
+
+```
+At access() time:
+    out.txt = real file owned by kaan
+    access() asks: can kaan write out.txt? → YES ✓ passes check
+
+At open() time:
+    out.txt = symlink → transactions.db
+    open() asks: can superpriv write? → YES ✓ opens transactions.db!
+```
+
+**You can't just replace a file with a symlink — you have to DELETE it first** because:
+
+```
+out.txt already EXISTS as a real file
+    ↓
+ln -s transactions.db out.txt
+    ↓
+ERROR: out.txt already exists!
+ln won't overwrite an existing file
+```
+
+So delete → recreate as symlink is the only way to swap them
+
+
+#### The Full Race Condition
+
+![[Pasted image 20260603155535.png]]
+
+LEFT SCRIPT (victim)     RIGHT SCRIPT (attacker)
+────────────────────     ──────────────────────
+                         touch out.txt  ← real file exists
+access(out.txt, W_OK)    
+  kaan owns it → PASS ✓  
+                         rm -f out.txt  ← DELETE it!
+                         ln -s transactions.db out.txt
+                                        ← now out.txt = symlink!
+open(out.txt, O_WRONLY)  
+  follows symlink →
+  opens transactions.db!
+  superpriv can write → 
+🔥 transactions.db gets  
+   overwritten!          rm -f out.txt  ← reset, try again
+
+####  Why "Corrupted" Specifically
+
+```
+transactions.db was a structured binary database
+    ↓
+invoice program wrote plain invoice text into it
+    ↓
+database now contains garbage data
+    ↓
+any program trying to read transactions.db
+finds invalid structure → "Database is corrupted"
+```
+
+### Solution 
+
+Open the file descriptor 
