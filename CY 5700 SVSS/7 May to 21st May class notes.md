@@ -683,13 +683,92 @@ The `echo a` acts as a **sacrificial command** that absorbs the `| wc -l`, keepi
 
 `echo a | wc -l` → this only runs **after you exit `sh`** — it's just sitting in line waiting
 
+![[Pasted image 20260603041346.png]]
 #### How would you analyze a code.
 
 Now if you see system() you know it is dangerous.  You system() here is system(cmd) 
 
 The external user has any influence on the command. If is hardcoded it doesnt have to be a problem. Here you see argument goes to the command. So it is automatically vulnerable.  
 
-Read IFS
+### Environment Variables 
+
+![[Pasted image 20260603041546.png]]
+![[Pasted image 20260603041604.png]]
+
+ Environment variables is like a **dictionary (key=value pairs) that every process carries with it. When you run `printenv` or `env`, you see your shell's current environment  things like `USER=kaan`, `HOME=/home/kaan`, `SHELL=/bin/bash`, etc.
+
+####  Environment variable Rules
+
+**1. Every process has its own copy** When a process is created, it gets a _copy_ of its parent's environment — not a reference to it. So changes one process makes don't affect anyone else's copy.
+
+**2. Processes can modify their own environment** Using `setenv()` in C, or `export VAR=value` in bash — but this only affects _that process's_ copy.
+
+**3. The inheritance chain (this is the important part)**
+
+```
+Shell (USER=kaan)
+    │
+    ├── fork() → child inherits a COPY
+    │               └── child changes HOME=/tmp
+    │                       └── grandchild inherits HOME=/tmp  ✓
+    │
+    └── Shell still has HOME=/home/kaan  ✓  (unaffected)
+```
+
+Children inherit from their parent at the moment of `fork()`. Changes flow **downward only**, never upward or sideways.
+
+####  Why This Matters in Security (relevant for you!)
+
+- **Privilege escalation risk**: SUID binaries inherit the calling user's environment. A malicious `PATH` or `LD_PRELOAD` in the environment can hijack what a privileged binary loads/executes — this is exactly why secure SUID programs sanitize their environment on startup.
+- **`LD_PRELOAD` attacks**: If you can inject a library path via the environment, you can intercept function calls in privileged processes.
+- **`PATH` hijacking**: If a SUID binary calls `system("ls")` without an absolute path, a crafted `PATH` in the environment points it to your malicious `ls`
+- 
+#### Cd 
+
+Home environment variable is what cd looks for. You change the value it will take you to different directory. 
+
+#### Path
+
+The **`PATH` environment variable** contains a list of search directories that the operating system uses to locate executable programs and commands.
+
+If you type a command inside shell and hit enter without relative or absolute path. The shell knows where to look and search the first directory in the path if it can;t find it there it will  move to the second directory. 
+
+By changing the environment variables you can change the content of these variables you can change the behaviour of the program that relies on these variables.
+
+#### Internal field separator. 
+ 
+
+IFS : Internal field separator. it tells the shell _"where does one token end and the next begin?"_
+
+![[Pasted image 20260603044758.png]]
+
+
+https://notes.kodekloud.com/docs/Advanced-Bash-Scripting/Special-Shell-Variables/ifs/page
+
+IFS is by default set to **blank space.** 
+#### What is Tokenization?
+
+When the shell sees a command, it splits the string into **tokens** (individual meaningful chunks) using IFS as the delimiter.
+
+bash
+
+```bash
+/usr/bin/cat myfile
+```
+
+The shell splits this on the space:
+
+```
+Token 1: /usr/bin/cat   ← the program to run
+Token 2: myfile         ← argument passed to it
+```
+
+
+### Demo 2 
+
+![[Pasted image 20260603045934.png]]
+
+
 Soft link command ln 
 $ - hacker template. 
 
