@@ -48,7 +48,7 @@ Klikparty 2007
 Depends on the security policy. Any malicious act against a system that violates your security policy.
 
 ## Security policy: 
-what are you trying to protect, what assets, what are the security goals, what do you want to protct against, threats. what is the risk? 
+what are you trying to protect, what assets, what are the security goals, what do you want to protect against, threats. what is the risk? 
 
 ## Super important : Security Goals
 1. Confidentiality:  the property that **information is not made available to unauthorized entities.** 
