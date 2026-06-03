@@ -946,19 +946,96 @@ With IFS="/"
 
 system("/bin/ls")
  shell splits on "/" → tokens: ""  "bin"  "ls"
-#                                ↑
+                               ↑
                  first token is empty, ignored
  second token "bin" becomes the COMMAND
 
-Soft link command ln 
-$ - hacker template. 
+So the shell now tries to execute **`bin`** as a command, and looks it up in `PATH`!
+
+Why "Root Executes" is the Scary Part
+
+Normal user runs malicious "bin"  →  damage limited to that user
+ROOT runs malicious "bin"         →  full system compromise
+                                      can do anything:
+                                      - add root users
+                                      - install backdoors
+                                      - read /etc/shadow
+                                      - destroy the system
 
 
+## Shellshock 
 
-File Descriptors 
+![[Pasted image 20260603130401.png]]
+## File Descriptors 
+
 you can read, write when the file is open 
 what if it is a privileged file when fork happens the child inherits open child it was not suppose to do. 
+![[Pasted image 20260603132231.png]]
+https://medium.com/@tharinduimalka915/linux-file-descriptors-ec945fd36893
+
+![[Pasted image 20260603133135.png]]
+This is also known as the **capability leak.** 
+### Child can still access the file via the descriptor!
+
+#### FLOW 
+
+Permission Check Happens at `open()`, NOT at `read()`
+
+Root process calls **open("/etc/shadow")**
+         ↓
+Kernel checks: **"is caller root?" → YES ✓**
+         ↓
+Returns file descriptor **(just an integer, e.g. fd=5)**
+         ↓
+**fork() → child inherits fd=5**
+         ↓
+**Child calls read(fd=5, ...)**
+         ↓
+Kernel checks: ???
+
+**The kernel does NOT re-check permissions on read/write.** The file descriptor is already open — it's just a number pointing to an open file. The gate was only checked once, at `open()`.
+
+#### Why This is a Problem
+
+SUID root program          Unprivileged child
+─────────────────          ──────────────────
+open("/etc/shadow")   →    gets fd=5 inherited
+[runs as root, succeeds]   
+fork()                →          child drops to user kaan
+drop_privileges()          but still HAS fd=5!
+                           read(fd=5) → reads /etc/shadow ✓
+                           [no permission check on read!]
 
 
+### setuid root program opens a file only readable by root. 
 
+#### Flow 
 
+SUID binary runs as root
+    → opens sensitive file (root-only)
+    → fork()
+    → child drops privileges to normal user
+    → but fd is ALREADY open → child can still read it
+
+Dropping privileges closes the SUID elevation, but it **does not close open file descriptors**.
+
+#### The Fix
+
+Before forking into an unprivileged child, explicitly close any sensitive file descriptors:
+
+fd = open("/etc/shadow", O_RDONLY);  // root opens it
+// ... do root work ...
+close(fd);          // close BEFORE fork
+fork();             // now child has nothing sensitive
+
+Or use the `O_CLOEXEC` flag when opening, which auto-closes the fd on `exec()`.
+
+![[Pasted image 20260603134616.png]]
+This ensures that the kernel **automatically closes the file descriptor** when the current process executes a new program via any `exec` function family call. 
+
+## Shared Libraries. 
+
+![[Pasted image 20260603135219.png]]
+https://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html
+
+### What LD_PRELOAD Does Normally
