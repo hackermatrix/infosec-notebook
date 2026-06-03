@@ -705,7 +705,7 @@ The external user has any influence on the command. If is hardcoded it doesnt ha
 
 **1. Every process has its own copy** When a process is created, it gets a _copy_ of its parent's environment — not a reference to it. So changes one process makes don't affect anyone else's copy.
 
-**2. Processes can modify their own environment** Using `setenv()` in C, or `export VAR=value` in bash — but this only affects _that process's_ copy.
+**2. Processes can modify their own environment** Using `setenv()` in C, or `export VAR=value` in bash but this only affects _that process's_ copy.
 
 **3. The inheritance chain (this is the important part)**
 
@@ -723,7 +723,7 @@ Children inherit from their parent at the moment of `fork()`. Changes flow **dow
 
 ####  Why This Matters in Security (relevant for you!)
 
-- **Privilege escalation risk**: SUID binaries inherit the calling user's environment. A malicious `PATH` or `LD_PRELOAD` in the environment can hijack what a privileged binary loads/executes — this is exactly why secure SUID programs sanitize their environment on startup.
+- **Privilege escalation risk**: SUID binaries inherit the calling user's environment. A malicious `PATH` or `LD_PRELOAD` in the environment can hijack what a privileged binary loads/executes , this is exactly why secure SUID programs sanitize their environment on startup.
 - **`LD_PRELOAD` attacks**: If you can inject a library path via the environment, you can intercept function calls in privileged processes.
 - **`PATH` hijacking**: If a SUID binary calls `system("ls")` without an absolute path, a crafted `PATH` in the environment points it to your malicious `ls`
 - 
@@ -766,7 +766,6 @@ The shell splits this on the space:
 Token 1: /usr/bin/cat   ← the program to run
 Token 2: myfile         ← argument passed to it
 ```
-
 
 ### Demo 2 
 
@@ -970,6 +969,21 @@ ROOT runs malicious "bin"         →  full system compromise
 ## Shellshock 
 
 ![[Pasted image 20260603130401.png]]
+
+ Bash allows storing functions in environment variables
+env VAR='() { echo hello; }' bash
+       ↑
+this is a function definition
+
+Shellshock bug: bash KEPT EXECUTING whatever came AFTER the function
+env VAR='() { echo hello; }; rm -rf /' bash
+                           ↑
+THIS part should be ignored
+but bash executed it anyway!
+
+https://www.youtube.com/watch?v=aKShnpOXqn0
+
+
 ## File Descriptors 
 
 you can read, write when the file is open 
@@ -1317,3 +1331,7 @@ With fd approach:
     fd already points to the real file that was opened
     symlink swap has NO EFFECT ✗
 ```
+
+## Disk Encryption
+
+![[Pasted image 20260603172607.png]]
