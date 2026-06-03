@@ -897,6 +897,34 @@ So if the attacker placed a malicious file called `sendmail` or `home` in `/tmp`
 Runs the SUID binary — **which runs as root**.
 
 
+### Final execution 
+
+![[Pasted image 20260603060122.png]]
+
+### Creating symbolic link 
+### The Syntax
+
+bash
+
+```bash
+ln -s `which sh` home
+#      ↑           ↑
+#   TARGET       SYMLINK NAME
+#  (real thing)  (shortcut created)
+```
+
+```
+ln -s  (what already exists)  (new shortcut to create)
+```
+
+
+![[Pasted image 20260603060230.png]]
+![[Pasted image 20260603060309.png]]
+![[Pasted image 20260603061115.png]]
+
+We are inside a nested shell now . 
+![[Pasted image 20260603061450.png]]
+
 
 Soft link command ln 
 $ - hacker template. 
