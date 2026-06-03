@@ -843,7 +843,7 @@ this is the short cut saying that modify the environment only for the purpose of
 
 ![[Pasted image 20260603055526.png]]
 
-###  Breaking Down `IFS=/ PATH=/tmp:$PATH ./preserve`
+####  Breaking Down `IFS=/ PATH=/tmp:$PATH ./preserve`
 
 #####  Piece by Piece
 
@@ -897,12 +897,12 @@ So if the attacker placed a malicious file called `sendmail` or `home` in `/tmp`
 Runs the SUID binary — **which runs as root**.
 
 
-### Final execution 
+####  Final execution 
 
 ![[Pasted image 20260603060122.png]]
 
-### Creating symbolic link 
-### The Syntax
+#### Creating symbolic link 
+##### The Syntax
 
 bash
 
@@ -925,11 +925,35 @@ ln -s  (what already exists)  (new shortcut to create)
 We are inside a nested shell now . 
 ![[Pasted image 20260603061450.png]]
 
+If we launch another shell, the IFS relaunches to the normal value.  Don't play with IFS for challenge.
+
+
+
+![[Pasted image 20260603125629.png]]
+
+#### What Happens When Root Executes `/bin/ls` with `IFS=/`
+
+Normal Execution (IFS = space)
+
+```
+system("/bin/ls")
+```
+ 
+shell sees ONE token: /bin/ls
+runs the real ls binary → safe ✓
+
+With IFS="/"
+
+system("/bin/ls")
+ shell splits on "/" → tokens: ""  "bin"  "ls"
+#                                ↑
+                 first token is empty, ignored
+ second token "bin" becomes the COMMAND
 
 Soft link command ln 
 $ - hacker template. 
 
-Don't play with IFS for challenge
+
 
 File Descriptors 
 you can read, write when the file is open 
