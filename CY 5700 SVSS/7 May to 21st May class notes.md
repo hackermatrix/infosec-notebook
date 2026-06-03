@@ -1038,4 +1038,95 @@ This ensures that the kernel **automatically closes the file descriptor** when t
 ![[Pasted image 20260603135219.png]]
 https://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html
 
-### What LD_PRELOAD Does Normally
+![[Pasted image 20260603141035.png]]
+
+### Library Path Resolution, How Linux Finds Libraries
+
+When you run a program, the **dynamic linker** needs to find all required `.so` files. It searches in this order:
+
+#### 1. Default System Paths
+
+/lib
+/usr/lib
+/lib64
+
+Trusted, root-owned, always checked. Safe ✓
+
+#### 2. `LD_LIBRARY_PATH` (Environment Variable)
+
+bash
+
+```bash
+export LD_LIBRARY_PATH=/tmp/mylibs
+./myprogram
+# linker checks /tmp/mylibs FIRST before system paths
+```
+
+User-controlled → **ignored for SUID**   (Check below)
+
+#### 3. Configuration Files
+
+```
+/etc/ld.so.conf
+/etc/ld.so.conf.d/*.conf
+```
+
+Root-owned files that tell the linker about additional trusted directories. Safe ✓
+
+#### 4. Cache
+
+```
+/etc/ld.so.cache
+```
+
+`ldconfig` reads the config files above and builds this **binary cache** for fast lookups — so the linker doesn't have to scan directories every time a program starts.
+
+```
+/etc/ld.so.conf  →  ldconfig  →  /etc/ld.so.cache
+(config)            (command)     (fast lookup index)
+```
+
+### Can't Preload malicious library
+####  What LD_PRELOAD Does Normally
+
+ Normal (non-SUID) program
+
+```
+LD_PRELOAD=/tmp/evil.so ./normalprogram
+```
+
+evil.so gets loaded FIRST
+
+can override any function like open(), read(), system()
+
+works perfectly on normal binaries ✓
+
+####  What Happens With SUID Binaries
+
+bash
+
+```
+LD_PRELOAD=/tmp/evil.so ./preserve```
+
+#                              ↑
+                         SUID binary
+```
+
+The dynamic linker (`ld.so`) sees: _"wait, this binary has the SUID bit set"_ and **silently ignores** `LD_PRELOAD` entirely.
+
+LD_PRELOAD set? → is binary SUID? → YES → ignore LD_PRELOAD
+                                         → ignore LD_LIBRARY_PATH
+                                         → only load from trusted paths
+                                           (/lib, /usr/lib, /etc/ld.so.conf)
+
+
+## Debugging 
+
+![[Pasted image 20260603141710.png]]
+
+### Demo 3 
+
+The setup is like this. This sets an internal tool. Every user transaction or purchase records in the database. Employees should grab non-sensitive data from the database. 
+
+
+![[Pasted image 20260603145551.png]]
