@@ -767,6 +767,135 @@ Token 2: myfile         ← argument passed to it
 ### Demo 2 
 
 ![[Pasted image 20260603045934.png]]
+![[Pasted image 20260603050006.png]]
+
+Preserve sees why your program crashed. Before terminating anything it takes the backup of your file, preserves the file. It sends an email 
+Preserve is set to a set binary 
+
+./preserve asd
+    │
+    ├── fork()
+    │     ├── CHILD  → drop_privileges() → execl nano (opens "asd" in nano)
+    │     └── PARENT → waitpid() → watches for crash → system(sendmail)
+
+Analyzing the code the child drops the privileges, the child exists the editor command. Child picks up the hard coded nano 
+![[Pasted image 20260603050651.png]]
+
+You spot the system() command 
+![[Pasted image 20260603051351.png]]
+
+This is a multi-stage attack.  You are going to change the way the shell is going to make sense of the 
+
+Change the internal field separator from blank space to /  then launch preserve. So when you launch preserve the command is going to be interpreted by the ifs. 
+
+The command is going to be ![[Pasted image 20260603052614.png]]
+home [space] kaan 
+So it looks like home is the name of the command that is going to be executed and the rest are arguments to the command. 
+
+But then it is going to complain that there is no such thing as home. 
+
+So you eventually want to have an executable called home. But usr/bin is not writable 
+So we would change the path 
+
+home has not provided an absolute or relative path so it will trigger a path search. Trick into running our home executable. 
+
+#### Before the attack observing preserve. (analysing the flow of the code )
+
+![[Pasted image 20260603053835.png]]
+
+![[Pasted image 20260603054011.png]]
+![[Pasted image 20260603054057.png]]
+
+![[Pasted image 20260603053915.png]]
+
+ #### Now crashing it , we are looking for PID 
+ ![[Pasted image 20260603054228.png]]
+![[Pasted image 20260603054228.png]]
+![[Pasted image 20260603054245.png]]
+
+#### We found the program id. 
+
+![[Pasted image 20260603054400.png]]
+
+#### Kill command for the pid
+
+
+![[Pasted image 20260603054430.png]]
+
+![[Pasted image 20260603054516.png]]
+
+SIMULATE A CRASH of the editor
+                    ↓
+          nano IS the child process
+                    ↓
+        killing nano = "crash detected"
+                    ↓
+   parent's WIFSIGNALED(stat_var) becomes TRUE
+                    ↓
+        **parent runs system(CMD_MAIL)** ← this is the vulnerable line!
+
+
+#### Modifying the environment 
+
+![[Pasted image 20260603055339.png]]
+
+this is the short cut saying that modify the environment only for the purpose of the program 
+
+![[Pasted image 20260603055526.png]]
+
+###  Breaking Down `IFS=/ PATH=/tmp:$PATH ./preserve`
+
+#####  Piece by Piece
+
+#### `IFS=/`
+
+Changes the field separator from **space** to **forward slash**
+
+```
+Normal IFS=" "  →  "/usr/bin/nano" is ONE token
+IFS="/"         →  "/usr/bin/nano" splits into: "" "usr" "bin" "nano"
+```
+
+So when `preserve` internally calls:
+
+c
+
+```c
+execl("/usr/bin/nano", ...)   // this is hardcoded, safe
+```
+
+That's fine. But when the crash handler calls:
+
+c
+
+```c
+system(CMD_MAIL);
+// CMD_MAIL = "/home/kaan/work/cs3740/class/demos/shellattack/sendmail"
+```
+
+With `IFS=/`, that path **tokenizes** into fragments — the shell can no longer resolve it as a path properly.
+
+---
+
+#### `PATH=/tmp:$PATH`
+
+Prepends `/tmp` to the PATH, so **`/tmp` is searched first** for any command.
+
+```
+Before: PATH=/usr/local/bin:/usr/bin:/bin
+After:  PATH=/tmp:/usr/local/bin:/usr/bin:/bin
+                ↑
+        attacker's directory checked FIRST
+```
+
+So if the attacker placed a malicious file called `sendmail` or `home` in `/tmp`, the shell finds it before the real one.
+
+---
+
+#### `./preserve`
+
+Runs the SUID binary — **which runs as root**.
+
 
 
 Soft link command ln 
