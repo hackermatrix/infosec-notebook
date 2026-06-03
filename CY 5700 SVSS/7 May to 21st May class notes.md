@@ -565,21 +565,26 @@ ACL :- EG. GOOGLE DOCS WHICH IS NOT IN DAC.
 Sudo configuration file is an example of access control. 
 ## Shell Interpretation Attacks & Other CLI Classics
 
+### Shell 
+
+![[Pasted image 20260603164104.png]]
+Bash is a default and most common shell in Linux and macOS. Zsh is default on macOS
+
+### Shell command injection 
+
+![[Pasted image 20260524183316.png]]
+https://www.shellscript.sh/escape.html
+
 ### Attack
 
 ![[Pasted image 20260524111836.png]]
 ![[Pasted image 20260524180520.png]]
 
 To get those extra privileges you may use setuid. 
-![[Pasted image 20260524182859.png]]
-
-![[Pasted image 20260524183316.png]]
-https://developer.mozilla.org/en-US/docs/Glossary/Escape_character
-
 ###  system()
 https://www.geeksforgeeks.org/cpp/system-call-in-c/
 System() function comes in libc by default
-The function takes one argument it is a string & it literally launches the shell.
+The **function takes one argument it is a string & it literally launches the shell.**
 ![[Pasted image 20260524184426.png]]
 
 When you call `system("ls -la")`, it doesn't just run `ls -la` directly. It does this:
@@ -608,7 +613,6 @@ And the user provides: `; rm -rf /` as input, the shell sees:
 ```
 
 The shell interprets the semicolon as a command separator and happily runs both commands. That's command injection.
-
 
 `popen()` has the same problem — it also invokes `/bin/sh -c` underneath — but additionally gives you a pipe to read/write the command's output.
 
@@ -1276,4 +1280,40 @@ finds invalid structure → "Database is corrupted"
 
 ### Solution 
 
-Open the file descriptor 
+#### The TOCTOU Problem Was This Gap
+
+access(argv[2], W_OK)    // CHECK  → uses real uid
+        ↓
+    [GAP - attacker swaps out.txt → symlink]
+        ↓
+open(argv[2], O_WRONLY)  // USE    → uses effective gid
+
+#### How fd Solves It — Open FIRST, Check AFTER
+
+c
+
+```c
+// Step 1: open using REAL uid (drop effective privileges temporarily)
+fd = open(argv[2], O_WRONLY);   // if kaan can't write → fails here
+
+// Step 2: NOW check what fd actually points to
+fstat(fd, &st);                 // checks the ALREADY OPEN file
+                                // not the filename anymore!
+```
+
+####  Why This Eliminates the Race
+
+```
+With access() + open():
+    checking FILENAME → gap → opening FILENAME
+    attacker swaps what filename points to in the gap ✓
+
+With fd approach:
+    open file → get fd (integer handle to actual file)
+    now check fd itself
+        ↓
+    filename is IRRELEVANT now
+    attacker can swap out.txt → symlink all they want
+    fd already points to the real file that was opened
+    symlink swap has NO EFFECT ✗
+```
