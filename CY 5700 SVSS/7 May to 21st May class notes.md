@@ -230,13 +230,12 @@ Linux kernel is the software that runs in **supervisor mode** and **handles all 
 ###  What is User Space 
 Userspace - operates in user mode.– System binaries, daemons, applications.
 
-
 ## Difference between user space and kernel space. 
 https://blogs.oracle.com/linux/userspace-vs-kernelspace-understanding-the-divide
 https://en.wikipedia.org/wiki/Protection_ring
 https://medium.com/codex/understanding-operating-system-part-3-7df85242cce5
 
-Anything under /dev and /proc are not files. 
+Anything under /dev and /proc are not files. (Kernel)
 
 ### Why is the Linux in the file system
 
@@ -244,6 +243,8 @@ Anything under /dev and /proc are not files.
 2. Ensures uniform access control. 
 
 ###  What are linux processes
+
+![[Pasted image 20260603224256.png]]
 
 Linux Process: Processes are the programs currently running on your machine. The Linux kernel manages them, and each process is assigned a unique number called the **process ID (PID**. `ps` command. This provides a quick snapshot of the processes associated with your current terminal session.
 
@@ -1335,3 +1336,109 @@ With fd approach:
 ## Disk Encryption
 
 ![[Pasted image 20260603172607.png]]
+
+## Resource Limits
+
+![[Pasted image 20260603222109.png]]
+https://medium.com/@weidagang/linux-beyond-the-basics-cgroups-f157d93bd755
+
+ cgroups are a kernel feature that allows you to partition and limit the system resources (CPU, memory, disk I/O, network, etc.) that a group of processes can use.
+
+## TL;DR
+
+
+## Sandboxes 
+
+![[Pasted image 20260603221056.png]]
+
+### ### What is a Sandbox?
+
+```
+Sandbox = prison for untrusted processes
+
+Normal process:    can do ANYTHING the OS allows
+Sandboxed 
+process: restricted to only what YOU permit
+```
+
+### seccomp (Secure Computing Mode)
+
+Every program communicates with kernel via SYSTEM CALLS:
+    open(), read(), write(), fork(), exec()...
+    
+seccomp lets you say:
+"this process is ONLY allowed to use these syscalls
+ any other syscall → process is KILLED immediately"
+
+### Two Modes
+
+seccomp strict mode:
+    only allows: read(), write(), exit(), sigreturn()
+    ANY other syscall → SIGKILL
+    extremely restrictive
+    rarely used directly
+
+seccomp-bpf:
+    uses Berkeley Packet Filter rules
+    custom filter per syscall
+    much more flexible
+
+seccomp-bpf 
+Docker uses seccomp: default profile blocks ~44 dangerous syscalls like: ptrace(), mount(), reboot()
+
+
+### chroot — Filesystem Jail
+
+chroot = change root directory
+
+Normal process sees:
+    / 
+    ├── etc/
+    ├── home/
+    ├── bin/
+    ├── var/
+    └── tmp/
+
+After chroot("/jail"):
+    process thinks THIS is /:
+    /jail/
+    ├── etc/      ← fake etc
+    ├── bin/      ← limited binaries
+    └── tmp/
+    
+    cannot see ANYTHING outside /jail
+    /etc/shadow?  → doesn't exist from inside
+    /home/kaan?   → doesn't exist from inside
+
+#### Concrete Example
+
+bash
+
+```bash
+# Create a jail
+mkdir /jail
+cp /bin/bash /jail/bin/
+cp /bin/ls /jail/bin/
+
+# Put process in jail
+chroot /jail /bin/bash
+
+# Now inside jail:
+ls /           # only sees /jail contents
+cat /etc/shadow # /etc doesn't exist!
+cd /home/kaan   # /home doesn't exist!
+```
+
+#### chroot Security Warning
+
+chroot is NOT perfect isolation!
+
+Root can escape chroot:
+    chroot() again from inside
+    use mknod to create device files
+    use relative paths to escape
+
+So chroot is:
+    good for containing non-root processes ✓
+    NOT sufficient for containing root ✗
+    often combined with dropping privileges first
