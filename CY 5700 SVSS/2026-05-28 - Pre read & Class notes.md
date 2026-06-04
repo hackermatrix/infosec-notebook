@@ -366,6 +366,7 @@ How do you see the table, column names
 
 ![[Pasted image 20260602165418.png]]
 
+
 ###  What is `sqlite_master`
 
 Every SQLite database has a built-in table called `sqlite_master` that stores the **schema** — basically a map of the entire database:
