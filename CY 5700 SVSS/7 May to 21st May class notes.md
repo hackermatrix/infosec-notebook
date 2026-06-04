@@ -161,25 +161,99 @@ MAC gives you better authentication/integrity than hash. ubutnu attacker example
 
 # 14 May 2026 
 
-## Changing the ciphertext example 
+## Demo changing the ciphertext example 
 
 Fresh out of college working on a payroll processor. 
+![[Pasted image 20260604111429.png]]
 
-JSON PAYLOAD looks like this and sends to the backend of the company. 
-src_account: 946720344
-dst_account: 94
-amount: 1000 
+The information is encrypted with the shared key. Stores all of the above encrypted payload in the database. 
+
+You get to access the encrypted payload (as a fresher). You want to mess with a payment. 
+
+You have a stream cipher implemented 
+
+![[Pasted image 20260604112103.png]]
+
+You try to analyse the code it takes an input json, pad file is the key. c is for cipher text 
+
+![[Pasted image 20260604112339.png]]
+
+C is a binary if you look into it you realize it is random bytes. 
+
+![[Pasted image 20260604112523.png]]
+
+![[Pasted image 20260604112655.png]]
+
+You want to manipulate the 1000 dollars to 9000 dollars. 
+
+If you had access to the plaintext. 
+
+hexedit api.json
+
+![[Pasted image 20260604113136.png]]
+![[Pasted image 20260604113205.png]]
+
+Here you can see you can pinpoint the location 
+![[Pasted image 20260604113243.png]]
+
+### Quick ASCII references for this dump
+
+| Hex  | Character   |
+| ---- | ----------- |
+| `20` | space       |
+| `22` | `"` (quote) |
+| `3A` | `:`         |
+| `0A` | newline     |
+| `7B` | `{`         |
+| `7D` | `}`         |
+
+![[Pasted image 20260604113833.png]]
 
 
-20 means space. 
-39 asii to 9 
+**20 means space.** 
+**39 means  9**
 
-now to get the difference in cryto  you do xor 
+### For the difference what bits can you XOR to make it 39. 
+
+now to get the difference in cryto  you do XOR
+
+20 and 39 value in binary 
+
+![[Pasted image 20260604114229.png]]
+
+
 20 = 0010 0000
 39 = 0011 1001
-    +  0001 1001 = X
+    0001 1001 = 19 in hex
+    
+If you take this value and XOR with 20 it will give 39. 
 
-APPLY this to the cipher text 
+APPLY this to the **cipher text** 
+
+#### Open the cipher text 
+
+![[Pasted image 20260604114652.png]]
+
+
+48 address had the space 20 where we doing changes 
+
+![[Pasted image 20260604114859.png]]
+
+
+
+![[Pasted image 20260604115146.png]]
+
+![[Pasted image 20260604115159.png]]
+
+
+open the ciphertext again change it 
+
+![[Pasted image 20260604115943.png]]
+
+
+![[Pasted image 20260604115343.png]]
+
+![[Pasted image 20260604115436.png]]
 
 
 This attack violates integrity as we are changing ciphertext, encryption protects confidentiality and not integrity. 
@@ -252,7 +326,7 @@ This depends on the context
 **Check every access to every object** **Every time.** for authorization and authentication.  
 
 
-## 4. *Open Design 
+## 4. Open Design 
 
 -It should be possible to **make design available for all parties without compromising security - Security through Obscurity. 
 
