@@ -88,6 +88,18 @@ then you securiy be leaked and reverse-engineeed.
 block cipher mode of operation. 
 an alogrithm that describes how to repeatedly 
 
+### Stream Cipher 
+
+The **key + nonce** go into the stream cipher algorithm which **generates a keystream** — a long pseudorandom sequence of bits. Then:
+
+```
+Ciphertext = Plaintext ⊕ Keystream
+```
+
+That's it. **No block cipher encryption step happens per chunk.** The XOR _is_ the encryption.
+
+pseudorandom number generator seeded by (Key + Nonce
+
 ## Message Authentication Code 
 
 **MAC is for authentication and integrity**. But it is weak because suppose you share your key with multiple folk you can authenticate that it is from your shared key but you dont know from whom it is. 
@@ -97,10 +109,49 @@ MAC = F(key, message)
 
 Only someone who **possesses the shared secret key** can produce a valid MAC for a given message. This is where authenticity comes from.
 
+
+## Stream Cipher Attack
+
+https://en.wikipedia.org/wiki/Bit-flipping_attack
+
+### Why it works (the math)
+
+Remember stream cipher: `C = P ⊕ K`
+
+To decrypt: `P = C ⊕ K`
+
+Now if the attacker flips a bit in ciphertext `C` to get `C'`, the receiver decrypts:
+
+```
+C' ⊕ K = (C ⊕ 1) ⊕ K = P ⊕ 1
+```
+
+That **exact bit in the plaintext gets flipped too**. The attacker doesn't need to know K at all.
+
+---
+
+### The scary part — targeted manipulation
+
+If the attacker **knows or guesses** part of the plaintext structure (which is often true — think fixed headers, JSON fields, "amount="), they can craft a flip to change specific values:
+
+```
+"amount=0100" → flip specific bits → "amount=9999"
+```
+
+They can't _read_ the message, but they can **surgically alter** it.
 ## Cryptohraphic Hash Functions 
 
 A function to map data of arbitrary length to a short, fixed length bit hash. 
 also called a digest. 
+
+#### Hash function properties: 
+
+1. Property 1: 
+If i have a hash value i should not be able to construct a message from it. 
+2. Property 2: 
+two different messages should not have a same hash value which i believe is a collision 
+3. Property 3: 
+if you have a hash value you should not find another message that matches to this hash 
 
 **Integrity**
 **Authentication**
