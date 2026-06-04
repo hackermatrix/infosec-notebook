@@ -242,11 +242,18 @@ UNION SELECT card_id,2,3 FROM cards--
 
 ![[Pasted image 20260604145829.png]]
 
-## Constructing the sql injection 
+![[Pasted image 20260604150039.png]]
+
+![[Pasted image 20260604150257.png]]
+
+![[Pasted image 20260604150407.png]]
+
 
 UNION SELECT card_id INTEGER PRIMARY KEY, user_id INTEGER, card_name TEXT, card_no TEXT, FROM cards--
 
 The CREATE TABLE statement is the **schema definition**, not the column names to put in your SELECT
+
+**it is returning number from the first column**
 
 ### CSRF Token manipulation 
 
