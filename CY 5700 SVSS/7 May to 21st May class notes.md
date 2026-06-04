@@ -224,61 +224,69 @@ When facing security questions, allows developers to answer "yes", or "no" with 
 
 ## Design Principles (8) for Security: 
 
-- 1. **Economy of mechanism**; If you want to connect two thing KISS keep it as simple and stupid as **possible.** 
+## 1. **Economy of mechanism**; 
+If you want to connect two thing KISS keep it as simple and stupid as **possible.** 
 
-**Higher the complexity, more possibilities for errors. Complex mechanisms are difficult to test.**
+**Higher the complexity, more possibilities for errors. Complex mechanisms are difficult to test.
 
-Tony Hoare - One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies. The first method is far more difficult. 
+  Tony Hoare  One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies. The first method is far more difficult. 
 
-Kernighan's Law - Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.
+Kernighan's Law  Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.
 -
 Black Box Testing 
 White Box Testing
 
-2.  **Fail-safe defaults**: 
+## 2.  **Fail-safe defaults**: 
 **Default privilege : None** 
 **Default state: Lack of access**
+
+Caching of checks is dangerous
 
 Allow by Default:- Wrong method. 
 
 Deny by Default: Roll back to secure state. 
 This depends on the context 
 
-3. Complete mediation 
+## 3. Complete mediation 
 
 **Check every access to every object** **Every time.** for authorization and authentication.  
 
 
-- 4. *Open Design 
+## 4. *Open Design 
+
 -It should be possible to **make design available for all parties without compromising security - Security through Obscurity. 
 
 Make security depend on the secrecy of a small token.
 
-- 5. Seperation of privilege
+## 5. Seperation of privilege
+
 Do not grant access based on a single condition.
 -Process-oriented too; e.g., commits to your git repo.
 https://techcommunity.microsoft.com/blog/azuresqlblog/security-separation-of-privilege/2393637
 
-- 6. Least privilege 
+##  6. Least privilege 
 -Hold the minimum possible privileges to complete the task.
 If augmented privileges are needed, relinquish them when no longer needed.
 Minimizes **damage if something goes wrong**.
 
-- 7. Least Common mechanism.
+##  7. Least Common mechanism.
 -![[Pasted image 20260520143528.png]]
 
 
-- 8. Pscyhological acceptability. 
-- If security controls, software, or policies are too cumbersome, unintuitive, or frustrating to navigate, **humans will inevitably try to bypass them to get their work done.**
-- ==security mechanisms should not make a resource more difficult to access than if the security controls were not present==.
-- 
-- 9. Seperation of data and control. 
+## 8. Pscyhological acceptability. 
+If security controls, software, or policies are too cumbersome, unintuitive, or frustrating to navigate, **humans will inevitably try to bypass them to get their work done.**
+security mechanisms should not make a resource more difficult to access than if the security controls were not present==.  
+## 9. Seperation of data and control. 
  Control: Processing Information. e.g Javascript is pure control. 
 When designing the system make sure your system can differentiate between data and control. 
 An HTML page is supposed to be _data_ ,content you read. But HTML allows `<script>` tags, meaning executable code lives right alongside the content. This is exactly why XSS works.
 
-- 10. Defense in depth. 
+![[Pasted image 20260604103641.png]]
 
+
+## 10. Defense in depth. 
+
+![[Pasted image 20260604103628.png]]
 
 ## Linux Security
 
