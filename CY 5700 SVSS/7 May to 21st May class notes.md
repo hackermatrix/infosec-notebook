@@ -354,7 +354,6 @@ The first kaan is the owner kaan and the second is the group kaan.
 The uid and group is different. 
 It differes per the distro.
 
-
 #### Directory write bit:
 If you see a write you can write files to the directory and delete files inside the directory. There may be a file that does not give you a write access but if the parent directory gives you a write permission you can still delete the file. 
 
@@ -375,9 +374,9 @@ Remember r is about listing the contents.
 #### Directory Execute Bit
 
 execute is accessing the contents of the directory. suppose you want to open etc/a/b/b/c.txt 
-to open you need to have read bit set on the file but you also need execute on every parent directory. 
+to open you need to have **read bit set on the file** but you also need execute on every parent directory. 
 
-Execute says you can access the contents of the directory. If you drop the r they can no longer do the ls but if they know the name they can directly access it without the ls. 
+Execute says you can **access the contents of the directory. If you drop the r they can no longer do the ls but if they know the name they can directly access it without the ls.** 
 
 Note: in the challenge you mean see something like this. 
 
@@ -491,8 +490,8 @@ CAP_CHOWN
 make arbitary changes to file UIDs and GIDS 
 CAP_DAC_OVERRIDE
 
-If you have capability you can make arbitary changes to the euid. 
-A process under normal condition does not start with any capabilty.
+**If you have capability you can make arbitary changes to the euid.** 
+**A process under normal condition does not start with any capabilty**.
 With capabilies it is all or nothing for fine grained access you need DAC. 
 For effectively implementing least privilege you need both DAC and capabilities. 
 ### File Capabilities
@@ -502,9 +501,9 @@ E.g. root is going to say I am going to mark sudo with certain file capabilities
 ### Capability Control 
 
 Boils down to juggling members of capability sets. 
-capget and capset do capability management during runtime. there are not written in libc you need to write it down. 
+**capget and capset** do capability management during runtime. there are not written in libc you need to write it down. 
 
-every process has five set of capabilities. 
+every process has **five set of capabilities.** 
 ![[Pasted image 20260522163314.png]]
 ### Capability Sets 
 https://man7.org/linux/man-pages/man7/capabilities.7.html
@@ -1344,7 +1343,6 @@ https://medium.com/@weidagang/linux-beyond-the-basics-cgroups-f157d93bd755
 
  cgroups are a kernel feature that allows you to partition and limit the system resources (CPU, memory, disk I/O, network, etc.) that a group of processes can use.
 
-## TL;DR
 
 
 ## Sandboxes 
