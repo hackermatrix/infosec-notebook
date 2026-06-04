@@ -247,11 +247,14 @@ APPLY this to the **cipher text**
 
 
 open the ciphertext again change it 
+![[Pasted image 20260604120047.png]]
 
 ![[Pasted image 20260604115943.png]]
 
 
 ![[Pasted image 20260604115343.png]]
+
+the value is manipulated. 
 
 ![[Pasted image 20260604115436.png]]
 
@@ -1580,3 +1583,4 @@ So chroot is:
     good for containing non-root processes ✓
     NOT sufficient for containing root ✗
     often combined with dropping privileges first
+
