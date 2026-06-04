@@ -62,23 +62,26 @@ what are you trying to protect, what assets, what are the security goals, what d
 
 ## 03- Cryptography for Dummies 
 
-Practice of secure communication in the presence of an adversary. 
+Practice of **secure communication in the presence of an adversary.** 
 
 Cryptographic primitives: 
 Core algorithms to build
 
 Only encrypting the data is not enough it serves only **confidentiality.** 
 
-There should be collision between plaintext and ciphertext. 
-With Analayzing ciphertext one should not be able to decipher the plaintext. 
-No collision between the plaintext and ciphertext. 
-No correlation between the ciphertext and key. 
 
+**With Analayzing ciphertext one should not be able to decipher the plaintext.** 
+No collision between the plaintext and ciphertext. 
+No **correlation between the ciphertext and key.** 
+
+![[Pasted image 20260604081737.png]]
 
 ## Security by obscurity
 
 We do not do that e.g. ciphertext is always public. 
 then you securiy be leaked and reverse-engineeed. 
+![[Pasted image 20260604081847.png]]
+![[Pasted image 20260604082124.png]]
 
 ## Mode of Operation 
 
@@ -88,7 +91,11 @@ an alogrithm that describes how to repeatedly
 ## Message Authentication Code 
 
 **MAC is for authentication and integrity**. But it is weak because suppose you share your key with multiple folk you can authenticate that it is from your shared key but you dont know from whom it is. 
+https://www.geeksforgeeks.org/computer-networks/how-message-authentication-code-works/
 
+MAC = F(key, message)
+
+Only someone who **possesses the shared secret key** can produce a valid MAC for a given message. This is where authenticity comes from.
 
 ## Cryptohraphic Hash Functions 
 
