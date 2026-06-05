@@ -214,17 +214,6 @@ Web server receives input and sends to database
 
 ## SQL 
 
-UNION SELECT 
-
-The **SQL `UNION` operator** combines the results of two or more `SELECT` queries into a **single, distinct result set by automatically removing duplicate rows**
-
-SQL queries often include ***user input***
-
--- comment it out. 
-
-Be aware of the tiny implementation details. 
-
-'  and paranthesis is what you should look into it. 
 
 metadata table 
 
@@ -235,7 +224,6 @@ Cross site scripting:  Javascript injection you inject JS code so that the brows
 end goal is your injected script should be in the code. reflect back to you! 
 
 look for some input injection need not be vulnerability always. 
-
 
 
 ## Demo 1 
@@ -251,6 +239,9 @@ Why `asdf` as username
 Any random string works — `banana`, `xyz`, anything fake.
 
 **Why `asdf' OR 1=1--` as the password?**
+
+--  used for commenting it out. 
+
 
 The backend SQL query probably looks like:
 
@@ -325,26 +316,7 @@ If both show the same results regardless → injection is not working, output is
 
 ![[Pasted image 20260602152745.png]]
 
-**The original query the app runs:**
 
-sql
-
-```sql
-SELECT course_code, course_name, grade 
-FROM transcripts 
-WHERE course_code LIKE 'asd'
-```
-
-**What the injection does:**
-
-sql
-
-```sql
-SELECT course_code, course_name, grade 
-FROM transcripts 
-WHERE course_code LIKE 'asd' 
-UNION SELECT 1 --'
-```
 **Why UNION?** UNION lets you **attach a completely different SELECT statement** and have its results appear alongside (or instead of) the original results. Unlike `OR 1=1` which just bypasses a condition, UNION actually **extracts data from other tables**.
 
 **Why `SELECT 1`?** Just a test — you're checking if UNION works at all. The `1` is a placeholder. You need to match the number of columns the original query returns (3 in this case — course_code, course_name, grade).
@@ -359,12 +331,50 @@ Then replace those numbers with actual data you want:
 ```
 asd' UNION SELECT username, password, 3 FROM users --
 ```
+## **constant** literal
 
-![[Pasted image 20260602164458.png]]
+A constant in SQL is any value that doesn't come from a table — it's just a fixed literal. `1` and `3` are **constants/literals** — fixed values you're hardcoding just to satisfy the column count and type requirement:
 
-How do you see the table, column names
+- `1` — integer constant
+- `'hello'` — string constant
+- `NULL` — null constant
 
-![[Pasted image 20260602165418.png]]
+They don't change row to row, they just **fill a position**.
+
+### How to figure out the constant
+
+When doing UNION injection:
+
+1. Figure out column count
+2. Figure out which positions accept text vs integer using constants (`1`, `2`, `'a'`)
+3. Replace the constant in a **text-accepting position** with the real column you want to exfiltrate
+4. Keep constants everywhere else just to hold the structure together
+
+![[Pasted image 20260605170351.png]]
+
+Professor did his iterations till 6 column till he got the output 
+
+This shows that field 1,2,4 are numbers 
+
+![[Pasted image 20260605170554.png]]
+
+Professor is trying iterations here putting sql at position 5. 
+
+![[Pasted image 20260605171424.png]]
+
+This is giving an internal error. 
+
+![[Pasted image 20260605171453.png]]
+
+Professor changed the iteration to number 6. 
+
+![[Pasted image 20260605171741.png]]
+![[Pasted image 20260605171756.png]]
+
+We already established that 1,2,4 are numbers so we trying something at 3.
+
+![[Pasted image 20260605172052.png]]
+![[Pasted image 20260605172109.png]]
 
 
 ###  What is `sqlite_master`
@@ -397,4 +407,33 @@ asd' UNION SELECT 1,2,3,4,5,6 FROM sqlite_master --
 Is trying to dump the schema.
 
 ![[Pasted image 20260602170807.png]]
+
+
+Be aware of the tiny implementation details. 
+
+'  and paranthesis is what you should look into it. 
+## Javascript injection / Cross site scripting 
+
+Because of the Same orgin policy document.cookie being javascript code. You can only work on the same origin. It cannot come from localhost it should come from northeastern.edu something like that. W will try code injection for that. find a way to check your javascript into the program. 
+
+## Step 1: 
+
+Check when you provide some input to the application and get response. when you look at the source your injected code should be reflected in the source. Input that is reflected back if that doesnt exists you can;t inject anything. 
+
+![[Pasted image 20260605173658.png]]
+
+
+Now this is one of the hint 
+
+![[Pasted image 20260605175136.png]]
+![[Pasted image 20260605175238.png]]
+
+If there is no input validation and output sanitization. these would get replaced with html entities. 
+![[Pasted image 20260605175359.png]]
+
+In the source code of you see there is a value. 
+
+![[Pasted image 20260605175618.png]]
+
+
 
