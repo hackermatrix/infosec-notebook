@@ -53,10 +53,6 @@ All the src images seem fine
 Comments get posted 
 ![[Pasted image 20260601130238.png]]
 
-### Inspecting I the second  page 
-
-![[Pasted image 20260601130407.png]]
-
 ###  Comment section input 
 
 ![[Pasted image 20260601133721.png]]
@@ -64,6 +60,11 @@ Comments get posted
 
 ![[Pasted image 20260601133706.png]]
  
+
+### Inspecting I the second  page 
+
+![[Pasted image 20260601130407.png]]
+
   ### Playing with XSS
 
 ![[Pasted image 20260601162952.png]]
@@ -388,3 +389,16 @@ To become a seller you need to click on this. Also when you are a moderator whic
 ![[Pasted image 20260604162817.png]]
 
 What if I play with the GET request 
+
+
+I retrieved the seller_id 
+
+![[Pasted image 20260605144415.png]]
+![[Pasted image 20260605145638.png]]
+UNION SELECT 1,2,user_id FROM cards--
+
+**user_name**
+
+let me try these iterations 
+
+![[Pasted image 20260605144010.png]]
