@@ -321,7 +321,7 @@ If they behave differently like this → **injection is working**.
 
 If both show the same results regardless → injection is not working, output is being sanitized. 
 
-**500** means your SQL syntax broke something server-side — useful because it confirms the input is reaching SQL, but you **need to fix your syntax.**
+**500** means your SQL syntax broke something server-side,useful because it confirms the input is reaching SQL, but you **need to fix your syntax.**
 
 ![[Pasted image 20260602152745.png]]
 
@@ -397,3 +397,4 @@ asd' UNION SELECT 1,2,3,4,5,6 FROM sqlite_master --
 Is trying to dump the schema.
 
 ![[Pasted image 20260602170807.png]]
+

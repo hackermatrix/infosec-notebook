@@ -198,30 +198,7 @@ When i change the password it is a GET request.
 
 ![[Pasted image 20260601173623.png]]
 
-### Trying SQL injection on Messages. 
-
-![[Pasted image 20260602150207.png]]
-![[Pasted image 20260602150242.png]]
-
-which makes me realize that it takes the user id. 
-
-I had created a user tani myself  
-
-![[Pasted image 20260602150339.png]]
-
-![[Pasted image 20260602150421.png]]
-
-Things I am observing the GET request and the POST request have this in common. 
-
-28251da03e59a20613c7195c43bd5fa2fed23c93d101824931db0088f668f4fb
-
-
-session=eyJfZmxhc2hlcyI6W3siIHQiOlsic3VjY2VzcyIsIk1lc3NhZ2Ugc2VudC4iXX1dfQ.ah8o6A.cI43_7EmVDTepNWSM3a_FTB-FJQ
-
-
-csrf_token=cb1745f79417a77bfd308b6f15aeb3ef82a3f26a5a224404ebbb60790fe5302e
-
-![[Pasted image 20260604143934.png]]
+### Trying SQL Injection in messages 
 
 ![[Pasted image 20260604144017.png]]
 
@@ -263,7 +240,67 @@ The CREATE TABLE statement is the **schema definition**, not the column names to
 
 **it is returning number from the first column**
 
+
+####  Why `1` works in position 1
+
+The original query returns a **real timestamp** (like `1778005670`) in column 1, which the app renders as a date. When you inject `UNION SELECT 1,...)`, the app tries to render `1` as a timestamp too.
+
+`1` is a valid integer → converts to `1969-12-31T19:00:01` (Unix epoch + 1 second) → **no crash**.
+
+That's exactly why you kept seeing `1969-12-31T19:00:01` in all your successful injections — it's just the number `1` being interpreted as a Unix timestamp!
+
+#### Why `password` and `user_name` crashed
+
+They're TEXT strings → app tries to parse them as a timestamp → crash → 500.
+
+####  The mental model for next time
+
+When you get a 500 on a working UNION, ask:
+
+**"What does the original query put in that column position?"**
+
+|Original column type|What you can inject there|
+|---|---|
+|INTEGER|integers only (`1`, `2`, actual numeric columns)|
+|TEXT|anything — strings, concatenations|
+|TIMESTAMP|integers only (Unix epoch)|
+
+#### The rule of thumb
+
+Always first confirm which positions accept text vs integers using your dummy values:
+
+```sql
+UNION SELECT 'a',2,3--    -- if 500 → position 1 is integer-only
+UNION SELECT 1,'a',3--    -- if works → position 2 accepts text ✅
+```
+
+That tells you which slots are safe to dump text data into before you target real columns.
 ### CSRF Token manipulation 
+
+
+![[Pasted image 20260602150207.png]]
+![[Pasted image 20260602150242.png]]
+
+which makes me realize that it takes the user id. 
+
+I had created a user tani myself  
+
+![[Pasted image 20260602150339.png]]
+
+![[Pasted image 20260602150421.png]]
+
+Things I am observing the GET request and the POST request have this in common. 
+
+28251da03e59a20613c7195c43bd5fa2fed23c93d101824931db0088f668f4fb
+
+
+session=eyJfZmxhc2hlcyI6W3siIHQiOlsic3VjY2VzcyIsIk1lc3NhZ2Ugc2VudC4iXX1dfQ.ah8o6A.cI43_7EmVDTepNWSM3a_FTB-FJQ
+
+
+csrf_token=cb1745f79417a77bfd308b6f15aeb3ef82a3f26a5a224404ebbb60790fe5302e
+
+![[Pasted image 20260604143934.png]]
+
 
 I tried removing the CSRF token thing it gives this. 
 
@@ -325,3 +362,8 @@ I tried sending it as bob and admin it gave me this
 ![[Pasted image 20260602145831.png]]
 
 and i can delete through this. 
+
+## List a new item for sale with an account you create
+
+![[Pasted image 20260604162735.png]]
+![[Pasted image 20260604162817.png]]
