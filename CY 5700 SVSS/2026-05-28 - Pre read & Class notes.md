@@ -451,6 +451,23 @@ if this does not work use things like
 
 ```
 
+Now we will try to do stored xss for it, this field is not very promosing. 
+
+![[Pasted image 20260606180103.png]]
+
+We have this profile update page. 
+
+![[Pasted image 20260606180211.png]]
+
+Add a script at Display name
+
+![[Pasted image 20260606180255.png]]
+![[Pasted image 20260606185131.png]]
 
 
-Now we will try to do stored xss 
+![[Pasted image 20260606185323.png]]
+
+
+
+![[Pasted image 20260606185732.png]]
+![[Pasted image 20260606185854.png]]
