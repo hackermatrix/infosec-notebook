@@ -435,5 +435,22 @@ In the source code of you see there is a value.
 
 ![[Pasted image 20260605175618.png]]
 
+This is one of script that we run across 
 
 
+![[Pasted image 20260606170158.png]]
+
+```
+<script> alert(document.cookie)</script>
+```
+
+if this does not work use things like 
+'```
+ <img src=
+```
+
+```
+
+
+
+Now we will try to do stored xss 
