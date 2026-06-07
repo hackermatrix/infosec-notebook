@@ -176,3 +176,10 @@ what does the process see
 what does the origin see 
 what does it result it 
 does the final result look like a valid request. 
+
+![[Pasted image 20260607170847.png]]
+
+## Web Cache Poisoning 
+
+![[Pasted image 20260607171012.png]]
+![[Pasted image 20260607171023.png]]
