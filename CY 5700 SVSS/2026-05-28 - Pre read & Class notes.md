@@ -528,3 +528,6 @@ The browser automatically sends cookies with every request. So if a victim visit
 3. The request carries **their session cookies**
 4. Server thinks the victim intentionally hit that endpoint
 
+![[Pasted image 20260606203014.png]]
+
+![[Pasted image 20260606203050.png]]
