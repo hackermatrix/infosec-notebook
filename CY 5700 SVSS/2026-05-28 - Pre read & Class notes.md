@@ -531,3 +531,5 @@ The browser automatically sends cookies with every request. So if a victim visit
 ![[Pasted image 20260606203014.png]]
 
 ![[Pasted image 20260606203050.png]]
+
+![[Pasted image 20260607010757.png]]
