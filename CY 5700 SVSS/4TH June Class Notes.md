@@ -42,20 +42,19 @@ https://builder.aws.com/content/2wChJSmjrexaiedg3RNFA934NDl/application-security
 You can't cache everything. 
 Objects have to be publicly available & static objects. It can't be confidential or sensitive data.
 Like electricity bill , only one person or family needs to access it will not be cached. 
-Static objects, if the content changes everything it can be cached. eg. stock market. 
+Static objects, if the content changes everything it can't be cached. eg. stock market. 
 https://aws.amazon.com/caching/
 
 netflix film it is accessible to all netflix customers (10-20 Gb) it is static. 
 
 There are experimental technology that does caching for dynamic objects. 
-e.g. where static part is cached on the edge location and the origin is fetched for the dynamic object. 
+**e.g. where static part is cached on the edge location and the origin is fetched for the dynamic object.** 
 
-Routing , waf you need to look inside traffic, you need to terminate TLS. You have multiple TLS hops. CDN's can see everything. The whole security reason is nothing bad happens to the data during transit 
-
+Routing , waf you need to look inside traffic, you need to terminate TLS. You have multiple TLS hops. CDN's can see everything. **The whole security reason is nothing bad happens to the data during transit** 
 
 if you are an origin server, how do you signal to cache or not. 
-It is done through HTTP response headers like Cache-Control: no-cache. 
-The proxy obeys. 
+It is done through HTTP response headers like **Cache-Control: no-cache.** 
+**The proxy obeys.** 
 
 **Partial caching** is a performance optimization technique where an application caches only specific, frequently requested portions of a page, file, or data response, rather than caching the entire item.
 ### Cache-Control Headers 
@@ -65,32 +64,59 @@ The proxy obeys.
 - no-cache 
 - no-transform 
 - public 
+- private
+
 
 Let us say you have a web application deployed to old school like IBM. You're cahcing policy changes you need to go to each server to change cache-control. 
 
 Identify the servers, the cache-owners. 
 
+### Caching Rules
+
+You configure the cache to decide _what_ gets cached using rules based on:
+
+- **File extension** — e.g., cache anything ending in `.jpg`, `.css`, `.js`
+- **Regexes** — more flexible pattern matching, like "cache any URL matching `/static/.*`"
+- **Headers** — e.g., cache responses with `Cache-Control: public` but not `Cache-Control: private`
+- **Data** — could refer to response body, content-type, or other metadata
+
+https://falconcloud.ae/about/blog/how-do-i-configure-cache-rules-on-a-cdn/
+
+### Cache-Key 
+
+A **cache key** is the unique identifier the cache uses to look up a stored response. Think of it as the "address" of a cached object.
+
+For example; a cache key like `['node', 5]` might represent the cache entry for the rendered output of _node/5_.
+
+Cache keys are precise. When you want to delete or retrieve a specific cache entry, the cache key ensures you’re interacting with the correct data. The specificity of cache keys means they work well for **individual items**, but they don’t help much when you need to invalidate multiple related items at once.
+
+If _node/5_ appears in a block, a menu, and a view, each of these items has its own distinct cache key.
+
+![[Pasted image 20260607163556.png]]
 
 Read x-gateway-cache-status 
 
- ## Range Attacks 
+ 
+ # Range Attacks 
+ ![[Pasted image 20260607161554.png]]
 HTTP defines the range header, Range: bytes=0-10240 
 
-Does denial of service, it is asymmetry. Attakcker spends very little request. 
+Does denial of service, it is asymmetry. Attacker spends very little request. 
 
-if it is no costing much to the hacker,the hacker might not persue it. 
-
-
-If you design the system to handle the bening traffic , they monitor they try to detect it. 
+if it is no costing much to the hacker, the hacker might not pursue it. 
+If you design the system to handle the benin traffic , they monitor they try to detect it. 
 
 
-## Slowloris Sttacks 
+# Slowloris Sttacks 
+![[Pasted image 20260607161922.png]]
 
+https://www.netscout.com/what-is-ddos/slow-post-attacks
 
+![[Pasted image 20260607163831.png]]
+# URL 
 
-
-## URL 
-
+![[Pasted image 20260607165320.png]]
+![[Pasted image 20260607165414.png]]
 it is a string, can be manipulated by the server. 
 
 example.com/home/index.html
@@ -116,7 +142,8 @@ you may get a 404.
 
 ## Web Cache Deception 
 
-Reroute is a usability thing cause 404 is ugly. server knows it doesnt exists and it gives a 200 success. 
+Reroute is a usability thing cause 404 is ugly. server knows it doesn't exists and it gives a 200 success. 
+![[Pasted image 20260607165805.png]]
 
 bank.com/accont.php/nonexistent.jpg   -400 
 
@@ -126,15 +153,11 @@ This can cause misunderstanding between the cache and proxy it gives 200 Ok, CAC
 
 99% of the comapny check the box that says ignore the CACHE-CONTROL error. 
 
-We assume that fall back page is a sensitive page. 
-
-
-Cached and Confused, USENIX Security 2020 
-tested 340 sites, 37 impacted. 
-CDN default configurations don;t help. 
-
+**We assume that fall back page is a sensitive page.** 
 
 ## HTTP Processing Discrepancy.
+
+![[Pasted image 20260607165921.png]]
 
 ? - Bad request 
 
