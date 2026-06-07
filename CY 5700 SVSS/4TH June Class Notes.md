@@ -3,48 +3,47 @@ System Security
 
 Web Application Attacks 2.0 (a.k.a Why the internet is Doomed)
 
-
 ## Client Server Model
 it is abstract it missed details it never happens in practice. 
 Web Proxy intermediary between client and server. 
 It is never a single proxy there are layers and layers. 
 
-## What is Proxy? 
+## What is Web Proxy? 
 It is an HTTP server understands the HTTP protocol forwards the request, change the request. 
-In practise it can be simple as load balancer
-It could be web application firewall.
-it could be anything a general purpose http server. 
+In practise it can be **simple as load balancer**
+It could be **web application firewall**.
+it could be **anything a general purpose http server.** 
 
-Akamai does not use partial caching .
 ## Content Delivery Network (CDN)
 Massively distributed networks of reverse proxies. 
 Akamai is the biggest footprint of CDN. 
 Forms an internet overlay network
 
-
 Clients are us, our browsers. 
-Customers of CDNS, govenrments, banks ,amazon, netflix. 
-Origin server is where the content originated from.
-Edge server are plain old proxy. 
+Customers of CDNS:-  governments, banks ,amazon, netflix. 
+**Origin server is where the content originated from.**
+**Edge server are plain old proxy.** 
 
-
-BGP is not designed for performace. all the ISP, route traffic from A to B do not find the shortest path. 
+BGP is not designed for performance. all the ISP, route traffic from A to B do not find the shortest path. 
 BGP has zero security built in. 
 
 Most CDN's ignore BGP, they have the internet overlay who do their own routing. 
-Deploying such platform is super expensive. AWS, Azure has hunders of data centers whereas Akamai have more data centers all over the world, distribution is important. 
+Deploying such platform is super expensive. AWS, Azure has hundreds of data centers whereas Akamai have more data centers all over the world, distribution is important. 
+**60% to 70% of internet is behind the CDN.** 
 
-60% to 70% of internet is behind the CDN. 
+CDN are also recognized as **critical infrastructure in countries like Germany.** 
+Akamai does not use partial caching. 
 
-CDN are also recognized as critical infrastructure in countries like Germany. 
-
+![[Pasted image 20260607154833.png]]
+https://builder.aws.com/content/2wChJSmjrexaiedg3RNFA934NDl/application-security-origin-cloaking
 
 ## Web Caches 
 
-You can;t cache everything. 
-Objects have to be publicly available objects. It can be confidential or sensitive data.
+You can't cache everything. 
+Objects have to be publicly available & static objects. It can't be confidential or sensitive data.
 Like electricity bill , only one person or family needs to access it will not be cached. 
 Static objects, if the content changes everything it can be cached. eg. stock market. 
+https://aws.amazon.com/caching/
 
 netflix film it is accessible to all netflix customers (10-20 Gb) it is static. 
 
@@ -58,6 +57,7 @@ if you are an origin server, how do you signal to cache or not.
 It is done through HTTP response headers like Cache-Control: no-cache. 
 The proxy obeys. 
 
+**Partial caching** is a performance optimization technique where an application caches only specific, frequently requested portions of a page, file, or data response, rather than caching the entire item.
 ### Cache-Control Headers 
 
 - max-age=seconds
