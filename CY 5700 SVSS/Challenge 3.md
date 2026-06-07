@@ -408,3 +408,16 @@ let me try these iterations
 ![[Pasted image 20260605144010.png]]
 
 Changed the seller name in these responses. 
+
+![[Pasted image 20260607020249.png]]
+
+![[Pasted image 20260607020330.png]]
+
+![[Pasted image 20260607020350.png]]
+
+![[Pasted image 20260607020537.png]]
+
+![[Pasted image 20260607020554.png]]
+![[Pasted image 20260607020708.png]]
+
+**"Only SellerAccount roles can list items for sale."** This is the key result. It means: (a) you _found_ the listing endpoint (whatever you POSTed to), and (b) the gate checks **role**, and it's reading role from somewhere server-side — your cookie said BuyerAccount and it knew.
