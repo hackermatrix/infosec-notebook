@@ -105,6 +105,16 @@ Look at the headers.
 The `x-gateway-cache-status: HIT` header indicates that the API gateway or proxy handling your request already had a fresh copy of the resource saved in its memory. The gateway successfully served your response directly from that cache without having to contact the origin server
 
 The `x-gateway-cache-key` is an unofficial HTTP response header used by proxies, Content Delivery Networks (CDNs), or API Gateways to identify the specific **cache key** generated for a given request.
+if you look at the value in the picture you understand that the url and everything is included in the cache. 
+
+
+Suppose you had an arbitary argument it changes the cache. 
+![[Pasted image 20260608160046.png]]
+
+This is why now you can see it as MISS, because it had to fetch the request from the origin. 
+
+![[Pasted image 20260608160217.png]]
+
 
 
 #### Difference between Cache Headers and Caching Rules 
