@@ -142,7 +142,18 @@ Read x-gateway-cache-status
  
  # Range Attacks 
  ![[Pasted image 20260607161554.png]]
-HTTP defines the range header, Range: bytes=0-10240 
+HTTP defines the range header, Range: bytes=0-10240. If you define the range bytes and send to a server. The server will send the part requested 
+
+The question is if you have a proxy in between what should it do with the header. 
+Option 1: 
+You can choose to do nothing about it. Take the request you receive & give it to the origin.  The origin will return the requested part. But if you do this the proxy misses out on the opportunity to cache. Because there is no such thing as partial object caching. 
+
+Suppose you have a video file that is 1GB. If user wants only 10K of the gig file. If it is 5 people doing such request it is fine. But what if the video went super viral, you have millions of range request accessing different parts of the request. In such case you may have to cache this thing instead of going to the origin server. 
+
+Option 2: 
+
+You can configure the CDN saying that when you receive such request , remove it and send us the operative thing. 
+
 
 Does denial of service, it is asymmetry. Attacker spends very little request. 
 
