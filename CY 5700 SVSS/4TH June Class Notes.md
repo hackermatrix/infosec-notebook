@@ -148,7 +148,7 @@ The question is if you have a proxy in between what should it do with the header
 Option 1: 
 You can choose to do nothing about it. Take the request you receive & give it to the origin.  The origin will return the requested part. But if you do this the proxy misses out on the opportunity to cache. Because there is no such thing as partial object caching. 
 
-Suppose you have a video file that is 1GB. If user wants only 10K of the gig file. If it is 5 people doing such request it is fine. But what if the video went super viral, you have millions of range request accessing different parts of the request. In such case you may have to cache this thing instead of going to the origin server. 
+Suppose you have a video file that is 1GB. If user wants only 10K of the gig file. If it is 5 people doing such request it is fine. But what if the video went super viral, you have millions of range request accessing different parts of the request. In such case you may have to cache this thing instead of going to the origin server.  Remember it does not do partial caching it caches the entire 1GB, and just gives the requested range. 
 
 Option 2: 
 
