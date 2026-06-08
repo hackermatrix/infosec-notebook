@@ -140,8 +140,9 @@ bank.com/account.php/i-love-pokemon.jpg
 
 you may get a 404. 
 
-## Web Cache Deception 
+# Web Cache Deception 
 
+https://portswigger.net/web-security/web-cache-deception
 Reroute is a usability thing cause 404 is ugly. server knows it doesn't exists and it gives a 200 success. 
 ![[Pasted image 20260607165805.png]]
 
@@ -155,7 +156,7 @@ This can cause misunderstanding between the cache and proxy it gives 200 Ok, CAC
 
 **We assume that fall back page is a sensitive page.** 
 
-## HTTP Processing Discrepancy.
+# HTTP Processing Discrepancy.
 
 ![[Pasted image 20260607165921.png]]
 
@@ -179,7 +180,10 @@ does the final result look like a valid request.
 
 ![[Pasted image 20260607170847.png]]
 
-## Web Cache Poisoning 
+# Web Cache Poisoning 
 
 ![[Pasted image 20260607171012.png]]
 ![[Pasted image 20260607171023.png]]
+https://en.wikipedia.org/wiki/Chunked_transfer_encoding
+
+# HTTP Request Smuggling
