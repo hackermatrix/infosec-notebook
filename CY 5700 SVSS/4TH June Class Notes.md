@@ -59,17 +59,21 @@ It is done through HTTP response headers like **Cache-Control: no-cache.**
 **Partial caching** is a performance optimization technique where an application caches only specific, frequently requested portions of a page, file, or data response, rather than caching the entire item.
 ### Cache-Control Headers 
 
+Let us say you have a web application deployed to old school like IBM. You're caching policy changes saying that you can specifically cache anymore.  you need to go to each server to change cache-control. You will need to identify the servers, owners of the servers. Go through an entire change management process. This is a time-consuming process in practise, you have a (Content Delivery Network) CDN, eg. Akamai. Through a centralized portal they will check on Ignore 'Cache-Control Headers' From that point on Akamai servers will ignore this. Then and there you will set up your cache rules which will ensure all the servers follow it. 
+
 - max-age=seconds
-- no-store 
+- no-store: it should not be cached
 - no-cache 
 - no-transform 
 - public 
 - private
 
+The proxy **trusts you to define the headers.** 
+ 
 
-Let us say you have a web application deployed to old school like IBM. You're cahcing policy changes you need to go to each server to change cache-control. 
+Below is a response header 
 
-Identify the servers, the cache-owners. 
+![[Pasted image 20260608151435.png]]
 
 ### Caching Rules
 
@@ -81,6 +85,35 @@ You configure the cache to decide _what_ gets cached using rules based on:
 - **Data** — could refer to response body, content-type, or other metadata
 
 https://falconcloud.ae/about/blog/how-do-i-configure-cache-rules-on-a-cdn/
+
+It is important to set up the caching rules correctly. 
+
+Reason there is amazing refereshing button because northeastern in behind a cdn. 
+
+![[Pasted image 20260608155154.png]]
+
+To byass the cdn the button is there, what does it do. 
+
+![[Pasted image 20260608155251.png]]
+
+Click on more tools > Web developer tools 
+![[Pasted image 20260608155429.png]]
+
+Look at the headers. 
+![[Pasted image 20260608155621.png]]
+
+The `x-gateway-cache-status: HIT` header indicates that the API gateway or proxy handling your request already had a fresh copy of the resource saved in its memory. The gateway successfully served your response directly from that cache without having to contact the origin server
+
+The `x-gateway-cache-key` is an unofficial HTTP response header used by proxies, Content Delivery Networks (CDNs), or API Gateways to identify the specific **cache key** generated for a given request.
+
+
+#### Difference between Cache Headers and Caching Rules 
+
+**Cache-Control` headers are standardized HTTP tags sent directly by web servers to instruct browsers and CDNs how to handle content, while Cache Rules are custom, centralized configurations managed within a CDN or proxy dashboard (like Cloudflare or Akamai) to override or refine those default behaviors.
+
+
+![[Pasted image 20260608154628.png]]
+
 
 ### Cache-Key 
 
