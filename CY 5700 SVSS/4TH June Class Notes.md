@@ -152,14 +152,36 @@ Suppose you have a video file that is 1GB. If user wants only 10K of the gig fil
 
 Option 2: 
 
-You can configure the CDN saying that when you receive such request , remove it and send us the operative thing. 
+- CDN **strips the Range header** before forwarding to origin
+- Origin receives just `GET /video.mkv` — no Range header — so it returns the **entire 1GB file**
+- CDN **caches the full 1GB**
+- CDN then slices out bytes 0–10240 and returns just that to the client
+
+What is the attacker re-arranges. 
+![[Pasted image 20260609143840.png]]
+**The attack:**
+
+1. Attacker sends `GET /video.mkv Range: bytes=0-1` to Edge Server A (Boston)
+2. Boston edge has never seen this file → cache miss → strips Range header → asks Netflix for the **entire 1GB**
+3. Boston edge caches 1GB, returns 1 byte to attacker
+4. Attacker now hits Edge Server B (Chicago) with the same `Range: bytes=0-1`
+5. Chicago has its own cache, hasn't seen this file either → cache miss → asks Netflix for **another 1GB**
+6. Chicago caches 1GB, returns 1 byte to attacker
+7. Attacker repeats this across **hundreds of edge servers**
 
 
-Does denial of service, it is asymmetry. Attacker spends very little request. 
+![[Pasted image 20260609145659.png]]
 
+
+**The key insight:**
+
+**The amplification factor is what makes it devastating. The CDN's Option 2 behavior (fetch the whole thing) is being weaponized, the attacker is essentially using Akamai's infrastructure _against_ Netflix's origin..** 
+
+Side Note: This counts as a denial of service attack, the key thing to look for it is that it is asymmetric. Asymmetric means the Attacker spends a very little bandwidth request. 
 if it is no costing much to the hacker, the hacker might not pursue it. 
-If you design the system to handle the benin traffic , they monitor they try to detect it. 
 
+Side Note: What does the CDN do then
+The CDN today still do option 2, you design the system to handle the benign traffic , For the attack traffic, they monitor they try to detect and block it .
 
 # Slowloris Sttacks 
 ![[Pasted image 20260607161922.png]]
