@@ -183,8 +183,21 @@ if it is no costing much to the hacker, the hacker might not pursue it.
 Side Note: What does the CDN do then
 The CDN today still do option 2, you design the system to handle the benign traffic , For the attack traffic, they monitor they try to detect and block it .
 
-# Slowloris Sttacks 
+
+# POST Request 
+
+
+# Slowloris Attacks 
 ![[Pasted image 20260607161922.png]]
+
+
+Suppose you are sending you're origin a huge request a POST request. Edge can do one of the two things.
+
+Option 1: 
+
+You see the body, immediately open a connection. as soon as you see more data forward it to the origin or you can;t wait to receive the entire whole thing and wait to forward. 
+
+The only correct thing is to stream, the attacker leverages this and sends a slow request and edge does not sheild you from this. Introducing new class of Slowloris attack. Every proxy is vulnerable to this you need some kind of monitoring tools for this. this is not secure by design .
 
 https://www.netscout.com/what-is-ddos/slow-post-attacks
 
