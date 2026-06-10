@@ -380,8 +380,65 @@ Content-Length: 16 tells here that after you are done with the header you should
 In chunked encoding the terminator is at the end of each 
 ![[Pasted image 20260610165912.png]]
 
+![[Pasted image 20260610170816.png]]
+![[Pasted image 20260610171045.png]]
 
 ![[Pasted image 20260607171023.png]]
 https://en.wikipedia.org/wiki/Chunked_transfer_encoding
+
+#### Disagreement between the origin server and proxy on transfer encoding and content-length
+
+The disagreement comes from the fact that **proxies and origin servers are built by different people and may handle ambiguous requests differently.**
+
+
+**The specific ambiguity: what if a request has BOTH headers?**
+
+```
+POST /search HTTP/1.1
+Host: example.com
+Content-Length: 16
+Transfer-Encoding: chunked
+
+...body...
+```
+
+HTTP spec says if both are present, **chunked wins**. But not every proxy/server follows this correctly.
+
+**Where the disagreement happens:**
+
+![[Pasted image 20260610172651.png]]
+
+![[Pasted image 20260610173119.png]]
+
+
+**Left side — Proxy uses Content-Length: 32**
+
+
+The proxy counts exactly 32 bytes from the body. Let's count:
+
+```
+0\r\n                        = 3 bytes
+\r\n                         = 2 bytes
+GET /img/x.jpg HTTP/1.1\r\n  = 24 bytes
+X:                           = 2 bytes (+ 1 space = 3?)
+```
+
+That adds up to roughly 32 bytes → proxy thinks the **entire thing including the smuggled GET is the body** of the POST. It forwards all 32 bytes to the origin as one request. Nothing smuggled.
+
+---
+
+**Right side — Origin uses Transfer-Encoding: chunked**
+
+Origin sees `0\r\n\r\n` → that means **chunk size 0, body is done**. Request ends there.
+
+Everything after — `GET /img/x.jpg HTTP/1.1\r\nX:` — is treated as a **brand new request** sitting in the persistent connection pipeline
+
+
+![[Pasted image 20260610173638.png]]
+
+The next user is just a normal request this is going to be forwarded to the proxy and it is going to look like this In this example it could be a simple cache poisoning but it is not known as HTTP Request Smuggling because you smuggled your request and directly hit the origin and it gets triggered later. 
+![[Pasted image 20260610174320.png]]
+
+The origin can;t read all of this it looks like the X got appended in the next header. 
 
 # HTTP Request Smuggling
