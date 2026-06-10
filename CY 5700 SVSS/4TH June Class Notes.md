@@ -4,6 +4,9 @@ System Security
 Web Application Attacks 2.0 (a.k.a Why the internet is Doomed)
 
 ## Client Server Model
+
+![[Pasted image 20260609160054.png]]
+
 it is abstract it missed details it never happens in practice. 
 Web Proxy intermediary between client and server. 
 It is never a single proxy there are layers and layers. 
@@ -186,26 +189,59 @@ The CDN today still do option 2, you design the system to handle the benign traf
 
 # POST Request 
 
+## Header
+
+![[Pasted image 20260609155242.png]]
+
+## Body 
+![[Pasted image 20260609155301.png]]
+
+The `Content-Length: 509` in the headers tells the server "expect 509 bytes of body coming." The server reads the headers first, sees that number, then waits to receive that many bytes as the body.
+
+### How Slowloris exploits this on POST
+
+The attacker sends the headers normally (so the server doesn't time out), then **drip-feeds the body** — maybe 1 byte every 5 seconds. The server sees `Content-Length: 509`, knows more is coming, and keeps the connection open waiting. Multiply by thousands of connections → origin is holding thousands of open connections waiting for bodies that never fully arrive.
 
 # Slowloris Attacks 
 ![[Pasted image 20260607161922.png]]
 
 
+### Why is the origin vulnerable when edge streams slowly?
+
+The edge opens a connection to the origin and starts forwarding data as it trickles in. That connection to the origin **stays open and waiting** the entire time.
+
+So the attacker's slow request to the edge → becomes a slow, hanging connection from edge to origin.
+
+Now imagine the attacker opens 10,000 parallel slow connections to the edge. The edge opens 10,000 parallel slow connections to the origin. The origin hits its connection limit → DoS.
+
+The edge didn't absorb the attack — it **passed it through** to the origin. That's the vulnerability. The CDN is supposed to be a shield but in streaming mode it just becomes a pipe that forwards the slowloris behavior downstream.
 Suppose you are sending you're origin a huge request a POST request. Edge can do one of the two things.
 
-Option 1: 
-
-You see the body, immediately open a connection. as soon as you see more data forward it to the origin or you can;t wait to receive the entire whole thing and wait to forward. 
-
-The only correct thing is to stream, the attacker leverages this and sends a slow request and edge does not sheild you from this. Introducing new class of Slowloris attack. Every proxy is vulnerable to this you need some kind of monitoring tools for this. this is not secure by design .
 
 https://www.netscout.com/what-is-ddos/slow-post-attacks
 
 ![[Pasted image 20260607163831.png]]
+
+
+### CDNs DO protect against classic Slowloris (GET requests)**
+
+Attacker → slow connection → Edge Edge buffers the full request, THEN opens a fast connection to origin. Origin never sees the slow connection. It's shielded.
+
+
+**But POST breaks that protection**
+
+The edge has two bad choices:
+
+**Stream immediately →** attacker's slow connection gets forwarded as a slow connection to origin. CDN is now just a pipe, not a shield. Origin is exposed to slowloris again.
+
+**Buffer the full POST body first, then forward →** now every legitimate user's POST request has to be fully received and held in the edge's memory before origin gets it. For a site with millions of users uploading large files, this **destroys performance** — hence "obliterated website performance.
+
 # URL 
 
 ![[Pasted image 20260607165320.png]]
 ![[Pasted image 20260607165414.png]]
+If you click on i-love-pokemon,jpg link the worst case is you would expect a 404. 
+
 it is a string, can be manipulated by the server. 
 
 example.com/home/index.html
@@ -217,37 +253,92 @@ example.com/home/index/en/us
 We do not expose the name of the argument. 
 It is just a different way to write. 
 
+## Example 
 
-example.com/index/img/pic.jpg
-example.com/index.html?part1=img?part2=pic.jpg 
+Web server is the bank application, web cache here can be standalone proxy or a CDN to cache stuff. Using sea surf or something the attacker makes the victim send the link. 
 
-this is how it is iteratied. 
+![[Pasted image 20260609161125.png]]
 
-bank.com/account.php
+The proxy checks if it sees the link for the first time. It forwards the link to the origin. 
 
-bank.com/account.php/i-love-pokemon.jpg 
+![[Pasted image 20260609161416.png]]
 
-you may get a 404. 
+The server knows that the link does not exist, it may send a 404. If the web application server on which this thing is built on
 
+It does reroute it depending on the framework. The invalid page goes away.
+
+![[Pasted image 20260609162002.png]]
+
+
+
+![[Pasted image 20260609162230.png]]
+
+- The `?` signals "everything after this is a query parameter, not a file path"
+- So the server runs `account.php` (which exists) and passes `nonexistent.jpg` as an **input parameter** to it
+- `account.php` runs fine, does whatever it does with that parameter → **200**
+
+![[Pasted image 20260609163237.png]]
+
+This part is dangerous because the cache does not know this happened. This can cause misunderstanding between the cache and proxy it gives 200 Ok, 
+
+It internally re-routed it, the web server is telling the web-cache I did some rerouting here but you do not remember it by doing CACHE-CONTROL;NO-store. Now this would have worked only if the Cache-control would have stayed as NO **but 99% of the company check the box that says ignore the CACHE-CONTROL error.** 
+
+Because of this. 
+any attacker who requests  a static file externsion `GET /account.php/nonexistent.jpg` gets the victim's **cached sensitive bank page** served directly from cache. **No authentication needed, no hitting the origin.**
+
+The `.jpg` suffix tricked the cache into storing something it should never have stored.
+
+![[Pasted image 20260609164130.png]]
+
+
+E.g. Amazon 
+
+![[Pasted image 20260610153140.png]]
+
+In an attack scenario **We assume that fall back page is a sensitive page.** 
+
+How do we know if the web page will return a sensitive page like account.php. 
 # Web Cache Deception 
 
 https://portswigger.net/web-security/web-cache-deception
 Reroute is a usability thing cause 404 is ugly. server knows it doesn't exists and it gives a 200 success. 
 ![[Pasted image 20260607165805.png]]
-
-bank.com/accont.php/nonexistent.jpg   -400 
-
-bank.com/account.php?parameter=nonexistent.jpg     -  200
-
-This can cause misunderstanding between the cache and proxy it gives 200 Ok, CACHE-CONTROL;NO-store. 
-
-99% of the comapny check the box that says ignore the CACHE-CONTROL error. 
-
-**We assume that fall back page is a sensitive page.** 
-
 # HTTP Processing Discrepancy.
 
+There are many different proxies like Akamai and stuff. So different proxies have different design decisions and different processing rules. 
+
+In HTTP you have your standard headers like x-content-type-options
+![[Pasted image 20260610155156.png]]
+![[Pasted image 20260610155829.png]]
+But there are also custom headers like Kaan's-Favourite-FF! It is meaningful for your application and no one else. 
 ![[Pasted image 20260607165921.png]]
+
+The browser treats it as just another key-value pair it's carrying along — it has no idea what it means.
+
+On the server side, your application code explicitly reads it:
+
+python
+
+```python
+# Flask example
+fav = request.headers.get("Kaan's-Favorite-FF!")
+# fav = "VIII"
+```
+
+If the application doesn't have code to read that header, it's simply **ignored**. Nothing breaks.
+
+![[Pasted image 20260610160053.png]]
+
+Per this specification it says you can't send this ? 
+![[Pasted image 20260610160145.png]]
+
+Example of leveraging this ? 
+![[Pasted image 20260610160843.png]]
+
+The web server does input sanitization and just removes this. This has got fixed now. 
+
+![[Pasted image 20260610161229.png]]
+
 
 ? - Bad request 
 
@@ -267,11 +358,29 @@ what does the origin see
 what does it result it 
 does the final result look like a valid request. 
 
-![[Pasted image 20260607170847.png]]
 
 # Web Cache Poisoning 
 
 ![[Pasted image 20260607171012.png]]
+## Content-Length Encoding 
+
+Parsing the request and headers is trivial they have terminators. 
+
+![[Pasted image 20260610163345.png]]
+
+The body does not have a terminator. You need to indicate to the server where your header ends and that is done by 'Content-Length Encoding.
+
+Content-Length: 16 tells here that after you are done with the header you should read 16 bytes. The next data is from the next request. 
+
+`query=funny+cats` is exactly 16 bytes — so the server reads those 16 bytes and considers the request complete.
+## Chunked Encoding 
+
+![[Pasted image 20260610165256.png]]
+
+In chunked encoding the terminator is at the end of each 
+![[Pasted image 20260610165912.png]]
+
+
 ![[Pasted image 20260607171023.png]]
 https://en.wikipedia.org/wiki/Chunked_transfer_encoding
 
