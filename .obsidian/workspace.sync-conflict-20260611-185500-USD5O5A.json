@@ -6,7 +6,7 @@
       {
         "id": "d09883f74440aac9",
         "type": "tabs",
-        "dimension": 78.64406779661017,
+        "dimension": 77.40112994350282,
         "children": [
           {
             "id": "b4ff8cf49efb17d8",
@@ -42,12 +42,68 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "12_Kubernetes/06_Kubernetes Namespace.md",
+                "file": "CY 5700 SVSS/7 May to 21st May class notes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "06_Kubernetes Namespace"
+              "title": "7 May to 21st May class notes"
+            }
+          },
+          {
+            "id": "612fbdd94de0ae1f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "09_Web_Exploitation/03_Web_Vulnerabilities/01_Server_Side_Request_Forgery.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01_Server_Side_Request_Forgery"
+            }
+          },
+          {
+            "id": "366f2347b724b52c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/2026-05-28 - Pre read & Class notes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-05-28 - Pre read & Class notes"
+            }
+          },
+          {
+            "id": "38edb5747e5d0ca7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/2026-05-28 - Pre read & Class notes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-05-28 - Pre read & Class notes"
+            }
+          },
+          {
+            "id": "80911e19bc4413df",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/4TH June Class Notes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "4TH June Class Notes"
             }
           },
           {
@@ -56,12 +112,68 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "12_Kubernetes/12_Taints_and_tolerations.md",
+                "file": "CY 5700 SVSS/4TH June Class Notes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "12_Taints_and_tolerations"
+              "title": "4TH June Class Notes"
+            }
+          },
+          {
+            "id": "67d5e6160b3ffd2d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/4TH June Class Notes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "4TH June Class Notes"
+            }
+          },
+          {
+            "id": "2e050cc6a3269f0a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/Bonus Assignment 1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Bonus Assignment 1"
+            }
+          },
+          {
+            "id": "e35ad1c800bbbaf9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/Cache Poisoning Paper.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Cache Poisoning Paper"
+            }
+          },
+          {
+            "id": "f5f5b9ee88332d35",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/Three Modern Mechanisms for Web.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Three Modern Mechanisms for Web"
             }
           },
           {
@@ -168,35 +280,35 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Global Master MOC.md",
+                "file": "CY 5700 SVSS/CY5770 Software Vulnerability & System Security.sync-conflict-20260522-145244-CIJJFWX.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Global Master MOC"
+              "title": "CY5770 Software Vulnerability & System Security.sync-conflict-20260522-145244-CIJJFWX"
             }
           }
         ],
         "currentTab": 11
       },
       {
-        "id": "f5e2f3fd76e46764",
+        "id": "206fafe3ee723990",
         "type": "tabs",
-        "dimension": 21.35593220338983,
+        "dimension": 22.598870056497173,
         "children": [
           {
-            "id": "3279e036011af0a6",
+            "id": "3121b768c16594e3",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Global Master MOC.md",
-                "followCursor": false,
-                "showSearch": true,
+                "file": "CY 5700 SVSS/Three Modern Mechanisms for Web.md",
+                "followCursor": true,
+                "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Global Master MOC"
+              "title": "Outline of Three Modern Mechanisms for Web"
             }
           }
         ]
@@ -361,54 +473,54 @@
       "bases:Create new base": false
     }
   },
-  "active": "a25f72829b9b7205",
+  "active": "f5f5b9ee88332d35",
   "lastOpenFiles": [
-    "CY 5700 SVSS/CY5770 Software Vulnerability & System Security.md",
-    "CY 5700 SVSS/CY5770 Software Vulnerability & System Security.sync-conflict-20260522-145244-CIJJFWX.md",
-    "CY 5700 SVSS/~syncthing~CY5770 Software Vulnerability & System Security.md.tmp",
-    "images/Pasted image 20260522145027.png",
-    "images/Pasted image 20260522144759.png",
-    "images/Pasted image 20260522144729.png",
-    "images/Pasted image 20260522123147.png",
-    "images/Pasted image 20260522122857.png",
-    "images/Pasted image 20260522122830.png",
-    "images/Pasted image 20260522122718.png",
-    "images/Pasted image 20260522122637.png",
-    "images/Pasted image 20260522121842.png",
-    "images/Pasted image 20260522121743.png",
-    "Global Master MOC.md",
-    "14_GRC/Common Criteria Framework.md",
-    "5130/06_Auditd.md",
-    "5130/04_Unix_Syslog.md",
-    "5130/Audit_and_Logging_TextBook/3.1-3.6 - Log Management Infrastructure.md",
+    "CY 5700 SVSS/28th May - Pre read & Class notes.md",
+    "CY 5700 SVSS/11th June Class Notes.md",
+    "CY 5700 SVSS/Three Modern Mechanisms for Web.md",
+    "CY 5700 SVSS/Challenge 4.md",
+    "CY 5700 SVSS/2026-05-28 - Pre read & Class notes.md",
+    "CY 5700 SVSS/7 May to 21st May class notes.md",
+    "CY 5700 SVSS/4th June Class Notes.md",
+    "CY 5700 SVSS/Cache Poisoning Paper.md",
     "2026-05-21 CY5770.md",
+    "images/Pasted image 20260611162056.png",
+    "images/Pasted image 20260611161553.png",
+    "images/Pasted image 20260611161456.png",
+    "images/Pasted image 20260611161321.png",
+    "images/Pasted image 20260611155911.png",
+    "images/Pasted image 20260611155730.png",
+    "images/Pasted image 20260611155721.png",
+    "images/Pasted image 20260611144511.png",
+    "images/Pasted image 20260611144139.png",
+    "images/Pasted image 20260611143051.png",
+    "CY 5700 SVSS/Challenge 3.md",
     "CY 5700 SVSS/Bonus Assignment 1.md",
+    "LLM Attack & and prompt injection.md",
+    "12_Kubernetes/12_Taints_and_tolerations.md",
+    "CY 5700 SVSS/Challenge 2.md",
+    "CY 5700 SVSS/Crypto challenge.md",
+    "17_Bug_Bounty/Daily_Tasks.md",
+    "17_Bug_Bounty/Bug_Bounty_Journal.md",
+    "09_Web_Exploitation/Web MOC.md",
+    "14_GRC/Types of Assesments.md",
+    "09_Web_Exploitation/02_Web_Servers.md",
+    "09_Web_Exploitation/04_Exploitation_Techniques.md",
+    "File Path.md",
+    "C Revision.md",
+    "Global Master MOC.md",
+    "5010 Network Security.md",
+    "2026-05-25.md",
+    "08_Cryptography/Cryptography/~syncthing~GPG Cheatsheet.md.tmp",
+    "CY 5700 SVSS/~syncthing~CY5770 Software Vulnerability & System Security.md.tmp",
+    "CY 5700 SVSS/~syncthing~CY5770 Software Vulnerability & System Security.sync-conflict-20260522-145244-CIJJFWX.md.tmp",
     "~syncthing~2026-05-21 CY5770.md.tmp",
     "02_Linux_Systems/Access Control/~syncthing~Access Control.md.tmp",
-    "12_Kubernetes/08_DaemonSet__Jobs__CronJobs.md",
-    "12_Kubernetes/09_Static Pods.md",
-    "12_Kubernetes/07_MultiContainer Pods.md",
-    "12_Kubernetes/06_Kubernetes Namespace.md",
-    "12_Kubernetes/05_Kubernetes Service.md",
-    "12_Kubernetes/04_Managing Objects.md",
-    "12_Kubernetes/04_Kubernetes Networking.md",
-    "12_Kubernetes/01_Foundations.md",
-    "12_Kubernetes/02_Kubernetes Components.md",
-    "12_Kubernetes/15_Kubernetes_Health_Probes.md",
-    "12_Kubernetes/14_Kubernetes Resources, Requests and Limits.md",
-    "12_Kubernetes/13_Affinity_and_anti-affinity.md",
-    "12_Kubernetes/12_Taints_and_tolerations.md",
-    "12_Kubernetes/11_Manual_Scheduling_Labels_Selectors.md",
-    "12_Kubernetes/03_Kubernetes Objects.md",
-    "02_Linux_Systems/Access Control/Privilege Escalation.md",
-    "02_Linux_Systems/Linux MOC.md",
     "Untitled",
     "12_Kubernetes/~syncthing~14_Kubernetes Resources, Requests and Limits.md.tmp",
     "vids/diable_NBT_NS_GPO_create.mp4",
     "CY 5700 SVSS",
     "12_Kubernetes/~syncthing~13_Affinity_and_anti-affinity.md.tmp",
-    "images/~syncthing~Pasted image 20260505190457.png.tmp",
-    "12_Kubernetes/~syncthing~12_Taints_and_tolerations.md.tmp",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }
