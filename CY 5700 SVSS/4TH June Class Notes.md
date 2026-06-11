@@ -1,8 +1,4 @@
 
-System Security 
-
-Web Application Attacks 2.0 (a.k.a Why the internet is Doomed)
-
 ## Client Server Model
 
 ![[Pasted image 20260609160054.png]]
@@ -143,7 +139,7 @@ If _node/5_ appears in a block, a menu, and a view, each of these items has it
 Read x-gateway-cache-status 
 
  
- # Range Attacks 
+## Range Attacks 
  ![[Pasted image 20260607161554.png]]
 HTTP defines the range header, Range: bytes=0-10240. If you define the range bytes and send to a server. The server will send the part requested 
 
@@ -186,14 +182,13 @@ if it is no costing much to the hacker, the hacker might not pursue it.
 Side Note: What does the CDN do then
 The CDN today still do option 2, you design the system to handle the benign traffic , For the attack traffic, they monitor they try to detect and block it .
 
+## POST Request 
 
-# POST Request 
-
-## Header
+### Header
 
 ![[Pasted image 20260609155242.png]]
 
-## Body 
+### Body 
 ![[Pasted image 20260609155301.png]]
 
 The `Content-Length: 509` in the headers tells the server "expect 509 bytes of body coming." The server reads the headers first, sees that number, then waits to receive that many bytes as the body.
@@ -202,7 +197,7 @@ The `Content-Length: 509` in the headers tells the server "expect 509 bytes of b
 
 The attacker sends the headers normally (so the server doesn't time out), then **drip-feeds the body** — maybe 1 byte every 5 seconds. The server sees `Content-Length: 509`, knows more is coming, and keeps the connection open waiting. Multiply by thousands of connections → origin is holding thousands of open connections waiting for bodies that never fully arrive.
 
-# Slowloris Attacks 
+## Slowloris Attacks 
 ![[Pasted image 20260607161922.png]]
 
 
@@ -236,7 +231,7 @@ The edge has two bad choices:
 
 **Buffer the full POST body first, then forward →** now every legitimate user's POST request has to be fully received and held in the edge's memory before origin gets it. For a site with millions of users uploading large files, this **destroys performance** — hence "obliterated website performance.
 
-# URL 
+## URL 
 
 ![[Pasted image 20260607165320.png]]
 ![[Pasted image 20260607165414.png]]
@@ -246,14 +241,14 @@ it is a string, can be manipulated by the server.
 
 example.com/home/index.html
 
-## Clean URL 
+ Clean URL 
 
 example.com/home/index/en/us
 
 We do not expose the name of the argument. 
 It is just a different way to write. 
 
-## Example 
+### Example 
 
 Web server is the bank application, web cache here can be standalone proxy or a CDN to cache stuff. Using sea surf or something the attacker makes the victim send the link. 
 
@@ -298,12 +293,12 @@ E.g. Amazon
 In an attack scenario **We assume that fall back page is a sensitive page.** 
 
 How do we know if the web page will return a sensitive page like account.php. 
-# Web Cache Deception 
+## Web Cache Deception 
 
 https://portswigger.net/web-security/web-cache-deception
 Reroute is a usability thing cause 404 is ugly. server knows it doesn't exists and it gives a 200 success. 
 ![[Pasted image 20260607165805.png]]
-# HTTP Processing Discrepancy.
+##  HTTP Processing Discrepancy.
 
 There are many different proxies like Akamai and stuff. So different proxies have different design decisions and different processing rules. 
 
@@ -351,15 +346,7 @@ Chunked encoding hexadecimal
 
 \r\n should be counted as content-length 
  
-
-Draw the picture  on a pen and paper 
-what does the process see 
-what does the origin see 
-what does it result it 
-does the final result look like a valid request. 
-
-
-# Web Cache Poisoning 
+## Web Cache Poisoning 
 
 ![[Pasted image 20260607171012.png]]
 ## Content-Length Encoding 
@@ -386,7 +373,7 @@ In chunked encoding the terminator is at the end of each
 ![[Pasted image 20260607171023.png]]
 https://en.wikipedia.org/wiki/Chunked_transfer_encoding
 
-#### Disagreement between the origin server and proxy on transfer encoding and content-length
+### Disagreement between the origin server and proxy on transfer encoding and content-length
 
 The disagreement comes from the fact that **proxies and origin servers are built by different people and may handle ambiguous requests differently.**
 
@@ -441,4 +428,84 @@ The next user is just a normal request this is going to be forwarded to the prox
 
 The origin can;t read all of this it looks like the X got appended in the next header. 
 
-# HTTP Request Smuggling
+## HTTP Request Smuggling
+
+![[Pasted image 20260611101624.png]]
+### Example 1: Bypassing Access Control 
+![[Pasted image 20260611102002.png]]
+![[Pasted image 20260611102817.png]]
+
+
+---
+
+**What the attacker sends (one request):**
+
+```
+POST /public HTTP/1.1
+Content-Length: ...
+Transfer-Encoding: chunked
+
+0\r\n
+\r\n
+GET /admin HTTP/1.1\r\n
+X:
+```
+
+---
+
+**Step 1 — Proxy reads it (uses Content-Length):**
+
+Proxy counts all the bytes including `0\r\n\r\nGET /admin HTTP/1.1\r\nX:` and says "this is all one POST body." Forwards everything to origin as one request. Access control check passes because the outer request is to `/public` which is allowed.
+
+---
+
+**Step 2 — Origin reads it (uses chunked):**
+
+Origin sees `0\r\n\r\n` → body is empty, POST is done.
+
+Now `GET /admin HTTP/1.1\r\nX:` is **sitting in the pipeline** as a pending request.
+
+---
+
+**Step 3 — Next legitimate user sends their request:**
+
+```
+GET / HTTP/1.1
+Host: example.com
+```
+
+Origin **combines** the leftover smuggled part with this new request:
+
+```
+GET /admin HTTP/1.1
+X: GET / HTTP/1.1
+Host: example.com
+```
+
+- Origin processes `GET /admin` — the restricted endpoint the attacker wanted
+- The legitimate user's `GET /` gets swallowed into the `X:` header  it becomes invisible, just a header value
+- The legitimate user gets back the `/admin` response instead of their own page ,completely confused
+
+**The two things that make this work:**
+
+1. **`X:` is a deliberately incomplete header — it has no value yet, so it "absorbs" the next request as its value, neutralizing it**
+2. The proxy never saw `GET /admin` — it only saw `POST /public` so **access control was never checked** for the admin request
+
+
+HTTP 2.0 is a very different protocol not just in terms of semantics but also structure it does not have content length and does not have transfer encoding. 
+
+### Example 2:  Leaking user request. 
+
+![[Pasted image 20260611104838.png]]
+
+The proxy reads the content-length and forwards everything to the origin. 
+The attacker includes his own cookie. eg. his reddit session 
+
+Now suppose a poor victim is trying to read the home page of the reddit. The home page get request gets appended here 
+
+![[Pasted image 20260611105447.png]]
+
+For server, it looks like attacker is trying to comment 
+
+
+
