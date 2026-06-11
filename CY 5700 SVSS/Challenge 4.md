@@ -103,3 +103,15 @@ Because if you do:
 ![[Pasted image 20260611155911.png]]
 
 
+## Exploring the Den™
+
+The Come in.. is getting cached. 
+
+![[Pasted image 20260611161321.png]]
+
+![[Pasted image 20260611161456.png]]
+
+![[Pasted image 20260611161553.png]]
+
+![[Pasted image 20260611162056.png]]
+
