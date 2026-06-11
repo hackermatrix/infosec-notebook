@@ -54,3 +54,52 @@ If you **manipulate** those real headers (which is exactly what CPDoS/HTTP desyn
 - **Drop your request** entirely thinking it's malformed
 - **Misframe the request** and confuse it with the next one
 - **Return their own error** before it even reaches the challenge server
+
+for **initial exploration**:
+
+```
+X-Hack-Mode: 0    ← or just don't include it at all
+```
+
+
+### The Core Rule
+
+```
+Real Headers          →  For the internet/middleboxes to understand
+X- Custom Headers     →  For The Den™ to understand (in Hack Mode)
+```
+
+They need to **coexist** in your request. Each audience reads what it knows.
+
+
+### Point 1 — Keep a Real `Content-Length` for the Journey
+
+When your request has a body, the middleboxes (ISP, routers, proxies) need to know how big it is so they can **forward the whole thing** correctly. So:
+
+```
+Content-Length: 42        ← real, correct, full body size
+                            → middleboxes use this to forward your request intact
+
+X-Content-Length: 10      ← your "fake" smuggling value
+                            → The Den™ uses this, ignores the real one
+```
+
+### Point 2 — Don't Insert a Real `Transfer-Encoding` Header
+
+Under normal circumstances your tools use `Content-Length` for framing anyway, so this shouldn't be an issue. But the warning is:
+
+> Don't manually add `Transfer-Encoding: chunked` as a real header
+
+Because if you do:
+
+- Middleboxes will see it and try to parse your body as chunked
+- This will likely **mangle your request** before it even reaches The Den™
+
+
+
+![[Pasted image 20260611155730.png]]
+
+
+![[Pasted image 20260611155911.png]]
+
+
