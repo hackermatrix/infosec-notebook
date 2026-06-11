@@ -505,7 +505,44 @@ Now suppose a poor victim is trying to read the home page of the reddit. The hom
 
 ![[Pasted image 20260611105447.png]]
 
-For server, it looks like attacker is trying to comment 
+
+**What the attacker smuggles in:**
+
+```
+POST /comment HTTP/1.1
+Host: forum.com
+Content-Length: 1000        ← expects 1000 bytes of comment body
+Cookie: session=<attacker_session>
+
+comment=                    ← body starts here, only has "comment=" so far
+                            ← 1000 bytes not yet fulfilled, waiting...
+```
+
+The `Content-Length: 1000` is the key trick. The smuggled POST says "I need 1000 bytes for my comment body" but only provides `comment=` — so it's **starving, waiting for more data.**
 
 
+**The victim literally just does this:**
 
+They type `forum.com` in their browser → browser sends:
+
+```
+GET / HTTP/1.1
+Host: forum.com
+Cookie: session=<victim_session>
+```
+
+A completely normal, innocent homepage request.
+
+The trap was already set by the attacker beforehand. The origin server is sitting there with an incomplete POST /comment that needs 1000 bytes to fill its body.
+
+When the victim's innocent GET request arrives on that same persistent connection, the origin doesn't see it as a new request — it sees it as **the rest of the comment body it was waiting for.**
+
+Older version of server
+![[Pasted image 20260611110519.png]]
+
+latest versions are more specific. 
+![[Pasted image 20260611110631.png]]
+
+The how were we able to do it our examples because of it.
+![[Pasted image 20260611110724.png]]
+![[Pasted image 20260611111312.png]]
