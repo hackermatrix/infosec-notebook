@@ -100,6 +100,8 @@ List of instructions your CPU understands.
 RISC (keep your instructions simple they should do only one thing, these architecutres tend to have seperate memory RAM, ROM, load THIS data from RAM into register, they have many registers available to them ) v.s
 CISC(on the other hand goes to complete opposite direction, they do lot of things have lot of side effects. eg, add instruction reads from one and it needs to store . rewrite and give error somewhere else, small number of registers, difficicult to write code for compile for. we are stuck with this)
 
+Anything that comes from Intel is CISC.
+
 ## Assembly 
 is not change in the level of abstraction when you look at binary represnetation of the program and compare with C LEVEL . they are different levels of abstraction 
 
@@ -115,10 +117,31 @@ With memory not being represented as single box separation of data and memory is
 ## Registers 
 
 6 general purpose registers. 
+Compilers need to think about allocation of registers. 
 
+Google "x86 cheatsheet"
 
+## Operands 
 
+% you are accessing the contents of the registers 
+$2500 is a number 
+no dollar just integer this is a pointers. Memory address: 2500 
+suppose you don;t want to hardcode it this is how you go it 
+ res
 
+displacement(base_reg,index_reg, scale)
+result = base + displacement + (index *scale)
+
+## Comparison and Branch 
+jmp 
+call 
+if you want to jump to a function you want to return to the function to enable that to remember we have a call function it takes the address of the return address and pushes to the stack. it looks at the return address and jumps back to it. and 
+
+## End-ianess 
+
+you can;t access address 0 , if you do it will throw an error. 
+
+local function like main will be in the stack, malloc will be in heap
 
 ## Confused Deputy 
 

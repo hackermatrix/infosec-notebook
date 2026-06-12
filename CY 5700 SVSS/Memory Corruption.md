@@ -22,3 +22,12 @@
 ## Assembly 
 
 - Human-readable representation of machine code . Simple translation to machine code . 
+
+
+
+
+## Operands 
+
+%eax - access the content of register
+$2500 - litral value i.e 2500
+2500 - memory address
