@@ -152,6 +152,26 @@ It does not block it
 
 ![[Pasted image 20260612174404.png]]
 
+### Trying with the hex values & string
+
+![[Pasted image 20260613130100.png]]
+
+![[Pasted image 20260613130657.png]]
+
+When i did this cache got close, that means it reached the origin server, but the origin ignores it that is why i am not getting an error. 
+
+![[Pasted image 20260613130739.png]]
+
+%0d%0a as text    →  origin ignores it  →  200 OK
+0x0D 0x0A as real bytes  →  origin rejects  →  400 error  →  gets cached!
+
+let us try sending it 
+![[Pasted image 20260613132059.png]]
+
+this got hit 
+![[Pasted image 20260613132146.png]]
+
+The proxy is **ignoring query strings** when building cache keys. So `/?x=anything` always matches the cached `/` entry.
 
 
 ![[Pasted image 20260612180831.png]]
@@ -159,5 +179,9 @@ It does not block it
 
 ![[Pasted image 20260612180934.png]]
 
+## HTTPHeaderOversize (HHO) Attack
+
+![[Pasted image 20260613135429.png]]
+![[Pasted image 20260613135441.png]]
 
 ## Origin is looking at the chunk i.e, the transfer encoding. 
