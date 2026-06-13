@@ -181,12 +181,23 @@ The proxy is **ignoring query strings** when building cache keys. So `/?x=anythi
 
 ## HTTPHeaderOversize (HHO) Attack
 
+![[Pasted image 20260613152734.png]]
+
+![[Pasted image 20260613152752.png]]
+
+
 ![[Pasted image 20260613135429.png]]
 ![[Pasted image 20260613135441.png]]
 
+![[Pasted image 20260613152841.png]]
 
 Metachar → similar potential but harder to execute (need real bytes, not text)
 
 ![[Pasted image 20260613140410.png]]
+
+![[Pasted image 20260613153316.png]]
+![[Pasted image 20260613153332.png]]
+
+![[Pasted image 20260613153359.png]]
 
 ## Origin is looking at the chunk i.e, the transfer encoding. 
