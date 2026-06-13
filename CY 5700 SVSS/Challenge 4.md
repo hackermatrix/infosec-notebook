@@ -184,4 +184,9 @@ The proxy is **ignoring query strings** when building cache keys. So `/?x=anythi
 ![[Pasted image 20260613135429.png]]
 ![[Pasted image 20260613135441.png]]
 
+
+Metachar → similar potential but harder to execute (need real bytes, not text)
+
+![[Pasted image 20260613140410.png]]
+
 ## Origin is looking at the chunk i.e, the transfer encoding. 
