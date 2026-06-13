@@ -102,6 +102,15 @@ Because if you do:
 
 ![[Pasted image 20260611155911.png]]
 
+## Playing with the headers 
+
+![[Pasted image 20260613123411.png]]
+![[Pasted image 20260613123426.png]]
+
+If i remove everything it does drop the request. 
+
+![[Pasted image 20260613123535.png]]
+
 
 ## Exploring the Den™
 
@@ -115,3 +124,40 @@ The Come in.. is getting cached.
 
 ![[Pasted image 20260611162056.png]]
 
+
+## Tried two header request smuggling 
+
+![[Pasted image 20260612140450.png]]
+
+It doesn;t work. 
+
+
+#
+## Need to try query strings 
+
+
+## Different content length 
+
+
+## Trying X HTTP-Method-Override it blocks it
+
+![[Pasted image 20260612174018.png]]
+![[Pasted image 20260613121317.png]]
+## Trying X- HTTPMetaCharacter (HMC)Attack
+
+![[Pasted image 20260612174320.png]]
+
+It does not block it 
+![[Pasted image 20260612174420.png]]
+
+![[Pasted image 20260612174404.png]]
+
+
+
+![[Pasted image 20260612180831.png]]
+
+
+![[Pasted image 20260612180934.png]]
+
+
+## Origin is looking at the chunk i.e, the transfer encoding. 
