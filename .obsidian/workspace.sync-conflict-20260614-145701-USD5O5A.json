@@ -4,21 +4,44 @@
     "type": "split",
     "children": [
       {
-        "id": "f3a489ab957ef113",
+        "id": "d09883f74440aac9",
         "type": "tabs",
+        "dimension": 77.40112994350282,
         "children": [
           {
-            "id": "70c094c4ee3dcfe4",
+            "id": "f5f5b9ee88332d35",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Lab Solves/Web Cache Lab.md",
+                "file": "04_Active_Directory/AD_Foundations.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Web Cache Lab"
+              "title": "AD_Foundations"
+            }
+          }
+        ]
+      },
+      {
+        "id": "206fafe3ee723990",
+        "type": "tabs",
+        "dimension": 22.598870056497173,
+        "children": [
+          {
+            "id": "3121b768c16594e3",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "04_Active_Directory/AD_Foundations.md",
+                "followCursor": true,
+                "showSearch": true,
+                "searchQuery": "Same "
+              },
+              "icon": "lucide-list",
+              "title": "Outline of AD_Foundations"
             }
           }
         ]
@@ -183,55 +206,54 @@
       "bases:Create new base": false
     }
   },
-  "active": "70c094c4ee3dcfe4",
+  "active": "f5f5b9ee88332d35",
   "lastOpenFiles": [
-    "Lab Solves/Untitled 1.md",
-    "Lab Solves/Web Cache Lab.md",
+    "images/Pasted image 20260614132311.png",
+    "04_Active_Directory/AD Vulns Index.md",
+    "04_Active_Directory/AD_Authentication/Kerberos.md",
+    "04_Active_Directory/AD_SPN.md",
+    "04_Active_Directory/AD Basics.md",
+    "04_Active_Directory/AD_Objects.md",
+    "04_Active_Directory/AD_GPOs.md",
+    "04_Active_Directory/AD_Foundations.md",
+    "images/Pasted image 20260614121802.png",
+    "images/Pasted image 20260614121335.png",
     "09_Web_Exploitation/03_Web_Vulnerabilities/12_Web_Cache_Attacks.md",
-    "Lab Solves",
-    "Untitled.md",
-    "Untitled.base",
-    "09_Web_Exploitation/03_Web_Vulnerabilities/11_Path Traversal.md",
-    "CY 5700 SVSS/Three Modern Mechanisms for Web.md",
-    "images/Pasted image 20260613111933.png",
-    "images/Pasted image 20260613110543.png",
-    "images/Pasted image 20260613032530.png",
-    "Untitled.canvas",
-    "images/Pasted image 20260613031221.png",
-    "CY 5700 SVSS/11th June Class Notes.md",
-    "09_Web_Exploitation/03_Web_Vulnerabilities/12_Web_Cache_Attacks",
-    "09_Web_Exploitation/Untitled",
-    "09_Web_Exploitation/Untitled.md",
-    "CY 5700 SVSS/~syncthing~Memory Corruption.md.tmp",
+    "images/Pasted image 20260613153359.png",
+    "images/Pasted image 20260613153332.png",
+    "images/Pasted image 20260613153316.png",
+    "images/Pasted image 20260613152841.png",
+    "images/Pasted image 20260613152814.png",
+    "images/Pasted image 20260613152752.png",
+    "images/Pasted image 20260613152734.png",
+    "CY 5700 SVSS/Challenge 4.md",
+    "images/Pasted image 20260613140410.png",
+    "CY 5700 SVSS/Cache Poisoning Paper.md",
+    "CY 5700 SVSS/Challenge 1.md",
     "CY 5700 SVSS/Memory Corruption.md",
+    "CY 5700 SVSS/Challenge 3.md",
+    "CY 5700 SVSS/4th June Class Notes.md",
+    "Lab Solves/Web Cache Lab.md",
+    "images/~syncthing~Pasted image 20260613111933.png.tmp",
+    "Lab Solves/~syncthing~Web Cache Lab.md.tmp",
+    "images/~syncthing~Pasted image 20260613110543.png.tmp",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/~syncthing~12_Web_Cache_Attacks.md.tmp",
+    "images/~syncthing~Pasted image 20260613031221.png.tmp",
+    "images/~syncthing~Pasted image 20260613032530.png.tmp",
+    "Lab Solves",
+    "09_Web_Exploitation/Untitled",
+    "CY 5700 SVSS/11th June Class Notes.md",
+    "CY 5700 SVSS/Bonus Assignment 1.md",
+    "CY 5700 SVSS/28th May - Pre read & Class notes.md",
+    "CY 5700 SVSS/Challenge 2.md",
+    "CY 5700 SVSS/Three Modern Mechanisms for Web.md",
+    "CY 5700 SVSS/~syncthing~Memory Corruption.md.tmp",
     "CY 5700 SVSS/Untitled.md",
     "CY 5700 SVSS/~syncthing~Untitled.md.tmp",
-    "CY 5700 SVSS/~syncthing~Three Modern Mechanisms for Web.md.tmp",
-    "CY 5700 SVSS/4th June Class Notes.md",
-    "CY 5700 SVSS/28th May - Pre read & Class notes.md",
     "CY 5700 SVSS/7 May to 21st May class notes.md",
-    "CY 5700 SVSS/~syncthing~Classic Attacks Extended.md.tmp",
     "09_Web_Exploitation/03_Web_Vulnerabilities/10_Server-Side-Parameter-Pollution.md",
     "CY 5700 SVSS/Classic Attacks Extended.md",
-    "CY 5700 SVSS/Challenge 4.md",
-    "CY 5700 SVSS/Cache Poisoning Paper.md",
     "2026-05-21 CY5770.md",
-    "images/Pasted image 20260611162056.png",
-    "images/Pasted image 20260611161553.png",
-    "images/Pasted image 20260611161456.png",
-    "images/Pasted image 20260611161321.png",
-    "images/Pasted image 20260611155911.png",
-    "images/Pasted image 20260611155730.png",
-    "CY 5700 SVSS/Challenge 3.md",
-    "CY 5700 SVSS/Bonus Assignment 1.md",
-    "LLM Attack & and prompt injection.md",
-    "12_Kubernetes/12_Taints_and_tolerations.md",
-    "CY 5700 SVSS/Challenge 2.md",
-    "CY 5700 SVSS/Crypto challenge.md",
-    "17_Bug_Bounty/Daily_Tasks.md",
-    "17_Bug_Bounty/Bug_Bounty_Journal.md",
-    "08_Cryptography/Cryptography/~syncthing~GPG Cheatsheet.md.tmp",
-    "CY 5700 SVSS/~syncthing~CY5770 Software Vulnerability & System Security.md.tmp",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }

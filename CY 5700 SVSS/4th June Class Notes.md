@@ -363,7 +363,9 @@ Content-Length: 16 tells here that after you are done with the header you should
 ## Chunked Encoding 
 
 ![[Pasted image 20260610165256.png]]
-
+- `6` → next 6 bytes are `query=` (q-u-e-r-y-= = 6 bytes) ✓
+- `a` → `a` is hex for 10, so the next 10 bytes are `funny+cats` (f-u-n-n-y-+-c-a-t-s = 10 bytes) ✓
+- `0` → zero-size chunk = "body is done"
 In chunked encoding the terminator is at the end of each 
 ![[Pasted image 20260610165912.png]]
 

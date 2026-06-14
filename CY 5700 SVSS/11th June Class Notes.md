@@ -87,32 +87,53 @@ Assembly
 More C. 
 More Linux 
 
-### Machine Code 
+### Basics Revision  
 
-CPU
+**Machine code** (or machine language) is the fundamental, lowest-level programming language directly understood by a computer's CPU. Composed entirely of binary digits (0s and 1s).
+
+
+
+https://stackoverflow.com/questions/466790/assembly-code-vs-machine-code-vs-object-code
+
+![[Pasted image 20260614140903.png]]
 
 Linux executable format - elf 
-Bin
-
+.Bin a generic binary file that stores raw data (0s and 1s)
 ### Instruction Set Architecture 
 
+![[Pasted image 20260614141605.png]]
 List of instructions your CPU understands. 
-RISC (keep your instructions simple they should do only one thing, these architecutres tend to have seperate memory RAM, ROM, load THIS data from RAM into register, they have many registers available to them ) v.s
-CISC(on the other hand goes to complete opposite direction, they do lot of things have lot of side effects. eg, add instruction reads from one and it needs to store . rewrite and give error somewhere else, small number of registers, difficicult to write code for compile for. we are stuck with this)
+RISC (keep your instructions simple they should do only one thing, these architectures tend to have separate memory RAM, ROM, load THIS data from RAM into register, they have many registers available to them ) v.s
+CISC(on the other hand goes to complete opposite direction, they do lot of things have lot of side effects. eg, add instruction reads from one and it needs to store . rewrite and give error somewhere else, small number of registers, difficult to write code for compile for. we are stuck with this)
 
 Anything that comes from Intel is CISC.
 
-## Assembly 
-is not change in the level of abstraction when you look at binary represnetation of the program and compare with C LEVEL . they are different levels of abstraction 
+![[Pasted image 20260614142051.png]]
 
-C makes sense to human 
-binary makes sense to 
-with assembly  abstraction same as binary  
+## Assembly 
+
+**Assembly code** is plain text and (somewhat) human-readable source code with a mostly-direct 1:1 relationship to machine instructions. This is accomplished using mnemonics for the actual instructions, registers, or other resources. Examples include `JMP` and `MULT` for the CPU's jump and multiplication instructions. Unlike machine code, the CPU does not understand assembly code. You convert assembly code to machine code with the use of an **assembler** or a **compiler**,
+
+![[Pasted image 20260614142318.png]]
 
 32 bit version will be taken as reference. 
 We will go with the AT&T version of flavor. 
 
-With memory not being represented as single box separation of data and memory is being violated. if you tell the cpu execute the address it goes ahead and executes. 
+https://gist.github.com/youkaichao/9fe03d94839886c74acc847d82b57b66
+
+
+## Von Neumann Architecture
+
+![[Pasted image 20260614142726.png]]
+
+
+With memory not being represented as single box separation of data and memory is being violated. i 
+There's no hardware enforcement separating "this region is code" from "this region is data." The CPU doesn't inherently know it just fetches whatever address `%eip` (the program counter) points to and executes it.
+Exploited through buffer overflow.
+
+![[Pasted image 20260614143038.png]]
+
+https://www.geeksforgeeks.org/computer-organization-architecture/different-instruction-cycles/
 
 ## Registers 
 

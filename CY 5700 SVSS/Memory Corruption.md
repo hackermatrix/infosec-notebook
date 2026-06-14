@@ -1,5 +1,4 @@
 
-
 ## Instruction Set Arch
 
 - Abstraction of the interface between software and hardware. i.e the instructions that a CPU understands.

