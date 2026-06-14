@@ -93,7 +93,35 @@ Fundamental components that make up the Active Directory environment.
 - This GUID value is unique across the enterprise, similar to a MAC address.
 - <mark style="background: #FFB86CA6;">The GUID is stored in the `ObjectGUID` attribute.</mark>
 - It is used by AD to internally identify objects.
-- 
+
+#### 7. Security principals
+- [Security principals](https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/security-principals) are<mark style="background: #FFF3A3A6;"> anything that the operating system can authenticate</mark>, including users, computer accounts, or even threads/processes that run in the context of a user or computer account (i.e., an application such as Tomcat running in the context of a service account within the domain).
+
+#### 8. Security Identifier (SID)
+- A [security identifier](https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/security-principals), or SID is used as a unique identifier for a security principal or security group. Every account, group, or process has its own unique SID, which, in an AD environment, is issued by the domain controller and stored in a secure database.
+- SIDs <mark style="background: #BBFABBA6;">cannot be assigned to other security principle</mark> even if the original security principle is deleted.
+- There are also [well-known SIDs](https://ldapwiki.com/wiki/Wiki.jsp?page=Well-known%20Security%20Identifiers) that are used to identify generic users and groups. These are the same across all operating systems. An example is the `Everyone` group.
+- ![[Pasted image 20260614132311.png]]
+
+#### 9. Distinguished Name (DN)
+- A [Distinguished Name (DN)](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ldap/distinguished-names) describes the full path to an object in AD (such as `cn=bjones, ou=IT, ou=Employees, dc=inlanefreight, dc=local`).
+
+#### 10. Relative Distinguished Name (RDN)
+- A [Relative Distinguished Name (RDN)](https://docs.microsoft.com/en-us/windows/win32/ad/object-names-and-identities) is a single component of the Distinguished Name that identifies the object as unique from other objects at the current level in the naming hierarchy.
+- In our example, `bjones` is the Relative Distinguished Name of the object.
+- <mark style="background: #FFB86CA6;">An object can have same RDN but cannot have the same DNs.</mark>
+
+#### 11. sAMAccountName
+- The [sAMAccountName](https://docs.microsoft.com/en-us/windows/win32/ad/naming-properties#samaccountname) is the user's logon name. Here it would just be `bjones`. It must be a unique value and 20 or fewer characters.
+
+#### 12. userPrincipalName
+- The [userPrincipalName](https://social.technet.microsoft.com/wiki/contents/articles/52250.active-directory-user-principal-name.aspx) attribute is another way to identify users in AD. 
+- This attribute consists of a prefix (the user account name) and a suffix (the domain name) in the format of `bjones@inlanefreight.local`. This attribute is not mandatory.
+
+#### 13. FSMO Roles
+
+
+
 ****
 ---
 **Next Steps:****
