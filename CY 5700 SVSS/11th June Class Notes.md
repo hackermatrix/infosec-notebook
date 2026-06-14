@@ -127,7 +127,7 @@ https://gist.github.com/youkaichao/9fe03d94839886c74acc847d82b57b66
 ![[Pasted image 20260614142726.png]]
 
 
-With memory not being represented as single box separation of data and memory is being violated. i 
+With memory not being represented as single box separation of data and memory is being violated. 
 There's no hardware enforcement separating "this region is code" from "this region is data." The CPU doesn't inherently know it just fetches whatever address `%eip` (the program counter) points to and executes it.
 Exploited through buffer overflow.
 
@@ -138,6 +138,9 @@ https://www.geeksforgeeks.org/computer-organization-architecture/different-instr
 ## Registers 
 
 6 general purpose registers. 
+
+![[Pasted image 20260614151004.png]]
+
 Compilers need to think about allocation of registers. 
 
 Google "x86 cheatsheet"
