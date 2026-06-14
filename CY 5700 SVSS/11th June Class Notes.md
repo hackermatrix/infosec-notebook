@@ -139,11 +139,23 @@ https://www.geeksforgeeks.org/computer-organization-architecture/different-instr
 
 6 general purpose registers. 
 
+An accumulator register is a high-speed temporary storage location inside a computer's CPU. Its primary job is to hold the intermediate results of ongoing arithmetic and logic operations (like adding numbers or comparing values) so the CPU doesn't have to keep accessing slower main memory.
+
+A loop counter in a register is a dedicated hardware mechanism or standard software usage that tracks the number of times a block of code (a loop) repeats.
+
 ![[Pasted image 20260614151004.png]]
+
+![[Pasted image 20260614161736.png]]
+
+![[Pasted image 20260614162058.png]]
 
 Compilers need to think about allocation of registers. 
 
 Google "x86 cheatsheet"
+
+![[Pasted image 20260614161620.png]]
+
+![[Pasted image 20260614162300.png]]
 
 ## Operands 
 
