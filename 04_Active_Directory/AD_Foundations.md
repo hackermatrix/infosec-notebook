@@ -119,7 +119,13 @@ Fundamental components that make up the Active Directory environment.
 - This attribute consists of a prefix (the user account name) and a suffix (the domain name) in the format of `bjones@inlanefreight.local`. This attribute is not mandatory.
 
 #### 13. FSMO Roles
-
+- Microsoft separated the various responsibilities that a DC can have into [Flexible Single Master Operation (FSMO)](https://docs.microsoft.com/en-us/troubleshoot/windows-server/identity/fsmo-roles) roles.
+- These give Domain Controllers (DC) the ability to continue authenticating users and granting permissions without interruption (authorization and authentication).
+- <mark style="background: #FFB86CA6;">It is similar to how  responsibilities are assigned to multiple higher level people in an organization.</mark>
+- There are five FSMO roles: 
+	- `Schema Master` and `Domain Naming Master` (one of each per forest), 
+	- `Relative ID (RID) Master` (one per domain), 
+	- `Primary Domain Controller (PDC) Emulator` (one per domain), and `Infrastructure Master` (one per domain).
 
 
 ****
