@@ -235,11 +235,77 @@ getPasswords = function() { sendToAttacker() }
 
 ![[Pasted image 20260617145922.png]]
 
+ This diagram shows how a malicious extension M abuses the shared namespace + XPCOM to attack your computer. Let me walk through each step:
+
+---
+
+**The players:**
+
+- **Extension M** = malicious extension (has the skull)
+- **Extension X** = a legitimate extension that has **download capability** (like a download manager)
+- **Extension Y** = a legitimate extension that has **execute capability** (like a file launcher)
+- **XPCOM** = the powerful framework giving access to everything
+
+---
+
+**Step by step:**
+
+**Step 1 — M tells X to download:**
+
+```
+M → X: "hey use your download capability 
+        to grab this .exe from the internet"
+```
+
+M itself might not have download permission, but X does. Because of shared namespace, M can just **call X's functions directly**.
+
+**Step 2 — X uses XPCOM to access internet:**
+
+```
+X → XPCOM → Internet
+```
+
+X has legitimate internet access through XPCOM, so this works fine, no suspicion.
+
+**Step 3 — .exe gets saved to filesystem:**
+
+```
+Internet → .exe file → Filesystem
+```
+
+The malicious executable is now sitting on your computer.
+
+**Step 4 — M tells Y to execute:**
+
+```
+M → Y: "hey use your execute capability 
+        to run this file I just downloaded"
+```
+
+Again M borrows Y's capability through shared namespace.
+
+**Step 5 — Y uses XPCOM to run the file:**
+
+```
+Y → XPCOM → Filesystem → runs .exe
+```
+
+Malware is now executing on your machine.
+
+---
+
+**The key insight:**
+
+M never directly downloaded or executed anything — it **borrowed legitimate capabilities from X and Y** through the shared namespace. So if anyone was watching:
+
+- X did the download — X is a trusted extension, looks fine
+- Y did the execution — Y is a trusted extension, looks fine
+- M just quietly orchestrated everything behind the scenes
+
+This is exactly the **confused deputy problem** from the slides applied to extensions — X and Y were legitimate deputies that got confused into doing M's dirty work.
 
 Let us say you installed some extension on the browser & the extension has a bug or vulnerability in it. Anything you visit on the browser becomes a vulnerable input. Most of the browser extensions are designed to scan the websites you visit. E.g, you scan the website you are looking at like phone number which makes it clickable. you're entire website can be untrusted input to the extension which increases the attack surface. 
 Question on mid term  on extension ask you security design question 
-
-
 
 
 
