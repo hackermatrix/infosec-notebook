@@ -30,8 +30,38 @@ Lower layers of the stack are trustworthy.
 Attackers cannot intercept traffic - TLS partially solves this. 
 But there are a lot of technology like proxy end the TLS. so if proxy gets compromised it is a problem. 
 **Sites cannot escape the browser sandbox.** 
-#### Important 
+#### Important: What is origin
+
 Different origins are isolated. -> origin = **<scheme, host, port>** 
+
+**Scheme** = the protocol part of the URL. Examples: `https`, `http`, `ftp`. It's everything before the `://`.
+
+The scheme is specifically the **protocol identifier** at the very start of a URL. Only things like `http`, `https`, `ftp`, `mailto`, `file` etc. are schemes.
+
+GET, POST, PUT are part of the **HTTP request itself** — they tell the server _what action_ you want to perform on a resource:
+
+- **GET** → fetch/read something
+- **POST** → submit data to be processed
+- **PUT** → store/replace data at a location
+- **DELETE** → delete something
+
+A simple way to think about the difference:
+
+- The **scheme** is in the URL → `https://bank.com`
+- The **method** is in the request line → `GET /login HTTP/1.1`
+
+They operate at completely different levels. **The scheme is about _how to connect_ (what protocol), the method is about _what to do_ once connected.**
+
+**Host** = the domain name or IP address. Examples: `bank.com`, `www.google.com`, `192.168.1.1`.
+
+**Port** = the network port number. Examples: `443` (default for HTTPS), `80` (default for HTTP), `8080`.
+
+So for a URL like `https://bank.com:443/login`:
+
+- Scheme → `https`
+- Host → `bank.com`
+- Port → `443`
+- 
 Every web object is associated with an origin. 
 - **HTML, CSS, scripts, images, fonts...** 
 eg. the jpeg file that you fetch. 
@@ -212,8 +242,13 @@ Web server receives input and sends to database
 - if you are the developer of website it is their input 
   if it is database input it is their output. 
 
-## SQL 
+## SQL Injection 
+![[Pasted image 20260617131426.png]]
 
+
+![[Pasted image 20260617131523.png]]
+
+![[Pasted image 20260617131548.png]]
 
 metadata table 
 
@@ -413,8 +448,18 @@ Be aware of the tiny implementation details.
 
 '  and paranthesis is what you should look into it. 
 ## Javascript injection / Cross site scripting 
+![[Pasted image 20260617131828.png]]
 
-Because of the Same orgin policy document.cookie being javascript code. You can only work on the same origin. It cannot come from localhost it should come from northeastern.edu something like that. W will try code injection for that. find a way to check your javascript into the program. 
+Because of the Same orgin policy document.cookie being javascript code. You can only work on the same origin. It cannot come from localhost it should come from northeastern.edu something like that. We will try code injection for that. find a way to check your javascript into the program. 
+
+### Reflected XSS
+
+![[Pasted image 20260617132514.png]]
+
+### Stored XSS
+![[Pasted image 20260617132724.png]]
+
+![[Pasted image 20260617132822.png]]
 
 ### Step 1: Find a code injection vector 
 
@@ -533,3 +578,48 @@ The browser automatically sends cookies with every request. So if a victim visit
 ![[Pasted image 20260606203050.png]]
 
 ![[Pasted image 20260607010757.png]]
+## Code injection 
+
+![[Pasted image 20260617131652.png]]
+## Cross-Site Request Forgery
+
+![[Pasted image 20260617134652.png]]
+### What is Document Object Model
+
+When your browser loads a webpage, it converts all the HTML into a **tree structure** that JavaScript can interact with. That tree is the DOM.
+
+```
+
+<body>
+  <div id="name">Kaan</div>
+  <p>Welcome!</p>
+</body>
+
+```
+Becomes a tree the browser builds internally, and JavaScript can access/modify it via `document.something`:
+
+document.getElementById("name")  // grabs that div
+document.cookie                   // grabs cookies
+document.title                    // grabs page title
+
+
+whaterver we mention through div id = 'something; e.g. div id="roll_number" this can be accessesed by  document.getElementById("roll_number")
+
+So when the slide says **"not exposed to the DOM"** it means JavaScript **cannot access it** through `document.cookie` or any other DOM API.
+
+### **Why the name HttpOnly?**
+
+The name means **"this cookie should only travel over HTTP"** — meaning:
+
+- ✅ Browser can send it in HTTP requests automatically
+- ❌ JavaScript/DOM cannot touch it at all
+
+So the cookie still does its job (authenticating you with the server) but JS is completely locked out from reading it.
+
+
+![[Pasted image 20260617135734.png]]
+
+### CSRF Tokens
+
+![[Pasted image 20260617135857.png]]
+![[Pasted image 20260617135915.png]]
