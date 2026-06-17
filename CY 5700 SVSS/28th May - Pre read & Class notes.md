@@ -618,8 +618,21 @@ So the cookie still does its job (authenticating you with the server) but JS is 
 
 
 ![[Pasted image 20260617135734.png]]
-
+![[Pasted image 20260617140443.png]]
+![[Pasted image 20260617140550.png]]
 ### CSRF Tokens
 
 ![[Pasted image 20260617135857.png]]
 ![[Pasted image 20260617135915.png]]
+### Defenses 
+
+![[Pasted image 20260617140712.png]]
+ 
+The core difference is that **`Origin` only contains the domain information (scheme, host, and port)** while **`Referer` can contain the full URL path, query parameters, and fragments**.
+
+**`Referer` header** is an optional HTTP request header that identifies the address of the **previous web page** **from which a link was followed**.
+
+
+![[Pasted image 20260617142845.png]]
+
+**Client-side attacks** target the user’s web browser (e.g., XSS, clickjacking). **Server-side attacks** target the back-end infrastructure (e.g., databases, application logic).

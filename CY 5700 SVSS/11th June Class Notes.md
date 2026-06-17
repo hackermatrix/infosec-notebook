@@ -140,8 +140,108 @@ Examples:
 - LastPass (password manager)
 - Grammarly
 
+![[Pasted image 20260617144454.png]]
+![[Pasted image 20260617144548.png]]
+![[Pasted image 20260617144957.png]]
+### **1. Code injection — Extension calls eval() with parts of HTML**
+
+Remember from the slides `eval()` is called "the greatest evil" — it takes a **string and executes it as code**.
+
+So if an extension does something like:
+eval(document.getElementById("someDiv").innerHTML)
+
+An attacker can put malicious code inside that div on their webpage, and the extension will **execute it with extension-level privileges** — way more powerful than normal webpage JS.
+
+### 2. Replacing native APIs — Script redefines DOM APIs and confuses extension
+
+JavaScript lets you **overwrite built-in functions**. So a malicious website could do:
+
+javascript
+
+```javascript
+document.cookie = function() {
+    sendToAttacker(arguments);  // steal data first
+    return originalCookie;       // then behave normally
+}
+```
+
+Your extension comes along and calls `document.cookie` thinking it's talking to the **real browser API** — but it's actually calling the **attacker's fake version**.
+
+The extension never knew it was swapped. It gets the right answer back so it doesn't suspect anything. Meanwhile the attacker got the data.
+
+### 3. Capability leaks — Extension leaks privileged objects to website**
+
+Extensions have special powers normal webpages don't — like reading your bookmarks, history, filesystem etc.
+
+If an extension accidentally **exposes those privileged objects** to the webpage:
+
+javascript
+
+```javascript
+// Extension accidentally makes this accessible to the page
+window.extensionAPI = this.privilegedObject
+```
+
+Now any website can grab `window.extensionAPI` and use those extension-level powers — powers they were never supposed to have.
+
+
+### **4. Mixed content — Extension injects HTTP script into HTTPS page**
+
+You're on `https://bank.com` — fully encrypted, secure connection.
+
+But your extension injects:
+
+html
+
+```html
+<script src="http://somesite.com/script.js"></script>
+```
+
+That script loads over **plain HTTP** — unencrypted, can be intercepted and tampered with by a man-in-the-middle attacker. The whole security of HTTPS is now undermined because the extension punched a hole in it.
+
+### **XPCOM Framework:**
+![[Pasted image 20260617145738.png]]
+
+XPCOM = Cross Platform Component Object Model
+
+Think of it as a **set of tools/APIs** Firefox gave to extensions that allowed them to do basically anything the browser itself could do:
+
+```
+Normal webpage JS can do:    Extension with XPCOM could do:
+─────────────────────────    ──────────────────────────────
+Read DOM                     Read DOM
+Make HTTP requests           Make HTTP requests
+                             + Read your filesystem
+                             + Access bookmarks/history
+                             + Intercept ALL HTTP traffic
+                             + Modify browser UI itself
+                             + Run native code
+```
+
+So it was essentially giving extensions **root-level browser access** with no restrictions. That's the problem — way too much power given by default.
+
+![[Pasted image 20260617145834.png]]
+In JavaScript, namespace is much simpler — it just means the **shared memory space where all variables and functions live**.
+
+// Extension A writes on the whiteboard:
+var userPassword = "abc123"
+function getPasswords() { ... }
+
+// Extension B can just... read it:
+console.log(userPassword)  // "abc123" — oops!
+
+// Extension B can even overwrite it:
+getPasswords = function() { sendToAttacker() }
+
+![[Pasted image 20260617145922.png]]
+
+
 Let us say you installed some extension on the browser & the extension has a bug or vulnerability in it. Anything you visit on the browser becomes a vulnerable input. Most of the browser extensions are designed to scan the websites you visit. E.g, you scan the website you are looking at like phone number which makes it clickable. you're entire website can be untrusted input to the extension which increases the attack surface. 
 Question on mid term  on extension ask you security design question 
+
+
+
+
 
 # Memory Corruption 
 
