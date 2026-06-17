@@ -127,7 +127,27 @@ Fundamental components that make up the Active Directory environment.
 	- `Relative ID (RID) Master` (one per domain), 
 	- `Primary Domain Controller (PDC) Emulator` (one per domain), and `Infrastructure Master` (one per domain).
 
+#### 14 A **Global Catalog (GC)**
+- A Global Catalog in Active Directory is a special Domain Controller that stores a **searchable copy of information about every object in the entire forest**.
+- It has partial information for all the domains in the forest.
+- why do we even need GC ?:
+	  - The GC lets users/applications search the whole forest.
+	  - helps determine Universal Group memberships and makes login faster.
+	  - Reduces Network Traffic.
 
+#### 15. Read-Only DCs and Active Directory Schema
+- Read-Only Domain Controller (RODC) is a special type of Domain Controller in Active Directory that stores a **read-only copy** of the AD database.
+- It means that : 
+	-  it can authenticate users
+	- it can answer AD requests
+	- BUT it cannot make changes to Active Directory
+#### 16. Service Principal Name (SPN)
+- A [Service Principal Name (SPN)](https://docs.microsoft.com/en-us/windows/win32/ad/service-principal-names) uniquely identifies a service instance.
+- . They are used by Kerberos authentication to<mark style="background: #FFB86CA6;"> associate an instance of a service with a logon account</mark>, allowing a client application to request the service to authenticate an account without needing to know the account name.
+
+#### 17. Group Policy Object (GPO)
+- [Group Policy Objects (GPOs)](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/policy/group-policy-objects) are virtual collections of policy settings.
+- 
 ****
 ---
 **Next Steps:****
