@@ -105,6 +105,10 @@ This completes the request.
 
 Access-Control-Allow-Origin : t
 
+
+![[Pasted image 20260618054440.png]]
+https://medium.com/@apmaduwantha/cors-vs-csp-a-practical-developer-focused-guide-to-web-security-6d056566c96c
+
 ## Can be asked in exam.  
 CORS is not a security technology it makes it more vulnerable. It is an excellent example of **security architecture one is least privilege**. This is clever example of least privilege. Because different origins cannot interact with each other. So you use CORS to keep the same origin policy 
 
@@ -233,6 +237,7 @@ console.log(userPassword)  // "abc123" — oops!
 // Extension B can even overwrite it:
 getPasswords = function() { sendToAttacker() }
 
+## CrossFire
 ![[Pasted image 20260617145922.png]]
 
  This diagram shows how a malicious extension M abuses the shared namespace + XPCOM to attack your computer. Let me walk through each step:
