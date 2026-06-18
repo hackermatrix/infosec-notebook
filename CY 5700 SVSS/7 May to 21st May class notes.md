@@ -640,7 +640,6 @@ For effectively implementing least privilege you need both DAC and capabilities.
 ### File Capabilities
 ![[Pasted image 20260522150620.png]]
 E.g. root is going to say I am going to mark sudo with certain file capabilities. Any body launching sudo starts the process holding this capability. 
-
 ### Capability Control 
 
 Boils down to juggling members of capability sets. 
@@ -812,6 +811,21 @@ ls ;sh | wc -l
 
 The shell sees a pipe between `sh` and `wc -l`. A pipe means "take the output of the left command and feed it into the right command." So every time you type a command inside that shell, its output goes into `wc -l` instead of your screen. **You're typing blind the shell is running,** **but you can't see anything it outputs.** Useless.
 
+So you **do** get a shell prompt and can type commands. The problem isn't that you don't see the shell — it's that **every command you type inside that shell has its output piped to `wc -l`**. You're typing into a working shell, but all the output is being swallowed:
+
+bash
+
+```bash
+$ whoami
+1        # you just see "1" (wc -l counted 1 line)
+$ ls
+5        # you see "5" (wc -l counted 5 lines)
+$ cat /etc/passwd
+42       # you see "42" (wc -l counted 42 lines)
+```
+
+You're running commands, but you can't see what they actually output — only the line count. Totally blind.
+
 **Scenario 2: `;sh;echo a`**
 
 The final string becomes:
@@ -820,11 +834,20 @@ The final string becomes:
 ls ;sh;echo a  | wc -l
 ```
 
-Now the shell sees three separate commands split by semicolons:
 
-1. `ls` → runs, you see the directory listing
-2. `sh` → runs, you get a **clean interactive shell** with output on your screen
-3. `echo a | wc -l` → this only runs **after you exit `sh`** — it's just sitting in line waiting
+The shell parses this as **four separate things**:
+
+1. `ls` (runs first)
+2. `;` (separator)
+3. `sh` (runs second, **standalone, NO pipe**)
+4. `;` (separator)
+5. `echo a | wc -l` (runs third, **only AFTER you exit sh**)
+
+The crucial point: **the second semicolon breaks the pipeline**. The pipe only connects to `echo a`, not to `sh`. So:
+
+- `sh` runs cleanly with normal stdin/stdout
+- You type commands and see their full output
+1. `echo a | wc -l` → this only runs **after you exit `sh`** — it's just sitting in line waiting
 
 The `echo a` acts as a **sacrificial command** that absorbs the `| wc -l`, keeping it away from `sh`. That's its entire purpose.
 
