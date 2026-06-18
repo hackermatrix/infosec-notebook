@@ -123,6 +123,8 @@ It computes the hash on your computer inside the browser & sees if it matches if
 It is not in use so much cause it is operationally not feasible. 
 you see this only cause if you go with the most cheapest not something like Amazon or Azure. 
 
+![[Pasted image 20260618072656.png]]
+
 ## Browser Extensions
 
 ### Difference between plugin and extension 
