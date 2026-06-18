@@ -109,7 +109,7 @@ Adjustments possible , login to github using your google account.
 
 ![[Pasted image 20260530135042.png]]
 
-**Stateless** means each HTTP request is completely independent — the server has no memory of previous requests. Every request starts fresh.
+**Stateless** means each HTTP request is completely independent the server has no memory of previous requests. Every request starts fresh.
 HTTP H2,H3 are binary and compressed in multiple ways which dont make any sense. 
 Body does not have structures. 
 
@@ -213,13 +213,13 @@ everything in a HTTP, request is considered input.
 - **Cookies** 
 - **Uploaded files** 
 
-Everything that comes to the application from external- not just request paylod. but every part of the request. 
+Everything that comes to the application from external not just request paylod. but every part of the request. 
 
 ### Rule 1: Validate Input 
 
 Validate all input always. 
 eg. data type, range.charachters/patters, allowed, whether duplicates or empty values are allowed. 
-Against a positive specification. eg does it contain bad characters - you can;t know that you know the good charactehers. 
+Against a positive specification. eg does it contain bad characters - you can;t know that you know the good characters. 
 eg. regular expression match if is it the date. 
 e.g get_ip get the network interface and check if is right instead they 
 Do it on the server. 
