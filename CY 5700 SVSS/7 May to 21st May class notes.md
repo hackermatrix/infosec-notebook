@@ -300,7 +300,7 @@ Use full disk encryption - xts aes symmetric.
 When facing security questions, allows developers to answer "yes", or "no" with confidence 
 
 ## Design Principles (8) for Security: 
-
+- https://devguide.owasp.org/en/02-foundations/03-security-principles/
 ## 1. **Economy of mechanism**; 
 If you want to connect two thing KISS keep it as simple and stupid as **possible.** 
 
@@ -342,7 +342,7 @@ Do not grant access based on a single condition.
 https://techcommunity.microsoft.com/blog/azuresqlblog/security-separation-of-privilege/2393637
 
 ##  6. Least privilege 
--Hold the minimum possible privileges to complete the task.
+- Hold the minimum possible privileges to complete the task.
 If augmented privileges are needed, relinquish them when no longer needed.
 Minimizes **damage if something goes wrong**.
 
@@ -1508,7 +1508,6 @@ With fd approach:
 https://medium.com/@weidagang/linux-beyond-the-basics-cgroups-f157d93bd755
 
  cgroups are a kernel feature that allows you to partition and limit the system resources (CPU, memory, disk I/O, network, etc.) that a group of processes can use.
-
 
 
 ## Sandboxes 
