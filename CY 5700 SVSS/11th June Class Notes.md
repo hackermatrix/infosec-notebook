@@ -399,6 +399,7 @@ Compilers need to think about allocation of registers.
 
 ebp's role is to stay put and never move. To point to the location in previous stack frame. 
 
+You will see eip pointing in the text region or syscall in kernel operation. You are competing what the next location of eip would be. Is a function pointer. 
 
 
 ![[Pasted image 20260614161620.png]]

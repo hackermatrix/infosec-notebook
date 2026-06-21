@@ -1,15 +1,33 @@
+
+## Basic Revision 
 Per the calling convention before the caller calls the calleee the arguments are pushed in the reverse order in the stack. First argument 2 goes and then argument 1. The hardware is designed like that. 
 
 ![[Pasted image 20260621104419.png]]
 
 If you want to reference local data it is ebp - 8. 
 
+## Spot the problem 
+
+![[Pasted image 20260621142220.png]]
+
+![[Pasted image 20260621142804.png]]
+
+### Understanding the problem 
+
 Strings have a null byte. 
 char buffer[100]
 strcpy(bufffer,msg) 
-it copies everyting till it is a null byte. 
-msg has to be a string and not a null byte. 
+1. The `strcpy(buffer, msg)` function copies a string from a source variable (`msg`) into a destination variable (`buffer`). 
+2. You must include `#include <string.h>` in C or `#include <cstring>` in C++ to use this function.
+3. strcpy` copies the `msg` character by character until it hits a null terminator (`\0`), which tells the computer where the string ends. It copies this null terminator as well.
+4. msg has to be a string and not a null byte. 
 
+### Difference between a null terminator and row terminator 
+![[Pasted image 20260621144123.png]]
+
+In C strings are byte arrays 
+they are terminated with the 0 bytes. 
+everything other than the 0 byte should be a printable ASCII character. There is no such thing as a non-printable ASCII character. 
 
 if you crash something you get segmentation fault 
 0x414141 in ?? ()'
