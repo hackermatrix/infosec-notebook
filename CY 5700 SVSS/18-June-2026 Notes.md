@@ -1,3 +1,9 @@
+Per the calling convention before the caller calls the calleee the arguments are pushed in the reverse order in the stack. First argument 2 goes and then argument 1. The hardware is designed like that. 
+
+![[Pasted image 20260621104419.png]]
+
+If you want to reference local data it is ebp - 8. 
+
 Strings have a null byte. 
 char buffer[100]
 strcpy(bufffer,msg) 
