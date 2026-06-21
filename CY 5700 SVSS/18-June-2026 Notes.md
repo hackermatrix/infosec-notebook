@@ -29,9 +29,25 @@ In C strings are byte arrays
 they are terminated with the 0 bytes. 
 everything other than the 0 byte should be a printable ASCII character. There is no such thing as a non-printable ASCII character. 
 
+
+![[Pasted image 20260621154353.png]]
 if you crash something you get segmentation fault 
 0x414141 in ?? ()'
 Capital A is 0x414141 
+
+why we see the 0x41 in ?? () and what is this function
+
+return address overwritten with 0x41414141
+eip tries to jump to 0x41414141
+that address doesn't exist
+CPU crashes → SIGSEGV
+GDB shows ?? () because no real function there
+
+
+ebp is also overwritten 
+Return address is getting in overwritten  eip is trying to jump to that address. ebp is going to point to some nonsense location. 
+
+CPU  executes the address 0x414141 in the code. 
 
 Return address is the key. 
 
