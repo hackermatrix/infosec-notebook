@@ -723,7 +723,7 @@ Definition of return address is take whatever is at the top of the stack and jum
 ### Prologue 
 **First two instructions (function SETUP):**
 pushl %ebp          ; save caller's frame pointer
-movl  %esp, %ebp    ; set MY frame pointer = current stack top
+movl %esp, %ebp (esp → ebp) src=esp, dst=ebp ; set MY frame pointer = current stack top
 
 Every single function starts with these two. Always. Without exception.
 
@@ -737,12 +737,25 @@ Take the value inside esp & write into ebp which means make ebp point to the sam
 
 ![[Pasted image 20260616234740.png]]
 
+BEFORE prologue:
+%ebp = 0x9000  (caller's frame base, main's frame)
+
+pushl %ebp:
+→ pushes VALUE 0x9000 onto stack (saved into memory slot)
+→ that slot now contains 0x9000
+
+movl %esp, %ebp:
+→ ebp register now points to that slot
+→ but INSIDE that slot = still 0x9000 (unchanged!)
+
 ### Epilogue — last three instructions
 
 The purpose of epilogue is clean up. 
-movl %ebp, %esp     ; throw away local vars (esp jumps back up to ebp)
+movl %ebp, %esp (ebp → esp) src=ebp, dst=esp    ; throw away local vars (esp jumps back up to ebp)
 popl %ebp           ; restore CALLER's frame pointer
 ret                 ; pop return address into %eip, jump back
+
+
 ### Local Data
 
  we allocate the local storage data let us say inside the function we created an array of 32 bits. It is subtracting from the stack. Sub means you are expanding your stack 

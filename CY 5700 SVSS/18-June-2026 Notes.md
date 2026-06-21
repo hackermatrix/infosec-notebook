@@ -29,6 +29,7 @@ In C strings are byte arrays
 they are terminated with the 0 bytes. 
 everything other than the 0 byte should be a printable ASCII character. There is no such thing as a non-printable ASCII character. 
 
+### Understanding segmentation fault. 
 
 ![[Pasted image 20260621154353.png]]
 if you crash something you get segmentation fault 
@@ -44,14 +45,36 @@ CPU crashes → SIGSEGV
 GDB shows ?? () because no real function there
 
 
-ebp is also overwritten 
-Return address is getting in overwritten  eip is trying to jump to that address. ebp is going to point to some nonsense location. 
+ebp is pointing to 0x41414141.
+Why ebp?" 
 
-CPU  executes the address 0x414141 in the code. 
+Yes ebp IS the base pointer. But remember the epilogue order:
+
+asm
+
+```asm
+movl %ebp, %esp    ; step 1
+popl %ebp          ; step 2 ← HERE is the problem
+ret                ; step 3
+```
+
+Step 2 — `popl %ebp`:
+
+```
+reads whatever is on stack at that moment
+that slot was overwritten with 0x41414141
+loads 0x41414141 INTO ebp
+
+ebp = 0x41414141 now
+ebp is supposed to be base pointer
+but now points to garbage
+```
+
+
+
 
 Return address is the key. 
 
-get_nobody is a convention for a user who has acccess to nothing. 
 
 Use python as an array and then print that. 
 
@@ -64,5 +87,14 @@ for practise make an another function and make it vulnerable.
 look at the clues from the calling conventions 
 abuse the fact ebp is the fixed point in stack. 
 
-ebp -values are local data 
-+values are arguments 
+
+### Privilege drop gone wrong exploit
+![[Pasted image 20260621162545.png]]
+
+1. get_nobody is a convention for a user who has acccess to nothing. 
+2. strcpy the user input to the char buffer which is a problem because user_input could be 100 and copied into 63 byte char buf. 
+3. your setuid bit will be a uid which would be user with less prvilege 
+4. so you could argue it is dropping privledge but the system(buf) is anoying now the value of buffer is the strcpy(user_input).
+
+
+If you can overflow this and then the uid comes before the buffer at a higher address deep in the stack. 
