@@ -98,3 +98,16 @@ abuse the fact ebp is the fixed point in stack.
 
 
 If you can overflow this and then the uid comes before the buffer at a higher address deep in the stack. 
+
+# Demo 
+
+![[Pasted image 20260621184720.png]]
+
+You want to get into this speakeasy code. 
+
+This is the source code. 
+
+![[Pasted image 20260621185015.png]]
+![[Pasted image 20260621185100.png]]
+
+Everything writes on the variable is_valid 

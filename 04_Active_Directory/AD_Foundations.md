@@ -147,7 +147,35 @@ Fundamental components that make up the Active Directory environment.
 
 #### 17. Group Policy Object (GPO)
 - [Group Policy Objects (GPOs)](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/policy/group-policy-objects) are virtual collections of policy settings.
-- 
+OR
+- A **GPO (Group Policy Object)** is a container of policy settings that can be applied to users and computers
+
+#### 18. Access Control List (ACL)
+
+- An [Access Control List (ACL)](https://docs.microsoft.com/en-us/windows/win32/secauthz/access-control-lists) is the ordered collection of Access Control Entries (ACEs) that apply to an object.
+
+- Imagine a building:
+	- The **ACL** is the full security policy for the building door
+	- Each **ACE** is one rule inside that policy
+
+- Example:
+
+```
+ACL: 
+├── Alice can enter 
+├── Bob can only view 
+└── Charlie is denied access
+```
+
+Each line is an ACE.
+
+#### 19. Access Control Entries (ACEs)
+- Each [Access Control Entry (ACE)](https://docs.microsoft.com/en-us/windows/win32/secauthz/access-control-entries) in an ACL identifies a trustee (user account, group account, or logon session) and lists the access rights that are allowed, denied, or audited for the given trustee.
+
+#### 20. Discretionary Access Control List (DACL)
+- DACL is a type of ACL
+- A **DACL (Discretionary Access Control List)** is the part of the ACL that:
+	- Controls who can access an object and what they can do.
 ****
 ---
 **Next Steps:****

@@ -4,12 +4,26 @@
     "type": "split",
     "children": [
       {
-        "id": "d09883f74440aac9",
+        "id": "206fafe3ee723990",
         "type": "tabs",
-        "dimension": 77.40112994350282,
         "children": [
           {
-            "id": "f5f5b9ee88332d35",
+            "id": "3121b768c16594e3",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "04_Active_Directory/AD_Foundations.md",
+                "followCursor": true,
+                "showSearch": true,
+                "searchQuery": "caller"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of AD_Foundations"
+            }
+          },
+          {
+            "id": "776f3aa033002f89",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -22,29 +36,8 @@
               "title": "AD_Foundations"
             }
           }
-        ]
-      },
-      {
-        "id": "206fafe3ee723990",
-        "type": "tabs",
-        "dimension": 22.598870056497173,
-        "children": [
-          {
-            "id": "3121b768c16594e3",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "04_Active_Directory/AD_Foundations.md",
-                "followCursor": true,
-                "showSearch": true,
-                "searchQuery": "Same "
-              },
-              "icon": "lucide-list",
-              "title": "Outline of AD_Foundations"
-            }
-          }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -206,54 +199,54 @@
       "bases:Create new base": false
     }
   },
-  "active": "f5f5b9ee88332d35",
+  "active": "776f3aa033002f89",
   "lastOpenFiles": [
-    "images/Pasted image 20260614123715.png",
-    "images/Pasted image 20260614140903.png",
-    "images/Pasted image 20260614143038.png",
-    "images/Pasted image 20260614123426.png",
-    "images/Pasted image 20260613153425.png",
-    "images/Pasted image 20260614141605.png",
-    "images/Pasted image 20260613153529.png",
-    "images/Pasted image 20260614124509.png",
-    "images/Pasted image 20260613153835.png",
-    "images/Pasted image 20260614124521.png",
-    "images/Pasted image 20260614142242.png",
-    "04_Active_Directory/AD Vulns Index.md",
-    "04_Active_Directory/AD_Authentication/Kerberos.md",
-    "04_Active_Directory/AD_SPN.md",
-    "04_Active_Directory/AD Basics.md",
-    "04_Active_Directory/AD_Objects.md",
-    "04_Active_Directory/AD_GPOs.md",
-    "04_Active_Directory/AD_Foundations.md",
-    "09_Web_Exploitation/03_Web_Vulnerabilities/12_Web_Cache_Attacks.md",
-    "CY 5700 SVSS/Challenge 4.md",
-    "CY 5700 SVSS/Cache Poisoning Paper.md",
-    "CY 5700 SVSS/Challenge 1.md",
+    "images/Pasted image 20260621185100.png",
+    "images/Pasted image 20260621185015.png",
+    "images/Pasted image 20260621184720.png",
+    "CY 5700 SVSS/Bonus Assignment 1.md",
     "CY 5700 SVSS/Memory Corruption.md",
-    "CY 5700 SVSS/Challenge 3.md",
+    "04_Active_Directory/AD_Foundations.md",
+    "CY 5700 SVSS/18-June-2026 Notes.md",
+    "images/Pasted image 20260621162545.png",
+    "CY 5700 SVSS/11th June Class Notes.md",
+    "images/Pasted image 20260621154353.png",
+    "images/Pasted image 20260621152834.png",
+    "images/Pasted image 20260621144123.png",
+    "images/Pasted image 20260621142804.png",
+    "images/Pasted image 20260621142220.png",
+    "CY 5700 SVSS/7 May to 21st May class notes.md",
+    "CY 5700 SVSS/28th May - Pre read & Class notes.md",
+    "11th June Class Notes.md",
+    "2026-05-21 CY5770.md",
     "CY 5700 SVSS/4th June Class Notes.md",
+    "images/Pasted image 20260621104419.png",
+    "C Revision.md",
+    "CY 5700 SVSS/Cache Poisoning Paper.md",
+    "CY 5700 SVSS/Challenge 2.md",
+    "CY 5700 SVSS/Challenge 4.md",
+    "CY 5700 SVSS/Challenge 3.md",
+    "CY 5700 SVSS/Challenge 1.md",
+    "CY 5700 SVSS/~syncthing~Challenge 2.md.tmp",
+    "CY 5700 SVSS/~syncthing~7 May to 21st May class notes.md.tmp",
+    "CY 5700 SVSS/Piazza Posts.md",
+    "images/Pasted image 20260618072656.png",
+    "04_Active_Directory/~syncthing~AD_Foundations.md.tmp",
+    "CY 5700 SVSS/Three Modern Mechanisms for Web.md",
+    "Untitled.md",
+    "~syncthing~Untitled.md.tmp",
+    "17_Bug_Bounty/Daily_Tasks.md",
+    "17_Bug_Bounty/Bug_Bounty_Journal.md",
+    "15_SOC/02_SOC L1 Alert Reporting.md",
+    "images/~syncthing~Pasted image 20260614121335.png.tmp",
+    "images/~syncthing~Pasted image 20260614132311.png.tmp",
+    "images/~syncthing~Pasted image 20260614121802.png.tmp",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/12_Web_Cache_Attacks.md",
     "Lab Solves/Web Cache Lab.md",
     "images/~syncthing~Pasted image 20260613111933.png.tmp",
     "Lab Solves/~syncthing~Web Cache Lab.md.tmp",
     "images/~syncthing~Pasted image 20260613110543.png.tmp",
-    "09_Web_Exploitation/03_Web_Vulnerabilities/~syncthing~12_Web_Cache_Attacks.md.tmp",
-    "images/~syncthing~Pasted image 20260613031221.png.tmp",
-    "images/~syncthing~Pasted image 20260613032530.png.tmp",
-    "Lab Solves",
-    "09_Web_Exploitation/Untitled",
-    "CY 5700 SVSS/11th June Class Notes.md",
-    "CY 5700 SVSS/Bonus Assignment 1.md",
-    "CY 5700 SVSS/28th May - Pre read & Class notes.md",
-    "CY 5700 SVSS/Challenge 2.md",
-    "CY 5700 SVSS/Three Modern Mechanisms for Web.md",
-    "CY 5700 SVSS/~syncthing~Memory Corruption.md.tmp",
     "CY 5700 SVSS/Untitled.md",
-    "CY 5700 SVSS/~syncthing~Untitled.md.tmp",
-    "CY 5700 SVSS/7 May to 21st May class notes.md",
-    "09_Web_Exploitation/03_Web_Vulnerabilities/10_Server-Side-Parameter-Pollution.md",
-    "CY 5700 SVSS/Classic Attacks Extended.md",
-    "2026-05-21 CY5770.md",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }
