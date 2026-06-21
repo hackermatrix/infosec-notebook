@@ -738,10 +738,10 @@ Take the value inside esp & write into ebp which means make ebp point to the sam
 
 ### Epilogue — last three instructions
 
+The purpose of epilogue is clean up. 
 movl %ebp, %esp     ; throw away local vars (esp jumps back up to ebp)
 popl %ebp           ; restore CALLER's frame pointer
 ret                 ; pop return address into %eip, jump back
-
 ### Local Data
 
  we allocate the local storage data let us say inside the function we created an array of 32 bits. It is subtracting from the stack. Sub means you are expanding your stack 
