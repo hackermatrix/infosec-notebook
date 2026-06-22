@@ -140,7 +140,25 @@ python generates "asd\n"
 → scanf reads it AS IF you typed it manually
 → no human needed
 
+**Why this matters for exploitation:**
+Your payload has non-printable bytes:
+b"A" * 128 + b"\x01\x00\x00\x00"
 
+You CANNOT type \x00 on a keyboard!
+Keyboard = only printable characters
+
+Python generates ANY byte value
+Pipe sends it to program
+scanf receives raw bytes
+
+![[Pasted image 20260621200846.png]]
+
+sys          → access system
+.stdout      → output channel
+.buffer      → raw bytes mode (most important part!)
+.write()     → send it
+
+Together = "send these exact raw bytes to output"
 
 python;s program does not use string python 3 print is a unicode we want a ram byte printer not an acii printer that is why use 
 sys.stdout.buffer.write("asd") 
