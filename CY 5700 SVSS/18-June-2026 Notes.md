@@ -184,10 +184,75 @@ Python looks up each character in ASCII table:
 'd' → 0x64
 
 stores exactly: [0x61][0x73][0x64]
-nothing more, nothing less
-raw bytes, no metadata
 
-objdump is present on every linux ststem
+![[Pasted image 20260622130007.png]]
+
+### When are crafting this paylaod we are making couple of assumptions 
+1. When  you request 128 in the buffer , but there is no guarantee that gcc would give you 128. 
+
+#### Reason 1 - Alignment:
+CPU reads memory most efficiently in chunks of 4 or 8 bytes
+If buffer ends at non-aligned address
+GCC adds PADDING bytes to align next variable
+
+char buffer[128]    = 128 bytes
+padding             = maybe 4 extra bytes added
+int is_valid        = 4 bytes
+
+Real layout might be:
+[128 bytes buffer][4 bytes padding][4 bytes is_valid]
+
+#### **Reason 2 — GCC reorders variables:**
+
+```
+You wrote:
+int is_valid;      ← first
+char buffer[128];  ← second
+
+GCC might put on stack:
+char buffer[128]   ← first
+int is_valid       ← second
+
+OR completely different order!
+Compiler optimizes for performance
+not for your assumptions
+```
+
+#### **Reason 3 — Stack canaries:**
+
+```
+GCC security feature adds SECRET VALUE between
+buffer and return address:
+
+[buffer][CANARY][saved ebp][return address]
+
+If canary changes → buffer overflow detected → crash
+Attacker must know canary value to bypass
+```
+
+#### **Reason 4 — Extra space:**
+
+```
+GCC sometimes allocates MORE than you asked:
+char buffer[128] → GCC gives 144 bytes
+                   for alignment purposes
+```
+
+So we can't rely on souce code you need to check disassembly & giving out the correct number. 
+![[Pasted image 20260622131228.png]]
+
+objdump is present on every linux ststem  it is used to display detailed information about object files, executables, and shared libraries
+https://man7.org/linux/man-pages/man1/objdump.1.html
+
+Why objdump -d ./club & not disas main 
+→ disassembles ENTIRE binary at once
+→ no need to run program at all
+→ see ALL functions together
+→ can pipe output, grep, save to file
+→ works on binary directly
+
+We are only interested in function main 
+![[Pasted image 20260622131808.png]]
 
 for practise make an another function and make it vulnerable. 
 look at the clues from the calling conventions 
