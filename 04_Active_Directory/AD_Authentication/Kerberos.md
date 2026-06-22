@@ -130,7 +130,7 @@ Understanding Kerberos is essential for modern AD exploitation.
 **Deep Dives:**
 - [[AS-REP Roasting|AS-REP Roasting Detailed]]
 - [[Kerberoasting|Kerberoasting Detailed]]
-- [[04_Active_Directory/AD_Foundations|AD Foundations]]
+- [[01_AD_Foundations|AD Foundations]]
 
 
 

@@ -176,6 +176,16 @@ Each line is an ACE.
 - DACL is a type of ACL
 - A **DACL (Discretionary Access Control List)** is the part of the ACL that:
 	- Controls who can access an object and what they can do.
+
+#### 21. SACL:
+- A **SACL contains ACEs (audit entries)** that specify:
+	- What actions to log
+	- Who to audit (users/groups)
+	- Whether to log:
+	    - Successful access
+	    - Failed access
+
+
 ****
 ---
 **Next Steps:****

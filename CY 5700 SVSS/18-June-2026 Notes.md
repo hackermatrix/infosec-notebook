@@ -70,22 +70,7 @@ ebp is supposed to be base pointer
 but now points to garbage
 ```
 
-
-
-
 Return address is the key. 
-
-
-Use python as an array and then print that. 
-
-python;s program does not use string python 3 print is a unicode we want a ram byte printer not an acii printer that is why use 
-sys.stdout.buffer.write("asd") 
-
-objdump is present on every linux ststem
-
-for practise make an another function and make it vulnerable. 
-look at the clues from the calling conventions 
-abuse the fact ebp is the fixed point in stack. 
 
 
 ### Privilege drop gone wrong exploit
@@ -111,3 +96,57 @@ This is the source code.
 ![[Pasted image 20260621185100.png]]
 
 Everything writes on the variable is_valid 
+you see scanf("%s) which means it is string & you write that into buffer. 
+strcmp and other things are hardcoded so this tells us that only the is_valid argument is what we 
+you overflow the buffer and reach the is_valid argument. 
+
+Looking at the code we understand 128 bytes declared that is a start to the payload. 
+For junk we will use the A's 
+
+We can see the integers declared 1 and 0. We will use 4 bit of integer 1. because is_valid is an integer that is 4 bytes. 
+00 00 00 01
+Now thinking about the Little-Endian.
+01 00 00 00
+
+scanf does not care about null terminators. 
+scanf is a vulnerable. 
+
+https://medium.com/@hritombhattacharya029/why-scanf-function-is-just-like-your-ex-5ceb468585cb
+
+![[Pasted image 20260621195539.png]]
+
+Use python as an array and then print that. 
+
+**What `|` (pipe) does:**
+
+python -c "print('asd')" | ./club
+
+LEFT side          RIGHT side
+python generates   ./club receives
+output             it as input
+
+**Without pipe — normal way:**
+
+./club
+→ program waits
+→ YOU type input manually on keyboard
+→ press enter
+→ scanf reads it
+
+
+**With pipe — automated way:**
+python generates "asd\n"
+→ pipe sends it directly to ./club's stdin
+→ scanf reads it AS IF you typed it manually
+→ no human needed
+
+
+
+python;s program does not use string python 3 print is a unicode we want a ram byte printer not an acii printer that is why use 
+sys.stdout.buffer.write("asd") 
+
+objdump is present on every linux ststem
+
+for practise make an another function and make it vulnerable. 
+look at the clues from the calling conventions 
+abuse the fact ebp is the fixed point in stack. 

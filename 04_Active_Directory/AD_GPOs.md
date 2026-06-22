@@ -33,5 +33,5 @@ GPOs can be linked at the following levels:
 
 ---
 **Related Topics:**
-- [[04_Active_Directory/AD_Foundations|AD Foundations]]
+- [[01_AD_Foundations|AD Foundations]]
 - [[01_Recon_Scanning/Nmap Cheatsheet|Recon Tools]]

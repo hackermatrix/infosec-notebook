@@ -41,5 +41,5 @@ Detailed breakdown of users, computer accounts, and groups in an AD environment.
 
 ---
 **Related Topics:**
-- [[04_Active_Directory/AD_Foundations|AD Foundations]]
+- [[01_AD_Foundations|AD Foundations]]
 - [[04_Active_Directory/AD_GPOs|AD Group Policies]]
