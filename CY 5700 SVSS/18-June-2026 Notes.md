@@ -163,6 +163,30 @@ Together = "send these exact raw bytes to output"
 python;s program does not use string python 3 print is a unicode we want a ram byte printer not an acii printer that is why use 
 sys.stdout.buffer.write("asd") 
 
+![[Pasted image 20260622122742.png]]
+
+Why does this work 
+
+![[Pasted image 20260622125502.png]]
+
+When you write `'asd'` (string):
+
+Python stores it as TEXT
+worries about encoding (UTF-8, ASCII etc)
+adds extra metadata
+not raw bytes
+
+When you write `b'asd'` (bytes):
+
+Python looks up each character in ASCII table:
+'a' → 0x61
+'s' → 0x73
+'d' → 0x64
+
+stores exactly: [0x61][0x73][0x64]
+nothing more, nothing less
+raw bytes, no metadata
+
 objdump is present on every linux ststem
 
 for practise make an another function and make it vulnerable. 
