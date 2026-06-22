@@ -84,22 +84,24 @@ Return address is the key.
 
 If you can overflow this and then the uid comes before the buffer at a higher address deep in the stack. 
 
-# Demo 
+## Demo 
 
 ![[Pasted image 20260621184720.png]]
 
 You want to get into this speakeasy code. 
 
-This is the source code. 
+### Look at the source code. 
 
 ![[Pasted image 20260621185015.png]]
 ![[Pasted image 20260621185100.png]]
+
 
 Everything writes on the variable is_valid 
 you see scanf("%s) which means it is string & you write that into buffer. 
 strcmp and other things are hardcoded so this tells us that only the is_valid argument is what we 
 you overflow the buffer and reach the is_valid argument. 
 
+### Drafting the exploit 
 Looking at the code we understand 128 bytes declared that is a start to the payload. 
 For junk we will use the A's 
 
@@ -187,7 +189,7 @@ stores exactly: [0x61][0x73][0x64]
 
 ![[Pasted image 20260622130007.png]]
 
-### When are crafting this paylaod we are making couple of assumptions 
+### Assumptions when drafting the paylaod
 1. When  you request 128 in the buffer , but there is no guarantee that gcc would give you 128. 
 
 #### Reason 1 - Alignment:
@@ -238,6 +240,8 @@ char buffer[128] → GCC gives 144 bytes
                    for alignment purposes
 ```
 
+## Understanding objdump 
+
 So we can't rely on souce code you need to check disassembly & giving out the correct number. 
 ![[Pasted image 20260622131228.png]]
 
@@ -251,9 +255,26 @@ Why objdump -d ./club & not disas main
 → can pipe output, grep, save to file
 → works on binary directly
 
+### Step 1: 
 We are only interested in function main 
-![[Pasted image 20260622131808.png]]
 
-for practise make an another function and make it vulnerable. 
-look at the clues from the calling conventions 
-abuse the fact ebp is the fixed point in stack. 
+![[Pasted image 20260622131808.png]]
+why do we see the initial instructions before the epilogue i.e, 
+
+`main()` is SPECIAL — it's different from normal functions:
+
+Normal function:
+caller controls esp → no alignment needed → straight to prologue
+
+main():
+OS controls esp → alignment NOT guaranteed → 
+GCC fixes it first → THEN prologue
+
+for practise make an another function and make it vulnerable not main. 
+
+### Step 2: look at the clues from the calling conventions 
+
+### Step 3: abuse the fact ebp is the fixed point in stack. 
+
+Looking at the code use of ebp to access the data. 
+![[Pasted image 20260622143315.png]]
