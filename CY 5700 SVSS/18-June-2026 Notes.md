@@ -5,6 +5,7 @@ Per the calling convention before the caller calls the calleee the arguments are
 ![[Pasted image 20260621104419.png]]
 
 If you want to reference local data it is ebp - 8. 
+ebp + 8 is arguments
 
 ## Spot the problem 
 
@@ -274,7 +275,87 @@ for practise make an another function and make it vulnerable not main.
 
 ### Step 2: look at the clues from the calling conventions 
 
+![[Pasted image 20260622153036.png]]
+
+Two registers pushed here are caller saved registers. 
+
+For calling convention look here 
+
+![[Pasted image 20260622153454.png]]
+
+Per the calling convention we know that it has to pass arguments , arguments passed on to the stack are pushed in the reverse order. now the thing pushed first must be the buffer address. 
+
+Scanf is a function in it;s own 
+scanf("%s", buffer);
+
+Two arguments:
+1. format string "%s"    ← arg1 (first in C code)
+2. buffer address        ← arg2 (second in C code)
+
+Arguments passed on to the stack are pushed in the reverse order. now the thing pushed first must be the buffer address.
+
+This is the scanf call sign 
+
+![[Pasted image 20260622155824.png]]
+![[Pasted image 20260622155845.png]]
+and you see two pushes before that. 
+
+so the first value is the buffer. 
 ### Step 3: abuse the fact ebp is the fixed point in stack. 
 
 Looking at the code use of ebp to access the data. 
+
+#### First use of ebp 
 ![[Pasted image 20260622143315.png]]
+
+Refresher ebp - values are local arguments, ebp + values . this seems like it is the address of is_valid
+
+You have two local variables 
+![[Pasted image 20260622150410.png]]
+![[Pasted image 20260622151404.png]]
+
+`0xC` is a hexadecimal (base-16) number. The prefix `0x` denotes that the following digits are in hex, while `C` represents the decimal value `12`
+
+now since it is 12 it can be char buffer.
+
+So the char can be 128 bytes so we are eliminating and bufffer then it is is_valid.
+This says 
+![[Pasted image 20260622150447.png]]
+
+#### Second use of ebp 
+
+![[Pasted image 20260622153337.png]]
+Ignore lea -0x8c(%ebp), %eax , why because 
+
+**`%eax` as return VALUE:**
+
+```
+sum():
+    addl %ebx, %eax    ; eax = 10 + 11 = 21
+    ret                ; eax = 21 (the answer)
+
+main:
+    call sum
+    ; eax = 21 now    ← return VALUE sitting here
+```
+
+`%eax` holds the **actual answer/result.**
+
+**`lea -0x8c(%ebp), %eax` — ADDRESS not value:**
+
+```
+AT&T syntax: lea source, destination
+
+lea -0x8c(%ebp), %eax
+
+source      = -0x8c(%ebp) = ebp - 140
+destination = %eax
+
+eax = ADDRESS of buffer (ebp - 140)
+    = NOT what is stored at that address
+    = just the location itself
+```
+
+**Not relevant to exploit calculation Just compiler passing buffer to scanf
+
+**
