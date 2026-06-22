@@ -300,7 +300,9 @@ This is the scanf call sign
 ![[Pasted image 20260622155845.png]]
 and you see two pushes before that. 
 
-so the first value is the buffer. 
+so the first value is the buffer. And what is inside eax it is this 
+![[Pasted image 20260622160008.png]]
+
 ### Step 3: abuse the fact ebp is the fixed point in stack. 
 
 Looking at the code use of ebp to access the data. 
@@ -325,7 +327,6 @@ This says
 #### Second use of ebp 
 
 ![[Pasted image 20260622153337.png]]
-Ignore lea -0x8c(%ebp), %eax , why because 
 
 **`%eax` as return VALUE:**
 
@@ -344,6 +345,10 @@ main:
 **`lea -0x8c(%ebp), %eax` — ADDRESS not value:**
 
 ```
+just calculate the address itself, put in eax, do not go there unlike mov
+```
+
+```
 AT&T syntax: lea source, destination
 
 lea -0x8c(%ebp), %eax
@@ -356,6 +361,53 @@ eax = ADDRESS of buffer (ebp - 140)
     = just the location itself
 ```
 
-**Not relevant to exploit calculation Just compiler passing buffer to scanf
 
-**
+
+#### **why is `lea` the start of buffer, not `push %eax`?**
+
+```
+lea  -0x8c(%ebp), %eax
+→ CALCULATES address ebp-140
+→ STORES that address INTO eax
+→ eax now = pointer to buffer
+
+push %eax
+→ pushes WHATEVER IS IN eax onto stack
+→ eax contains buffer's address
+→ so buffer's address goes onto stack
+```
+## Step 4: Finding the offset 
+
+**Calculate offset between buffer and is_valid passed as local data :**
+
+
+
+![[Pasted image 20260622161030.png]]
+## Final exploit 
+![[Pasted image 20260622161616.png]]
+![[Pasted image 20260622164002.png]]
+Suppose we do a small change in the code. 
+
+![[Pasted image 20260622162305.png]]
+
+![[Pasted image 20260622162940.png]]
+
+Each pair = 1 byte NOT each single digit!
+
+Value needed:  0x12345678
+
+Little endian stores LEAST significant byte first:
+byte 1 = 0x78  ← least significant
+byte 2 = 0x56
+byte 3 = 0x34
+byte 4 = 0x12  ← most significant
+
+So payload = \x78\x56\x34\x12
+
+It did work why did it crash 
+
+![[Pasted image 20260622163058.png]]
+
+[\x78][\x56][\x34][\x12][\x00] ← null terminator added! ↑ 5th byte written! goes PAST is_valid hits next memory location
+
+scanf adds another 0, it is ovewriting the saved registers cause saved registers Pop and crash later you still get in to the system but it gives error later 
