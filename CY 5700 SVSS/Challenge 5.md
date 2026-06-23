@@ -22,3 +22,6 @@ read_file(buf, argv[1]);
 ![[Pasted image 20260623174134.png]]
  f file descriptor 4 bytes, 
  buf +cur puts the content of the file into this 
+
+![[Pasted image 20260623180400.png]]
+-0x848(%ebp),%eax
