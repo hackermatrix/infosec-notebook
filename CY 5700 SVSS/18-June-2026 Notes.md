@@ -413,3 +413,5 @@ It did work why did it crash
 [\x78][\x56][\x34][\x12][\x00] ← null terminator added! ↑ 5th byte written! goes PAST is_valid hits next memory location
 
 scanf adds another 0, it is ovewriting the saved registers cause saved registers Pop and crash later you still get in to the system but it gives error later 
+
+
