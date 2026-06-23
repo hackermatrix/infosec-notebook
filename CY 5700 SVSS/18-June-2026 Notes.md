@@ -188,6 +188,8 @@ Python looks up each character in ASCII table:
 
 stores exactly: [0x61][0x73][0x64]
 
+As long as you use `b''` prefix and stick to printable ASCII characters — you can write anything inside it!
+
 ![[Pasted image 20260622130007.png]]
 
 ### Assumptions when drafting the paylaod
@@ -307,7 +309,7 @@ so the first value is the buffer. And what is inside eax it is this
 
 Looking at the code use of ebp to access the data. 
 
-#### First use of ebp 
+#### First use of ebp other than prologue
 ![[Pasted image 20260622143315.png]]
 
 Refresher ebp - values are local arguments, ebp + values . this seems like it is the address of is_valid
