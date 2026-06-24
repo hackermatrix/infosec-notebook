@@ -25,3 +25,7 @@ read_file(buf, argv[1]);
 
 ![[Pasted image 20260623180400.png]]
 -0x848(%ebp),%eax
+
+which i think can be the of struct config conf 
+![[Pasted image 20260624100429.png]]
+ 8d 83 79 e3 ff ff       lea    -0x1c87(%ebx),%eax
