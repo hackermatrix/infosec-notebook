@@ -86,6 +86,25 @@ The low 32 bits are always at the **lower address** on a little-endian system (w
 
 so 1056 + 1032 = 2088 
 
-And then we now we need to fill the next 8 bytes so that makes it 2088+8 = 2096. 
+# After calculating hydrogen from conf pad long long hydrogen 8 bytes. 
+And then we now we need to fill the next 8 bytes so that makes it 2088+8 = 2096
 
 
+Both values contain null bytes `\x00` — and that's fine here because `read_file` uses the `read()` syscall directly:
+
+c
+
+```c
+while ((count = read(f, buf + cur, IO_CHUNK)))
+```
+
+`read()` is binary-safe, it doesn't stop at `\x00`. If the program used `strcpy` or `fgets` instead, null bytes would terminate early and break your payload. Always check which function is doing the reading — it determines whether null bytes in your payload are a problem or not.
+
+`it_is_time()` immediately runs and does three more things:
+
+execl(conf->processor) // step 3
+
+your own uid, seteuid always allows this.
+![[Pasted image 20260625154259.png]]
+
+![[Pasted image 20260625154325.png]]
