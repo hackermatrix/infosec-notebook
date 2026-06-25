@@ -102,9 +102,25 @@ while ((count = read(f, buf + cur, IO_CHUNK)))
 
 `it_is_time()` immediately runs and does three more things:
 
-execl(conf->processor) // step 3
+![[Pasted image 20260625160033.png]]
+
+If your payload is just `b'A' * 2088 + b'\x01\x00\x00\x00\x00\x00\x00\x00'`, this is what those fields contain:
+
+```
+conf->processor = "AAAAAAA..."  → execl("AAAA...") → no such file
+conf->user      = 0x41414141   → seteuid(1094795585) → EPERM → die()
+conf->group     = 0x41414141   → setegid(1094795585) → EPERM → die()
+```
+
+
 
 your own uid, seteuid always allows this.
 ![[Pasted image 20260625154259.png]]
 
 ![[Pasted image 20260625154325.png]]
+
+
+[hacker22@warhead ~]$ sun payload.bin
+"Congratulations! Submit this token: 22-eHp-fMLS2VHgj79hIBx6vg-22
+"
+        - The Processor
