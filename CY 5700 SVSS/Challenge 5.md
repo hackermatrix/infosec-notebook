@@ -14,16 +14,14 @@ Debuggers behave differently with privileged processes to prevent unprivileged o
 ![[Pasted image 20260623051535.png]]
 
 ![[Pasted image 20260623170033.png]]
-
+![[Pasted image 20260625115128.png]]
 read_file(buf, argv[1]);
 **`argv[1]`**: The **first user-provided argument**.
 
 ![[Pasted image 20260623174134.png]]
- f file descriptor 4 bytes, 
- buf +cur puts the content of the file into this 
+ 
+now if we look at the objdump of read_file 
 
-![[Pasted image 20260625054531.png]]
--0x848(%ebp),%eax
 
 Then the code part which is vulnerable is this part where if current year is greater than equal to hydrogen it executes success otherwise it executes this part that the program only works after the sun's exhaustion. per the output. 
 
