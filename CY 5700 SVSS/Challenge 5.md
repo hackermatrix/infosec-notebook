@@ -9,7 +9,6 @@ Debuggers behave differently with privileged processes to prevent unprivileged o
 2. Its **setgid bit** is set.
 
 
-
 -rwsr-xr-x  1 grader grader  16360 May 31 01:38 win
 
 ![[Pasted image 20260623051535.png]]
@@ -31,10 +30,7 @@ Then the code part which is vulnerable is this part where if current year is gre
 ![[Pasted image 20260625060809.png]]
 
 ![[Pasted image 20260625060358.png]]
-
-![[Pasted image 20260625060254.png]]
-
-0x428
+![[Pasted image 20260625095638.png]]
 
 0x848 - 0x428 = 1056
 
