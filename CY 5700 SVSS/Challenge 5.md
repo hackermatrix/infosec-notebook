@@ -23,7 +23,7 @@ read_file(buf, argv[1]);
  f file descriptor 4 bytes, 
  buf +cur puts the content of the file into this 
 
-![[Pasted image 20260623180400.png]]
+![[Pasted image 20260625054531.png]]
 -0x848(%ebp),%eax
 
 which i think can be the of struct config conf 

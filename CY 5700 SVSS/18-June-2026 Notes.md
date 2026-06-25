@@ -251,7 +251,7 @@ So we can't rely on souce code you need to check disassembly & giving out the co
 objdump is present on every linux ststem  it is used to display detailed information about object files, executables, and shared libraries
 https://man7.org/linux/man-pages/man1/objdump.1.html
 
-Why objdump -d ./club & not disas main 
+Why **objdump -d ./club** & not disas main 
 → disassembles ENTIRE binary at once
 → no need to run program at all
 → see ALL functions together
