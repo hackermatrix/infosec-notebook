@@ -34,3 +34,19 @@
 > - The **jmp** instructions use relative addresses .
 > - <mark style="background: #FF5582A6;">**Always Test you Shellcodes!!!!**</mark>
 
+
+
+## What exactly Is Memory Corruption ?
+
+- Going beyond memony Bounds 
+- Do Something Malicious like :
+	- Hijack exec flow 
+	- Overwrite Sensitive data
+	- Overread sensitive data
+	- ...........etc
+- <mark style="background: #FF5582A6;">**DOING BUFFEROVERFLOW AND JUMPING TO THE SHELLCODE IS NOT THE CORRECT ANSWER TO THIS QUESTION!!!!!!!!!**</mark>
+
+
+
+
+
