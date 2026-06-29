@@ -1,4 +1,11 @@
+## Going beyond manipulating the local data in stack frame
+![[Pasted image 20260629113331.png]]
 
+Return address and saved ebp are **control.** 
+The return address is not instruction but pointer to the instruction. return address tells your cpu where to go next. if you change this you can influence the cpu to jump to a completely different place. 
+Saved ebp is not the code pointer either. But by changing this you are changing the mechanism that allows you to access the arguments and local data. like ebp - is the data access and ebp + is the arguments. 
+eg. in a function you can change the arguments/local data.
+you can trick the saved ebp. (not in the course)
 
 ## Different types of BufferFlow Attacks 
 
@@ -20,7 +27,7 @@
 - <mark style="background: #FF5582A6;"> Is it difficult!!!!!!!!!!!!.</mark>
 - Use a Generator like **Metasploit**.
 
-##### Let's Spawn A Basic Shell
+##### 1.3.1 Let's Spawn A Basic Shell
 1. To get a shell, you need to call `execve("/bin/sh", argv_ptr, env_ptr)`
 2. **Since syscalls don't use cdecl (arguments on stack), they use registers instead:**
 %eax = 0xb        ← syscall number for execve
@@ -90,7 +97,7 @@ the `/bin/sh\0` null terminator can't be embedded directly — instead you write
 > - The **jmp** instructions use relative addresses .
 > - <mark style="background: #FF5582A6;">**Always Test you Shellcodes!!!!**</mark>
 
-##### NOP SLEDS
+##### 1.4.1 NOP SLEDS
 
 ![[Pasted image 20260629085803.png]]
 ![[Pasted image 20260629085842.png]]
