@@ -21,36 +21,61 @@
 - Use a Generator like **Metasploit**.
 
 ##### Let's Spawn A Basic Shell
-
-![[Pasted image 20260629091514.png]]
-![[Pasted image 20260629094217.png]]
-
-![[Pasted image 20260629094625.png]]
-
-##### What execve actually needs
-
-execve("/bin/sh", argv_ptr, env_ptr)
-
-- **path** → a pointer to the string `"/bin/sh"`
-- **argv** → an _array of pointers_ that represents the command + arguments
-- **env** → an _array of pointers_ for environment variables
-
-##### What is argv_ptr[] exactly
-/bin/sh         ← that's argv[0]  (the program itself)
-                ← argv[1] would be first argument, but there is none
-
-argv_ptr[] = { pointer_to_"/bin/sh",  NULL }
-                      argv[0]          argv[1] ← signals "no more args"
-
-The NULL at the end is **required by convention** — it's how the kernel knows where the argument list ends. Without it, it **keeps reading garbage memory looking for more arguments.**
-
-#### Why the NULL in env_ptr[]?
-
-`env_ptr[] = {NULL}` means "empty environment." Just one NULL = an empty but valid array. The kernel needs a valid pointer, not nothing.
+1. To get a shell, you need to call `execve("/bin/sh", argv_ptr, env_ptr)`
+2. **Since syscalls don't use cdecl (arguments on stack), they use registers instead:**
+%eax = 0xb        ← syscall number for execve
+%ebx = address of "/bin/sh"
+%ecx = address of argv_ptr[]
+%edx = address of env_ptr[]
 
 
-![[Pasted image 20260629095023.png]]
+3. And the memory layout you need to set up is:
+[ /bin/sh\0 | address | 0x00000000 ]
+                ↑            ↑
+           argv_ptr       env_ptr
+           (points        (NULL = 
+           back to        empty env)
+           /bin/sh)
+4. The New Problem: Address of "/bin/sh"
+**the `address` cell in that memory layout needs to point exactly to where `/bin/sh` sits.**
+You need the _exact_ address of that string.
 
+5.  The jmp+call Trick: Solving the Address Problem
+
+shellcode writers use to figure out their own location at runtime.
+
+jmp path        ← 1. jump to the END of shellcode
+
+back:
+  popl %esi     ← 3. pop the address! now %esi = address of "/bin/sh"
+  ...
+
+path:
+  call back     ← 2. call pushes the NEXT instruction's address onto stack
+  .ascii "/bin/sh\0"   ← this is what gets pushed!
+
+
+6. The strcpy Problem: what if you inject this shellcode via `strcpy`
+`strcpy` **stops copying when it hits a `\x00` byte**. But your shellcode has multiple zero bytes — in `movl $0x0`, `movl $0xb`, etc. strcpy would truncate your shellcode mid-copy and you'd get garbage on the stack.
+
+7. Eliminating Zero Bytes 
+fix is to rewrite every instruction that produces a `\x00` byte using equivalent zero-free alternatives:
+movl $0x0, %eax   ← has zero bytes in encoding
+→ replace with:
+xorl %eax, %eax   ← XOR register with itself = 0, no zero bytes!
+
+movl $0x1, %eax   ← has zero bytes
+→ replace with:
+xorl %eax, %eax
+inc %eax          ← now eax = 1, still no zero bytes
+
+movl $0xb, %eax   ← 0x0000000b has zeros in encoding
+→ replace with:
+movb $0xb, %al    ← only write the low byte, avoids the zeros
+
+the `/bin/sh\0` null terminator can't be embedded directly — instead you write it programmatically at runtime using `movb %al, 0x7(%esi)` after you've already XOR'd %eax to zero.
+8.  Shellcode
+![[Pasted image 20260629102150.png]]
 
 #### 1.4 How do you find the location of your shell code ?
 1. You Guess !!.  We don't know the address of the injected shellcode.
