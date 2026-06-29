@@ -95,7 +95,7 @@ the `/bin/sh\0` null terminator can't be embedded directly — instead you write
 
 > [! Information]
 > - You can find the stack location of a program by looking at the memory mapping of the program.
-> Mostly present under **/proc**
+> Mostly present under **/proc** The kernel generates it on the fly to expose information about running processes. Every running process gets its own directory:
 > -  The<mark style="background: #ABF7F7A6;"> **int**</mark> instruction means "Hey OS, I want to launch a syscall !!"
 > - syscalls do not follow calling conventions. (They have specifications documented online )
 > - The **jmp** instructions use relative addresses .
