@@ -13,19 +13,23 @@ you can trick the saved ebp. (not in the course)
 - We write the address of a code in the return address that we control (shell-code).
 - <mark style="background: #FFB86CA6;">shellcode are raw assembly instructions ( used for mailicious code )</mark>.
 - You can put your shell-code almost anywhere in the memory given the following  :
-	- writable area.
-	- executable area.
-	- have enough space.
-- Even env vars are present on the stack. So,,,,,, we can have our shell-code in the env variable.
+	- **writable area.**
+	- **executable area.**
+	- **have enough space**
+- **Even env vars are presen**t on the stack. So,,,,,, we can have our shell-code in the env variable.  Env var is a user space concept. They are located on the stack. 
+
+![[Pasted image 20260629121811.png]]
 
 #### 1.2 Where to inject the shellcode in the memory ?
 1. In the Overflown buffer. overflow the buffer means writing past the written address.
 2. <mark style="background: #FFF3A3A6;">Environment Variable.</mark>
 3. many other places.
 
+
 #### 1.3 How to write the shellcode ?
-- <mark style="background: #FF5582A6;"> Is it difficult!!!!!!!!!!!!.</mark>
+- <mark style="background: #FF5582A6;"> Is it difficult!!!!!!!!!!!!.</mark>  because you're writing raw machine code that has no linker, no libraries, no fixed addresses, and can't contain zero bytes  all constraints that normal assembly programming doesn't have.
 - Use a Generator like **Metasploit**.
+![[Pasted image 20260629121910.png]]
 
 ##### 1.3.1 Let's Spawn A Basic Shell
 1. To get a shell, you need to call `execve("/bin/sh", argv_ptr, env_ptr)`
@@ -98,6 +102,8 @@ the `/bin/sh\0` null terminator can't be embedded directly — instead you write
 > - <mark style="background: #FF5582A6;">**Always Test you Shellcodes!!!!**</mark>
 
 ##### 1.4.1 NOP SLEDS
+
+Nop is used for normal running and padding by the cpu's. 
 
 ![[Pasted image 20260629085803.png]]
 ![[Pasted image 20260629085842.png]]
