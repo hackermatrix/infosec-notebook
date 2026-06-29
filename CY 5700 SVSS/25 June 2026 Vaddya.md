@@ -33,12 +33,43 @@ you can trick the saved ebp. (not in the course)
 
 ##### 1.3.1 Let's Spawn A Basic Shell
 1. To get a shell, you need to call `execve("/bin/sh", argv_ptr, env_ptr)`
-2. **Since syscalls don't use cdecl (arguments on stack), they use registers instead:**
+![[Pasted image 20260629180253.png]]
+why is there a null in argv_prt[] cause array don;t know their sizes and syscall says we need to mention seperate sizes for these things. null means end of an array.
+why have we mentioned NULL in the env_ptr[] cause we dont want it to take any environments nor the parent environments. 
+
+In the shellcode we need to mention it **as inline data and we need the data bytes"**. means we cannot reference `/bin/sh` from somewhere else in memory  have to **embed it directly inside the shellcode blob itself**
+
+1. **Since syscalls don't use cdecl (arguments on stack), they use registers instead:**
 %eax = 0xb        ← syscall number for execve
 %ebx = address of "/bin/sh"
 %ecx = address of argv_ptr[]
 %edx = address of env_ptr[]
+![[Pasted image 20260629180529.png]]
 
+There is a huge problem here. 
+The above is the **compiler-generated** version of execve. It accesses arguments using `%ebp` as a base — because in a normal function call, `%ebp` is set up properly by the function prologue:
+So `0x8(%ebp)`, `0xc(%ebp)`, `0x10(%ebp)` are just offsets from a **known, valid frame pointer**.
+
+###### The problem when this becomes shellcode
+
+When your shellcode gets injected and executed, **there is no function prologue**. The CPU just jumps into your bytes mid-execution. So:
+
+- `%ebp` contains **whatever garbage value it had** from the previous function
+- `0x8(%ebp)` now points to some **completely random location** in memory
+- That random location has nothing to do with your `/bin/sh` string
+
+"We're taking these instructions and dropping them at a completely different memory address, which has its own stack context, we cannot guarantee `%ebp` maps to anything meaningful there
+
+
+movl $0xb, %eax
+
+`0xb` in 32-bit (4 bytes) is actually stored in memory as:
+
+```
+0x0b 0x00 0x00 0x00
+```
+
+Those three trailing zeros are **zero bytes**. and this becomes the problem. When `strcpy` or any string function is copying your shellcode byte by byte into the buffer, it treats every `0x00` as the **end of the string** and stops copying immediately.
 
 3. And the memory layout you need to set up is:
 [ /bin/sh\0 | address | 0x00000000 ]
@@ -47,6 +78,7 @@ you can trick the saved ebp. (not in the course)
            (points        (NULL = 
            back to        empty env)
            /bin/sh)
+		   
 4. The New Problem: Address of "/bin/sh"
 **the `address` cell in that memory layout needs to point exactly to where `/bin/sh` sits.**
 You need the _exact_ address of that string.
