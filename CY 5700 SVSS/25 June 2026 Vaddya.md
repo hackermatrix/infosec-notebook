@@ -7,6 +7,11 @@ Saved ebp is not the code pointer either. But by changing this you are changing 
 eg. in a function you can change the arguments/local data.
 you can trick the saved ebp. (not in the course)
 
+## Syscall 
+
+![[Pasted image 20260629215323.png]]
+
+Now suppose you want to run the syscall open 0x05 will be put in the eax register.  
 ## Different types of BufferFlow Attacks 
 
 ### 1 . Overwriting The Return Address 
