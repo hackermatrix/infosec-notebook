@@ -215,6 +215,8 @@ This is the code
 
 ![[Pasted image 20260630144028.png]]
 
+main function it had two arguments int argc , char argv and then function vuln was called. then there was vuln function with char buffer, argv[1] passed in the vuln(s) is the same that is copied to in the strcpy to the buffer.
+
 Shell Code is 50 bytes long. return address is 4  bytes. 
 
 
@@ -222,4 +224,32 @@ We did gdb
 ![[Pasted image 20260630145522.png]]
 
 ![[Pasted image 20260630145644.png]]
-This is position independable. These are not absolute addresses these are offsets this code is going to be loaded in the text region 
+The 0x000011cf is not an address, it is the instruction. 
+
+this is position independable that when we say lea 0x4(%esp),%ecx here they are related to esp and ecx addresses that would be running at runtime 0x4 is just the offset. 
+
+Run the program once.
+
+![[Pasted image 20260630151426.png]]
+
+![[Pasted image 20260630151504.png]]
+
+Addresses do not change inside gdb because gdb is used for debugging and it disables that if you are running a program with higher privileges like maybe through a set bit or something it will change it disables some part of it and confuses it. 
+
+Now this is the vulnerable function
+
+![[Pasted image 20260630152030.png]]
+
+Because strcpy is the function where the danger happens we are looking at .strcpy(bufffer,s) would have two pushes first s would get pushed then buffer. 
+we see strcpy being called at 0x565561af
+![[Pasted image 20260630152838.png]]
+
+buffer is located at 
+![[Pasted image 20260630152938.png]]
+
+![[Pasted image 20260630153008.png]]
+
+the buffer starts at ebp - decimal(264) either compiler gave you more than required or there  could be more data. 
+to structure you're payload you would need 264 + saved ebp is 4 bytes + saved return address.
+
+You want to make sure that the length of the payload is just right and overwrite the saved return address to the location of our choosing. 
