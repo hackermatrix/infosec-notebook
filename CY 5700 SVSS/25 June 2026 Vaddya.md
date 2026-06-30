@@ -75,7 +75,7 @@ movl $0xb, %eax
 0x0b 0x00 0x00 0x00
 ```
 
-Those three trailing zeros are **zero bytes**. and this becomes the problem. When `strcpy` or any string function is copying your shellcode byte by byte into the buffer, it treats every `0x00` as the **end of the string** and stops copying immediately.
+Those three trailing zeros are **zero bytes**. and this becomes the problem. When `strcpy` or any string function is copying your shellcode byte by byte into the buffer, it treats every `0x00` as the **end of the string** and stops copying immediately. 
 
 3. And the memory layout you need to set up is:
 [ /bin/sh\0 | address | 0x00000000 ]
@@ -130,8 +130,15 @@ movl $0xb, %eax   ← 0x0000000b has zeros in encoding
 movb $0xb, %al    ← only write the low byte, avoids the zeros
 
 the `/bin/sh\0` null terminator can't be embedded directly — instead you write it programmatically at runtime using `movb %al, 0x7(%esi)` after you've already XOR'd %eax to zero.
-8.  Shellcode
+8.  Test Shellcode
+This is one of the template of the shellcode. 
 ![[Pasted image 20260629102150.png]]
+
+###### 8.1  What happens if you display the array outside of main. 
+
+you might have to declare it as global variable, then it will not be allocated on stack it will be allocated in data. 
+
+![[Pasted image 20260630123520.png]]
 
 #### 1.4 How do you find the location of your shell code ?
 1. You Guess !!.  We don't know the address of the injected shellcode.
