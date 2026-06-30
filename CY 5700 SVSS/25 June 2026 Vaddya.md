@@ -215,11 +215,12 @@ This is the code
 
 ![[Pasted image 20260630144028.png]]
 
+## Understanding the code 
 main function it had two arguments int argc , char argv and then function vuln was called. then there was vuln function with char buffer, argv[1] passed in the vuln(s) is the same that is copied to in the strcpy to the buffer.
 
 Shell Code is 50 bytes long. return address is 4  bytes. 
 
-
+## Calculating buffer bytes 
 We did gdb
 ![[Pasted image 20260630145522.png]]
 
@@ -253,3 +254,49 @@ the buffer starts at ebp - decimal(264) either compiler gave you more than requi
 to structure you're payload you would need 264 + saved ebp is 4 bytes + saved return address.
 
 You want to make sure that the length of the payload is just right and overwrite the saved return address to the location of our choosing. 
+## Controlling Return Address
+
+![[Pasted image 20260630160123.png]]
+
+Why we did 4 A's **The proof is right there in the output:**
+
+```
+0x41414141 in ?? ()
+```
+
+`0x41` is the ASCII hex value of the character `'A'`. So all four bytes of the return address got overwritten with `'A'`, making the CPU try to jump to address `0x41414141`, which is invalid memory → SIGSEGV.
+
+### Let makes them different bytes
+
+![[Pasted image 20260630160830.png]]
+
+
+**With `\x55` + `AAAA`:**
+
+```
+55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 41 41 41 41
+                                                                      ^^^^^^^^^^^
+                                                                   clearly the return address
+```
+
+Now in memory you can **immediately see** where the return address starts because the pattern changes from `55` to `41`.
+
+![[Pasted image 20260630162615.png]]
+
+Any change you do in the shellcode test it. 
+![[Pasted image 20260630162852.png]]
+the shellcode is 45 bytes right now. 
+ 
+ ## Writing NOP SLED 
+
+![[Pasted image 20260630163602.png]]
+
+until push eax before call strcpy everything is fine. All the vulnerability happens inside the strcpy function. 
+
+Now until the add part everything is broken 
+
+![[Pasted image 20260630163726.png]]
+
+![[Pasted image 20260630164052.png]]
+
+Looking at the stack. 
