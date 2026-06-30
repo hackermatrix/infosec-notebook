@@ -34,6 +34,7 @@ Now suppose you want to run the syscall open 0x05 will be put in the eax registe
 #### 1.3 How to write the shellcode ?
 - <mark style="background: #FF5582A6;"> Is it difficult!!!!!!!!!!!!.</mark>  because you're writing raw machine code that has no linker, no libraries, no fixed addresses, and can't contain zero bytes  all constraints that normal assembly programming doesn't have.
 - Use a Generator like **Metasploit**.
+- Shell code should be a position independent code
 ![[Pasted image 20260629121910.png]]
 
 ##### 1.3.1 Let's Spawn A Basic Shell
@@ -89,19 +90,26 @@ Those three trailing zeros are **zero bytes**. and this becomes the problem. Whe
 You need the _exact_ address of that string.
 
 5.  The jmp+call Trick: Solving the Address Problem
+![[Pasted image 20260630113414.png]]
 
-shellcode writers use to figure out their own location at runtime.
+shellcode writers use to figure out their own location at runtime. This is finding the absolute address relative to the executing instruction.  
 
 jmp path        ← 1. jump to the END of shellcode
 
-back:
+**back:**
   popl %esi     ← 3. pop the address! now %esi = address of "/bin/sh"
   ...
 
 path:
-  call back     ← 2. call pushes the NEXT instruction's address onto stack
+  call **back**     ← 2. call pushes the NEXT instruction's address onto stack
   .ascii "/bin/sh\0"   ← this is what gets pushed!
 
+###### How do we know the address of jump, how do we jump to "jump"
+Jumps are relative jumps jump from the location (i.e, From wherever you currently are, skip forward 6 pages.) so we dont need to know the address. 
+
+But data access is not done that way. Data access (like `movl 0x8(%esi), %ebx`) needs an actual address in a register to dereference. You can't say "read from 6 bytes forward" the same way the instruction needs a real number sitting in `%esi` to compute from.  
+
+You need position independent code. i.e, executables that can be loaded anywhere in the memory. dynamic libraries can be loaded anywhere in the memory. you want to produce position independent code always. Position independent code, even though the compiler may not it is not allowed to do data access. Shell code should be a position independent code.  In intel 64 you can do relative data access through instructions. You do not need the jmp + call trick. 
 
 6. The strcpy Problem: what if you inject this shellcode via `strcpy`
 `strcpy` **stops copying when it hits a `\x00` byte**. But your shellcode has multiple zero bytes — in `movl $0x0`, `movl $0xb`, etc. strcpy would truncate your shellcode mid-copy and you'd get garbage on the stack.
