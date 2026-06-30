@@ -210,3 +210,16 @@ Spaces work for shell paths/strings because they're typically trimmed or treated
 
 
 # Demo 
+
+This is the code 
+
+![[Pasted image 20260630144028.png]]
+
+Shell Code is 50 bytes long. return address is 4  bytes. 
+
+
+We did gdb
+![[Pasted image 20260630145522.png]]
+
+![[Pasted image 20260630145644.png]]
+This is position independable. These are not absolute addresses these are offsets this code is going to be loaded in the text region 
