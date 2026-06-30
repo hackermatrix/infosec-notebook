@@ -162,12 +162,12 @@ Nop is used for normal running and padding by the cpu's.
 
 ## What exactly Is Memory Corruption ?
 
-- Going beyond memory Bounds 
-- Do Something Malicious like :
-	- Hijack exec flow 
+- Going beyond **memory Bounds** 
+- Do **Something Malicious** like :
+	- **Hijack exec flow** 
 	- **Hijacking execution flow** means an attacker tricks a computer into running their malicious code instead of the real program
-	- Overwrite Sensitive data
-	- Overread sensitive data
+	- **Overwrite Sensitive data**
+	- **Overread sensitive data**
 	- ...........etc
 - <mark style="background: #FF5582A6;">**DOING BUFFEROVERFLOW AND JUMPING TO THE SHELLCODE IS NOT THE CORRECT ANSWER TO THIS QUESTION!!!!!!!!!**</mark>
 
@@ -207,3 +207,6 @@ Both exploit the same principle: **build tolerance into your guess by padding wi
  whatever data structure you're injecting (a string, a struct, an array of pointers), if you pad it with bytes that are **harmless/neutral for that specific data type**, you build in tolerance for addressing errors — the same defensive trick as the NOP sled, just applied to data instead of code.
 
 Spaces work for shell paths/strings because they're typically trimmed or treated as harmless. For other data types you'd pick a different "neutral" filler byte appropriate to that context.
+
+
+# Demo 
