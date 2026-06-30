@@ -287,7 +287,7 @@ Any change you do in the shellcode test it.
 ![[Pasted image 20260630162852.png]]
 the shellcode is 45 bytes right now. 
  
- ## Writing NOP SLED 
+##  Writing NOP SLED 
 
 ![[Pasted image 20260630163602.png]]
 
@@ -299,4 +299,92 @@ Now until the add part everything is broken
 
 ![[Pasted image 20260630164052.png]]
 
-Looking at the stack. 
+## Examining the stack. 
+
+![[Pasted image 20260630171719.png]]
+
+You can immediately see where the NOP sled ends 
+Let us locate the shellcode. the shellcode starts with eb 1f 
+![[Pasted image 20260630172126.png]]
+![[Pasted image 20260630172254.png]]
+
+Because of endianness you are reading everything in the reverse order. 
+
+instead of that if you want you can run this command. 
+![[Pasted image 20260630172429.png]]
+![[Pasted image 20260630172447.png]]
+
+you can see the shellcode here. 
+![[Pasted image 20260630172515.png]]
+![[Pasted image 20260630172540.png]]
+
+
+Professor wants to jump here anywhere in this sea of 0x90
+![[Pasted image 20260630173120.png]]
+
+CPU lands at 0xffffd310  →  NOP, slide down
+CPU lands at 0xffffd330  →  NOP, slide down
+CPU lands at 0xffffd350  →  NOP, slide down
+                              ↓
+                         eventually hits shellcode at 0xffffd3c0
+                              ↓
+                         shellcode executes → shell spawns
+
+
+Make sure to remove all the breakpoints. 
+![[Pasted image 20260630173423.png]]
+![[Pasted image 20260630173614.png]]
+![[Pasted image 20260630173715.png]]
+
+it did  not work the problem is something to do with the address. 
+![[Pasted image 20260630173925.png]]
+
+![[Pasted image 20260630174104.png]]
+
+if you run win you would get an error saying you dont have the correct group cause in the debugger the privileges are dropped to get the correct group. if you run the same payload outside it might not work because the stack addresses change as the environment variables in the stack and outside might be different. 
+
+It doesnt make sense to change the last value. 
+![[Pasted image 20260630174832.png]]
+
+The address in little endian is written as:
+
+```
+0xffffd301 = \x01\xd3\xff\xff
+              ↑    ↑   ↑   ↑
+             low       high bytes
+```
+
+**Why it doesn't make sense to change the last bytes (`\xff\xff`):**
+
+```
+Change \xff\xff → completely different memory region
+0xffffd301  ← in the stack (where your NOP sled is)
+```
+
+![[Pasted image 20260630175312.png]]
+
+**Why specifically `\xd3` → `\xd4` and not `\xd5` or `\xd6`?**
+
+```
+\xd3 = 0xd3
+\xd4 = 0xd4
+difference = 0x01 in second byte position
+           = 0x100 in actual address
+           = 256 bytes higher in memory
+```
+
+The reasoning:
+
+```
+1. Stack shift from GDB → outside GDB is typically small
+   (just a few hundred bytes, not thousands)
+         ↓
+2. Incrementing second byte by 1 = jumps 256 bytes higher
+         ↓
+3. With 223 byte NOP sled you have tolerance of 223 bytes
+         ↓
+4. Try \xd4 first (smallest reasonable jump upward)
+         ↓
+5. If shell spawns → done!
+   If not → try \xd5, \xd6 etc.
+```
