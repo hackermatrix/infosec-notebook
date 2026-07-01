@@ -293,7 +293,7 @@ the shellcode is 45 bytes right now.
 
 until push eax before call strcpy everything is fine. All the vulnerability happens inside the strcpy function. 
 
-Now until the add part everything is broken 
+Now until the add part everything is broken so we break there. 
 
 ![[Pasted image 20260630163726.png]]
 
