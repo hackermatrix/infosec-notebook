@@ -388,3 +388,56 @@ The reasoning:
 5. If shell spawns → done!
    If not → try \xd5, \xd6 etc.
 ```
+
+
+# Summary of demo 
+
+1. UNDERSTAND THE CODE
+   → find where user input is accepted
+   → argv[1], stdin, network input etc.
+
+2. FIND THE DANGEROUS FUNCTION
+   → strcpy, gets, scanf, sprintf
+   → these don't check bounds
+
+3. CALCULATE THE OFFSET (disas vuln in GDB)
+   → find: lea -0x108(%ebp), %eax  ← buffer address
+   → convert: 0x108 = 264 bytes
+   → payload size = 264 (buffer) + 4 (saved ebp) + 4 (return address)
+
+4. CONFIRM EIP CONTROL
+   → send: \x55 * 268 + ABCD
+   → verify: crash shows 0x44434241
+   → you own the return address
+
+5. PREPARE SHELLCODE
+   → eliminate all zero bytes (xorl, movb, inc tricks)
+   → verify shellcode is position independent (jmp+call trick)
+   → test shellcode separately before injecting
+
+6. BUILD PAYLOAD WITH NOP SLED
+   → \x90 * (268 - shellcode_length) + shellcode + ABCD
+   → adjust until shellcode lands exactly before return address
+
+7. EXAMINE STACK IN GDB (breakpoint after strcpy)
+   → x/400bx $esp  ← see byte by byte
+   → confirm: sea of \x90, then \xeb\x1f... shellcode, then ABCD
+   → pick any address inside the NOP sled
+
+8. REPLACE ABCD WITH NOP SLED ADDRESS
+   → \x90 * 223 + shellcode + \x01\xd3\xff\xff
+   → test inside GDB first
+
+9. EXECUTE OUTSIDE GDB
+   → ASLR is re-enabled (slightly)
+   → stack shifts higher because GDB env vars are gone
+   → increment middle byte: \xd3 → \xd4 → \xd5
+   → NOP sled absorbs the uncertainty
+   → sh-5.3$ ← shell spawns
+
+
+
+GDB stack  →  lower addresses  (GDB adds env vars, pushes stack down)
+Outside    →  higher addresses (fewer env vars, stack sits higher)
+                                        ↑
+                         that's why you increment \xd3 → \xd4
