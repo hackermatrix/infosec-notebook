@@ -48,5 +48,33 @@ We are choosing echo because one this is where the size is declared and it gets 
 disas echo      → tells you WHERE the buffer is (the offset from %ebp)
 my_strcat       → is WHERE the writing happens (but no buffer declared there)
 
+![[Pasted image 20260701150255.png]]
 
+So the buffer starts at ebp - decimal(18) 0x12 
 
+To structure my payload I need 18 + 4 bytes (saved ebp)
+
+# Controlling return address
+
+r $(python3 -c 'import sys; sys.stdout.buffer.write(b"A"*18 + b"AAAA" )')
+
+I see this 
+![[Pasted image 20260701152133.png]]
+
+![[Pasted image 20260701152344.png]]
+crash should show 0x44434241, that means it has overran the past address. 
+![[Pasted image 20260701153309.png]]
+
+![[Pasted image 20260701153450.png]]
+
+Now I only see 55 and not 41 I should be able to see the 41 for that I will try reducing the number of buffer. when i do 17 i can see a A
+
+![[Pasted image 20260701153721.png]]
+
+I will keep reducing it till i see 44434241 it is 14. 
+
+![[Pasted image 20260701153943.png]]
+
+So the final payload structure is \x55 * 14
+
+# Prepare Shellcode
