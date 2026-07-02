@@ -225,6 +225,38 @@ https://security.stackexchange.com/questions/136647/why-must-a-ret2libc-attack-f
 [[05_Reverse_Engineering/03_Exploitation_Security/Security Mechanisms|Security Mechanisms]]
 
 https://vickieli.dev/binary%20exploitation/attacking-dynamic-linking/
+https://youtu.be/kUk5pw4w0h4?si=Mga3l0xED4P-XFTJ
+
+
+`printf`, `malloc`, and `puts` are part of the standard C library (`libc`).
+they reside in a centralized shared library file such as `/lib/x86_64-linux-gnu/libc.so.6`. When a program calls one of these functions, it actually references the implementation in this shared library, which is loaded into memory when the program runs.
+
+
+# Understanding got 
+
+https://can-ozkan.medium.com/got-vs-plt-in-binary-analysis-888770f9cc5a
+
+![[Pasted image 20260702152055.png]] 
+
+Here 
+`00004014` is the address in the GOT where the address of printf will be stored after it is resolved.
+
+# Understanding PLT
+
+## 4. What is the PLT?
+
+When a program calls an external function such as `printf`, it doesn’t jump directly to the function’s memory address. Instead, it jumps to a corresponding entry in the PLT, which then handles resolving or dispatching the call.
+
+
+# Understanding the connection between PLT and GOT 
+
+
+When main executes `call 1080 <fprintf@plt>`, control goes to the PLT stub, which reads a jump target out of the GOT slot at 00004014. On the _first_ call, that slot doesn't have the real address yet — it triggers the resolver instead. Once resolved, that same slot at 00004014 gets **overwritten** to store fprintf's actual address in libc, so every call after that jumps straight there.
+
+![[Pasted image 20260702154039.png]]
+
+
+![[Pasted image 20260702154015.png]]
 
 Per the  usually the exact same function
 1. **Format String Vulnerability** or an **Arbitrary Write** primitive. it does take the input function. 
