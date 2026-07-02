@@ -204,4 +204,11 @@ Congratulations! Submit this token: 22-z2dFw2LY8DGDDmo9ljntEg-22
 
 ![[Pasted image 20260702100956.png]]
 
-What i understood from the code is that you have 
+main function takes two argument int argc and char argv first it check if you have three arguments then it prints enter two strings but what i have noticed is that if i dont give any arguments how does that work should it be less than argc <= 3 the main function has defined the buffer as 128 bytes and has a pointer *p then this p contatenates buffer 128 and len of the argument then strcpy copies the argument in buffer this is our vulnerable function strcpy i think we should find the address of this for calculating our buffer. then strcpy copies the second argument argv[2], which we found earlier. 
+
+i think i missed exit(0)
+https://security.stackexchange.com/questions/52754/can-this-code-be-expoited-using-buffer-overflow
+
+ **It does not overwrite the EIP because exit() will terminate the program before the return address is popped.
+ **
+https://security.stackexchange.com/questions/136647/why-must-a-ret2libc-attack-follow-the-order-system-exit-command
