@@ -140,4 +140,14 @@ sys.stdout.buffer.write(buf)
 https://security.stackexchange.com/questions/13194/finding-environment-variables-with-gdb-to-exploit-a-buffer-overflow
 
 ![[Pasted image 20260701185358.png]]
-![[Pasted image 20260701185819.png]]
+![[Pasted image 20260701190231.png]]
+![[Pasted image 20260701190639.png]]
+
+if you export env in different terminal you will not see in gdb 
+
+SC is at `0xffffde4f` but that includes the `SC=` prefix (3 bytes)
+0xffffde4f:     
+
+![[Pasted image 20260701190919.png]]
+
+![[Pasted image 20260701191138.png]]
