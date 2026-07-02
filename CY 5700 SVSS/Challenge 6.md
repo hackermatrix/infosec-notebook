@@ -224,12 +224,14 @@ https://security.stackexchange.com/questions/136647/why-must-a-ret2libc-attack-f
 [[temp_re/Reverse Engineering/GOT overwrite|GOT overwrite]] 
 [[05_Reverse_Engineering/03_Exploitation_Security/Security Mechanisms|Security Mechanisms]]
 
+https://vickieli.dev/binary%20exploitation/attacking-dynamic-linking/
+
 Per the  usually the exact same function
 1. **Format String Vulnerability** or an **Arbitrary Write** primitive. it does take the input function. 
 
 2. The Target: In our code case it will be this fprintf(stdout, %s) because per this the overwrite has already happen. 
 
-3. the overwrite:  printfyfunction as our target which will be overwritten 
+3. the overwrite:  printfy function as our target which will be overwritten 
 
 4. trigger: here in the example it says printf user input 
 

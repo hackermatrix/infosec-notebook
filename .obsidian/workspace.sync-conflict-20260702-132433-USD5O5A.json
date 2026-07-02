@@ -8,36 +8,116 @@
         "type": "tabs",
         "children": [
           {
+            "id": "50e375e7aa9ea22b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/18-June-2026 Notes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "18-June-2026 Notes"
+            }
+          },
+          {
+            "id": "939641881f3df4f8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/Challenge 5.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": true,
+                  "extraContext": true,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Challenge 5"
+            }
+          },
+          {
+            "id": "9292afec17f13989",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/Challenge 3.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Challenge 3"
+            }
+          },
+          {
+            "id": "e5e402f1221cb99c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/Bonus 3.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Bonus 3"
+            }
+          },
+          {
+            "id": "6d4c60365c2f7252",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/Challenge 5.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Challenge 5"
+            }
+          },
+          {
+            "id": "164866cd5135db67",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CY 5700 SVSS/Challenge 6.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Challenge 6"
+            }
+          },
+          {
             "id": "3121b768c16594e3",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "04_Active_Directory/02_Active Directory Protocols.md",
+                "file": "CY 5700 SVSS/Challenge 6.md",
                 "followCursor": true,
                 "showSearch": true,
-                "searchQuery": "caller"
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 02_Active Directory Protocols"
-            }
-          },
-          {
-            "id": "776f3aa033002f89",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "04_Active_Directory/02_Active Directory Protocols.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "02_Active Directory Protocols"
+              "title": "Outline of Challenge 6"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -69,7 +149,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": " GOT ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -190,8 +270,8 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
+      "switcher:Open quick switcher": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
@@ -199,54 +279,54 @@
       "bases:Create new base": false
     }
   },
-  "active": "776f3aa033002f89",
+  "active": "f5840bfbaf596e7a",
   "lastOpenFiles": [
-    "04_Active_Directory/01_AD_Foundations.md",
-    "04_Active_Directory/02_Active Directory Protocols.md",
-    "Untitled 1.md",
-    "04_Active_Directory/AD_GPOs.md",
-    "images/Pasted image 20260621185118.png",
-    "images/Pasted image 20260621185100.png",
-    "images/Pasted image 20260621185015.png",
-    "images/Pasted image 20260621184720.png",
-    "CY 5700 SVSS/Bonus Assignment 1.md",
-    "CY 5700 SVSS/Memory Corruption.md",
+    "03_Exploitation_Security/ret2libc Summary.md",
+    "03_Exploitation_Security/GOT overwrite.md",
+    "images/Pasted image 20260702124629.png",
+    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/GOT overwrite.md",
+    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/ret2libc Summary.md",
+    "5010 Network Security.md",
+    "CY 5700 SVSS/Challenge 6.md",
+    "images/Pasted image 20260702100956.png",
+    "images/Pasted image 20260702100743.png",
+    "images/Pasted image 20260702100535.png",
+    "images/Pasted image 20260701232658.png",
+    "images/Pasted image 20260701232558.png",
+    "images/Pasted image 20260701232312.png",
+    "images/Pasted image 20260701232145.png",
+    "images/Pasted image 20260701191138.png",
+    "images/Pasted image 20260701190919.png",
+    "CY 5700 SVSS/25th June 2026.md",
+    "CY 5700 SVSS/25 June 2026 Vaddya.md",
+    "CY 5700 SVSS/Challenge 5.md",
     "CY 5700 SVSS/18-June-2026 Notes.md",
-    "images/Pasted image 20260621162545.png",
-    "CY 5700 SVSS/11th June Class Notes.md",
-    "images/Pasted image 20260621154353.png",
-    "images/Pasted image 20260621152834.png",
-    "images/Pasted image 20260621144123.png",
-    "images/Pasted image 20260621142804.png",
-    "images/Pasted image 20260621142220.png",
-    "CY 5700 SVSS/7 May to 21st May class notes.md",
     "CY 5700 SVSS/28th May - Pre read & Class notes.md",
-    "11th June Class Notes.md",
-    "2026-05-21 CY5770.md",
+    "CY 5700 SVSS/Bonus Assignment 1.md",
+    "CY 5700 SVSS/BLIF.md",
+    "CY 5700 SVSS/Memory Corruption.md",
     "CY 5700 SVSS/4th June Class Notes.md",
-    "C Revision.md",
-    "CY 5700 SVSS/Cache Poisoning Paper.md",
-    "CY 5700 SVSS/Challenge 2.md",
-    "CY 5700 SVSS/Challenge 4.md",
     "CY 5700 SVSS/Challenge 3.md",
-    "CY 5700 SVSS/Challenge 1.md",
+    "CY 5700 SVSS/11th June Class Notes.md",
+    "CY 5700 SVSS/7 May to 21st May class notes.md",
+    "CY 5700 SVSS/Cache Poisoning Paper.md",
+    "CY 5700 SVSS/Bonus 3.md",
+    "CY 5700 SVSS/Challenge 4.md",
+    "5010/5010_Operational_Security/10.5 - Dealing with Disaster.md",
+    "5010/Final Exam Quiz Practise.md",
+    "5010/5010_Operational_Security/10.6 - Conclusion.md",
+    "5010/5010_Operational_Security/10.2 - Business Continuity Planning.md",
+    "5010/5010_Operational_Security/00 - Chapter 10 MOC.md",
+    "CY 5700 SVSS/~syncthing~25 June 2026 Vaddya.md.tmp",
+    "~syncthing~2026-06-25.md.tmp",
+    "vids/diable_NBT_NS_GPO_create.mp4",
+    "CY 5700 SVSS/~syncthing~25th June 2026.sync-conflict-20260625-182141-USD5O5A.md.tmp",
+    "CY 5700 SVSS/~syncthing~25th June 2026.md.tmp",
     "CY 5700 SVSS/~syncthing~Challenge 2.md.tmp",
     "CY 5700 SVSS/~syncthing~7 May to 21st May class notes.md.tmp",
-    "CY 5700 SVSS/Piazza Posts.md",
     "04_Active_Directory/~syncthing~AD_Foundations.md.tmp",
-    "CY 5700 SVSS/Three Modern Mechanisms for Web.md",
-    "Untitled.md",
     "~syncthing~Untitled.md.tmp",
-    "17_Bug_Bounty/Daily_Tasks.md",
-    "17_Bug_Bounty/Bug_Bounty_Journal.md",
-    "15_SOC/02_SOC L1 Alert Reporting.md",
     "images/~syncthing~Pasted image 20260614121335.png.tmp",
-    "images/~syncthing~Pasted image 20260614132311.png.tmp",
-    "images/~syncthing~Pasted image 20260614121802.png.tmp",
-    "09_Web_Exploitation/03_Web_Vulnerabilities/12_Web_Cache_Attacks.md",
-    "images/~syncthing~Pasted image 20260613111933.png.tmp",
-    "Lab Solves/~syncthing~Web Cache Lab.md.tmp",
-    "images/~syncthing~Pasted image 20260613110543.png.tmp",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }
