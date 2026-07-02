@@ -192,3 +192,16 @@ Congratulations! Submit this token: 22-z2dFw2LY8DGDDmo9ljntEg-22
 22-z2dFw2LY8DGDDmo9ljntEg-22
 
 
+
+# Understanding Concat functioning 
+
+
+
+![[Pasted image 20260702100535.png]]
+![[Pasted image 20260702100743.png]]
+
+# Understanding concat code. 
+
+![[Pasted image 20260702100956.png]]
+
+What i understood from the code is that you have 
