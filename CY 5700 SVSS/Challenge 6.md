@@ -210,5 +210,29 @@ i think i missed exit(0)
 https://security.stackexchange.com/questions/52754/can-this-code-be-expoited-using-buffer-overflow
 
  **It does not overwrite the EIP because exit() will terminate the program before the return address is popped.
+
+Why standard overflow won't work:
+normal overflow → overwrite return address → ret fires → shell
+                                              ↑
+                                         NEVER HAPPENS
+                                         because exit(0) runs
+                                         before function returns!
  **
 https://security.stackexchange.com/questions/136647/why-must-a-ret2libc-attack-follow-the-order-system-exit-command
+
+
+[[temp_re/Reverse Engineering/GOT overwrite|GOT overwrite]] 
+[[05_Reverse_Engineering/03_Exploitation_Security/Security Mechanisms|Security Mechanisms]]
+
+Per the  usually the exact same function
+1. **Format String Vulnerability** or an **Arbitrary Write** primitive. it does take the input function. 
+
+2. The Target: In our code case it will be this fprintf(stdout, %s) because per this the overwrite has already happen. 
+
+3. the overwrite:  printfyfunction as our target which will be overwritten 
+
+4. trigger: here in the example it says printf user input 
+
+![[Pasted image 20260702124629.png]]
+
+
