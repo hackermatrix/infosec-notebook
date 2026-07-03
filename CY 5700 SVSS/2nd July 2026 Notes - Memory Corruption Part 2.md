@@ -38,7 +38,42 @@ bash security feature - when we are launched the real user id is different from 
 
 # Chaining function calls. 
 
+In 64 bit the arguments are passed in the register. 
 
+-fno turns off executable 
+
+readelf - standard utility
+
+base + main_offset 
+
+
+# Return-oriented programming 
+
+extens the idea of return-to-libc 
+
+# turing complete: by using this technique you can use any exploit. 
+
+
+Gadgets are tiny code sequences that end with a return. 
+<a-single-instruction>
+ret 
+
+#How to compose exploits 
+
+1. Identify the gadgets in the program. 
+2. Figure out the 
+
+By looking at libc you can have all the gadgets that you want. 
+
+%eax = %eax -1 
+
+Instead of doing everything with return to address you can pair it with return to library. 
+
+# Finding gagdgets 
+
+finding c3 - return address. 
+
+can you existing instructions. 
 
 
 
