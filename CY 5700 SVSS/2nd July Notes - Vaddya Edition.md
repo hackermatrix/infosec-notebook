@@ -10,7 +10,10 @@
 
 
 
-## Defenses 
+
+# 2. inject malicious  code
+
+## A. Defenses 
 
 ### 1. Non-Executable Mem:
 - Used to mark stack non-executable.
@@ -21,9 +24,7 @@
 
 
 
-
-
-## Attacks 
+## B. Attacks 
 ### 1. The Code Reuse attack
 - We can use libc .
 - execute existing functions with the arguments you choose.
@@ -49,9 +50,63 @@
 #### 2.1 the Idea
 - Reuse tiny code chunks.
 	- **Gadgets** : code sequences that end with a return.
-	- **How to find them ?** : find /xc3 in executable sections of your code thats the return instruction and go back one address and use that as your gadget but you also may use more instructions if needed.( Look at the Finding Gadgets slide)
+	- **How to find them ?** : find /xc3 in executable sections of your code thats the return instruction and go back one address and use that as your gadget but you also may use more instructions if needed.( Look at the Finding Gadgets slide).
 - chain them together to compose exploit.
 - Sooooo the steps are :
 	1. Identify the Gadgets from the Code.
 	2. Figure out how to use them to fulfil your purpose. <mark style="background: #FF5582A6;">(Does not need to be about gettting a shell on the system.)</mark>
-	
+
+
+> [! Interesting ]
+> - \xc3 is **considered** as return instruction
+> - you can find unaligned instructions to get more variety.
+> - So if an instruction has a \xc3 in it, even if it is not an return instruction, the CPU thinks its a return address . (This happens because in RISC arch the instruction can be of variable lengths.)
+> - We can chain different gadgets to get the same effect as a return. <mark style="background: #FFF3A3A6;">(LOOK MORE INTO THIS !!!!!!)</mark>
+> - There are also other instructiosn like **jmp,call,etc**
+
+
+
+
+# 3. Overwrite control fields
+
+## A. Defenses:
+
+#### 1. Stack Canaries 
+- Add a canary value on stack and before return , if canary is dead, then attack detected .
+- This is a compiler based defense.
+
+- So how do we answer these?:
+	- Structure ? - **( Many types of Canaries)**
+	- Stored Where ? - **Thread Local Storage.**
+	- Generated When ? 
+	- Refreshed When ?
+
+- **The answer the above question depends on the compiler devs**
+
+## B. Attacks 
+
+### 1. Brute Force :
+- Depends on what you are attacking.
+- Feasible for instances where you have things like a web server where you have threads or child processes.
+
+### 2. Memory Leak:
+- Rebase Code section.
+- try reading up on this (incomplete info)
+
+
+
+# 4. Guess important addresses
+
+
+## A. Defenses:
+
+### 1. ASLR ( Address Space Layout Randomization)
+- Randomize the addresses and make them difficult to gues.
+- **For this to work , PIE(Position Independent Code) is importanta]**
+
+#### 1.2 How Random is it ?
+- The OS allocates memory in the form of Pages and each page is around 4KB ( may differ) so the randomiaztion is not greater than that 
+
+- ALL of the section in the mem are randomized independently, but there is no randomization within the sections.
+
+- **The randomization pattern differes based on the arch (x86 and x64) because x64 has a lot more space**

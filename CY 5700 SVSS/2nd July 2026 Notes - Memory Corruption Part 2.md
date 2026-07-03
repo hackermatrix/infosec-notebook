@@ -40,7 +40,8 @@ bash security feature - when we are launched the real user id is different from 
 
 In 64 bit the arguments are passed in the register. 
 
--fno turns off executable 
+-fno protects against canaries.
+
 
 readelf - standard utility
 
@@ -74,6 +75,50 @@ Instead of doing everything with return to address you can pair it with return t
 finding c3 - return address. 
 
 can you existing instructions. 
+can find unaligned instruction , cpu doesnt know you can jump you need not find the real return address. 
+can find unaligned instruction, then align back to original instruction sequence. 
+c3 is not the only return address there are more favlours 
+
+# Stack canaries (aka Cookies)
+
+Insert a canary value on the stack, check before return, if canaris dead, then bail out. 
+
+it is a dynamic value which is randomly generated. 
+this comes from the compiler. It is  a compiler based defense. 
+every function gets it own canary? - 
+
+
+# Ways to defeat stack canaries. 
+
+Implementation decisions 
+- Structure it is a hexadecimal value it is a random byte.  0xxxxxx0  -  7 bits with 0  with strcpy this gets blocked 
+- Stored where? - thread local storage. libc generates the value randomly 
+gcc single local cookie per program we have fixed location 
+- Generated when ?  
+- Refreshed when ? 
+
+# ASLR  Address Space Layout Randomization 
+
+Page minimum that you shift is 4 Kilo bytes. 
+Distance between functions 
+BSS, Data and Text move as a single block 
+Stack and main changes. 
+printf - system come from the same library so the dont change
+Within the block of memory there is no randomization. 
+in 64 
+every individual library is randomized. 
+
+# For challenge write a program similar to what professor taught and check the randomization. 
+
+ASLR defeats important addresses. 
+
+
+Defeating Canary & ASLR 
+
+Cookies never get refreshed. 
+
+
+
 
 
 
