@@ -19,7 +19,7 @@
 ## 🛡️ 03. Exploitation & Security
 ### **Stack-Based Attacks**
 - [[ret2libc Summary|ret2libc Exploit Strategy]]
-- [[05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/GOT overwrite|GOT Overwrite Attacks]]
+- [[GOT  overwrite & PLT|GOT Overwrite Attacks]]
 - [[05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/Stack Canaries|Detailed Stack Canary Notes]]
 - [[05_Reverse_Engineering/03_Exploitation_Security/Security Mechanisms|Binary Protections Overview]]
 

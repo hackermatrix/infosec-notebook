@@ -247,11 +247,10 @@ Here
 
 When a program calls an external function such as `printf`, it doesn’t jump directly to the function’s memory address. Instead, it jumps to a corresponding entry in the PLT, which then handles resolving or dispatching the call.
 
-
 # Understanding the connection between PLT and GOT 
 
 
-When main executes `call 1080 <fprintf@plt>`, control goes to the PLT stub, which reads a jump target out of the GOT slot at 00004014. On the _first_ call, that slot doesn't have the real address yet — it triggers the resolver instead. Once resolved, that same slot at 00004014 gets **overwritten** to store fprintf's actual address in libc, so every call after that jumps straight there.
+When main executes `call 1080 <fprintf@plt>`, control goes to the PLT stub, which reads a jump target out of the GOT slot at 00004014. On the _first_ call, that slot doesn't have the real address yet it triggers the **resolver instead. Once resolved,** that same slot at 00004014 gets **overwritten** to store fprintf's actual address in libc, so every call after that jumps straight there.
 
 ![[Pasted image 20260702154039.png]]
 
