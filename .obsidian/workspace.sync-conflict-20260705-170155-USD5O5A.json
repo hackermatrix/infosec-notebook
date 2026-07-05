@@ -51,12 +51,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CY 5700 SVSS/Challenge 3.md",
+                "file": "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/GOT  overwrite & PLT.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Challenge 3"
+              "title": "GOT  overwrite & PLT"
             }
           },
           {
@@ -65,59 +65,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CY 5700 SVSS/Bonus 3.md",
+                "file": "04_Active_Directory/02_Active Directory Protocols.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Bonus 3"
+              "title": "02_Active Directory Protocols"
             }
           },
           {
-            "id": "6d4c60365c2f7252",
+            "id": "a6cad809714d13f1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CY 5700 SVSS/Challenge 5.md",
+                "file": "CY 5700 SVSS/2nd July 2026 Notes - Memory Corruption Part 2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Challenge 5"
-            }
-          },
-          {
-            "id": "164866cd5135db67",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/GOT overwrite.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "GOT overwrite"
-            }
-          },
-          {
-            "id": "3121b768c16594e3",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/GOT overwrite.md",
-                "followCursor": true,
-                "showSearch": true,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "Outline of GOT overwrite"
+              "title": "2nd July 2026 Notes - Memory Corruption Part 2"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -149,7 +120,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": " GOT ",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -170,12 +141,11 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 347.5
+    "width": 351.5
   },
   "right": {
     "id": "4ea3f69a560f69fe",
@@ -280,54 +250,54 @@
       "bases:Create new base": false
     }
   },
-  "active": "164866cd5135db67",
+  "active": "e5e402f1221cb99c",
   "lastOpenFiles": [
-    "images/Pasted image 20260702144001.png",
+    "images/Pasted image 20260705170132.png",
+    "images/Pasted image 20260705165459.png",
+    "04_Active_Directory/01_AD_Foundations.md",
+    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/GOT  overwrite & PLT.md",
     "temp_re/Reverse Engineering/GOT overwrite.md",
-    "03_Exploitation_Security/GOT overwrite.md",
-    "05_Reverse_Engineering/03_Exploitation_Security/Security Mechanisms.md",
-    "03_Exploitation_Security/ret2libc Summary.md",
-    "CY 5700 SVSS/Challenge 6.md",
-    "CY 5700 SVSS/25 June 2026 Vaddya.md",
-    "CY 5700 SVSS/Challenge 1.md",
-    "images/Pasted image 20260702124629.png",
-    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/GOT overwrite.md",
-    "03_Exploitation_Security/Stack Canaries.md",
-    "05_Reverse_Engineering/04_Tools_CheatSheets/TOOLS.md",
-    "05_Reverse_Engineering/04_Tools_CheatSheets/Radare2 Cheat Sheet.md",
-    "05_Reverse_Engineering/04_Tools_CheatSheets/GDB How to's.md",
+    "temp_re/Reverse Engineering/MemorySections.md",
+    "05_Reverse_Engineering/02_Memory_Assembly/MemorySections.md",
+    "09_Web_Exploitation/03_Web_Vulnerabilities/Parameter Pollution Lab.md",
     "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/ret2libc Summary.md",
-    "5010 Network Security.md",
-    "images/Pasted image 20260702100956.png",
-    "images/Pasted image 20260702100743.png",
-    "images/Pasted image 20260702100535.png",
-    "images/Pasted image 20260701232658.png",
-    "images/Pasted image 20260701232558.png",
-    "images/Pasted image 20260701232312.png",
-    "images/Pasted image 20260701232145.png",
-    "images/Pasted image 20260701191138.png",
-    "images/Pasted image 20260701190919.png",
-    "CY 5700 SVSS/25th June 2026.md",
-    "CY 5700 SVSS/Challenge 5.md",
+    "05_Reverse_Engineering/03_Exploitation_Security/Security Mechanisms.md",
+    "Interview Prep/Third party risk management Questions.md",
+    "05_Reverse_Engineering/VERSIONING.md",
+    "CY 5700 SVSS/Challenge 6.md",
+    "images/Pasted image 20260705154943.png",
+    "images/Pasted image 20260703124350.png",
+    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/~syncthing~GOT  overwrite & PLT.md.tmp",
+    "images/~syncthing~Pasted image 20260703124350.png.tmp",
+    "images/Pasted image 20260703120139.png",
+    "images/Pasted image 20260703120054.png",
+    "images/Pasted image 20260703115627.png",
+    "images/Pasted image 20260703114914.png",
+    "images/Pasted image 20260703114832.png",
+    "images/Pasted image 20260703114543.png",
     "CY 5700 SVSS/18-June-2026 Notes.md",
+    "images/Pasted image 20260703113155.png",
+    "CY 5700 SVSS/2nd July Notes - Vaddya Edition.md",
+    "CY 5700 SVSS/25 June 2026 Vaddya.md",
+    "CY 5700 SVSS/2nd July 2026 Notes - Memory Corruption Part 2.md",
+    "CY 5700 SVSS/~syncthing~2nd July Notes - Vaddya Edition.md.tmp",
     "CY 5700 SVSS/28th May - Pre read & Class notes.md",
-    "CY 5700 SVSS/Bonus Assignment 1.md",
-    "CY 5700 SVSS/BLIF.md",
-    "CY 5700 SVSS/Memory Corruption.md",
-    "CY 5700 SVSS/4th June Class Notes.md",
     "CY 5700 SVSS/Challenge 3.md",
-    "CY 5700 SVSS/11th June Class Notes.md",
-    "CY 5700 SVSS/7 May to 21st May class notes.md",
+    "CY 5700 SVSS/4th June Class Notes.md",
+    "CY 5700 SVSS/25th June 2026.md",
+    "CY 5700 SVSS/Untitled.md",
+    "CY 5700 SVSS/~syncthing~Untitled.md.tmp",
+    "CY 5700 SVSS/Bonus 3.md",
+    "CY 5700 SVSS/Challenge 5.md",
+    "03_Exploitation_Security/ret2libc Summary.md",
+    "03_Exploitation_Security/GOT overwrite.md",
+    "5010 Network Security.md",
     "CY 5700 SVSS/~syncthing~25 June 2026 Vaddya.md.tmp",
     "~syncthing~2026-06-25.md.tmp",
     "vids/diable_NBT_NS_GPO_create.mp4",
     "CY 5700 SVSS/~syncthing~25th June 2026.sync-conflict-20260625-182141-USD5O5A.md.tmp",
     "CY 5700 SVSS/~syncthing~25th June 2026.md.tmp",
     "CY 5700 SVSS/~syncthing~Challenge 2.md.tmp",
-    "CY 5700 SVSS/~syncthing~7 May to 21st May class notes.md.tmp",
-    "04_Active_Directory/~syncthing~AD_Foundations.md.tmp",
-    "~syncthing~Untitled.md.tmp",
-    "images/~syncthing~Pasted image 20260614121335.png.tmp",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }

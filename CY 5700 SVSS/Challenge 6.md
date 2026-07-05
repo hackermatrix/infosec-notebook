@@ -272,4 +272,11 @@ https://infosecwriteups.com/got-overwrite-bb9ff5414628
 
 ![[Pasted image 20260705165459.png]]
 
-PLT is for the following fwrite@plt and strlen@plt
+![[Pasted image 20260705170132.png]]
+
+![[Pasted image 20260705170149.png]]
+
+
+![[Pasted image 20260705170302.png]]
+
+set *0x56556020=0xf7dc98b0
