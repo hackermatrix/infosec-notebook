@@ -1,4 +1,4 @@
-
+	
 
 ## 1. DNS - Do not sssssssss
 - Active Directory Domain Services (AD DS) uses DNS to allow clients (workstations, servers, and other systems that communicate with the domain) to locate Domain Controllers and for Domain Controllers that host the directory service to communicate amongst themselves.

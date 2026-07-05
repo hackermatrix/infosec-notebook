@@ -262,10 +262,14 @@ Per the  usually the exact same function
 
 2. The Target: In our code case it will be this fprintf(stdout, %s) because per this the overwrite has already happen. 
 
-3. the overwrite:  printfy function as our target which will be overwritten 
+3. the overwrite:  fprintf function as our target which will be overwritten 
 
 4. trigger: here in the example it says printf user input 
 
 ![[Pasted image 20260702124629.png]]
 
+https://infosecwriteups.com/got-overwrite-bb9ff5414628
 
+![[Pasted image 20260705165459.png]]
+
+PLT is for the following fwrite@plt and strlen@plt
