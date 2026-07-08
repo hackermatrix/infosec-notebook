@@ -712,7 +712,7 @@ Now will call the subroutine.
 
 Esp always points to the top of the stack. remember in call subroutine will have current+4 address to come back to it. 
 
-Definition of return address is take whatever is at the top of the stack and jump to it. 
+Definition of return address 
 
 → take whatever is at top of stack (%esp)
 → pop it into %eip
