@@ -32,3 +32,11 @@
 
 ### 8 . VPC flow log enabled 
 ![[Pasted image 20260707214810.png]]
+
+
+### 9. VPC has both public and private subnets 
+![[Pasted image 20260707220107.png]]
+
+### 10. IAM strong Password Policy
+
+![[Pasted image 20260707220545.png]]
