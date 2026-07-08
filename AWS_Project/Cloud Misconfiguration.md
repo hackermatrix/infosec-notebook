@@ -109,3 +109,7 @@ use case specific
 
 
 ![[Pasted image 20260707205319.png]]
+
+# Remediated
+
+![[Pasted image 20260708144211.png]]

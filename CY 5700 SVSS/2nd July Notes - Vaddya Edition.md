@@ -43,7 +43,7 @@ On the stack, you've got two categories of things:
 - So what do we do ????????????????????????????? <mark style="background: #FFB86CA6;">( Use the code that is already executable )</mark>
 
 ##  B. Attacks 
-### 1. The Code Reuse attack - Workaround Non-executable memory
+### 1. LIBC / The Code Reuse attack - Workaround Non-executable memory
 - Use code that is already executable. like system.  anything in the exec family. 
 -  execute existing functions with the arguments you choose .e.g. system("/bin/sh") make the cpu think that this is what it was suppose to run. 
 - analyze the system() inside libc you can easily look at dynamic symbol symbol that points to there is a symbol table which says this function is at this address. 
@@ -54,11 +54,15 @@ On the stack, you've got two categories of things:
 
 ![[Pasted image 20260708120259.png]]
 
+### System
 
+![[Pasted image 20260708142522.png]]
+Once the system opens a shell we are not looking at going back to the previous function. 
 #### 1.2 chaining Function call
 **Get this part from the recordings as well. **
 
 - In 64 bit systems you can put args in registers.
+![[Pasted image 20260708142718.png]]
 
 
 ### 2. Return Oriented Programming 
