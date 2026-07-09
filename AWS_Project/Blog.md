@@ -119,16 +119,21 @@ Bedrock is not configured in the demo environment.
 
 
 4. EC2 instance has detailed monitoring enabled. Risk Accepted (cost vs. benefit).
-CloudWatch monitoring has a per-instance cost and is primarily an operational/performance control, not a security control. For a single non-production instance, the added observability doesn't justify the cost. Would be reconsidered for production workloads with an on-call/incident-response process to actually consume the metrics.
+![[Pasted image 20260709161710.png]]
+Considering our demo account EC2 instance with the added observability doesn't justify the cost. Would be reconsidered for production workloads
 
-**(d) "CloudTrail records all S3 object-level API operations for all buckets" — Not Applicable.** Object-level (data event) logging has a real cost at scale and is most valuable when a bucket holds sensitive or regulated data. This lab bucket holds only test artifacts; management-event logging (already enabled) is sufficient for this environment's risk profile.
+5.  CloudTrail records all S3 object-level API operations for all buckets - Not Applicable.
+![[Pasted image 20260709161938.png]]
+Object-level (data event) logging has a real cost at scale and is most valuable when a bucket holds sensitive or regulated data.
 
-**(e) "VPCs are present in more than one region" — Not Applicable.** This finding assumes multi-region VPC presence is inherently risky (unused regions = unmonitored attack surface). This is a single-region-by-design lab; the finding is a non-issue here, not a gap. Would be relevant to re-check in a multi-account/Organizations context.
+6. VPCs are present in more than one region" — Not Applicable. 
+![[Pasted image 20260709162200.png]]
 
-
-
+Per our demo environment this is a single-region-by-design lab; the finding is a non-issue here, not a gap. 
 
 ## Reporting 
-- After segregating the Findings , we used a risk matrix to find the Serverity of each valid finding, risk and the reccomenta
+- After segregating the Findings , we used a risk matrix to find the Severity of each valid finding, risk and the recommendations to mitigate the risk. 
+- To determine the severity, we evaluated the finding in conjunction with other related findings that could potentially influence the overall risk impact of the identified issue.
+- ![[Pasted image 20260709160951.png]]
 
 
