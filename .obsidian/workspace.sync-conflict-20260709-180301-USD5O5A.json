@@ -13,27 +13,27 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "AWS_Project/Cloud Security Audit Report Template.md",
+                "file": "CY 5700 SVSS/Untitled.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Cloud Security Audit Report Template"
+              "title": "Outline of Untitled"
             }
           },
           {
-            "id": "61cbe97d3aa14eb7",
+            "id": "fed9e35bd81c9c74",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AWS_Project/Cloud Security Audit Report Template.md",
+                "file": "CY 5700 SVSS/Untitled.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Cloud Security Audit Report Template"
+              "title": "Untitled"
             }
           }
         ],
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AWS_Project/Cloud Misconfiguration.md",
+                "file": "AWS_Project/Blog.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Cloud Misconfiguration"
+              "title": "Backlinks for Blog"
             }
           },
           {
@@ -199,54 +199,54 @@
       "bases:Create new base": false
     }
   },
-  "active": "61cbe97d3aa14eb7",
+  "active": "fed9e35bd81c9c74",
   "lastOpenFiles": [
-    "images/aws-architecture-fixed.png",
-    "images/aws-architecture-before.png",
+    "CY 5700 SVSS/Untitled.md",
     "AWS_Project/Blog.md",
+    "AWS_Project/Cloud Security Audit Report Template.pdf",
+    "AWS_Project/~syncthing~Cloud Security Audit Report Template.pdf.tmp",
+    "images/Pasted image 20260709162200.png",
+    "images/Pasted image 20260709161938.png",
+    "images/Pasted image 20260709161710.png",
     "AWS_Project/Cloud Security Audit Report Template.md",
-    "AWS_Project/Report.md",
-    "AWS_Project/Blog Template.md",
-    "images/Pasted image 20260708155920.png",
-    "images/Pasted image 20260708155924.png",
-    "images/Pasted image 20260708174502.png",
-    "images/Pasted image 20260708164538.png",
-    "images/Pasted image 20260708155321.png",
-    "images/Pasted image 20260708165111.png",
-    "Untitled 2.md",
-    "Untitled.md",
-    "images/Pasted image 20260708164251.png",
-    "images/Pasted image 20260708175744.png",
-    "images/Pasted image 20260708174814.png",
-    "Untitled 1.md",
-    "CY 5700 SVSS/Challenge 5.md",
-    "CY 5700 SVSS/18-June-2026 Notes.md",
+    "images/Pasted image 20260709160951.png",
+    "images/~syncthing~Pasted image 20260709160951.png.tmp",
+    "AWS_Project/~syncthing~Blog.md.tmp",
     "AWS_Project/Cloud Misconfiguration.md",
-    "Interview Prep/Cloud Security - Case Bases Questions.md",
+    "AWS_Project/Blog Template.md",
+    "AWS_Project/Report.md",
+    "images/Pasted image 20260709154913.png",
+    "AWS_Project/~syncthing~Blog Template.md.tmp",
+    "images/Pasted image 20260709152749.png",
+    "images/Pasted image 20260709152136.png",
+    "images/Pasted image 20260709151802.png",
+    "AWS_Project/Cloud Security Audit Report Template.sync-conflict-20260709-012434-USD5O5A.md",
+    "AWS_Project/Cloud Security Audit Report Template.sync-conflict-20260709-005310-USD5O5A.md",
+    "AWS_Project/Config Fixes.md",
+    "images/Pasted image 20260709150336.png",
+    "images/Pasted image 20260709150307.png",
+    "AWS_Project/~syncthing~Cloud Security Audit Report Template.md.tmp",
     "CY 5700 SVSS/2nd July Notes - Vaddya Edition.md",
-    "CY 5700 SVSS/11th June Class Notes.md",
-    "CY 5700 SVSS/7 May to 21st May class notes.md",
+    "AWS_Project/~syncthing~Cloud Security Audit Report Template.sync-conflict-20260709-005310-USD5O5A.md.tmp",
+    "AWS_Project/~syncthing~Cloud Security Audit Report Template.sync-conflict-20260709-012434-USD5O5A.md.tmp",
+    "images/~syncthing~aws-architecture-fixed.png.tmp",
+    "images/~syncthing~aws-architecture-before.png.tmp",
+    "AWS_Project/Cloud Security Audit Report.md",
+    "AWS_Project/Cloud Security Audit.md",
+    "5130/08_Security Assessment,  Compliance and  Automation.md",
+    "Untitled 2.md",
+    "Untitled 1.md",
+    "Untitled.md",
     "CY 5700 SVSS/2nd July 2026 Notes - Memory Corruption Part 2.md",
+    "CY 5700 SVSS/7 May to 21st May class notes.md",
+    "Interview Prep/Cloud Security - Case Bases Questions.md",
+    "CY 5700 SVSS/11th June Class Notes.md",
     "CY 5700 SVSS/28th May - Pre read & Class notes.md",
     "C Revision.md",
     "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/GOT  overwrite & PLT.md",
-    "AWS_Project/Config Fixes.md",
-    "AWS_Project/~syncthing~Config Fixes.md.tmp",
-    "AWS_Project",
     "03_Exploitation_Security/Stack Canaries.md",
     "03_Exploitation_Security/ret2libc Summary.md",
     "03_Exploitation_Security/GOT overwrite.md",
-    "Interview Prep/Cloud Security Basics.md",
-    "5010/5010_Laws_Ethics_Privacy/Law_and_Ethics_Textbook/11.5 - Computer Crime.md",
-    "5010/5010_Operational_Security/10.2 - Business Continuity Planning.md",
-    "04_Active_Directory/~syncthing~02_Active Directory Protocols.md.tmp",
-    "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/~syncthing~GOT  overwrite & PLT.md.tmp",
-    "images/~syncthing~Pasted image 20260703124350.png.tmp",
-    "CY 5700 SVSS/~syncthing~2nd July Notes - Vaddya Edition.md.tmp",
-    "CY 5700 SVSS/~syncthing~Untitled.md.tmp",
-    "CY 5700 SVSS/~syncthing~25 June 2026 Vaddya.md.tmp",
-    "~syncthing~2026-06-25.md.tmp",
-    "vids/diable_NBT_NS_GPO_create.mp4",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }
