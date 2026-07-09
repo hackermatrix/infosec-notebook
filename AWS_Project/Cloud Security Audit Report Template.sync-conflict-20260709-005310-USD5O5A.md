@@ -16,14 +16,13 @@ This report documents a self-directed cloud security assessment performed on a d
 3. remediation 
 4. revalidation scan.
 
-| Metric                 | Before Remediation                                   | After Remediation         |
-| ---------------------- | ---------------------------------------------------- | ------------------------- |
-| Prowler ThreatScore    | 46.98%                                               | 96.11%                    |
-| Total checks evaluated | —                                                    | 445                       |
-| Failing checks         | ~104+ (Critical/High concentration in IAM & Network) | 214                       |
-| Passing checks         | —                                                    | 231                       |
-| Critical findings open | 6+                                                   | 0                         |
-| High findings open     | 5                                                    | 1 (accepted risk, see §7) |
+| Metric                 | Before Remediation                                   | After Remediation |
+| ---------------------- | ---------------------------------------------------- | ----------------- |
+| Prowler ThreatScore    | 46.98%                                               | 96.11%            |
+| Total checks evaluated | 155                                                  | 174               |
+| Failing checks         | ~104+ (Critical/High concentration in IAM & Network) | 77                |
+| Passing checks         | 48                                                   | 94                |
+
 
 The initial scan surfaced multiple Critical and High severity misconfigurations concentrated in Identity (root account without MFA, an over-privileged developer account) and Network (a security group open to the internet on all ports). All Critical findings were remediated. A small number of Low/Medium findings were reviewed and formally risk-accepted or marked not-applicable based on the lab's actual use case — documented in §7 rather than silently ignored, consistent with how these would be handled in a real audit workpaper.
 

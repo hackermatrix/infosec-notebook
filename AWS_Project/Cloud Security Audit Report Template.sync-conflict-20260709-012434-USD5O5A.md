@@ -5,21 +5,25 @@ Tanishka Chitnis
 **Cloud Provider:** Amazon Web Services (AWS) 
 **Account Scope:** Single AWS Account. Personal Sandbox (Account ID 966042699310) 
 **Assessment Tool:** Prowler v5.33.0 (open-source AWS CIS/compliance scanner) 
-**Report Date:** July 2026 
+**Report Date:** July 2026 **
 **Classification:**** Internal / Portfolio Demonstration (No production or client data involved)
 
 ## 1. Executive Summary
 
-This report documents a self-directed cloud security assessment performed on a deliberately misconfigured AWS sandbox environment. This sandbox consists of a social media web application hosted on EC2 . The application stores user images on a S3 bucket. The objective was to demonstrate the full audit life cycle: 
+This report documents a self-directed cloud security assessment performed on a deliberately misconfigured AWS sandbox environment. This sandbox consists of a social media web application hosted on EC2 . The application stores user images on a S3 bucket. The objective was to demonstrate the full audit lifecycle: 
 1. baseline scan  
 2. risk-rated findings  
 3. remediation 
-4. re-validation scan.
+4. revalidation scan.
 
-| Metric                 | Before Remediation                                   | After Remediation |
-| ---------------------- | ---------------------------------------------------- | ----------------- |
-| Prowler ThreatScore    | 46.98%                                               | 96.11%            |
-
+| Metric                 | Before Remediation                                   | After Remediation         |
+| ---------------------- | ---------------------------------------------------- | ------------------------- |
+| Prowler ThreatScore    | 46.98%                                               | 96.11%                    |
+| Total checks evaluated | —                                                    | 445                       |
+| Failing checks         | ~104+ (Critical/High concentration in IAM & Network) | 214                       |
+| Passing checks         | —                                                    | 231                       |
+| Critical findings open | 6+                                                   | 0                         |
+| High findings open     | 5                                                    | 1 (accepted risk, see §7) |
 
 The initial scan surfaced multiple Critical and High severity misconfigurations concentrated in Identity (root account without MFA, an over-privileged developer account) and Network (a security group open to the internet on all ports). All Critical findings were remediated. A small number of Low/Medium findings were reviewed and formally risk-accepted or marked not-applicable based on the lab's actual use case — documented in §7 rather than silently ignored, consistent with how these would be handled in a real audit workpaper.
 
@@ -69,6 +73,8 @@ The initial scan surfaced multiple Critical and High severity misconfigurations 
 ![[aws-architecture-fixed.png]]
 
 
+_(Diagram placeholder — recommend a simple network diagram showing: Internet → VPC → Public Subnet (EC2 instance, IGW-routed) + Private Subnet → S3 bucket (accessed via bucket policy) → CloudTrail → S3/CloudWatch Logs. I can generate this as an inline diagram — just ask.)_
+
 Key components:
 
 - 1 VPC (`vpc-05408b69a53452fe4`) spanning `us-east-2`, with one public and one private subnet
@@ -79,8 +85,8 @@ Key components:
 
 ## 6. Data Flow
 
-Users connect to the EC2-hosted social media app over HTTPS. The instance sits in the VPC's public subnet.
-The application reads and writes user-uploaded images directly to the S3 bucket.
+ In this lab, data flow is minimal: no application traffic; flows of interest are (a) administrative/API access via IAM credentials, and (b) audit log flow from CloudTrail into the log-storage bucket.
+
 ## 7. Findings
 
 | Sr. No | Observation                                                                                                                                                                                                                                                                                           | Severity | Risk                                                                                                                                                                                                                                                                                                                       | Recommendation                                                                                                                                                    | Status                                                                                                         |
@@ -98,7 +104,7 @@ The application reads and writes user-uploaded images directly to the S3 bucket.
 | 11     | VPC contained only public subnets and no private subnet segmentation existed.                                                                                                                                                                                                                         | Medium   | Without a private sub-net the database of the web application will also be inside a public sub-net and this could expose the database to public internet and hence creating a new attack surface and possibility of data ex filtration.                                                                                    | Introduce private subnets for resources that don't require inbound internet access; route via NAT for outbound-only needs.                                        | **Remediated** — private subnet added.                                                                         |
 | 12     | IAM account password policy did not meet CIS baseline (length, complexity, reuse, expiration).                                                                                                                                                                                                        | Medium   | A weak password policy could make IAM users with weak passwords vulnerable to attacks like credential stuffing.                                                                                                                                                                                                            | Enforce ≥14 character minimum, upper/lower/number/symbol complexity, 24-password reuse prevention, and a defined expiration window.                               | **Remediated** — 14-char minimum, full complexity, 24-password reuse prevention, 90-day expiration configured. |
 | 13     | No CloudWatch Logs metric filters/alarms exist for security-relevant CloudTrail events (unauthorized API calls, console sign-in without MFA, root account usage, IAM policy changes, security group/NACL/route table/gateway changes, S3 bucket policy changes, CMK deletion, Organizations changes). | Medium   | No monitoring and alerts could lead to unauthorized events not getting detected.                                                                                                                                                                                                                                           | Implement the CIS-recommended metric filter + alarm set on the CloudTrail log group (13 filters); route to an SNS topic or equivalent for real-time notification. | Open — recommended as Phase 2 (requires CloudWatch Logs group + SNS setup not yet built).                      |
-|        |                                                                                                                                                                                                                                                                                                       |          |                                                                                                                                                                                                                                                                                                                            |                                                                                                                                                                   | Open — partial remediation; admin policy removed but direct attachment pattern remains.                        |
+|        |                                                                                                                                                                                                                                                                                                       |          |                                                                                                                                                                                                                                                                                                                            |                                                                                                                                                                   |                                                                                                                |
 
 
 ## 9. Appendix
