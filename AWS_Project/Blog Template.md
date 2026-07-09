@@ -65,3 +65,19 @@ Open with the ThreatScore jump: 46.98% → 96.11%. Frame it as: this is what a r
 - Aim for 1,000–1,500 words — long enough to show depth, short enough that a hiring manager reads the whole thing.
 - Screenshots do a lot of work here; don't over-narrate what's visually obvious in them.
 - Avoid restating the audit report verbatim — the blog should read as the _story_ of doing the work; the report is the _artifact_ of having done it. Link to the report (or offer it as a downloadable PDF) rather than duplicating the findings table in full.
+
+
+
+## 8. Findings Reviewed and Not Remediated (False Positive / Risk Acceptance / Not Applicable)
+
+A mature audit distinguishes between "the tool flagged it" and "it's actually a risk in this context." The following findings were deliberately not remediated, with rationale documented rather than silently dismissed:
+
+**(a) IAM user `auditor` uses long-lived credentials outside IAM/STS — Risk Accepted.** This is the Prowler scanning tool's own service identity. It requires standing programmatic access to run scans on a schedule from outside AWS (no EC2/Lambda role available to assume from an external scanner). Compensating control: least-privilege read-only policy (`SecurityAudit` + `ViewOnlyAccess` only, no write access) and a defined key-rotation cadence.
+
+**(b) "At least one AWS Backup vault exists" — Not Applicable.** This lab environment holds no data requiring backup/recovery (no persistent business data, disposable sandbox resources). Backup vault creation would be pure overhead with no risk reduction in this context. Would flip to "in scope" the moment real data is introduced.
+
+**(c) "EC2 instance has detailed monitoring enabled" — Risk Accepted (cost vs. benefit).** Detailed (1-minute) CloudWatch monitoring has a per-instance cost and is primarily an operational/performance control, not a security control. For a single non-production instance, the added observability doesn't justify the cost. Would be reconsidered for production workloads with an on-call/incident-response process to actually consume the metrics.
+
+**(d) "CloudTrail records all S3 object-level API operations for all buckets" — Not Applicable.** Object-level (data event) logging has a real cost at scale and is most valuable when a bucket holds sensitive or regulated data. This lab bucket holds only test artifacts; management-event logging (already enabled) is sufficient for this environment's risk profile.
+
+**(e) "VPCs are present in more than one region" — Not Applicable.** This finding assumes multi-region VPC presence is inherently risky (unused regions = unmonitored attack surface). This is a single-region-by-design lab; the finding is a non-issue here, not a gap. Would be relevant to re-check in a multi-account/Organizations context.
