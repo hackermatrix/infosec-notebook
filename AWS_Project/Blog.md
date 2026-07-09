@@ -1,13 +1,11 @@
 Auditing My Own AWS Account: A Before/After Cloud Security Story
 
-This blog is to check if my foundational understanding on how AWS Security works and how cloud security audit works end-to-end from initial audit to revalidation. I deployed some services whichever available on  the free tier account. The intent was to cover major domains like Identity & Access Management, Network, Compute, Storage, Logging & Monitoring Took a demo use case that a social media application is hosted on EC2 instance and the S3 bucket stores user images. Instead of creating my own tool or doing manual configuration checks. I chosed an open source open-source tools prowler for my demo environment.    
+This blog demonstrates an end-to-end cloud security audit from the initial baseline scan to final revalidation. We deployed a small set of AWS services, all within what's available on a free-tier account, with the intent of covering the major security domains: Identity & Access Management, Network, Compute, Storage, and Logging & Monitoring. The demo use case was a social media application hosted on an EC2 instance, with user images stored in an S3 bucket. Instead of building our own scanning tool or checking configurations manually, We used Prowler, an open-source AWS compliance scanner, to run the assessment on this demo environment.
+# Initial Setup.
 
-The blog highlights my understanding of cloud security audit. 
-# Initial Deployment.
+For initial Deployment and feasibility of the project We choose to deploy through AWS console. We understand for enterprise level environments an Infrastructure a Code tool is used. 
 
-For initial Deployment and feasibility of the project I choose to deploy through AWS console. I understand for enterprise level environments an Infrastructure a Code tool is used. 
-
-Firstly used my root user account for the deployments, which i was hoping to be flagged as per the security practise root user should not be used for frequently. I did not set up any form of multi-factor authentication on the root account. Then I created user tara and attached administrative IAM policy to it. Deployed EC2 instance with over-permissive NACL and security group. S3 bucket was configured with public access open, the security features such as object lock, versioning multi-factor authentication disabled. I also did not deploy the S3 bucket policy. Did not configure logging and monitoring. 
+Firstly used my root user account for the deployments, which we were hoping to be flagged as per the security practice root user should not be used for frequently. We did not set up any form of multi-factor authentication on the root account. Then We created user tara and attached administrative IAM policy to it. Deployed EC2 instance with over-permissive NACL and security group. S3 bucket was configured with public access open, the security features such as object lock, versioning multi-factor authentication disabled. We  did not configure the S3 bucket policy. Did not configure logging and monitoring. 
 
 # Configuring Prowler
 
@@ -15,7 +13,7 @@ Firstly used my root user account for the deployments, which i was hoping to be 
 
 ![[Pasted image 20260709144803.png]]
 
-## Creating a user called audit with read permissions whose details I provided to prowler. 
+## Creating a user called audit with read permissions for scanning
 
 
 ![[Pasted image 20260709145111.png]]
@@ -33,6 +31,8 @@ Firstly used my root user account for the deployments, which i was hoping to be 
 
 ![[Pasted image 20260709145420.png]]
 
+# Findings
+
 ![[Pasted image 20260709145514.png]]
 
 ![[Pasted image 20260709145620.png]]
@@ -43,8 +43,92 @@ Per the below image you can observe that same finding for security group has bee
 
 ![[Pasted image 20260709145938.png]]
 
+# Mapping across compliances
+
+![[Pasted image 20260709150022.png]]
+
+![[Pasted image 20260709150052.png]]
+
+![[Pasted image 20260709150239.png]]
+
+![[Pasted image 20260709150307.png]]
+![[Pasted image 20260709150336.png]]
+
+# Remediation 
+
+After going through the findings we realized some of the findings are false positive. Even though the service was not configured it was being flagged like Bedrock. We first remediated the key ones. 
+
+### 1. Removing Administrative IAM Policy from user Tara
+
+![[Pasted image 20260707210918.png]]
+
+
+### 2. Setting up MFA on root account 
+
+![[Pasted image 20260707211230.png]]
+
+### 3. Restricting Security Groups Inbound to port 22 and my IP
+![[Pasted image 20260707211754.png]]
+
+
+### 4. Enabled Cloud Trail Logging 
+![[Pasted image 20260707212640.png]]
+
+
+### 5. S3 bucket Public Access block
+![[Pasted image 20260707212858.png]]
+
+
+### 6. S3 bucket Https policy enforeced 
+![[Pasted image 20260707213059.png]]
+
+### 7. S3 Bucket MFA delete enabled
+
+
+### 8 . VPC flow log enabled 
+![[Pasted image 20260707214810.png]]
+
+
+### 9. VPC has both public and private subnets 
+![[Pasted image 20260707220107.png]]
+
+### 10. IAM strong Password Policy
+
+![[Pasted image 20260707220545.png]]
+
+# False Positives/ Risk Accepted 
+- An Automated tool can surely find misconfiguration. However, to report the finding as a valid finding, we need to consider the business context(even if the finding is a critical one ). We call these findings False positives .
+
+1. AWS Organization restricts operations to only the configured AWS Regions with SCP policies
+
+![[Pasted image 20260709151802.png]]
+
+Considering this is a demo environment where AWS organization is not configured. This finding marked as High by the tool stands not-applicable. 
+
+2. EBS volume is encrypted
+
+![[Pasted image 20260709152136.png]]
+
+Considering this is a demo environment where encryption can be expensive the ebs volume are not encrypted.  
+
+3. Bedrock has at least one guardrail configured in the audited region
+
+Bedrock is not configured in the demo environment. 
+
+![[Pasted image 20260709154913.png]]
+
+
+4. EC2 instance has detailed monitoring enabled. Risk Accepted (cost vs. benefit).
+CloudWatch monitoring has a per-instance cost and is primarily an operational/performance control, not a security control. For a single non-production instance, the added observability doesn't justify the cost. Would be reconsidered for production workloads with an on-call/incident-response process to actually consume the metrics.
+
+**(d) "CloudTrail records all S3 object-level API operations for all buckets" — Not Applicable.** Object-level (data event) logging has a real cost at scale and is most valuable when a bucket holds sensitive or regulated data. This lab bucket holds only test artifacts; management-event logging (already enabled) is sufficient for this environment's risk profile.
+
+**(e) "VPCs are present in more than one region" — Not Applicable.** This finding assumes multi-region VPC presence is inherently risky (unused regions = unmonitored attack surface). This is a single-region-by-design lab; the finding is a non-issue here, not a gap. Would be relevant to re-check in a multi-account/Organizations context.
 
 
 
+
+## Reporting 
+- After segregating the Findings , we used a risk matrix to find the Serverity of each valid finding, risk and the reccomenta
 
 

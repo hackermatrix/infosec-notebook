@@ -2,6 +2,9 @@
 
 Purpose of this post: demonstrate you can operate on both sides of a cloud security engagement — building/breaking, scanning, triaging (including saying "this finding doesn't actually matter here"), fixing, and validating. The false-positive triage section is your differentiator; most portfolio posts stop at "ran a scanner, fixed stuff."
 
+
+This project aims 
+
 ---
 
 ## Suggested Title Options
