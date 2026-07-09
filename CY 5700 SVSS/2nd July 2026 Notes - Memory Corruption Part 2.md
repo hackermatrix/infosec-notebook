@@ -52,7 +52,6 @@ ret
 1. Identify the gadgets in the program. 
 2. Figure out the 
 
-By looking at libc you can have all the gadgets that you want. 
 
 %eax = %eax -1 
 
