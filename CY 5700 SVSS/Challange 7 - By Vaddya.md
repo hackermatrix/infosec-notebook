@@ -13,6 +13,7 @@
 
  1d3808 /bin/sh
 
+EXIT_OFFSET = 0x3c5a0
 
 ## How much is the variation is the base address  of libc ? :
 
