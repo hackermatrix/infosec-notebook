@@ -35,3 +35,22 @@
 #### Space complexity attacks :
 
 ### 1. Compression Bombs:
+
+
+
+
+### 2. Billion Laughs 
+- attacks using XML entities .
+- When custom symbols references other symbols.
+
+
+
+
+
+
+### Real attacks 
+- watch the video from the slides
+
+
+
+# Side Channels Attacks 

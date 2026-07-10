@@ -39,5 +39,19 @@ Seperate chaining
 
 Linked list - > 
 
+# XML entities 
+
+Billion laughs 
+
+need to disable xml parsing or enable watch dogs 
+
+# PITA Target : Do not check the OWASP argument 
+
+
+# Side - Channel Attacks 
+
+bit composition affects the energy 
+
+
 
 
