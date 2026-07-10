@@ -53,5 +53,9 @@ need to disable xml parsing or enable watch dogs
 bit composition affects the energy 
 
 
+# Security goals and fundamentals study about them 
+
+
+
 
 
