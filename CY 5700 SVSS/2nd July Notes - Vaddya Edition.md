@@ -5,7 +5,7 @@
 
 
 ## Basic requirements for basic shellcode Injection
-1. Run out of bounds 
+1. Run out of bounds - writing (or reading) past the boundary of a specific allocated object usually a buffer while still staying safely inside memory that belongs to your process.
 2. inject malicious code - non executable memory this is a technology that allows you to mark certain technology as non-executable this exists in every desktop and server. Everything learnt till last week 
 3. overwrite control fields 
 4. guess imp addresses
@@ -24,7 +24,6 @@ On the stack, you've got two categories of things:
 - Function pointers, if any are stored nearby
 - In C++, vtable pointers
 
-
 # Defenses
 
 ## Human defenses
@@ -37,7 +36,7 @@ On the stack, you've got two categories of things:
 
 ### 1. Non-Executable Mem:
 - Used to mark stack non-executable.
-- **Common name:** NX bit or DEP or XD ot XI or XN. (**W^X** in Mac OSX meaning that mem is Writable or Executable not both ). Data area is writable but not executable. Something that is s
+- **Common name:** NX bit or DEP or XD ot XI or XN. (**W^X** in Mac OSX meaning that mem is Writable or Executable not both ). Data area is writable but not executable. Something that is readable is not writable and vice versa.
 - This is implemented on the hardware side( The h/w signals the OS about the event happening).
 ![[Pasted image 20260708122645.png]]
 - So what do we do ????????????????????????????? <mark style="background: #FFB86CA6;">( Use the code that is already executable )</mark>
