@@ -11,6 +11,8 @@
 
 - the offset is : 0x528b0
 
+ 1d3808 /bin/sh
+
 
 ## How much is the variation is the base address  of libc ? :
 
