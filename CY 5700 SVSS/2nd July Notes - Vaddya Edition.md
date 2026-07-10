@@ -193,17 +193,31 @@ Implementation decisions
 - Structure it is a hexadecimal value it is a random byte.  0xxxxxx0  -  7 bits with 0  with strcpy this gets blocked 
 - Stored where? - thread local storage. libc generates the value randomly 
 gcc single local cookie per program we have fixed location 
+
+![[Pasted image 20260710132652.png]]
+
 # 4. Guess important addresses
 
 ## A. Defenses:
 
 ### 1. ASLR ( Address Space Layout Randomization)
 - Randomize the addresses and make them difficult to gues.
-- **For this to work , PIE(Position Independent Code) is importanta]**
+- **For this to work , PIE(Position Independent Code) is important]**
+![[Pasted image 20260710132841.png]]
 
 #### 1.2 How Random is it ?
-- The OS allocates memory in the form of Pages and each page is around 4KB ( may differ) so the randomiaztion is not greater than that 
+- The OS allocates memory in the form of Pages and each page is around 4KB ( may differ) so the randomization is not greater than that.  Due to page alignment and how memory is mapped, the **lowest byte (or lowest 12 bits, one page)** of a given address is often the same every time the program runs ASLR shifts things by whole pages, not by arbitrary byte offsets. So the last byte or two of a return address / function address are often fixed and guessable even with ASLR on.
 
-- ALL of the section in the mem are randomized independently, but there is no randomization within the sections.
+- **ALL of the section in the mem are randomized independently, but there is no randomization within the sections.**  
 
 - **The randomization pattern differes based on the arch (x86 and x64) because x64 has a lot more space**
+
+#### 1.3 Defeating ASLR and Canary 
+![[Pasted image 20260710133341.png]]
+
+![[Pasted image 20260710133416.png]]
+![[Pasted image 20260710133431.png]]
+![[Pasted image 20260710133537.png]]
+![[Pasted image 20260710133626.png]]
+![[Pasted image 20260710133653.png]]
+![[Pasted image 20260710133713.png]]
