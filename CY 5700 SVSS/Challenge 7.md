@@ -64,8 +64,57 @@ if (len == -1) {
     } else { /* Small reads are okay. */
 
 
-# On brief reading I don;t really find any vulnerability in judge 
+Now the next 
+![[Pasted image 20260710163408.png]]
 
-![[Pasted image 20260710155059.png]]
+judge is a function which is not in the code neither is judge_good here 
 
+In the function anime.c you can see here 
+
+![[Pasted image 20260710163522.png]]
+
+
+I got to check_anime 
+
+![[Pasted image 20260710163549.png]]
+
+then there is this get_title 
+
+![[Pasted image 20260710162441.png]]
+
+now though memcpy has len it is back track through len like int len is in check_anime 
+
+![[Pasted image 20260710165913.png]]
+
+now the get_title has title, buf , len 
+
+we have the memcpy which just checks out, in and len 
+
+which maps to memcpy(title, buf, len)
+
+which the size of title in anime.c is 
+
+
+![[Pasted image 20260710163847.png]]
+
+
+and that in judge is this 
+
+![[Pasted image 20260710164044.png]]
+
+but it says char title[CHUNK_SIZE]
+and  CHUNK_SIZE  is 256 
+
+let me check overwriting it 
+
+![[Pasted image 20260710165403.png]]
+
+![[Pasted image 20260710165339.png]]
+
+![[Pasted image 20260710165252.png]]
+
+
+# Buffer size is 257. 
+
+# Finding the canary 
 
