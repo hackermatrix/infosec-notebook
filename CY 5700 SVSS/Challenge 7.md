@@ -126,4 +126,5 @@ let me check overwriting it
 ![[Pasted image 20260710180137.png]]
 
 
+Important thing to remember is that the canary will change everytime you run the program. 
 
