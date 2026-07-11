@@ -128,3 +128,9 @@ let me check overwriting it
 
 Important thing to remember is that the canary will change everytime you run the program. 
 
+# Overcoming the ASLR 
+
+https://oliviagallucci.com/aslr-bypass-techniques-and-circumvention-impacts/
+
+![[Pasted image 20260711143857.png]]
+
