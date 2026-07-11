@@ -213,6 +213,7 @@ gcc single local cookie per program we have fixed location
 - **The randomization pattern differes based on the arch (x86 and x64) because x64 has a lot more space**
 
 #### 1.3 Defeating ASLR and Canary 
+
 ![[Pasted image 20260710133341.png]]
 
 ![[Pasted image 20260710133416.png]]
@@ -221,3 +222,17 @@ gcc single local cookie per program we have fixed location
 ![[Pasted image 20260710133626.png]]
 ![[Pasted image 20260710133653.png]]
 ![[Pasted image 20260710133713.png]]
+
+
+### How does partial overwrite work 
+
+Target_Address = Randomized_Base + Fixed_Offset
+
+**Partial overwrite lets you exploit this whenever there is already a correct, currently-valid pointer sitting somewhere in memory**
+
+ 1. .stack
+2. saved return address
+3. a struct field
+4. Canary (check assignment how we did it) 
+that shares the base you care about. You don't overwrite the whole thing you only flip the byte(s) that encode the _offset_ part, leaving the base bytes (which are already correctly randomized for this run) untouched.
+

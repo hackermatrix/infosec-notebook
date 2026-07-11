@@ -132,5 +132,10 @@ Important thing to remember is that the canary will change everytime you run the
 
 https://oliviagallucci.com/aslr-bypass-techniques-and-circumvention-impacts/
 
+## Checking the dynamic libraries
+
 ![[Pasted image 20260711143857.png]]
 
+The addresses shown (`0xf7f77000`, `0xf7f65000`, `0xf7d1d000`, etc.) are from **this specific run of `ldd`**, not from the actual `judge` server process. Every process gets its own independent ASLR randomization — `ldd`'s mmap layout has nothing to do with the judge server's mmap layout, even though it's the same binary and same libraries. So you can't take `0xf7d1d000` and just use it as `libc_base` in your exploit; it'll almost certainly be wrong for the actual running server.
+
+## Trying the partial overwrite 
