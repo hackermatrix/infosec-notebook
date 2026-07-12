@@ -12,8 +12,7 @@
 - what does it write ? <mark style="background: #FF5582A6;">( watch the recordings )</mark>
 
 
-# Algorithms and Data Structures 
-
+# Algorithmic Complexity: Time Complexity Attacks
 
 ### 1. QuickSort 
 https://www.geeksforgeeks.org/dsa/quick-sort-algorithm/
@@ -46,43 +45,62 @@ With median-of-three, pivot = 5. Now when you partition around 5:
 - Right side: `{6, 7, 8, 9}` → 4 elements
 
 That's a perfect 50/50 split! Instead of n levels of recursion (each doing O(n) work → O(n²)), you now get log n levels of recursion → back to **O(n log n)**.
-## Algorithmic Complexity and Side Channel attacks 
 
 ![[Pasted image 20260711201324.png]]
 
-### 1. Hash Table :
+### 2. Hash Table :
 
-- In a hash table what happens your hash and the value of which is being hashed eg. tanishka is passed through a hash function it;s value is stored in the hash table. 
-- so when the backend wants that particular hash it does search tanishka-> hash value and gives it i.e, why the complexity is O(1). 
-- but since there are limitations to our hash functions where we have collisions. suppose tanishka and vadya both have the same hash function. that is why they are stored in a linked list format this is known as linear probing.  
-
+- In a hash table what happens your hash and the value of which is being hashed eg. tanishka is passed through a hash function it produces an index (say, index 4). The backend stores/retrieves at `table[4]` directlyis stored in the hash table. 
+- so when the backend wants that particular  hash it does search tanishka-> hash value and gives it i.e, why the complexity is O(1). 
+- but since there are limitations to our hash functions where we have collisions. 
+-
 geeksforgeeks.org/dsa/hash-table-data-structure/
-- Collision Protections:
-	1. Linear Probing 
-	2. Seperate Chaining
+####  Collision Protections:
+##### Separate Chaining 
+![[Pasted image 20260712130409.png]]
+![[Pasted image 20260712130503.png]]
+	![[Pasted image 20260712130715.png]]
+	2. Linear Probing
 
+- This is **open addressing**, not chaining. 
+- Instead of building a list at the colliding slot, you say: "index 4 is taken, so try index 5. Taken too? Try index 6. Keep going until you find an empty slot." 
+- No linked lists at all, every item lives directly in the table array itself, just possibly not at its "ideal" index.
 
+### Hash Table Attacks 
 
+![[Pasted image 20260712130854.png]]
 
-#### Space complexity attacks :
+If an attacker finds many keys that all collide into the same bucket:
+
+- With **chaining**: that bucket's linked list grows to length n, and looking anything up in it becomes O(n) — a linear scan.
+- With **linear probing**: you get long clusters of occupied slots, and finding an empty one (or the right slot) means scanning through the whole cluster — also O(n).
+
+Either technique degrades from O(1) to O(n) per operation under a deliberate collision attack. 
+# Space complexity attacks :
 
 ### 1. Compression Bombs:
+![[Pasted image 20260712131656.png]]
 
+- The file itself is only about **42 kilobytes**.
+- Inside, it's not one layer of compression — it's **nested** zip files inside zip files, many layers deep (42.zip famously uses 5 layers of 16 zip files each, recursively).
+- If you actually unzip everything all the way down, the total decompressed size balloons to roughly **4.5 petabytes** (4.5 million gigabytes).
 
-
-
-### 2. Billion Laughs 
+# Time and Space Complexity Attacks
+### 1. Billion Laughs 
 - attacks using XML entities .
-- When custom symbols references other symbols.
+- When custom symbols references other symbols.. &lol9 will be called, and when it goes to lol9 then lol8 and then so on and on. 
 
+![[Pasted image 20260712132642.png]]
 
+Each entity is defined in terms of the previous one, repeated 10 times:
 
-
-
+![[Pasted image 20260712133138.png]]
+when an XML parser resolves an entity reference, it doesn't just "visit" it and move on — it has to **actually construct the expanded text (or DOM tree) and hold it in memory**, because the parser's whole job is to hand the application the fully-resolved content.
 
 ### Real attacks 
 - watch the video from the slides
 
+#### Target: Kubernetes 
 
 
 # Side Channels Attacks 
