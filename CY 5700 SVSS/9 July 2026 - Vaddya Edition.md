@@ -101,6 +101,39 @@ when an XML parser resolves an entity reference, it doesn't just "visit" it and 
 - watch the video from the slides
 
 #### Target: Kubernetes 
+![[Pasted image 20260712143520.png]]
+
+##### Symbol references means in YAML:
+
+**What "symbol references" means in YAML:**
+
+YAML has a feature called **anchors and aliases**, which let you define a piece of data once and then _reuse_ it elsewhere in the document without retyping it — like a variable.
+
+The syntax looks like this:
+
+yaml
+
+```yaml
+a: &a ["web", "web", "web"]
+b: [*a, *a, *a]
+```
+
+- `&a` — this **defines an anchor** named `a`, attached to the list `["web", "web", "web"]`. Think of `&a` as "save this value under the label `a`."
+- `*a` — this is an **alias**, meaning "insert whatever was saved under anchor `a` right here."
+- So `b: [*a, *a, *a]` doesn't literally contain three copies of `"web"` written out — it contains **three references** to the same anchor, each of which the YAML parser must expand into the full `["web","web","web"]` list when it processes the document.
+
+
+![[Pasted image 20260712144329.png]]
+
+- `a` = 9 literal strings.
+- `b` = 9 references to `a` → when expanded, 9 × 9 = 81 strings.
+- `c` = 9 references to `b` → 9 × 81 = 729 strings.
+- ...and this keeps multiplying by 9 at every letter, all the way to `i`.
+
+#### Target: Web Server
+
+![[Pasted image 20260712144736.png]]
+
 
 
 # Side Channels Attacks 
