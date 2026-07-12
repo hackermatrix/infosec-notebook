@@ -1,5 +1,4 @@
 
-
 ## what's wrong is the program ?
 - The program has this :> **printf(buffer)**.
 - The buffer is controlled by the attacker. 
@@ -13,15 +12,21 @@
 - what does it write ? <mark style="background: #FF5582A6;">( watch the recordings )</mark>
 
 
-
 # Algorithms and Data Structures 
 
 
 ### 1. QuickSort 
+https://www.geeksforgeeks.org/dsa/quick-sort-algorithm/
 - **Lomuto Scheme** : We take the last element at the pivot.
 - complexity: nlog(n)
 - what if the attacker passes an input that could cause a DOS attack?
+- Consider an already sorted array 
 
+![[Pasted image 20260711195525.png]]
+
+    
+    that's O(n2)
+    input[first], input[mid], input[last]. Pick the median
 ## Complexity and Side Channel attacks 
 
 ### 1. Hash Table :
