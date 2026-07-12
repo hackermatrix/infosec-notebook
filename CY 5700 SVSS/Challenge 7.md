@@ -522,3 +522,5 @@ What I am passing here is basically
 # Saved ebp 
 
 ![[Pasted image 20260712175525.png]]
+
+![[Pasted image 20260712180742.png]]
