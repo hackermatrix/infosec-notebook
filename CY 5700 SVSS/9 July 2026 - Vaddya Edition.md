@@ -27,9 +27,10 @@ https://www.geeksforgeeks.org/dsa/quick-sort-algorithm/
     
     that's O(n2)
     input[first], input[mid], input[last]. Pick the median
-## Complexity and Side Channel attacks 
-
+## Algorithmic Complexity and Side Channel attacks 
+![[Pasted image 20260711201324.png]]
 ### 1. Hash Table :
+geeksforgeeks.org/dsa/hash-table-data-structure/
 - Collision Protections:
 	1. Linear Probing 
 	2. Seperate Chaining
