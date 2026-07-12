@@ -415,6 +415,19 @@ if __name__ == "__main__":
 
 ![[WhatsApp Image 2026-07-12 at 3.29.18 PM.jpeg]]
 
+![[Pasted image 20260712160520.png]]
 
-## objdump analysis
+Re-going through the basics we need to start overflowing from the local data from the stack top which know the title 256 and title as chunk size which is in the check_anime. The frame that we are exploiting is check_anime. Now consider the above is the stack of check_anime the return address will be of  the function that it will go back to and it will have to go back to **judge.**  So if i have to overwrite the return address I will have to find the return address of judge. 
+
+![[Pasted image 20260712160739.png]]
+
+So we look at the objdump of libanime.so because 
+judge.c has a function process.c which calls judge 
+and in the anime.c there are all the functions. 
+
+![[Pasted image 20260712162219.png]]
+
+1711 - is the offset. 
+
+offset + base address = RETURN
 
