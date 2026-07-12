@@ -411,5 +411,10 @@ if __name__ == "__main__":
     log(f"[+] requests used  = {requests}\n")
     log("====================\n")
 
-
 ```
+
+![[WhatsApp Image 2026-07-12 at 3.29.18 PM.jpeg]]
+
+
+## objdump analysis
+

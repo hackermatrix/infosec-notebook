@@ -133,7 +133,20 @@ b: [*a, *a, *a]
 #### Target: Web Server
 
 ![[Pasted image 20260712144736.png]]
+If someone submits a form with fields `username=alice&language=en`, the framework automatically parses that into a dictionary-like structure so your code can just do:
 
+```
+request.form["username"]   → "alice"
+request.query["language"]  → "en"
+```
 
+**The key question the slide is asking:** _"Can you guess the data structure used?"_
 
+The answer: it's a **hash table**. Every parameter name (`username`, `language`, etc.) becomes a _key_ in a hash table, so lookups like `request.form["username"]` are O(1)
+
+- They find the specific hash function the web framework's language/runtime uses internally (many languages use similar, sometimes not-so-strong, default hash functions for dictionaries/hash tables).
+- They **precompute** a large batch of strings that are all guaranteed to hash to the _same_ bucket — a mass hash collision.
+- They craft one POST request with a body containing thousands (or tens of thousands) of these colliding "field names" as parameters — something like `x1=1&x2=1&x3=1...` where all those `x1, x2, x3...` names were deliberately chosen to collide.
+- The server tries to parse this into its hash table. But because every key collides into the same bucket, that bucket's linked list grows to be huge — and inserting n items that all collide costs O(n²).
 # Side Channels Attacks 
+
