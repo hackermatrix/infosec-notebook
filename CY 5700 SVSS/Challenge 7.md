@@ -524,3 +524,9 @@ What I am passing here is basically
 ![[Pasted image 20260712175525.png]]
 
 ![[Pasted image 20260712180742.png]]
+
+
+# Offset: Refers to the displacement or distance of an item from a base reference point or zero. 
+
+
+
