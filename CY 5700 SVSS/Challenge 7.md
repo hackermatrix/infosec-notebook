@@ -529,4 +529,17 @@ What I am passing here is basically
 # Offset: Refers to the displacement or distance of an item from a base reference point or zero. 
 
 
+# Important difference -s string and -d decompile
 
+![[Pasted image 20260712203517.png]]
+
+
+# Saved RETURN ADDRESS 
+
+![[Pasted image 20260712204049.png]]
+
+# Finding libanime  libc base_address and bin/sh address
+
+![[Pasted image 20260712204137.png]]
+
+# Finding 
