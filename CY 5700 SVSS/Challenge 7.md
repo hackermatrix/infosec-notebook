@@ -560,3 +560,5 @@ python3 -c 'import sys; sys.stdout.buffer.write(b"A" * 256+ b"\x0a\xee\x66\xe2" 
 
 ![[Pasted image 20260712214445.png]]
 
+
+![[Pasted image 20260712231501.png]]
