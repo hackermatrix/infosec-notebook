@@ -299,3 +299,83 @@ https://blog.cloudflare.com/hertzbleed-explained/
 
 Modern CPUs don't run at a fixed speed — they use **DVFS (Dynamic Voltage and Frequency Scaling)** to automatically adjust their clock frequency based on power/heat conditions, to stay within the chip's **TDP (Thermal Design Point)** — basically its safe power/heat budget.
 
+**the amount of power a CPU draws depends on the _data_ it's processing** — specifically, how many bits are `1` vs `0` in the values being computed.
+
+That's what image 3 is showing:
+
+- **Hamming weight** = how many `1` bits are in a value. `01111111` has more 1s (weight 7) than `01000000` (weight 1).
+- **Hamming distance** = how many bits differ between two values. Comparing A and B differs in just 1 bit; comparing C and D differs in 6 bits.
+
+**Why more 1-bits or more bit-flips matter:** Physically, flipping a transistor from 0→1 (or having more 1-bits active) draws more power than staying at 0. So a computation on data with high Hamming weight/distance draws **more power** than the same computation on data with low Hamming weight/distance — even though it's the exact same instructions.
+
+![[Pasted image 20260713211447.png]]
+
+**Left example: `01111111 + 01000000`**
+
+```
+  0 1 1 1 1 1 1 1
++ 0 1 0 0 0 0 0 0
+-----------------
+  1 0 1 1 1 1 1 1
+```
+
+Watch what happens bit by bit, from the right: `1+0=1`, no carry. Next: `1+0=1`, no carry... until you hit the bit where both are `1`. When you add `1+1`, that produces a carry that has to **ripple/propagate** through the next bits. Because the first number (`01111111`) has so many 1s in a row,
+
+**Right example: `01000000 + 01000000`**
+
+```
+  0 1 0 0 0 0 0 0
++ 0 1 0 0 0 0 0 0
+-----------------
+  1 0 0 0 0 0 0 0
+```
+
+Here there's only **one** `1+1` collision (at that single bit position), producing exactly one carry, and it doesn't have to ripple through a long chain of other 1-bits — much less internal switching.
+
+#### **Connecting power to frequency (the DVFS link):**
+
+![[Pasted image 20260713212013.png]]
+
+If a computation happens to draw more power (because the secret data it's processing has more 1-bits), the chip's DVFS system reacts by **lowering the clock frequency slightly** to stay within its safe power/thermal budget (image 2: frequency dips from 4.1 → 3.9 GHz). Lower frequency = the computation takes **slightly longer** to finish.
+
+#### **Putting the whole chain together:**
+
+```
+Secret data (e.g. a private key)
+   ↓
+Number of 1-bits in that data varies
+   ↓
+Power draw varies (more 1-bits = more power)
+   ↓
+DVFS adjusts CPU frequency to compensate
+   ↓
+Execution time changes, measurably, from outside the chip
+```
+
+**So why is this dangerous?**
+
+An attacker who can measure _how long_ a cryptographic operation takes (e.g., over a network, many times, averaging out noise) can work backward through this chain: timing differences → frequency changes → power differences → **Hamming weight of the secret data being processed.** That's enough of a signal, repeated across many measurements, to eventually recover bits of a private key — even though the attacker never touched the chip and never saw a single byte of memory. It's a pure **remote timing side-channel born from a power-saving feature**, which is why it was such a surprising and hard-to-patch discovery.
+
+## Cache 
+
+### **Quick refresher: what a cache actually is**
+
+CPUs have small, very fast memory (cache) sitting between the processor and slow main RAM. When the CPU needs data, it first checks the cache:
+
+- **Cache hit:** data is already there → very fast access.
+- **Cache miss:** data isn't there → CPU has to fetch it from slower RAM → noticeably slower.
+
+That speed difference (hit vs. miss) is small, but it's **measurable** and that's the entire foundation of cache attacks.
+
+
+## Meltdown & Spectre
+
+## Fault Injection 
+
+## Cold Boot Attacks
+
+## Rowhammer Attacks
+
+
+## Defense 
+![[Pasted image 20260713212849.png]]**Sharing** (in this context usually called **masking** or **secret sharing**) — you split a sensitive intermediate value into multiple random _shares_ such that any individual share is statistically independent of the true value, and you only recombine them at the end.
