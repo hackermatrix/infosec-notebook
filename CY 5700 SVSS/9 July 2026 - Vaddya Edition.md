@@ -369,12 +369,32 @@ That speed difference (hit vs. miss) is small, but it's **measurable** and that'
 
 
 ## Meltdown & Spectre
+- The Example code considered by the professor : 
+```c
+myarray = {1, 2};
+value = read(kernel_address);
+index = value & 1;
+myarray[index];
+```
+- The Normal flow is that the pr
+
 
 ## Fault Injection 
 
 ## Cold Boot Attacks
+- if an attacker has physical access to a system, they can :
+	- use a freeze spray to freeze a RAM stick
+	- take the RAM stick out of the system
+	- Extract Data from RAM Later.
+- This Happens because if we  the lower temperature, the data retains for longer time on the hardware.  
 
 ## Rowhammer Attacks
+- This attack takes the advantage of the fact that the modern hardware is very dense.
+- The attack:
+	- Hardware Stores bits (0s and 1s).
+	- The Bits can change based on what is running on the system.
+	- if the bits inside a electronic component is flipped very fast, this creates an electromagnetic field and this can influence the bits inside the neighboring components.
+- An attacker can modify inaccessible memory by doing this intelligently.
 
 
 ## Defense 
