@@ -1,4 +1,6 @@
 
+
+# User Accounts :z
 - Every company we encounter will have at least one AD user account provisioned per user. <mark style="background: #FFB86CA6;">Some users may have two or more accounts provisioned based on their job role (i.e., an IT admin or Help Desk member).</mark>
 - There are also service accounts which are used to run a particular application or service in the background or perform other vital functions within the domain environment.
 
@@ -29,3 +31,71 @@
 - <mark style="background: #FFF3A3A6;">One account to keep in mind is the `KRBTGT` account</mark>, however. This is a type of local account built into the AD infrastructure. This account acts as a service account for the Key Distribution service providing authentication and access for domain resources.
 - This account is a common target of many attackers since gaining control or access will enable an attacker to have unconstrained access to the domain. 
 - It can be leveraged for privilege escalation and persistence in a domain through attacks such as the [Golden Ticket](https://attack.mitre.org/techniques/T1558/001/) attack.
+
+
+
+
+![[Pasted image 20260714141531.png]]
+
+
+
+
+
+# AD Groups :
+- They can place similar users together and mass assign rights and access.
+
+## How is this different from OUs ?
+
+### Think of a Company
+
+Imagine this company:
+
+```
+ABC Company
+├── HR Department
+├── IT Department
+├── Sales Department
+```
+
+These departments are your **OUs**.
+
+<mark style="background: #FF5582A6;">Inside the IT OU:</mark>
+
+```
+IT OU
+├── Alice
+├── Bob
+├── PC-01
+├── PC-02
+```
+
+The OU simply organizes these objects.
+
+### Now suppose only some people should access the Finance server.
+
+<mark style="background: #BBFABBA6;">Create a **Group**:</mark>
+
+```
+Finance Access Group
+├── Alice
+├── Charlie
+```
+
+Then give the **group** permission:
+
+```
+Finance Server
+    ↓
+Allowed:
+Finance Access Group
+```
+
+Windows checks:
+
+> Is Alice in the Finance Access Group?
+
+Yes → Access granted.
+
+
+
+
