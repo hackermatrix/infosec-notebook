@@ -376,10 +376,24 @@ value = read(kernel_address);
 index = value & 1;
 myarray[index];
 ```
-- The Normal flow is that the pr
+- The Normal flow is that the program reads the  address , uses this " **index = value & 1** "  to find out the last bit of the content at that  address ( if the last bit is 1, then index becomes 1 and if the last bit is 0, index becomes 0).
+- This index is then used to get an element from " **myarray** ".
+- Now this index gets cached so for example if the index becomes 1, 1 gets cached this implies that **myarray\[1]**  would be faster than **myarray\[0\]**.
+- **The ATTACK :**
+	- The attacker supplies kernel addess as the input.
+	- The program crashes (OS does not allow reading content from kernel space.). 
+	- The crash happens at OS level but actually the read happens at hardware level.
+	- Because of that, following operations are executed and the index gets cached .
+	- Now, the index that just got cached was calculated based on the contents present at the given kernel address i.e if the content at that address has the last bit as 1, the index value becomes 1 and if it is 0 the index value becomes 0.
+	- Since the index is cached, based on the value of index the retrival speed for myarray\[1\] and myarray\[0\] will differe i.e if the 1 is cached , myarray\[1\] will be faster.
+	- SO, since myarray\[1\] is faster, the last index of the content present at the given kernel address has its last bit as 1.
+	- Using this same stratergy, the attacker can extract all bits of the content. (index = value & 2 will give you the second bit ).
 
 
-## Fault Injection 
+## Fault Injection :
+- **Fault Injection Attack** is a type of **hardware attack** where an attacker intentionally creates abnormal physical conditions to make a device behave incorrectly.
+- The attacker studies the incorrect output to learn something secret.
+- Famous example: Bellcore attack on RSA
 
 ## Cold Boot Attacks
 - if an attacker has physical access to a system, they can :
