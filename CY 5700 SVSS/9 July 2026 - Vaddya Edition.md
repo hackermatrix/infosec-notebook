@@ -148,5 +148,45 @@ The answer: it's a **hash table**. Every parameter name (`username`, `language`,
 - They **precompute** a large batch of strings that are all guaranteed to hash to the _same_ bucket — a mass hash collision.
 - They craft one POST request with a body containing thousands (or tens of thousands) of these colliding "field names" as parameters — something like `x1=1&x2=1&x3=1...` where all those `x1, x2, x3...` names were deliberately chosen to collide.
 - The server tries to parse this into its hash table. But because every key collides into the same bucket, that bucket's linked list grows to be huge — and inserting n items that all collide costs O(n²).
+
+#### Target: Password Strength Matters 
+
+![[Pasted image 20260713192606.png]]
+
+##### zxcvbn
+
+zxcvbn is Dropbox's password strength estimator, the little meter you see on signup forms saying "weak / okay / strong" as you type your password. It's meant to be smarter than dumb rules like "must contain 3 of {upper, lower, number, symbol}" — instead it actually analyzes the password's structure (common patterns, dictionary words, keyboard walks, etc.) to estimate how guessable it really is.
+
+##### The vulnerability :
+
+A security researcher found that the zxcvbn algorithm has quadratic time complexity, meaning a user could submit an arbitrarily long password to the library and cause a denial of service if done at scale. [HackerOne](https://hackerone.com/reports/542897)
+
+the strength-checking logic isn't scanning your password once because it's checking for overlapping patterns, substrings, repeated segments, dictionary matches at every position, etc., the amount of work grows roughly with the _square_ of the password length.
+
+**The attack, step-by-step:**
+
+1. Find a form using zxcvbn (or any quadratic-complexity string analysis) on a password field.
+2. Submit an extremely long string as the "password" (submitting a password field containing, say, 100,000 characters) no need to guess collisions or precompute anything fancy, unlike the hash table attack. Just _**length**_ is the weapon here.
+3. The server spends wildly disproportionate CPU time analyzing that one field.
+4. Repeat with a few concurrent requests, and you can pin a server's CPU again, a tiny, ordinary-looking request (just a long text field) causing outsized damage.
+
+
+#### "Denial of Service with a Fistful of Packets"
+
+algorithmic complexity vulnerabilities can be much quieter than traditional denial-of-service attacks, because they arise from intended functionality rather than a bug, the normal indicators of compromise like errors, unusually high traffic volume, or excessive logging often aren't present. That's the scary part: you don't need a botnet or a flood of traffic, a handful of well-chosen packets (or even one) is enough, and it can look like completely normal application behavior right up until the CPU is pegged.
+
+##### an algorithm has good _average-case_ behavior that developers rely on, but a _worst-case_ input (here: just "make the string very long") breaks that assumption completely
+
+# Defense 
+
+![[Pasted image 20260713194625.png]]
+
 # Side Channels Attacks 
+
+![[Pasted image 20260713194702.png]]
+
+
+
+
+
 
