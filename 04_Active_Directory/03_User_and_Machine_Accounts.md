@@ -97,5 +97,56 @@ Windows checks:
 Yes → Access granted.
 
 
+### Important Characteristics for Groups 
+- Groups in Active Directory have two fundamental characteristics: `type` and `scope`. The `group type` defines the group's purpose, while the `group scope` shows how the group can be used within the domain or forest. 
+- When creating a new group, we must select a group type. There are two main types: 
+	- `security`  groups.
+	- `distribution` groups.
 
 
+### Group Types :
+#### 1. Security Groups :
+- Security groups are used to **give permissions** to users.
+- Instead of giving permissions to each user one by one, you give the permission to the **group**, and everyone in the group gets it automatically.
+
+#### 2. `distribution` groups:
+- Distribution groups are **only for sending emails**.
+- They work like a mailing list.
+- ##### Example
+Suppose you create:
+
+```
+All_Employees
+├── Alice
+├── Bob
+├── Charlie
+└── David
+```
+
+When someone sends an email to:
+
+```
+All_Employees@company.com
+```
+
+Everyone in the group receives the email.
+
+
+### Group Scopes: 
+
+#### 1. Domain Local Group
+##### Purpose: 
+- Used to **assign permissions to resources in its own domain**.
+
+Think:
+> **"Protects resources inside my domain."**
+##### Members
+- A Domain Local group **can contain users and groups from any domain**.
+##### Permissions
+- <mark style="background: #FFF3A3A6;">It can only give permissions to resources in the same domain where it exists.</mark>
+
+#### 2. Global Group
+
+
+
+#### 3. Universal Group
