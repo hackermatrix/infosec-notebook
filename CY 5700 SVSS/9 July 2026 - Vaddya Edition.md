@@ -184,9 +184,118 @@ algorithmic complexity vulnerabilities can be much quieter than traditional deni
 # Side Channels Attacks 
 
 ![[Pasted image 20260713194702.png]]
+## Code Check_Token 
 
 
+c ```
+for (i = 0; i < TOKEN_LEN; ++i) {
+    if (user_token[i] != real_token[i]) {
+        return BAD_TOKEN;   // exits immediately on first mismatch
+    }
+}
+return GOOD_TOKEN;
+```
+```
 
 
+compares the `user_token` against the `real_token` (the secret), one character at a time — and the moment it finds a mismatched character, it **immediately returns** `BAD_TOKEN`. This is exactly what `strcmp` does internally too
 
+### Vulnerability
+
+**Say the real secret is `tannysingh` and the attacker submits `tannyXXXXX` (first 5 correct, then wrong):**
+
+```
+i=0:  user_token[0]='t'  vs  real_token[0]='t'  → match, continue
+i=1:  user_token[1]='a'  vs  real_token[1]='a'  → match, continue
+i=2:  user_token[2]='n'  vs  real_token[2]='n'  → match, continue
+i=3:  user_token[3]='n'  vs  real_token[3]='n'  → match, continue
+i=4:  user_token[4]='y'  vs  real_token[4]='y'  → match, continue
+i=5:  user_token[5]='X'  vs  real_token[5]='s'  → MISMATCH → return BAD_TOKEN immediately
+```
+
+So the loop runs **6 times** (i=0 through i=5) before it bails out — one iteration for each correct character, plus one more to discover the wrong one.
+
+An attacker who can measure response time (even down to microseconds, over a network, using enough repeated requests to average out noise) can exploit this character by character. Try every possible first character. The one that takes _slightly longer_ means that first character was correct (because the loop ran one more iteration before failing).Instead of having to brute-force the entire token at once (which for any reasonably long secret is computationally infeasible), the attacker can crack it **one character at a time**, using timing as a side channel.
+
+
+### FIX 
+
+
+c ```
+
+int check_token(const char *user_token, const char *real_token) {
+    int mismatch = 0;
+    for (int i = 0; i < TOKEN_LEN; ++i) {
+        mismatch |= (user_token[i] != real_token[i]);  // never breaks early
+    }
+    return mismatch ? BAD_TOKEN : GOOD_TOKEN;
+}
+
+**Say the real secret is `tannysingh` (10 characters), and the attacker submits `tannyXXXXX`:**
+
+c
+
+```c
+int mismatch = 0;
+```
+
+Start with `mismatch = 0` (meaning "no problems found yet").
+
+Now walk through **every single index, i = 0 to 9, no matter what**:
+
+```
+i=0: user_token[0]='t' vs real_token[0]='t'  → equal   → (false) → mismatch |= 0 → mismatch stays 0
+i=1: user_token[1]='a' vs real_token[1]='a'  → equal   → (false) → mismatch |= 0 → mismatch stays 0
+i=2: user_token[2]='n' vs real_token[2]='n'  → equal   → (false) → mismatch |= 0 → mismatch stays 0
+i=3: user_token[3]='n' vs real_token[3]='n'  → equal   → (false) → mismatch |= 0 → mismatch stays 0
+i=4: user_token[4]='y' vs real_token[4]='y'  → equal   → (false) → mismatch |= 0 → mismatch stays 0
+i=5: user_token[5]='X' vs real_token[5]='s'  → NOT equal → (true=1) → mismatch |= 1 → mismatch becomes 1
+i=6: user_token[6]='X' vs real_token[6]='i'  → NOT equal → (true=1) → mismatch |= 1 → mismatch stays 1
+i=7: user_token[7]='X' vs real_token[7]='n'  → NOT equal → (true=1) → mismatch |= 1 → mismatch stays 1
+i=8: user_token[8]='X' vs real_token[8]='g'  → NOT equal → (true=1) → mismatch |= 1 → mismatch stays 1
+i=9: user_token[9]='X' vs real_token[9]='h'  → NOT equal → (true=1) → mismatch |= 1 → mismatch stays 1
+```
+
+**Notice: the loop does NOT stop at i=5.** Even though we already know it's wrong by i=5, the code keeps going all the way to i=9 anyway, comparing every remaining character even though the answer is already decided.
+
+After the loop, `mismatch = 1`, so:
+
+c
+
+```c
+return mismatch ? BAD_TOKEN : GOOD_TOKEN;   // mismatch is 1 (truthy) → returns BAD_TOKEN
+```
+
+**Now compare with a guess where the very first letter is wrong: `Xannysingh`:**
+
+```
+i=0: 'X' vs 't' → NOT equal → mismatch becomes 1
+i=1: 'a' vs 'a' → equal    → mismatch |= 0 → stays 1
+i=2: 'n' vs 'n' → equal    → mismatch |= 0 → stays 1
+i=3: 'n' vs 'n' → equal    → mismatch |= 0 → stays 1
+i=4: 'y' vs 'y' → equal    → mismatch |= 0 → stays 1
+i=5: 's' vs 's' → equal    → mismatch |= 0 → stays 1
+i=6: 'i' vs 'i' → equal    → mismatch |= 0 → stays 1
+i=7: 'n' vs 'n' → equal    → mismatch |= 0 → stays 1
+i=8: 'g' vs 'g' → equal    → mismatch |= 0 → stays 1
+i=9: 'h' vs 'h' → equal    → mismatch |= 0 → stays 1
+```
+
+Still 10 iterations. Still `mismatch = 1` at the end. Still returns `BAD_TOKEN`.
+
+**The key point:**
+
+Both guesses — `tannyXXXXX` (5 correct) and `Xannysingh` (0 correct) — ran the loop **exactly the same number of times: 10.** There's no early exit anywhere. The attacker's clock sees identical timing regardless of how many characters were actually correct, so there's nothing left to measure — the letter-by-letter timing signal from before is completely gone.
+
+That `|=` (bitwise OR) trick is what makes this work: once `mismatch` becomes 1, later correct matches (`mismatch |= 0`) can't un-set it back to 0 — so you can safely keep comparing every character without needing an `if`/early-return to "lock in" the failure.
+
+
+## Hertzbleed
+
+https://blog.cloudflare.com/hertzbleed-explained/
+
+
+### **The core idea of Hertzbleed:**
+
+Modern CPUs don't run at a fixed speed — they use **DVFS (Dynamic Voltage and Frequency Scaling)** to automatically adjust their clock frequency based on power/heat conditions, to stay within the chip's **TDP (Thermal Design Point)** — basically its safe power/heat budget.
 
