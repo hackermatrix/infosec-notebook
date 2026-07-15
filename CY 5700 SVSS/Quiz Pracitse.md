@@ -83,7 +83,7 @@ For this the attacker do by testing like first send the calculated buffer, then 
 22. A developer uses `strcpy(buf, user_input)` to copy a string into a 64-byte local buffer. Why is this specifically vulnerable, and what is the attacker's ultimate goal on the stack?
 If a developer uses strcpy(buf, user_input) suppose the buffer is 256 the attacker can send 512 can crach the program. 
  23. Why must an attacker typically avoid including null bytes (`0x00`) when writing shellcode, and how might they initialize a register to zero without using one? 
- Attackers typically avoid including null bytes because if they exploiting something strcpy it gets terminated. 
+ Attackers typically avoid including null bytes because if they exploiting something strcpy it gets terminated.  
 24. In an x86 buffer overflow, if the attacker wants to spawn a shell using the `execve` syscall, what three arguments must they prepare in memory? 
 25. A system administrator enables the NX bit but forgets to enable ASLR. Explain a practical attack technique that could still achieve arbitrary code execution. 
 26. How does Return-Oriented Programming (ROP) manage to achieve Turing-complete execution without ever injecting new executable code? 
@@ -92,12 +92,18 @@ If a developer uses strcpy(buf, user_input) suppose the buffer is 256 the attack
 29. How does Control Flow Integrity (CFI) attempt to mitigate code-reuse attacks like ROP? 
 30. A modern web application parses incoming YAML configurations directly. What specific DoS vulnerability might it face, and what is the underlying mechanism? 
 31. You notice a web server's CPU spikes to 100% when it receives a single POST request containing thousands of duplicate parameter names. What underlying algorithmic flaw is being exploited? 
-32. A password checker function iterates through characters of a string, immediately returning `false` upon finding the first mismatch. How can an attacker practically exploit this logic to steal the password? 
+32. A password checker function iterates through characters of a string, immediately returning `false` upon finding the first mismatch. How can an attacker practically exploit this logic to steal the password?
+One thing the attacker can do is a Ddos i.e, it can pass 10000 length passsword and overwhelm the system second it knows it returns false upon finding the first mismatch suppose if it sends tara and the first three words tar are right and it declared problem on the 4th so till now it has run 3 and 4th wrong cycle which makes it easy for the attacker to guess. 
 33. How does the "Hertzbleed" attack leverage dynamic voltage and frequency scaling (DVFS) to leak cryptographic keys? 
+So when there is a key DVFS lowers the voltage which increases the processing time. 
 34. Why is ensuring a program is "isochronous" (runs in constant time) a strong defense against side-channel attacks? 
+Ensuring a program is isochrounous runs in constant time is a strong timing because then even if the attacker sends a raw charachter or key function it can;t guess with timing 
 35. How can an attacker theoretically defeat ASLR if they discover an out-of-bounds read vulnerability in the application? 
+If there is an out-of-bounds read vulnerability like if they can read addresses, then can look at the offset  and through brute force theoretically defeat ASLR. 
 36. Why does a "Compression Bomb" (like 42.zip) act as an attack against both time and space complexity? 
-37. Explain the "jmp + call" trick used in shellcode writing and why it is necessary to solve the "Address Problem" for data strings like `/bin/sh`. 
-38. A developer attempts to patch a buffer overflow by replacing `strcpy` with `strncpy`. Does this completely secure the application from all memory and complexity attacks? Why or why not?
-39. How does the Meltdown vulnerability exploit out-of-order execution and CPU caches to read arbitrary kernel memory?
-40. In what scenario would an attacker utilize "Fault Injection" (such as altering voltage or temperature), and what is the computational end goal
+Compression bomb like 42.zip acts an attack against both time and space because underneath it there are many zip files stored so 42.zip unzips to gigabytes which takes space and then the unzipping take time too. 
+37. Explain the "jmp + call" trick used in shellcode writing and why it is necessary to solve the "Address Problem" for data strings like `/bin/sh`. it is necessary to solve the address problem means the attacks does not exact location to redirect to /bin/sh so what it does is call jmp when we do jump it goes to a different location and then call /bin/sh
+38. A developer attempts to patch a buffer overflow by replacing `strcpy` with `strncpy`. Does this completely secure the application from all memory and complexity attacks? Why or why not?   strcpy and strncpy does not completly secure the application depend on the implementation.  
+
+39. In what scenario would an attacker utilize "Fault Injection" (such as altering voltage or temperature), and what is the computational end goal. 
+Attacker would use fault injection such as when aes computes the key it would send altering voltage because of which it computes less. 
