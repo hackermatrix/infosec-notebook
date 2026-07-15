@@ -57,3 +57,56 @@
 
 ## 10. Auditing Permissions and Access
 - Organizations should also periodically perform access control audits to ensure that users only have the level of access required for their day-to-day work.
+
+
+## 11. Audit Policies & Logging
+
+
+## 12. Using Restricted Groups
+- [Restricted Groups](https://social.technet.microsoft.com/wiki/contents/articles/20402.active-directory-group-policy-restricted-groups.aspx) allow for administrators to configure group membership via Group Policy.
+
+
+## 13. Limiting Server Roles
+- It is important not to install additional roles on sensitive hosts, such as installing the `Internet Information Server` (IIS) role on a Domain Controller.
+
+
+
+
+
+
+# Examining Group Policy
+![[Pasted image 20260715142805.png]]
+
+### Why do attackers care about GPOs?
+- If an attacker gains permission to modify a GPO, they can:
+	- Add themselves as an administrator
+	- Run malicious scripts
+	- Install malware
+	- Create scheduled tasks
+	- Move to other computers (lateral movement)
+	- Gain full control of the domain
+
+
+- <mark style="background: #FFB86CA6;">GPO settings are processed using the hierarchical structure of AD and are applied using</mark> the `Order of Precedence` rule as seen in the table below:
+
+![[Pasted image 20260715143041.png]]
+
+
+![[Pasted image 20260715143327.png]]
+
+
+
+
+EXAMPLE : 
+![[Pasted image 20260715144157.png]]
+-  When more than one GPO is linked to an OU, they are processed based on the `Link Order`.
+- The GPO with the lowest Link Order is processed last, or the GPO with link order 1 has the highest precedence, then 2, and 3, and so on.
+
+>[! Information]
+>- **Link Order** only matters when **multiple GPOs are linked to the same Site, Domain, or OU**.
+>- Since **the last GPO applied wins** (if two GPOs configure the same setting), Link Order determines which one has higher priority.
+>- Suppose you have this in Linked GPOs:
+>	- Link Order 1 → Password Policy 
+>	- Link Order 2 → Disable USB 
+>	- Link Order 3 → Login Banner
+>- **Link Order 3** is processed **first** and since **Password Policy (Link Order 1)** is processed last, it has the **highest precedence**.
