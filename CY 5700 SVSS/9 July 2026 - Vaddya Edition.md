@@ -367,7 +367,6 @@ CPUs have small, very fast memory (cache) sitting between the processor and slow
 
 That speed difference (hit vs. miss) is small, but it's **measurable** and that's the entire foundation of cache attacks.
 
-
 ## Meltdown & Spectre
 - The Example code considered by the professor : 
 ```c
