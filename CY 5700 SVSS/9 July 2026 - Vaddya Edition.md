@@ -379,12 +379,12 @@ myarray[index];
 - This index is then used to get an element from " **myarray** ".
 - Now this index gets cached so for example if the index becomes 1, 1 gets cached this implies that **myarray\[1]**  would be faster than **myarray\[0\]**.
 - **The ATTACK :**
-	- The attacker supplies kernel addess as the input.
-	- The program crashes (OS does not allow reading content from kernel space.). 
-	- The crash happens at OS level but actually the read happens at hardware level.
+	- The attacker supplies kernel **addess as the input.**
+	- The program crashes (OS does not allow reading content from **kernel space.).** 
+	- **The crash happens at OS level but actually the read happens at hardware level.**
 	- Because of that, following operations are executed and the index gets cached .
-	- Now, the index that just got cached was calculated based on the contents present at the given kernel address i.e if the content at that address has the last bit as 1, the index value becomes 1 and if it is 0 the index value becomes 0.
-	- Since the index is cached, based on the value of index the retrival speed for myarray\[1\] and myarray\[0\] will differe i.e if the 1 is cached , myarray\[1\] will be faster.
+	- **Now, the index that just got cached was calculated based on the contents present at the given kernel address i.e if the content at that address has the last bit as 1, the index value becomes 1 and if it is 0 the index value becomes 0.**
+	- **Since the index is cached, based on the value of index the retrival speed for myarray\[1\] and myarray\[0\] will differe i.e if the 1 is cached , myarray\[1\] will be faste**r.
 	- SO, since myarray\[1\] is faster, the last index of the content present at the given kernel address has its last bit as 1.
 	- Using this same stratergy, the attacker can extract all bits of the content. (index = value & 2 will give you the second bit ).
 
@@ -393,22 +393,24 @@ myarray[index];
 - **Fault Injection Attack** is a type of **hardware attack** where an attacker intentionally creates abnormal physical conditions to make a device behave incorrectly.
 - The attacker studies the incorrect output to learn something secret.
 - Famous example: Bellcore attack on RSA
-
+![[Pasted image 20260714222135.png]]
 ## Cold Boot Attacks
+![[Pasted image 20260714222206.png]]
 - if an attacker has physical access to a system, they can :
 	- use a freeze spray to freeze a RAM stick
 	- take the RAM stick out of the system
 	- Extract Data from RAM Later.
-- This Happens because if we  the lower temperature, the data retains for longer time on the hardware.  
+- This Happens because if we  **the lower temperature, the data retains for longer time on the hardware.**  
 
 ## Rowhammer Attacks
 - This attack takes the advantage of the fact that the modern hardware is very dense.
 - The attack:
 	- Hardware Stores bits (0s and 1s).
-	- The Bits can change based on what is running on the system.
-	- if the bits inside a electronic component is flipped very fast, this creates an electromagnetic field and this can influence the bits inside the neighboring components.
-- An attacker can modify inaccessible memory by doing this intelligently.
+	- The **Bits can change based on what is running on the system.**
+	- if the bits **inside a electronic component is flipped very fast, this creates an electromagnetic field and this can influence the bits inside the neighboring components.**
+- **An attacker can modify inaccessible memory by doing this intelligently**.
 
+![[Pasted image 20260714223131.png]]
 
 ## Defense 
 ![[Pasted image 20260713212849.png]]**Sharing** (in this context usually called **masking** or **secret sharing**) — you split a sensitive intermediate value into multiple random _shares_ such that any individual share is statistically independent of the true value, and you only recombine them at the end.
