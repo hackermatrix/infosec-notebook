@@ -110,3 +110,82 @@ EXAMPLE :
 >	- Link Order 2 → Disable USB 
 >	- Link Order 3 → Login Banner
 >- **Link Order 3** is processed **first** and since **Password Policy (Link Order 1)** is processed last, it has the **highest precedence**.
+
+
+### A. Now let's make the Domain GPO Enforced
+
+```
+Domain
+│
+├── Password Length = 8   (ENFORCED)
+│
+└── IT OU
+      └── Password Length = 12
+```
+
+- Normally, the IT OU would override the Domain setting.
+- But because the Domain GPO is **Enforced**, Windows says:
+
+> **"This policy cannot be overridden."**
+
+- ✅ **Final Result:** Password length = **8**
+- The IT OU's setting is ignored for that conflicting setting.
+#### Enforced GPO Policy Precedence
+![[Pasted image 20260715153956.png]]
+
+
+
+### B. What about Default Domain Policy ?
+#### Normally
+Suppose you have:
+```
+Domain
+│
+├── GPO A
+│
+└── IT OU
+      └── GPO B
+```
+If **GPO A** is **Enforced**, then **IT OU (GPO B)** cannot override any conflicting settings from **GPO A**.
+#### What is the Default Domain Policy?
+- When you install Active Directory, Windows automatically creates a GPO called:
+	- **Default Domain Policy**
+- It is linked at the **Domain** level and usually contains important domain-wide settings such as:
+	- Password Policy
+	- Account Lockout Policy
+	- Kerberos Policy
+- <mark style="background: #FFF3A3A6;">If the Default Domain Policy itself is marked Enforced, then its conflicting settings cannot be overridden by any other GPO, no matter where those GPOs are linked (Domain, OU, or Child OU).</mark>
+
+Example:
+```
+Domain
+│
+├── Default Domain Policy (Enforced)
+│      Password Length = 12
+│
+└── IT OU
+       └── IT Policy
+             Password Length = 8
+```
+
+Normally, the IT OU policy would be processed later.
+But because the **Default Domain Policy is Enforced**:
+	✅ Final password length = **12**
+
+The IT OU cannot override it.
+#### Default Domain Policy Override
+![[Pasted image 20260715154445.png]]
+
+
+
+### C. Block inheritance
+
+
+
+
+
+## Group Policy Refresh Frequency
+- When a new GPO is created, the settings are not automatically applied right away.
+- default is done every<mark style="background: #FFB8EBA6;"> 90 minutes with a randomized offset of +/- 30 minutes </mark><mark style="background: #FF5582A6;">for users and computers.</mark>
+- The period is only <mark style="background: #FFB8EBA6;">5 minutes </mark><mark style="background: #FF5582A6;">for domain controllers</mark> to update by default.
+- **Why Random Offset?** -> Prevents all computers from contacting the Domain Controller at the same time but its Not needed for DCs  because there are relatively few Domain Controllers.
