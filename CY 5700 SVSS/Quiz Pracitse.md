@@ -84,7 +84,7 @@ For this the attacker do by testing like first send the calculated buffer, then 
 If a developer uses strcpy(buf, user_input) suppose the buffer is 256 the attacker can send 512 can crach the program. 
  23. Why must an attacker typically avoid including null bytes (`0x00`) when writing shellcode, and how might they initialize a register to zero without using one? 
  Attackers typically avoid including null bytes because if they exploiting something strcpy it gets terminated.  
-24. In an x86 buffer overflow, if the attacker wants to spawn a shell using the `execve` syscall, what three arguments must they prepare in memory? 
+24. In an x86 buffer overflow, if the attacker wants to spawn a shell using the `execve` syscall, what three arguments must they prepare in memory?    
 25. A system administrator enables the NX bit but forgets to enable ASLR. Explain a practical attack technique that could still achieve arbitrary code execution. 
 26. How does Return-Oriented Programming (ROP) manage to achieve Turing-complete execution without ever injecting new executable code? 
 27. Why might an attacker intentionally look for "unaligned instructions" when building a ROP chain? 2
