@@ -1,5 +1,5 @@
 
-Practise what is wrong below. 
+Practice what is wrong below. 
 
 # What's wrong below - Practise this t
 

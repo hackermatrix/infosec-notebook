@@ -96,13 +96,13 @@ shellcode writers use to figure out their own location at runtime. This is findi
 
 jmp path        ← 1. jump to the END of shellcode
 
-**back:**
-  popl %esi     ← 3. pop the address! now %esi = address of "/bin/sh"
-  ...
-
 path:
   call **back**     ← 2. call pushes the NEXT instruction's address onto stack
   .ascii "/bin/sh\0"   ← this is what gets pushed!
+  **back:**
+  popl %esi     ← 3. pop the address! now %esi = address of "/bin/sh"
+  ...
+
 
 ###### How do we know the address of jump, how do we jump to "jump"
 Jumps are relative jumps jump from the location (i.e, From wherever you currently are, skip forward 6 pages.) so we dont need to know the address. 
@@ -175,8 +175,6 @@ The below is one of the method too.
 
 ![[Pasted image 20260629090851.png]]
 
-
-
 ## space characters as a "data sled"
 
 Just like NOP (`0x90`) is a "do nothing" instruction for code, **space characters (`0x20`)** can act similarly for _data_ like `/bin/sh`.
@@ -207,7 +205,6 @@ Both exploit the same principle: **build tolerance into your guess by padding wi
  whatever data structure you're injecting (a string, a struct, an array of pointers), if you pad it with bytes that are **harmless/neutral for that specific data type**, you build in tolerance for addressing errors — the same defensive trick as the NOP sled, just applied to data instead of code.
 
 Spaces work for shell paths/strings because they're typically trimmed or treated as harmless. For other data types you'd pick a different "neutral" filler byte appropriate to that context.
-
 
 # Demo 
 
@@ -270,7 +267,6 @@ Why we did 4 A's **The proof is right there in the output:**
 
 ![[Pasted image 20260630160830.png]]
 
-
 **With `\x55` + `AAAA`:**
 
 ```
@@ -282,11 +278,10 @@ Why we did 4 A's **The proof is right there in the output:**
 Now in memory you can **immediately see** where the return address starts because the pattern changes from `55` to `41`.
 
 ![[Pasted image 20260630162615.png]]
-
 Any change you do in the shellcode test it. 
+
 ![[Pasted image 20260630162852.png]]
 the shellcode is 45 bytes right now. 
- 
 ##  Writing NOP SLED 
 
 ![[Pasted image 20260630163602.png]]
@@ -403,7 +398,7 @@ The reasoning:
 3. CALCULATE THE OFFSET (disas vuln in GDB)
    → find: lea -0x108(%ebp), %eax  ← buffer address
    → convert: 0x108 = 264 bytes
-   → payload size = 264 (buffer) + 4 (saved ebp) + 4 (return address)
+   → payload size = 264 (buffer) + 4 (return address)
 
 4. CONFIRM EIP CONTROL
    → send: \x55 * 268 + ABCD
