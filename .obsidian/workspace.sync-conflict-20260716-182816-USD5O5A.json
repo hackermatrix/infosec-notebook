@@ -6,7 +6,7 @@
       {
         "id": "206fafe3ee723990",
         "type": "tabs",
-        "dimension": 77.37556561085974,
+        "dimension": 80.60394889663183,
         "children": [
           {
             "id": "50e375e7aa9ea22b",
@@ -100,8 +100,7 @@
               },
               "icon": "lucide-file",
               "title": "2nd July Notes - Vaddya Edition"
-            },
-            "group": "bf212a635e855854"
+            }
           },
           {
             "id": "fcb45b26513f8d12",
@@ -109,13 +108,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CY 5700 SVSS/Challenge 7.md",
+                "file": "CY 5700 SVSS/9 July 2026 - Vaddya Edition.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Challenge 7"
-            }
+              "title": "9 July 2026 - Vaddya Edition"
+            },
+            "group": "4d87630c9812c6f8"
           },
           {
             "id": "6e3e63492fe8b5c6",
@@ -205,25 +205,25 @@
         "currentTab": 6
       },
       {
-        "id": "70335415ede0fae6",
+        "id": "3f9295e55c749658",
         "type": "tabs",
-        "dimension": 22.624434389140273,
+        "dimension": 19.396051103368176,
         "children": [
           {
-            "id": "7fdd10a20ccccd14",
+            "id": "e463a4e80b61e5e4",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "CY 5700 SVSS/2nd July Notes - Vaddya Edition.md",
+                "file": "CY 5700 SVSS/9 July 2026 - Vaddya Edition.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2nd July Notes - Vaddya Edition"
+              "title": "Outline of 9 July 2026 - Vaddya Edition"
             },
-            "group": "bf212a635e855854"
+            "group": "4d87630c9812c6f8"
           }
         ]
       }
@@ -257,7 +257,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "cy",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -282,7 +282,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 351.5
+    "width": 205.5
   },
   "right": {
     "id": "4ea3f69a560f69fe",
@@ -389,51 +389,51 @@
   },
   "active": "fcb45b26513f8d12",
   "lastOpenFiles": [
-    "CY 5700 SVSS/~syncthing~Challange 7 - By Vaddya.md.tmp",
-    "images/Pasted image 20260710160624.png",
-    "images/~syncthing~Pasted image 20260710160624.png.tmp",
-    "images/Pasted image 20260710160503.png",
-    "images/~syncthing~Pasted image 20260710160503.png.tmp",
-    "CY 5700 SVSS/Challange 7 - By Vaddya.md",
-    "CY 5700 SVSS/Untitled.md",
-    "CY 5700 SVSS/~syncthing~Untitled.md.tmp",
-    "images/Pasted image 20260710155059.png",
-    "images/Pasted image 20260710150711.png",
-    "images/Pasted image 20260710150634.png",
-    "images/Pasted image 20260710142839.png",
-    "images/Pasted image 20260710142747.png",
-    "images/Pasted image 20260710142437.png",
-    "images/Pasted image 20260710142256.png",
-    "images/Pasted image 20260710140935.png",
-    "CY 5700 SVSS/2nd July Notes - Vaddya Edition.md",
-    "CY 5700 SVSS/Challenge 7.md",
     "CY 5700 SVSS/9th July 2026.md",
+    "CY 5700 SVSS/2nd July Notes - Vaddya Edition.md",
+    "CY 5700 SVSS/2nd July 2026 Notes - Memory Corruption Part 2.md",
     "CY 5700 SVSS/25 June 2026 Vaddya.md",
-    "CY 5700 SVSS/11th June Class Notes.md",
-    "CY 5700 SVSS/4th June Class Notes.md",
+    "CY 5700 SVSS/18-June-2026 Notes.md",
+    "CY 5700 SVSS/Quiz Pracitse.md",
     "CY 5700 SVSS/9 July 2026 - Vaddya Edition.md",
+    "CY 5700 SVSS/Challenge 7.md",
+    "04_Active_Directory/05_Security in Active Directory.md",
+    "images/Pasted image 20260715154445.png",
+    "images/Pasted image 20260715153956.png",
+    "images/Pasted image 20260715144157.png",
+    "images/Pasted image 20260715143327.png",
+    "images/Pasted image 20260715143041.png",
+    "images/Pasted image 20260715142805.png",
+    "CY 5700 SVSS/Bonus Assignment 1.md",
+    "CY 5700 SVSS/Bonus 3.md",
+    "CY 5700 SVSS/Three Modern Mechanisms for Web.md",
+    "CY 5700 SVSS/Memory Corruption.md",
     "CY 5700 SVSS/28th May - Pre read & Class notes.md",
+    "CY 5700 SVSS/11th June Class Notes.md",
+    "CY 5700 SVSS/7 May to 21st May class notes.md",
+    "CY 5700 SVSS/4th June Class Notes.md",
+    "images/Pasted image 20260714223131.png",
+    "images/Pasted image 20260714222206.png",
+    "images/Pasted image 20260714222135.png",
+    "images/Pasted image 20260714141531.png",
+    "CY 5700 SVSS/~syncthing~9 July 2026 - Vaddya Edition.md.tmp",
+    "images/~syncthing~Pasted image 20260714141531.png.tmp",
+    "04_Active_Directory/~syncthing~03_User_and_Machine_Accounts.md.tmp",
+    "CY 5700 SVSS/Challenge 6.md",
+    "CY 5700 SVSS/Challange 7 - By Vaddya.md",
+    "CY 5700 SVSS/~syncthing~Challange 7 - By Vaddya.md.tmp",
+    "images/~syncthing~Pasted image 20260710165238.png.tmp",
+    "images/~syncthing~Pasted image 20260710165101.png.tmp",
+    "images/~syncthing~Pasted image 20260710160733.png.tmp",
+    "images/~syncthing~Pasted image 20260710160624.png.tmp",
+    "images/~syncthing~Pasted image 20260710160503.png.tmp",
+    "CY 5700 SVSS/~syncthing~Untitled.md.tmp",
     "05_Reverse_Engineering/05_Academic_Notes/Class%20Notes%205130%20%2822-01-2026%29.md",
     "05_Reverse_Engineering/02_Memory_Assembly/Execution Flow.md",
     "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/GOT  overwrite & PLT.md",
     "05_Reverse_Engineering/03_Exploitation_Security/Stack_Based/Stack Canaries.md",
-    "CY 5700 SVSS/~syncthing~9 July 2026 - Vaddya Edition.md.tmp",
-    "AWS_Project/~syncthing~Cloud Security Audit Report Template.pdf.tmp",
-    "CY 5700 SVSS/2nd July 2026 Notes - Memory Corruption Part 2.md",
     "5130/05_SIEMS.md",
     "Untitled 3.md",
-    "AWS_Project/Blog.md",
-    "AWS_Project/Cloud Security Audit Report Template.pdf",
-    "AWS_Project/Cloud Security Audit Report Template.md",
-    "images/~syncthing~Pasted image 20260709160951.png.tmp",
-    "AWS_Project/~syncthing~Blog.md.tmp",
-    "AWS_Project/Cloud Misconfiguration.md",
-    "AWS_Project/Blog Template.md",
-    "AWS_Project/Report.md",
-    "AWS_Project/~syncthing~Blog Template.md.tmp",
-    "AWS_Project/Cloud Security Audit Report Template.sync-conflict-20260709-012434-USD5O5A.md",
-    "AWS_Project/Cloud Security Audit Report Template.sync-conflict-20260709-005310-USD5O5A.md",
-    "AWS_Project/Config Fixes.md",
     "09_Web_Exploitation/03_Web_Vulnerabilities/Untitled.canvas"
   ]
 }
