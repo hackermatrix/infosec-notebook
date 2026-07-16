@@ -1,4 +1,5 @@
 ## Going beyond manipulating the local data in stack frame
+
 ![[Pasted image 20260629113331.png]]
 
 Return address and saved ebp are **control.** 
@@ -26,10 +27,9 @@ Now suppose you want to run the syscall open 0x05 will be put in the eax registe
 ![[Pasted image 20260629121811.png]]
 
 #### 1.2 Where to inject the shellcode in the memory ?
-1. In the Overflown buffer. overflow the buffer means writing past the written address.
+1. In the Overflown buffer. overflow the buffer means writing past the return address.
 2. <mark style="background: #FFF3A3A6;">Environment Variable.</mark>
 3. many other places.
-
 
 #### 1.3 How to write the shellcode ?
 - <mark style="background: #FF5582A6;"> Is it difficult!!!!!!!!!!!!.</mark>  because you're writing raw machine code that has no linker, no libraries, no fixed addresses, and can't contain zero bytes  all constraints that normal assembly programming doesn't have.

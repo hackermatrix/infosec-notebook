@@ -313,7 +313,7 @@ Looking at the code use of ebp to access the data.
 #### First use of ebp other than prologue
 ![[Pasted image 20260622143315.png]]
 
-Refresher ebp - values are local arguments, ebp + values . this seems like it is the address of is_valid
+Refresher ebp - values are local arguments, ebp + values is local data . this seems like it is the address of is_valid
 
 You have two local variables 
 ![[Pasted image 20260622150410.png]]
