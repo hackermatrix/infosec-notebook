@@ -69,4 +69,16 @@ RESOURCES : "Engineering a Safer World" by Nancy Leveson, MIT
 
 - The Bytecode is much more structured than machine code .
 - So, if you have bytecode instead, the reversing task become a lot easier.
-- 
+
+
+
+
+### Two Algos to disassembly (Imp for endterm):
+1.  Linear Sweep diassembly 
+	- Disassemble linearly until all bytes processed .
+	- <mark style="background: #FFB86CA6;">vulnerable to inline data </mark> (check the recording time : 8:28 PM)
+2. Recursive decent/traversal disassembly :
+	- It follows the control flow of the code .
+	- Recursively follow branching code paths.
+	- <mark style="background: #FFB86CA6;">Not vulnerable to inline data</mark> 
+	- it fails if there is indirect branches (example : jmp %eax )
