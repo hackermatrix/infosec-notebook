@@ -1,4 +1,4 @@
-
+RESOURCES : "Engineering a Safer World" by Nancy Leveson, MIT
 # Systems Safety (IMPORTANT)
 
 **Accident Analysis** : Done Post Incident 
@@ -34,3 +34,39 @@
 
 ## The New Model !!
 
+- WE SHIFT to <mark style="background: #FFB86CA6;">SYSTEMS THEORY from  RELIABILITY THEORY</mark>.
+
+- Systems Have emergent properties that only appear when system is analyzed as whole ( Not when we follow divide and concoure )
+- <mark style="background: #FF5582A6;">Safety is an emergent property of a complex system.</mark> (IMPORTANT !!!!!!!!!!!!!!!!)
+
+
+
+
+## STAMP
+- Systems Theoritic Accident Model and Process .
+
+
+
+
+
+# Reverse Engineering 
+
+- Reversing is the process of creating a higher level abstraction of a low level thing.
+- Binary to Assembly is not reversing 
+
+
+
+- We can use Prologues and Elilogues as indicators to find function blocks.( Only if No optimization are applied by the Compiler)
+
+
+- The compiler may also add some padding code that 
+
+
+
+## Bytecode :
+- An intermediate code before the actual assembly.
+- For example : Java.
+
+- The Bytecode is much more structured than machine code .
+- So, if you have bytecode instead, the reversing task become a lot easier.
+- 
