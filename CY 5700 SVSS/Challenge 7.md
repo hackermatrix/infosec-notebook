@@ -67,9 +67,7 @@ if (len == -1) {
 Now the next 
 ![[Pasted image 20260710163408.png]]
 
-judge is a function which is not in the code neither is judge_good here 
 
-In the function anime.c you can see here 
 
 ![[Pasted image 20260710163522.png]]
 
@@ -114,7 +112,6 @@ let me check overwriting it
 ![[Pasted image 20260710165339.png]]
 
 ![[Pasted image 20260710165252.png]]
-
 
 # Buffer size is 257. 
 
@@ -553,7 +550,6 @@ python3 -c 'import sys; sys.stdout.buffer.write(b"A" * 256+ b"\x0a\xee\x66\xe2" 
 
 ![[Pasted image 20260712214022.png]]
 
-
 # Need to elevate privileges 
 
 ![[Pasted image 20260712214517.png]]
@@ -564,3 +560,7 @@ python3 -c 'import sys; sys.stdout.buffer.write(b"A" * 256+ b"\x0a\xee\x66\xe2" 
 ![[Pasted image 20260712231501.png]]
 
 22-KJV3-4iykds1AI5c3O5x-w-22
+
+# Explaination 
+
+First I went through the code I tried finding the vulnerability. Th
