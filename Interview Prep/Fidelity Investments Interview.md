@@ -22,7 +22,7 @@ What drew me to Fidelity is the scale and maturity of its cybersecurity program.
 
 I want to grow in an environment where security decisions influence business risk, where I will develop my strongest stronger judgment around how technical controls, governance, and risk management come together to protect large financial systems.
 
-
+got me really pumped. 
 
 Tell me about yourself:
 Good afternoon my name is tanishka Kiran chitnis I'm currently a cyber security grad student at northeastern prior to grad school I used to work at Deloitte as a cyber security consultant. what got me into cyber security is very interesting someone told me to get into consulting because you would get to travel unfortunately later I realized that travel meant working at airports and hotels preparing audit reports  but interesting part was I got to interact with different stakeholders from developers to CISO's developers. Decided to pursue grad school to strengthen my foundation in cyber security and learn more now in grad school I am exploring AI security recently developed and developed MPs security solution for which maps agent interaction to your off mcb top 10 or next I I basically to prevent like shadow AI Geo restrictions on that part and this like prototype solution help me win and hackathon organised by IBM and Red Hat
