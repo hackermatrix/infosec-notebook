@@ -226,8 +226,6 @@ First to check the ASLR I ran the ldd judge where I noticed the part 0xf7 and la
 
 ![[Pasted image 20260711160928.png]]
 
-
-
 ## Range Analysis 
 
 I ran this 
@@ -529,13 +527,15 @@ What I am passing here is basically
 
 starting addres is libc
 
-![[Pasted image 20260712203517.png]]
+objdemp -s 
 
+![[Pasted image 20260712203517.png]]
+![[Pasted image 20260718203642.png]]
 # Saved RETURN ADDRESS 
 
 ![[Pasted image 20260712204049.png]]
 
-# Finding libanime  libc base_address and bin/sh address
+# Finding  libc base_address and bin/sh address
 
 ![[Pasted image 20260712204137.png]]
 
@@ -560,7 +560,12 @@ python3 -c 'import sys; sys.stdout.buffer.write(b"A" * 256+ b"\x0a\xee\x66\xe2" 
 
 # Explaination 
 
-1. Finding vulnerablity in the codes: In the judg.c , judge function is called which is not in the code. When I look at the anime.c check_anime the CHUNK_SIZE  is 256 and there is get_title function has title, buf , len. we have the memcpy which just checks out, in and len  which maps to memcpy(title, buf, len). Which the size of title is 99 in anime.c. When I backtracked through len like int len in check_anime which is called in judge and in the process function I could see len = strlen(buf) + 1.  The frame that we are exploiting is check_anime. Then I tried overwriting it by sending 257.  So the buffer size is 257. 
-2. Finding the canary through brute force . 
-3. Judge is the vulnerable function called in the process function in the judge.c which is in the dynamic library libanime. 
-4. For overcoming the ASLR I checked the dynamic library. The confirm range 0xf7f. use `0xf7` as your fixed high byte. `0xf7` as your fixed high byte
+1. Finding vulnerablity in the codes: In the judg.c , judge function is called which is not in the code. When I look at the anime.c check_anime the CHUNK_SIZE  is 256 and there is get_title function has title, buf , len. we have the memcpy which just checks out, in and len  which maps to memcpy(title, buf, len). . When I backtracked through len like int len in check_anime which is called in judge and in the process function I could see len = strlen(buf) + 1.  Then I tried overwriting it by sending 257.  So the buffer size is 257.   The frame that we are exploiting is check_anime. 
+2. Found the canary, saved ebp and return address through brute force . 
+3. I looked at the objdump of libanime as it contains all the functions. In the judge function. I can see the next instruction after call check_anime at an offset of 1711 . Return address - offset = baseaddress of libanime
+4. When I did ldd $(which judge) i observed that difference between libc.so and libanime.so is 2371584 which help me with the base address of libc.so 
+5. Found offset of system through objdump -d libc.so. So base_address of libc.so + offset(system)= address of system. 
+6. When I run objdump -s /usr/lib32/libc.so.6 | grep /bin/sh this gives offset of system and address of /bin/sh. 
+7. First tried getting shell then to get privileges then I librpiv.c has group_perm_up to give me privileges. 
+8.  Now found the difference between librpiv and libanime which help me get the base address of libpriv. then ran objdump of libpriv which help me get offset of group_perm_up and then address of group_perm up. 
+9. Final shellcode structure was A*256 + CANARY + 8 BYTES PADDING  + saved ebp + group perm up + system +  4 bytes junk + bin/sh  
