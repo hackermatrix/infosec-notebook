@@ -219,14 +219,14 @@ https://oliviagallucci.com/aslr-bypass-techniques-and-circumvention-impacts/
 
 The addresses shown (`0xf7f77000`, `0xf7f65000`, `0xf7d1d000`, etc.) are from **this specific run of `ldd`**, not from the actual `judge` server process. Every process gets its own independent ASLR randomization — `ldd`'s mmap layout has nothing to do with the judge server's mmap layout, even though it's the same binary and same libraries. So you can't take `0xf7d1d000` and just use it as `libc_base` in your exploit; it'll almost certainly be wrong for the actual running server.
 
+First to check the ASLR I ran the ldd judge where I noticed the part 0xf7 and last 3 digits remained normal.  checked the dynamic libraries using ldd, 
 ## Confirming the ASLR 
 
 ![[Pasted image 20260711160023.png]]
 
 ![[Pasted image 20260711160928.png]]
 
-The confirm range 0xf7f. use `0xf7` as your fixed high byte
-All ten values share the top byte `0xf7`
+
 
 ## Range Analysis 
 
@@ -498,13 +498,12 @@ if __name__ == "__main__":
 
 ![[Pasted image 20260712160520.png]]
 
-Re-going through the basics we need to start overflowing from the local data from the stack top which know the title 256 and title as chunk size which is in the check_anime. The frame that we are exploiting is check_anime. Now consider the above is the stack of check_anime the return address will be of  the function that it will go back to and it will have to go back to **judge.**  So if i have to overwrite the return address I will have to find the return address of judge. 
-
-![[Pasted image 20260712160739.png]]
+Re-going through the basics we need to start overflowing from the local data from the stack top which know the title 256 and title as chunk size which is in the check_anime. The frame that we are exploiting is check_anime. Now consider the above is the stack of check_anime the return address is next instruction after call  
 
 So we look at the objdump of libanime.so because 
 judge.c has a function process.c which calls judge 
-and in the anime.c there are all the functions. 
+and in the anime.c there are all the functions. 1711 
+
 
 ![[Pasted image 20260712162219.png]]
 
@@ -532,7 +531,6 @@ starting addres is libc
 
 ![[Pasted image 20260712203517.png]]
 
-
 # Saved RETURN ADDRESS 
 
 ![[Pasted image 20260712204049.png]]
@@ -540,7 +538,6 @@ starting addres is libc
 # Finding libanime  libc base_address and bin/sh address
 
 ![[Pasted image 20260712204137.png]]
-
 
 python3 -c 'import sys; sys.stdout.buffer.write(b"A" * 256+ b"\x0a\xee\x66\xe2" + b"A" *8 + b"\x58\x3b\xdd\xff" + b"\x11\x65\xec\xf7")'| nc -U ~/judge_sock
 
@@ -563,4 +560,7 @@ python3 -c 'import sys; sys.stdout.buffer.write(b"A" * 256+ b"\x0a\xee\x66\xe2" 
 
 # Explaination 
 
-First I went through the code I tried finding the vulnerability. Th
+1. Finding vulnerablity in the codes: In the judg.c , judge function is called which is not in the code. When I look at the anime.c check_anime the CHUNK_SIZE  is 256 and there is get_title function has title, buf , len. we have the memcpy which just checks out, in and len  which maps to memcpy(title, buf, len). Which the size of title is 99 in anime.c. When I backtracked through len like int len in check_anime which is called in judge and in the process function I could see len = strlen(buf) + 1.  The frame that we are exploiting is check_anime. Then I tried overwriting it by sending 257.  So the buffer size is 257. 
+2. Finding the canary through brute force . 
+3. Judge is the vulnerable function called in the process function in the judge.c which is in the dynamic library libanime. 
+4. For overcoming the ASLR I checked the dynamic library. The confirm range 0xf7f. use `0xf7` as your fixed high byte. `0xf7` as your fixed high byte
