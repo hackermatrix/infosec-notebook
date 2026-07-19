@@ -122,3 +122,11 @@ var regex = new RegExp(name, "i"); if (regex.test(pass)) {
 ![[Pasted image 20260719161559.png]]
 
 `baccbd9516668cbab97fc5bcf0c9efc35330a09a3cb3e0a38daaec5991f6b034`
+
+40 as a reasonable middle guess likely to already be well past the server's timeout threshold, not because I calculated Honker's specific breaking point.
+
+# Question 2 
+
+Q2) Log in as the user timmy. You’ll find your solution token inside.
+
+
