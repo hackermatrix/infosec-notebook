@@ -129,4 +129,16 @@ var regex = new RegExp(name, "i"); if (regex.test(pass)) {
 
 Q2) Log in as the user timmy. You’ll find your solution token inside.
 
+![[Pasted image 20260721180925.png]]
 
+![[Pasted image 20260721181023.png]]
+
+![[Pasted image 20260721181104.png]]
+
+![[Pasted image 20260721181143.png]]
+
+![[Pasted image 20260721185737.png]]
+
+
+
+e1f470733bf99adad776d477350214ba7cb6cd35e894e6a4d12a6b969e0d1a58`
