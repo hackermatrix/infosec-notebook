@@ -51,17 +51,21 @@ RESOURCES : "Engineering a Safer World" by Nancy Leveson, MIT
 
 # Reverse Engineering 
 
-- Reversing is the process of creating a higher level abstraction of a low level thing.
-- Binary to Assembly is not reversing 
+- The process of analyzing a system to create representations of that system at a higher level of abstraction.
+- Process of analyzing a system to understand the structure, behavior, functionality semantics
+- **Binary to Assembly is not reversing** 
+-
 
+- 
+![[Pasted image 20260721203842.png]]
 
+Extracting code from the binary 
+Extracting data from the binary 
+Recover semantics from the binary 
+Recover control flow from the binary 
+The compiler may also add some padding code that
 
-- We can use Prologues and Elilogues as indicators to find function blocks.( Only if No optimization are applied by the Compiler)
-
-
-- The compiler may also add some padding code that 
-
-
+- We can use Prologues and Epilogues as indicators to find function blocks.( Only if No optimization are applied by the Compiler)
 
 ## Bytecode :
 - An intermediate code before the actual assembly.
