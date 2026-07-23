@@ -40,13 +40,8 @@ RESOURCES : "Engineering a Safer World" by Nancy Leveson, MIT
 - <mark style="background: #FF5582A6;">Safety is an emergent property of a complex system.</mark> (IMPORTANT !!!!!!!!!!!!!!!!)
 
 
-
-
 ## STAMP
 - Systems Theoritic Accident Model and Process .
-
-
-
 
 
 # Reverse Engineering 
@@ -162,14 +157,85 @@ Transform the code and make it difficult to read.
 ### Libraries
 
 ![[Pasted image 20260722215810.png]]
-### Disassembly
 
+Example
+
+Suppose a binary contains:
+
+push rbp
+mov rbp,rsp
+mov rcx,rdx
+
+.loop:
+mov al,[rsi]
+mov [rdi],al
+inc rsi
+inc rdi
+dec rcx
+jne .loop
+
+A fingerprint engine may recognize this as
+
+memcpy
+
+
+### Disassembly
+![[Pasted image 20260722220224.png]]
+
+#### Fixed-length 
+
+![[Pasted image 20260722222441.png]]
+- **Examples:** SPARC, MIPS, most ARM (32-bit ARM instructions are always 4 bytes; even Thumb is a fixed 2 or 4 bytes within its own mode).
+- **Why it matters for disassembly:** Since every instruction occupies the same number of bytes, a disassembler can simply chop the byte stream into fixed-size chunks and decode each one independently. You can start disassembling from _any_ aligned offset and still land on valid instruction boundaries.
+
+#### Variable-length 
+
+![[Pasted image 20260722222526.png]]
+
+- **Examples:** Intel x86, x86-64 (instructions can range from 1 byte to 15 bytes).
+- **Why it matters for disassembly:** Since instruction length depends on opcode, prefixes, ModR/M bytes, displacement, and immediate values, the disassembler must actually **decode** each instruction to know how many bytes it consumed before it can find the start of the next one.
+- **Consequence:** This creates real ambiguity problems:
+    - **Misaligned disassembly:** If you start decoding at the wrong byte offset (e.g., in the middle of a real instruction), you can get a completely different — but still "valid-looking" — sequence of instructions.
+    - **Overlapping instructions:** The same byte can be part of two different valid instructions depending on where decoding starts. Obfuscated or malicious code sometimes exploits this deliberately to confuse disassemblers (a classic anti-analysis trick).
+    - This is why disassemblers for x86 often need **control-flow-based (recursive descent) disassembly**
 ### Two Algos to disassembly (Imp for endterm):
 1.  Linear Sweep diassembly 
 	- Disassemble linearly until all bytes processed .
-	- <mark style="background: #FFB86CA6;">vulnerable to inline data </mark> (check the recording time : 8:28 PM)
-2. Recursive decent/traversal disassembly :
+	- Start at the beginning of a code section and decode instructions one after another, sequentially, without regard to control flow. 
+	- Once you decode an instruction and know its length, you just move to the very next byte and decode again. 
+	- Repeat until you reach the end of the section.
+
+```
+addr:  decode instruction → get its length L → next addr = addr + L → repeat
+```
+
+#### Why it's simple and popular
+
+- No need to trace jumps, calls, or branches, you don't have to understand _what the program does_, just walk through memory.
+- Fast and easy to implement.
+- Used by tools like the classic `objdump -d` in its basic mode.
+1. Recursive decent/traversal disassembly :
 	- It follows the control flow of the code .
 	- Recursively follow branching code paths.
 	- <mark style="background: #FFB86CA6;">Not vulnerable to inline data</mark> 
 	- it fails if there is indirect branches (example : jmp %eax )
+treat code like a graph, not a sequence of bytes.
+### Anti-disassembly
+![[Pasted image 20260722223204.png]]
+
+## Dynamic Techniques
+
+### General Information
+
+![[Pasted image 20260722225117.png]]
+### Network
+![[Pasted image 20260722225218.png]]
+### Call Tracing & Debugging
+![[Pasted image 20260722225239.png]]
+
+### Breakpoints
+
+![[Pasted image 20260722225715.png]]
+
+
+### 
