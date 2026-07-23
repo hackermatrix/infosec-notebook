@@ -138,8 +138,31 @@ Transform the code and make it difficult to read.
 - Break a simple function into a scattered mess of jumps back and forth, so tracing "what happens next" becomes a nightmare — even though the real logic is simple underneath.
 3. **Compression, encoding, encryptio**n: Hide the actual code/data by packing or scrambling it, then unpack/decrypt it only at runtime.
 ![[Pasted image 20260721215310.png]]
+### Demo
+![[Pasted image 20260722212524.png]]
 
-## Demo 
+![[Pasted image 20260722212547.png]]
+
+## Analyzing a Native Binary
+
+### Static Analysis 
+![[Pasted image 20260722213132.png]]
+
+### Dynamic Analysis
+![[Pasted image 20260722213516.png]]
+ 
+![[Pasted image 20260722213716.png]]
+## Static Techniques 
+
+### Gathering Information
+![[Pasted image 20260722214010.png]]
+
+### Symbols
+![[Pasted image 20260722214334.png]]
+### Libraries
+
+![[Pasted image 20260722215810.png]]
+### Disassembly
 
 ### Two Algos to disassembly (Imp for endterm):
 1.  Linear Sweep diassembly 
