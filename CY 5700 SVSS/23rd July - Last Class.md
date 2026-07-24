@@ -47,4 +47,19 @@ Difference between accept and ignore is your company has a policy where it goes 
 
 Pertinent to the model. 
 Focus on the diagram. Avoid the security fantasy zone. 
+Threats you find should be relevant to the model. 
+
+if you say backend might cause buffer overflow but for that there should be a buffer there is an implementation issue it is a code review problem. 
+
+# Do no say coding issues 
+# Implementation problems 
+
+you can;t say tls 1.3 
+
+# Should not say non-trivial and actionable threats. 
+
+# Threat recipe: <Bad entiy> does <bad thing> by exploiting <bas design> , which results in <badness> 
+
+
+Threat Modeling - Adam Shostack 
 

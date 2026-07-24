@@ -57,3 +57,15 @@ for each element in your model:
 - <mark style="background: #FFB86CA6;">You have a senior person to decide what things should we keep our focus on .</mark>
 
 
+## How to find Good Threats ? (IMPORTANT)
+- **Focus on the Diagram**
+- Avoid Security Fantasy.
+- **FOLLOW THESE RULES**:
+	1. Threats should be relevant to the model ( The diagram ).
+	2. **Find Impactful Things** - > **Non-trivial** and **actionable** threats . <mark style="background: #FF5582A6;"> (Strictly Prioritize!!!)</mark>
+						- You cannot say that the data can be intercepted( Cause that's a solved problem).
+						- You also cannot say a meteor could strike the Data center (Cause that is not solvable )
+	3. Threats should be **Complete and well Framed:**
+		- Can a rando dev tackle that ticket ?
+		- **Threat recipe:**
+		- \<Bad entity> does \<Bad thing> by exploiting \<bad design> ,which results in \<badness>
